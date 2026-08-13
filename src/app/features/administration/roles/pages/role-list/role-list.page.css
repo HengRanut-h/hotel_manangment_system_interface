@@ -1,0 +1,707 @@
+:host {
+  display: block;
+}
+
+.role-list-page {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-heading-row {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.create-button,
+.secondary-button {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    0
+    14px;
+
+  border-radius: 9px;
+
+  font: inherit;
+
+  font-size: 8.8px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.create-button {
+  flex: 0 0 auto;
+
+  border:
+    1px solid
+    #003eb3;
+
+  background:
+    #003eb3;
+
+  color:
+    #ffffff;
+}
+
+.create-button:hover {
+  border-color:
+    #002c8c;
+
+  background:
+    #002c8c;
+}
+
+.secondary-button {
+  border:
+    1px solid
+    #dfe4eb;
+
+  background:
+    #ffffff;
+
+  color:
+    #475467;
+}
+
+.create-button svg,
+.secondary-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  min-height: 90px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 16px;
+
+  border:
+    1px solid
+    #dfe5ec;
+
+  border-radius: 13px;
+
+  background:
+    #ffffff;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 11px;
+}
+
+.stat-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* Roles */
+
+.stat-icon--roles {
+  color:
+    #1677ff;
+
+  background:
+    #e6f4ff;
+}
+
+
+/* Users */
+
+.stat-icon--users {
+  color:
+    #722ed1;
+
+  background:
+    #f9f0ff;
+}
+
+
+/* Permissions */
+
+.stat-icon--permissions {
+  color:
+    #08979c;
+
+  background:
+    #e6fffb;
+}
+
+.stat-card > div {
+  display: grid;
+
+  gap: 4px;
+}
+
+.stat-card span {
+  color:
+    #667085;
+
+  font-size: 8.8px;
+}
+
+.stat-card strong {
+  color:
+    #101828;
+
+  font-size: 23px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+  overflow: hidden;
+
+  border:
+    1px solid
+    #dfe5ec;
+
+  border-radius: 13px;
+
+  background:
+    #ffffff;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar {
+  min-height: 64px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding:
+    12px
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+}
+
+.search {
+  width:
+    min(
+      480px,
+      100%
+    );
+
+  min-height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0
+    10px;
+
+  border:
+    1px solid
+    #dfe4eb;
+
+  border-radius: 9px;
+}
+
+.search > svg {
+  width: 14px;
+  height: 14px;
+
+  color:
+    #98a2b3;
+}
+
+.search input {
+  min-width: 0;
+
+  flex: 1;
+
+  border: 0;
+
+  outline: 0;
+
+  background:
+    transparent;
+
+  color:
+    #344054;
+
+  font: inherit;
+
+  font-size: 9.5px;
+}
+
+.search-clear {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background:
+    #f2f4f7;
+
+  color:
+    #667085;
+
+  cursor: pointer;
+}
+
+.search-clear svg {
+  width: 12px;
+  height: 12px;
+}
+
+.result-count {
+  color:
+    #98a2b3;
+
+  font-size: 8.5px;
+
+  white-space: nowrap;
+}
+
+.result-count strong {
+  color:
+    #344054;
+}
+
+
+/* =========================================================
+   ROLE LIST
+   ========================================================= */
+
+.role-list {
+  display: grid;
+}
+
+.role-item {
+  min-height: 72px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding:
+    11px
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+}
+
+.role-item:last-child {
+  border-bottom: 0;
+}
+
+.role-item:hover {
+  background:
+    #fafbfc;
+}
+
+.role-main {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.role-icon {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 9px;
+
+  background:
+    #eef3ff;
+
+  color:
+    #2b63e8;
+}
+
+.role-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.role-info {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 4px;
+}
+
+.role-info strong {
+  color:
+    #344054;
+
+  font-size: 9.8px;
+}
+
+.role-info small {
+  color:
+    #98a2b3;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.role-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.action-button {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    1px solid;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.action-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.action-button:hover:not(:disabled) {
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   VIEW
+   ========================================================= */
+
+.action-button--view {
+  color:
+    #595959;
+
+  border-color:
+    #d9d9d9;
+
+  background:
+    #fafafa;
+}
+
+.action-button--view:hover {
+  color:
+    #ffffff;
+
+  border-color:
+    #595959;
+
+  background:
+    #595959;
+}
+
+
+/* =========================================================
+   PERMISSIONS
+   ========================================================= */
+
+.action-button--permissions {
+  color:
+    #531dab;
+
+  border-color:
+    #d3adf7;
+
+  background:
+    #f9f0ff;
+}
+
+.action-button--permissions:hover {
+  color:
+    #ffffff;
+
+  border-color:
+    #531dab;
+
+  background:
+    #531dab;
+}
+
+
+/* =========================================================
+   EDIT
+   #002c8c
+   ========================================================= */
+
+.action-button--edit {
+  color:
+    #002c8c;
+
+  border-color:
+    #adc6ff;
+
+  background:
+    #f0f5ff;
+}
+
+.action-button--edit:hover {
+  color:
+    #ffffff;
+
+  border-color:
+    #002c8c;
+
+  background:
+    #002c8c;
+}
+
+
+/* =========================================================
+   DELETE
+   #cf1322
+   ========================================================= */
+
+.action-button--delete {
+  color:
+    #cf1322;
+
+  border-color:
+    #ffccc7;
+
+  background:
+    #fff1f0;
+}
+
+.action-button--delete:hover:not(:disabled) {
+  color:
+    #ffffff;
+
+  border-color:
+    #cf1322;
+
+  background:
+    #cf1322;
+}
+
+.action-button--delete:disabled {
+  color:
+    #cf1322;
+
+  border-color:
+    #ffe3e0;
+
+  background:
+    #fff7f6;
+
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+.state,
+.empty {
+  min-height: 260px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  text-align: center;
+}
+
+.state {
+  color:
+    #667085;
+}
+
+.state--error {
+  color:
+    #b42318;
+}
+
+.state-icon,
+.empty > svg {
+  width: 42px;
+  height: 42px;
+
+  padding: 11px;
+
+  border-radius: 11px;
+
+  background:
+    #f4f6f9;
+}
+
+.empty strong {
+  color:
+    #667085;
+
+  font-size: 9.5px;
+}
+
+.empty span {
+  color:
+    #98a2b3;
+
+  font-size: 8.5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .page-heading-row {
+    flex-direction: column;
+  }
+
+  .stats {
+    grid-template-columns:
+      1fr;
+  }
+
+  .toolbar {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .role-item {
+    align-items: flex-start;
+  }
+
+  .role-actions {
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+  }
+
+}

@@ -1,0 +1,302 @@
+<div class="permission-page">
+  <div class="page-heading-row">
+    <app-page-header
+      [showBack]="false"
+      [eyebrow]="'permissions.section' | translate"
+      [title]="'permissions.title' | translate"
+      [description]="'permissions.description' | translate" />
+
+    <button
+      type="button"
+      class="create-button"
+      (click)="createPermission()">
+      <svg lucideCirclePlus></svg>
+      <span>{{ 'permissions.create' | translate }}</span>
+    </button>
+  </div>
+
+  @if (loading() && permissions().length === 0) {
+    <app-spin
+      [label]="'permissions.loading' | translate"
+      size="large" />
+
+  } @else if (errorMessage()) {
+    <section class="state-card state-card--error">
+      <span class="state-icon">
+        <svg lucideShield></svg>
+      </span>
+
+      <div class="state-content">
+        <strong>{{ 'permissions.loadFailed' | translate }}</strong>
+        <span>{{ errorMessage() }}</span>
+      </div>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="refresh()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--permissions">
+          <svg lucideShieldCheck></svg>
+        </span>
+
+        <div class="summary-content">
+          <span class="summary-label">
+            {{ 'permissions.totalPermissions' | translate }}
+          </span>
+          <strong class="summary-value">{{ totalItems() }}</strong>
+          <span class="summary-note">
+            {{ 'permissions.availablePermissions' | translate }}
+          </span>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--groups">
+          <svg lucideLayers></svg>
+        </span>
+
+        <div class="summary-content">
+          <span class="summary-label">
+            {{ 'permissions.currentGroups' | translate }}
+          </span>
+          <strong class="summary-value">{{ groupCount() }}</strong>
+          <span class="summary-note">
+            {{ 'permissions.groupsOnPage' | translate }}
+          </span>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--page">
+          <svg lucideList></svg>
+        </span>
+
+        <div class="summary-content">
+          <span class="summary-label">
+            {{ 'permissions.currentPage' | translate }}
+          </span>
+          <strong class="summary-value">{{ currentPageCount() }}</strong>
+          <span class="summary-note">
+            {{ 'permissions.loadedRecords' | translate }}
+          </span>
+        </div>
+      </article>
+    </section>
+
+    <section class="permission-panel">
+      <header class="panel-toolbar">
+        <label class="search-box">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [placeholder]="'permissions.searchPlaceholder' | translate"
+            [value]="search()"
+            (input)="setSearch($event)">
+
+          @if (search()) {
+            <button
+              type="button"
+              class="icon-button"
+              [title]="'common.clear' | translate"
+              [attr.aria-label]="'common.clear' | translate"
+              (click)="clearSearch()">
+              <svg lucideX></svg>
+            </button>
+          }
+        </label>
+
+        <div class="toolbar-actions">
+          <label class="page-size-control">
+            <span>{{ 'common.rows' | translate }}</span>
+
+            <select
+              [value]="pageSize()"
+              [disabled]="loading()"
+              (change)="changePageSize($event)">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="loading()"
+            (click)="refresh()">
+
+            @if (loading()) {
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+            } @else {
+              <svg lucideRefreshCw></svg>
+            }
+
+            <span>{{ 'common.refresh' | translate }}</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="result-info">
+        <span>
+          {{ 'common.showing' | translate }}
+          <strong>{{ startItem() }}-{{ endItem() }}</strong>
+          {{ 'common.of' | translate }}
+          <strong>{{ totalItems() }}</strong>
+        </span>
+
+        @if (search()) {
+          <span>
+            {{ 'common.search' | translate }}:
+            <strong>{{ search() }}</strong>
+          </span>
+        }
+      </div>
+
+      @if (groups().length === 0) {
+        <section class="empty-state">
+          <span class="empty-icon">
+            <svg lucideShield></svg>
+          </span>
+          <strong>{{ 'permissions.noResults' | translate }}</strong>
+        </section>
+
+      } @else {
+        <div class="permission-groups">
+          @for (group of groups(); track group.name) {
+            <section class="permission-group">
+              <header class="group-header">
+                <div class="group-heading">
+                  <span class="group-icon">
+                    <svg lucideShield></svg>
+                  </span>
+
+                  <div>
+                    <strong>{{ group.name }}</strong>
+                    <span>
+                      {{ group.permissions.length }}
+                      {{ 'permissions.title' | translate }}
+                    </span>
+                  </div>
+                </div>
+
+                <span class="group-count">
+                  {{ group.permissions.length }}
+                </span>
+              </header>
+
+              <div class="permission-list">
+                @for (permission of group.permissions; track permission.id) {
+                  <article class="permission-item">
+                    <span class="permission-icon">
+                      <svg lucideShieldCheck></svg>
+                    </span>
+
+                    <div class="permission-info">
+                      <strong>{{ permission.name }}</strong>
+
+                      <span class="permission-meta">
+                        {{ 'permissions.usedBy' | translate }}
+                        <b>{{ permission.roleCount }}</b>
+                        {{
+                          permission.roleCount === 1
+                            ? ('permissions.role' | translate)
+                            : ('permissions.roles' | translate)
+                        }}
+                      </span>
+                    </div>
+
+                    <span class="permission-action">
+                      {{
+                        permission.name
+                          .split('.')
+                          .slice(1)
+                          .join('.')
+                        || 'permission'
+                      }}
+                    </span>
+
+                    <div class="permission-buttons">
+                      <button
+                        type="button"
+                        class="permission-button permission-button--edit"
+                        [title]="'common.edit' | translate"
+                        [attr.aria-label]="'common.edit' | translate"
+                        (click)="editPermission(permission)">
+                        <svg lucidePencil></svg>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="permission-button permission-button--delete"
+                        [disabled]="deletingId() !== null || permission.roleCount > 0"
+                        [title]="
+                          permission.roleCount > 0
+                            ? ('permissions.deleteAssignedHint' | translate)
+                            : ('common.delete' | translate)
+                        "
+                        [attr.aria-label]="'common.delete' | translate"
+                        (click)="deletePermission(permission)">
+
+                        @if (deletingId() === permission.id) {
+                          <app-spin
+                            [inline]="true"
+                            size="small"
+                            label="" />
+                        } @else {
+                          <svg lucideTrash2></svg>
+                        }
+                      </button>
+                    </div>
+                  </article>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      }
+
+      @if (totalPages() > 1) {
+        <footer class="pagination">
+          <button
+            type="button"
+            class="pagination-button"
+            [disabled]="!hasPreviousPage() || loading()"
+            (click)="previousPage()">
+            <svg lucideChevronLeft></svg>
+            <span>{{ 'common.previous' | translate }}</span>
+          </button>
+
+          <div class="page-info">
+            {{ 'common.page' | translate }}
+            <strong>{{ pageNumber() }}</strong>
+            {{ 'common.of' | translate }}
+            <strong>{{ totalPages() }}</strong>
+          </div>
+
+          <button
+            type="button"
+            class="pagination-button"
+            [disabled]="!hasNextPage() || loading()"
+            (click)="nextPage()">
+            <span>{{ 'common.next' | translate }}</span>
+            <svg lucideChevronRight></svg>
+          </button>
+        </footer>
+      }
+    </section>
+  }
+</div>

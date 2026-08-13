@@ -1,0 +1,170 @@
+:host {
+  display: block;
+}
+
+.permission-form {
+  width: 100%;
+  max-width: 860px;
+}
+
+.form-card {
+  overflow: hidden;
+  border: 1px solid #dfe5ec;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.form-card__header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #edf0f4;
+  background: #fafbfc;
+}
+
+.form-card__header > div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.form-card__header strong {
+  color: #101828;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.form-card__header span {
+  color: #8a94a4;
+  font-size: 8.5px;
+}
+
+.form-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: #e6f4ff;
+  color: #1677ff;
+}
+
+.form-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+  padding: 22px 26px;
+}
+
+.form-field label {
+  color: #344054;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.form-field input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid #d9e0e8;
+  border-radius: 11px;
+  outline: none;
+  background: #ffffff;
+  color: #101828;
+  font: inherit;
+  font-size: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-field input:focus {
+  border-color: #597ef7;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.08);
+}
+
+.form-field input.invalid {
+  border-color: #cf1322;
+}
+
+.form-field small {
+  color: #98a2b3;
+  font-size: 8px;
+}
+
+.field-error {
+  color: #cf1322;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 17px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.button--secondary {
+  border: 1px solid #dfe4eb;
+  background: #ffffff;
+  color: #667085;
+}
+
+.button--primary {
+  border: 1px solid #0c1729;
+  background: #0c1729;
+  color: #ffffff;
+}
+
+.button--primary:hover:not(:disabled) {
+  border-color: #002c8c;
+  background: #002c8c;
+}
+
+.button:disabled,
+.form-field input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .permission-form {
+    max-width: none;
+  }
+
+  .form-field {
+    padding: 18px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

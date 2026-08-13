@@ -1,0 +1,91 @@
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Live data</span>
+    <h1>{{ title() }}</h1>
+    <p>{{ subtitle() }}</p>
+  </div>
+
+  <button
+    class="btn btn--secondary"
+    type="button"
+    (click)="load()"
+  >
+    <svg lucideRefreshCw></svg>
+    Refresh
+  </button>
+</div>
+
+<section class="panel explorer-panel">
+  <div class="explorer-toolbar">
+    <label>
+      <svg lucideSearch></svg>
+
+      <input
+        type="search"
+        [placeholder]="'Search ' + title().toLowerCase() + '...'"
+        [value]="search()"
+        (input)="setSearch($event)"
+      />
+    </label>
+  </div>
+
+  <div class="table-wrap">
+    <table class="explorer-table">
+      <thead>
+        <tr>
+          @for (column of columns(); track column.key) {
+            <th>{{ column.label }}</th>
+          }
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (loading()) {
+          @for (skeletonRow of [1, 2, 3, 4, 5]; track skeletonRow) {
+            <tr>
+              @for (column of columns(); track column.key) {
+                <td>
+                  <span class="skeleton"></span>
+                </td>
+              }
+            </tr>
+          }
+        } @else {
+          @for (row of rows(); track row.id ?? $index) {
+            <tr>
+              @for (column of columns(); track column.key; let columnIndex = $index) {
+                <td>
+                  @if (column.type === 'status') {
+                    <app-status-badge
+                      [value]="$any(row[column.key])"
+                    />
+                  } @else {
+                    <span [class.primary]="columnIndex === 0">
+                      {{ display(row, column) }}
+                    </span>
+                  }
+                </td>
+              }
+            </tr>
+          } @empty {
+            <tr>
+              <td
+                [attr.colspan]="columns().length"
+                class="empty"
+              >
+                No records available.
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-pager
+    [page]="page()"
+    [pageSize]="20"
+    [total]="total()"
+    (pageChange)="changePage($event)"
+  />
+</section>

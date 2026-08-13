@@ -1,0 +1,7 @@
+@if (open()) {
+  <div class="modal-backdrop" (click)="closed.emit()"></div>
+  <section class="modal" [class.modal--wide]="wide()" role="dialog" aria-modal="true">
+    <header class="modal__header"><div><h2>{{ title() }}</h2><p>Complete the fields below and save your changes.</p></div><button class="modal__close" type="button" (click)="closed.emit()"><svg lucideX></svg></button></header>
+    <div class="modal__body"><ng-content /></div>
+  </section>
+}

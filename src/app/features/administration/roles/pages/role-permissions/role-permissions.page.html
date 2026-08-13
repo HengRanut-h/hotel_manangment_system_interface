@@ -1,0 +1,179 @@
+@if (loading()) {
+  <app-spin
+    [label]="'roles.permissionsLoading' | translate"
+    size="large"
+    [fullscreen]="true" />
+
+} @else if (errorMessage()) {
+  <section class="state state--error">
+    <span class="state-icon">
+      <svg lucideShield></svg>
+    </span>
+
+    <strong>{{ 'roles.permissionsLoadFailed' | translate }}</strong>
+    <span>{{ errorMessage() }}</span>
+
+    <button
+      type="button"
+      class="state-action"
+      (click)="load()">
+      <svg lucideRefreshCw></svg>
+      <span>{{ 'common.tryAgain' | translate }}</span>
+    </button>
+  </section>
+
+} @else if (role(); as currentRole) {
+  <div class="role-permissions-page">
+    <app-page-header
+      [eyebrow]="'roles.section' | translate"
+      [title]="currentRole.name"
+      [description]="'roles.permissionsDescription' | translate"
+      [backLabel]="'common.back' | translate"
+      [backUrl]="backUrl()" />
+
+    <section class="summary-bar">
+      <div class="summary-card">
+        <span class="summary-icon">
+          <svg lucideShieldCheck></svg>
+        </span>
+
+        <div class="summary-content">
+          <span>{{ 'roles.selectedPermissions' | translate }}</span>
+          <strong>{{ selectedCount() }} / {{ totalPermissions() }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <label class="search">
+        <svg lucideSearch></svg>
+
+        <input
+          type="search"
+          autocomplete="off"
+          [placeholder]="'permissions.searchPlaceholder' | translate"
+          [value]="search()"
+          (input)="setSearch($event)">
+
+        @if (search()) {
+          <button
+            type="button"
+            class="search-clear"
+            [title]="'common.clear' | translate"
+            [attr.aria-label]="'common.clear' | translate"
+            (click)="clearSearch()">
+            <svg lucideX></svg>
+          </button>
+        }
+      </label>
+
+      <div class="toolbar-actions">
+        <button type="button" class="toolbar-button" (click)="selectAll()">
+          <svg lucideCheck></svg>
+          <span>{{ 'roles.selectAll' | translate }}</span>
+        </button>
+
+        <button type="button" class="toolbar-button" (click)="clearAll()">
+          <svg lucideX></svg>
+          <span>{{ 'roles.clearAll' | translate }}</span>
+        </button>
+      </div>
+    </section>
+
+    @if (groups().length === 0) {
+      <section class="empty-state">
+        <span class="empty-state__icon">
+          <svg lucideShield></svg>
+        </span>
+        <strong>{{ 'permissions.noResults' | translate }}</strong>
+      </section>
+
+    } @else {
+      <div class="groups">
+        @for (group of groups(); track group.name) {
+          <section class="group">
+            <header class="group-header">
+              <div class="group-header__content">
+                <span class="group-icon">
+                  <svg lucideShield></svg>
+                </span>
+
+                <div class="group-title">
+                  <strong>{{ group.name }}</strong>
+                  <small>
+                    {{ group.items.length }} {{ 'roles.permissions' | translate }}
+                  </small>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="group-toggle"
+                [class.group-toggle--selected]="isGroupSelected(group)"
+                (click)="selectGroup(group)">
+
+                @if (isGroupSelected(group)) {
+                  <svg lucideX></svg>
+                  <span>{{ 'roles.clearGroup' | translate }}</span>
+                } @else {
+                  <svg lucideCheck></svg>
+                  <span>{{ 'roles.selectGroup' | translate }}</span>
+                }
+              </button>
+            </header>
+
+            <div class="permission-list">
+              @for (permission of group.items; track permission.id) {
+                <button
+                  type="button"
+                  class="permission"
+                  [class.permission--selected]="isSelected(permission.name)"
+                  (click)="toggle(permission.name)">
+
+                  <span class="permission-checkbox">
+                    @if (isSelected(permission.name)) {
+                      <svg lucideCheck></svg>
+                    }
+                  </span>
+
+                  <span class="permission-content">
+                    <strong>{{ permission.name }}</strong>
+                    <small>{{ 'roles.permissionDefaultDescription' | translate }}</small>
+                  </span>
+                </button>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    }
+
+    <div class="save-bar">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="saving()"
+        (click)="cancel()">
+        <svg lucideX></svg>
+        <span>{{ 'common.cancel' | translate }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="saving()"
+        (click)="save()">
+
+        @if (saving()) {
+          <app-spin
+            [inline]="true"
+            size="small"
+            [label]="'common.saving' | translate" />
+        } @else {
+          <svg lucideSave></svg>
+          <span>{{ 'roles.savePermissions' | translate }}</span>
+        }
+      </button>
+    </div>
+  </div>
+}

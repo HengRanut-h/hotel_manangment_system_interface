@@ -1,0 +1,15 @@
+<div class="toast-stack" aria-live="polite">
+  @for (message of toast.messages(); track message.id) {
+    <div class="toast" [class]="'toast toast--' + message.type">
+      <span class="toast__icon">
+        @switch (message.type) {
+          @case ('success') { <svg lucideCheckCircle2></svg> }
+          @case ('error') { <svg lucideCircleAlert></svg> }
+          @default { <svg lucideInfo></svg> }
+        }
+      </span>
+      <span class="toast__text">{{ message.text }}</span>
+      <button type="button" class="icon-btn" (click)="toast.dismiss(message.id)" aria-label="Dismiss"><svg lucideX></svg></button>
+    </div>
+  }
+</div>

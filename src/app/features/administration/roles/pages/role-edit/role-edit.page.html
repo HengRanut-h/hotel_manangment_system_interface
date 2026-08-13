@@ -1,0 +1,37 @@
+<div class="role-edit-page">
+  <app-page-header
+    [eyebrow]="'roles.section' | translate"
+    [title]="'roles.edit' | translate"
+    [description]="'roles.editDescription' | translate"
+    [backLabel]="'common.back' | translate"
+    [backUrl]="'/app/admin/roles/' + id()" />
+
+  @if (loading()) {
+    <app-spin
+      [label]="'roles.loading' | translate"
+      size="large" />
+
+  } @else if (errorMessage()) {
+    <section class="state state--error">
+      <strong>{{ 'roles.loadFailed' | translate }}</strong>
+      <span>{{ errorMessage() }}</span>
+
+      <button
+        type="button"
+        class="retry-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <app-role-form
+      [name]="name()"
+      (nameChange)="name.set($event)"
+      [saving]="saving()"
+      submitLabel="roles.update"
+      (submitted)="save()"
+      (cancelled)="cancel()" />
+  }
+</div>

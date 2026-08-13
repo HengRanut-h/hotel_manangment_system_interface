@@ -1,0 +1,16 @@
+<div
+  class="spin"
+  [class.spin--fullscreen]="fullscreen()"
+  [class.spin--inline]="inline()">
+
+  <span
+    class="spin__indicator"
+    [class.spin__indicator--small]="size() === 'small'"
+    [class.spin__indicator--large]="size() === 'large'"
+    aria-hidden="true">
+  </span>
+
+  @if (label()) {
+    <span class="spin__label">{{ label() }}</span>
+  }
+</div>

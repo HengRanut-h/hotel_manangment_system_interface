@@ -1,0 +1,181 @@
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Property</span>
+    <h1>Room Types</h1>
+    <p>
+      Manage sellable room categories, base pricing, capacity and active
+      availability.
+    </p>
+  </div>
+
+  <button class="btn btn--primary" type="button" (click)="create()">
+    <svg lucideCirclePlus></svg>
+    Add room type
+  </button>
+</div>
+
+<section class="panel room-panel">
+  <div class="room-toolbar">
+    <label>
+      <svg lucideSearch></svg>
+      <input
+        type="search"
+        placeholder="Search room types..."
+        [value]="search()"
+        (input)="setSearch($event)"
+      >
+    </label>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Base rate</th>
+          <th>Capacity</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (roomType of rows(); track roomType.id) {
+          <tr>
+            <td><strong>{{ roomType.name }}</strong></td>
+            <td>{{ roomType.code }}</td>
+            <td>{{ roomType.baseRate | currency: 'USD' }}</td>
+            <td>
+              {{ roomType.maxAdults }} adults ·
+              {{ roomType.maxChildren }} children
+            </td>
+            <td>
+              <app-status-badge
+                [value]="roomType.isActive ? 'Active' : 'Inactive'"
+              />
+            </td>
+            <td class="actions">
+              <button
+                type="button"
+                class="text-action"
+                [disabled]="busyId() === roomType.id"
+                (click)="toggleActive(roomType)"
+              >
+                {{ roomType.isActive ? 'Disable' : 'Enable' }}
+              </button>
+
+              <button
+                type="button"
+                title="Edit"
+                [disabled]="busyId() === roomType.id"
+                (click)="edit(roomType)"
+              >
+                <svg lucidePencil></svg>
+              </button>
+
+              <button
+                class="danger"
+                type="button"
+                title="Delete"
+                [disabled]="busyId() === roomType.id"
+                (click)="remove(roomType)"
+              >
+                <svg lucideTrash2></svg>
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty">No room types found.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-pager
+    [page]="page()"
+    [pageSize]="20"
+    [total]="total()"
+    (pageChange)="changePage($event)"
+  />
+</section>
+
+<app-modal
+  [open]="modal()"
+  [title]="editId() ? 'Edit Room Type' : 'Add Room Type'"
+  (closed)="modal.set(false)"
+>
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Name</span>
+      <input name="name" [(ngModel)]="name" required>
+    </label>
+
+    <label>
+      <span>Code</span>
+      <input name="code" [(ngModel)]="code" required>
+    </label>
+
+    <label>
+      <span>Base rate</span>
+      <input
+        name="baseRate"
+        type="number"
+        min="0"
+        step="0.01"
+        [(ngModel)]="baseRate"
+        required
+      >
+    </label>
+
+    <label>
+      <span>Max adults</span>
+      <input
+        name="maxAdults"
+        type="number"
+        min="1"
+        [(ngModel)]="maxAdults"
+      >
+    </label>
+
+    <label>
+      <span>Max children</span>
+      <input
+        name="maxChildren"
+        type="number"
+        min="0"
+        [(ngModel)]="maxChildren"
+      >
+    </label>
+
+    <label>
+      <span>Active</span>
+      <input
+        name="active"
+        type="checkbox"
+        [(ngModel)]="isActive"
+      >
+    </label>
+
+    <label class="field--full">
+      <span>Description</span>
+      <input name="description" [(ngModel)]="description">
+    </label>
+
+    <div class="form-actions field--full">
+      <button
+        class="btn btn--secondary"
+        type="button"
+        (click)="modal.set(false)"
+      >
+        Cancel
+      </button>
+
+      <button class="btn btn--primary" type="submit">
+        Save room type
+      </button>
+    </div>
+  </form>
+</app-modal>

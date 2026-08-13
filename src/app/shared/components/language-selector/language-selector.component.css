@@ -1,0 +1,95 @@
+:host {
+  display: inline-block;
+}
+
+/* =========================================================
+   LANGUAGE SELECTOR
+   ========================================================= */
+
+.language-selector {
+  min-height: 36px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    0
+    9px;
+
+  border:
+    1px solid
+    #dfe4ec;
+
+  border-radius:
+    9px;
+
+  background:
+    #ffffff;
+
+  transition:
+    border-color
+      0.2s ease,
+    box-shadow
+      0.2s ease;
+}
+
+.language-selector:focus-within {
+  border-color:
+    #8ca7e8;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      43,
+      99,
+      232,
+      0.07
+    );
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.language-icon {
+  font-size:
+    14px;
+
+  line-height:
+    1;
+}
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.language-selector select {
+  min-width:
+    82px;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    #344054;
+
+  font: inherit;
+
+  font-size:
+    10px;
+
+  font-weight:
+    650;
+
+  cursor:
+    pointer;
+}

@@ -1,0 +1,14 @@
+<div class="permission-create-page">
+  <app-page-header
+    [eyebrow]="'permissions.section' | translate"
+    [title]="'permissions.create' | translate"
+    [description]="'permissions.createDescription' | translate"
+    [backLabel]="'common.back' | translate"
+    backUrl="/app/admin/permissions" />
+
+  <app-permission-form
+    submitLabel="permissions.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

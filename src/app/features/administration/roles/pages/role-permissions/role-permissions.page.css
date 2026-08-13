@@ -1,0 +1,397 @@
+:host {
+  display: block;
+}
+
+.role-permissions-page {
+  width: 100%;
+}
+
+.summary-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.summary-card {
+  min-width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid #dfe5ec;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.summary-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: #e6f4ff;
+  color: #1677ff;
+}
+
+.summary-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.summary-content {
+  display: grid;
+  gap: 4px;
+}
+
+.summary-content > span {
+  color: #8c96a5;
+  font-size: 8.5px;
+}
+
+.summary-content strong {
+  color: #101828;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.search {
+  width: min(550px, 100%);
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid #dfe5ec;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.search > svg {
+  width: 14px;
+  height: 14px;
+  color: #98a2b3;
+}
+
+.search input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #344054;
+  font: inherit;
+  font-size: 10px;
+}
+
+.search-clear {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: #f2f4f7;
+  color: #667085;
+  cursor: pointer;
+}
+
+.search-clear svg {
+  width: 12px;
+  height: 12px;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.toolbar-button,
+.group-toggle,
+.state-action {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid #dfe5ec;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #667085;
+  font: inherit;
+  font-size: 8.5px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.toolbar-button svg,
+.group-toggle svg,
+.state-action svg {
+  width: 13px;
+  height: 13px;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.group {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dfe5ec;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 12px;
+  border-bottom: 1px solid #edf0f4;
+  background: #f9fafb;
+}
+
+.group-header__content {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.group-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: #f9f0ff;
+  color: #722ed1;
+}
+
+.group-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.group-title {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.group-title strong {
+  color: #344054;
+  font-size: 9.5px;
+  text-transform: capitalize;
+}
+
+.group-title small {
+  color: #9099a8;
+  font-size: 8px;
+}
+
+.group-toggle--selected {
+  border-color: #bfd5ff;
+  background: #eef4ff;
+  color: #2b63e8;
+}
+
+.permission-list {
+  display: grid;
+}
+
+.permission {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 1px solid #f0f2f5;
+  background: #ffffff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.permission:last-child {
+  border-bottom: 0;
+}
+
+.permission:hover {
+  background: #fafbfc;
+}
+
+.permission--selected {
+  background: #f7faff;
+}
+
+.permission-checkbox {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  margin-top: 1px;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+.permission--selected .permission-checkbox {
+  border-color: #1677ff;
+  background: #1677ff;
+}
+
+.permission-checkbox svg {
+  width: 12px;
+  height: 12px;
+}
+
+.permission-content {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.permission-content strong {
+  color: #344054;
+  font-size: 8.8px;
+  overflow-wrap: anywhere;
+}
+
+.permission-content small {
+  color: #929ba9;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.save-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #dfe5ec;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 8.8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.button--secondary {
+  border: 1px solid #dfe4eb;
+  background: #ffffff;
+  color: #667085;
+}
+
+.button--primary {
+  border: 1px solid #0c1729;
+  background: #0c1729;
+  color: #ffffff;
+}
+
+.button--primary:hover:not(:disabled) {
+  border-color: #002c8c;
+  background: #002c8c;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.state,
+.empty-state {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #667085;
+  text-align: center;
+}
+
+.state--error {
+  color: #b42318;
+}
+
+.state-icon,
+.empty-state__icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #f4f6f9;
+}
+
+@media (max-width: 900px) {
+  .groups {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search,
+  .toolbar-actions {
+    width: 100%;
+  }
+
+  .toolbar-actions {
+    justify-content: space-between;
+  }
+
+  .group-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .save-bar {
+    flex-direction: column-reverse;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

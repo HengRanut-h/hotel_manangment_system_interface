@@ -1,0 +1,413 @@
+<div class="role-list-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-heading-row">
+
+    <app-page-header
+      [showBack]="false"
+      [eyebrow]="'roles.section' | translate"
+      [title]="'roles.title' | translate"
+      [description]="'roles.description' | translate" />
+
+    <button
+      type="button"
+      class="create-button"
+      (click)="createRole()">
+
+      <svg lucideCirclePlus></svg>
+
+      <span>
+        {{ 'roles.create' | translate }}
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <app-spin
+      [label]="'roles.loading' | translate"
+      size="large" />
+
+
+  <!-- =====================================================
+       ERROR
+       ===================================================== -->
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <span class="state-icon">
+        <svg lucideShield></svg>
+      </span>
+
+      <strong>
+        {{ 'roles.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+
+      </button>
+
+    </section>
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+
+  } @else {
+
+
+    <!-- ===================================================
+         STATISTICS
+         =================================================== -->
+
+    <section class="stats">
+
+
+      <!-- TOTAL ROLES -->
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--roles">
+
+          <svg lucideShield></svg>
+
+        </span>
+
+        <div>
+
+          <span>
+            {{ 'roles.title' | translate }}
+          </span>
+
+          <strong>
+            {{ roles().length }}
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- ASSIGNED USERS -->
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--users">
+
+          <svg lucideUsers></svg>
+
+        </span>
+
+        <div>
+
+          <span>
+            {{ 'roles.assignedUsers' | translate }}
+          </span>
+
+          <strong>
+            {{ totalUsers() }}
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- PERMISSION ASSIGNMENTS -->
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--permissions">
+
+          <svg lucideShieldCheck></svg>
+
+        </span>
+
+        <div>
+
+          <span>
+            {{ 'roles.permissionAssignments' | translate }}
+          </span>
+
+          <strong>
+            {{ totalPermissionAssignments() }}
+          </strong>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ===================================================
+         ROLE PANEL
+         =================================================== -->
+
+    <section class="panel">
+
+
+      <!-- =================================================
+           TOOLBAR
+           ================================================= -->
+
+      <header class="toolbar">
+
+
+        <!-- SEARCH -->
+
+        <label class="search">
+
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [placeholder]="'roles.searchPlaceholder' | translate"
+            [value]="search()"
+            (input)="setSearch($event)">
+
+
+          <!-- CLEAR SEARCH -->
+
+          @if (search()) {
+
+            <button
+              type="button"
+              class="search-clear"
+              [title]="'common.clear' | translate"
+              [attr.aria-label]="'common.clear' | translate"
+              (click)="clearSearch()">
+
+              <svg lucideX></svg>
+
+            </button>
+
+          }
+
+        </label>
+
+
+        <!-- RESULT COUNT -->
+
+        <span class="result-count">
+
+          <strong>
+            {{ filteredRoles().length }}
+          </strong>
+
+          {{ 'roles.title' | translate }}
+
+        </span>
+
+      </header>
+
+
+      <!-- =================================================
+           EMPTY RESULT
+           ================================================= -->
+
+      @if (filteredRoles().length === 0) {
+
+        <div class="empty">
+
+          <svg lucideShield></svg>
+
+          <strong>
+            {{ 'roles.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'roles.noResultsDescription' | translate }}
+          </span>
+
+        </div>
+
+
+      <!-- =================================================
+           ROLE LIST
+           ================================================= -->
+
+      } @else {
+
+        <div class="role-list">
+
+          @for (
+            role of filteredRoles();
+            track role.id
+          ) {
+
+            <article class="role-item">
+
+
+              <!-- ===========================================
+                   ROLE INFORMATION
+                   =========================================== -->
+
+              <div class="role-main">
+
+                <span class="role-icon">
+
+                  <svg lucideShield></svg>
+
+                </span>
+
+                <span class="role-info">
+
+                  <strong>
+                    {{ role.name }}
+                  </strong>
+
+                  <small>
+
+                    {{ role.userCount }}
+
+                    {{ 'roles.users' | translate }}
+
+                    ·
+
+                    {{ role.permissions.length }}
+
+                    {{ 'roles.permissions' | translate }}
+
+                  </small>
+
+                </span>
+
+              </div>
+
+
+              <!-- ===========================================
+                   ACTION BUTTONS
+                   =========================================== -->
+
+              <div class="role-actions">
+
+
+                <!-- VIEW -->
+
+                <a
+                  class="action-button action-button--view"
+                  [routerLink]="[
+                    '/app/admin/roles',
+                    role.id
+                  ]"
+                  [title]="'common.view' | translate"
+                  [attr.aria-label]="'common.view' | translate">
+
+                  <svg lucideEye></svg>
+
+                </a>
+
+
+                <!-- MANAGE PERMISSIONS -->
+
+                <a
+                  class="action-button action-button--permissions"
+                  [routerLink]="[
+                    '/app/admin/roles',
+                    role.id,
+                    'permissions'
+                  ]"
+                  [title]="'roles.managePermissions' | translate"
+                  [attr.aria-label]="'roles.managePermissions' | translate">
+
+                  <svg lucideShieldCheck></svg>
+
+                </a>
+
+
+                <!-- EDIT -->
+
+                <a
+                  class="action-button action-button--edit"
+                  [routerLink]="[
+                    '/app/admin/roles',
+                    role.id,
+                    'edit'
+                  ]"
+                  [title]="'common.edit' | translate"
+                  [attr.aria-label]="'common.edit' | translate">
+
+                  <svg lucidePencil></svg>
+
+                </a>
+
+
+                <!-- DELETE -->
+
+                <button
+                  type="button"
+                  class="action-button action-button--delete"
+                  [disabled]="
+                    deletingId() !== null
+                    ||
+                    role.userCount > 0
+                  "
+                  [title]="
+                    role.userCount > 0
+                      ? ('roles.deleteAssignedHint' | translate)
+                      : ('common.delete' | translate)
+                  "
+                  [attr.aria-label]="'common.delete' | translate"
+                  (click)="remove(role)">
+
+
+                  <!-- DELETE SPINNER -->
+
+                  @if (deletingId() === role.id) {
+
+                    <app-spin
+                      [inline]="true"
+                      size="small"
+                      label="" />
+
+                  } @else {
+
+                    <svg lucideTrash2></svg>
+
+                  }
+
+                </button>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  }
+
+</div>

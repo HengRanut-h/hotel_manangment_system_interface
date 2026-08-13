@@ -1,0 +1,18 @@
+<div class="line-chart" [style.height.px]="height()">
+  <svg viewBox="0 0 600 220" preserveAspectRatio="none" role="img" aria-label="Trend chart">
+    @for (guide of guides(); track guide.y) {
+      <line x1="20" x2="580" [attr.y1]="guide.y" [attr.y2]="guide.y" class="grid-line" />
+      <text x="20" [attr.y]="guide.y - 4" class="axis-label">{{ guide.label }}</text>
+    }
+    @for (s of series(); track s.name; let i=$index) {
+      @if (i===0) { <polygon [attr.points]="area(s.values)" [attr.fill]="color(i)" class="area" /> }
+      <polyline [attr.points]="points(s.values)" fill="none" [attr.stroke]="color(i)" stroke-width="2.4" vector-effect="non-scaling-stroke" />
+    }
+  </svg>
+  <div class="x-labels">
+    @for (label of labels(); track $index) { <span>{{ label }}</span> }
+  </div>
+</div>
+<div class="legend">
+  @for (s of series(); track s.name; let i=$index) { <span><i [style.background]="color(i)"></i>{{ s.name }}</span> }
+</div>

@@ -1,0 +1,146 @@
+@if (loading()) {
+  <app-spin
+    [label]="'roles.loading' | translate"
+    size="large"
+    [fullscreen]="true" />
+
+} @else if (errorMessage()) {
+  <section class="state state--error">
+    <span class="state-icon">
+      <svg lucideShield></svg>
+    </span>
+
+    <strong>{{ 'roles.loadFailed' | translate }}</strong>
+    <span>{{ errorMessage() }}</span>
+
+    <button
+      type="button"
+      class="state-action"
+      (click)="load()">
+      <svg lucideRefreshCw></svg>
+      <span>{{ 'common.tryAgain' | translate }}</span>
+    </button>
+  </section>
+
+} @else if (role(); as currentRole) {
+  <div class="role-detail-page">
+    <header class="page-header">
+      <div class="page-header__content">
+        <button
+          type="button"
+          class="icon-button icon-button--back"
+          [title]="'common.back' | translate"
+          [attr.aria-label]="'common.back' | translate"
+          (click)="back()">
+          <svg lucideArrowLeft></svg>
+        </button>
+
+        <div class="page-title">
+          <span class="eyebrow">{{ 'roles.detail' | translate }}</span>
+          <h1>{{ currentRole.name }}</h1>
+          <p>{{ 'roles.detailDescription' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a
+          class="icon-button icon-button--permissions"
+          [routerLink]="['/app/admin/roles', currentRole.id, 'permissions']"
+          [title]="'roles.managePermissions' | translate"
+          [attr.aria-label]="'roles.managePermissions' | translate">
+          <svg lucideShieldCheck></svg>
+        </a>
+
+        <a
+          class="icon-button icon-button--edit"
+          [routerLink]="['/app/admin/roles', currentRole.id, 'edit']"
+          [title]="'common.edit' | translate"
+          [attr.aria-label]="'common.edit' | translate">
+          <svg lucidePencil></svg>
+        </a>
+
+        <button
+          type="button"
+          class="icon-button icon-button--delete"
+          [disabled]="currentRole.userCount > 0 || deleting()"
+          [title]="
+            currentRole.userCount > 0
+              ? ('roles.deleteAssignedHint' | translate)
+              : ('common.delete' | translate)
+          "
+          [attr.aria-label]="'common.delete' | translate"
+          (click)="remove()">
+
+          @if (deleting()) {
+            <app-spin
+              [inline]="true"
+              size="small"
+              label="" />
+          } @else {
+            <svg lucideTrash2></svg>
+          }
+        </button>
+      </div>
+    </header>
+
+    <div class="stats">
+      <article class="stat-card">
+        <span class="stat-card__icon stat-card__icon--users">
+          <svg lucideUsers></svg>
+        </span>
+        <div>
+          <span class="stat-card__label">
+            {{ 'roles.assignedUsers' | translate }}
+          </span>
+          <strong>{{ currentRole.userCount }}</strong>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon stat-card__icon--permissions">
+          <svg lucideShield></svg>
+        </span>
+        <div>
+          <span class="stat-card__label">
+            {{ 'roles.permissions' | translate }}
+          </span>
+          <strong>{{ currentRole.permissions.length }}</strong>
+        </div>
+      </article>
+    </div>
+
+    <section class="panel">
+      <header class="panel__header">
+        <span class="panel__icon">
+          <svg lucideShieldCheck></svg>
+        </span>
+
+        <div>
+          <strong>{{ 'roles.assignedPermissions' | translate }}</strong>
+          <small>{{ 'roles.assignedPermissionsDescription' | translate }}</small>
+        </div>
+      </header>
+
+      @if (currentRole.permissions.length === 0) {
+        <div class="empty">
+          <span class="empty__icon">
+            <svg lucideShield></svg>
+          </span>
+          <strong>{{ 'roles.noPermissions' | translate }}</strong>
+        </div>
+
+      } @else {
+        <div class="permission-grid">
+          @for (permission of currentRole.permissions; track permission) {
+            <div class="permission-item">
+              <span class="permission-item__icon">
+                <svg lucideShieldCheck></svg>
+              </span>
+              <span class="permission-item__name">{{ permission }}</span>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  </div>
+}

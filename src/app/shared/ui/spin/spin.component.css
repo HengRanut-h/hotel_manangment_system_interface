@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.spin {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spin--fullscreen {
+  min-height: 320px;
+}
+
+.spin--inline {
+  min-height: 0;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.spin__indicator {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border: 3px solid #e6ebf2;
+  border-top-color: #1677ff;
+  border-radius: 50%;
+  animation: spin-rotate 0.7s linear infinite;
+}
+
+.spin__indicator--small {
+  width: 15px;
+  height: 15px;
+  border-width: 2px;
+}
+
+.spin__indicator--large {
+  width: 36px;
+  height: 36px;
+}
+
+.spin__label {
+  color: #667085;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.spin--inline .spin__label {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+@keyframes spin-rotate {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.role-edit-page {
+  width: 100%;
+}
+
+.state {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #667085;
+  text-align: center;
+}
+
+.state--error {
+  color: #b42318;
+}
+
+.retry-button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 13px;
+  border: 1px solid #dfe4eb;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #475467;
+  font: inherit;
+  font-size: 8.8px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.retry-button svg {
+  width: 13px;
+  height: 13px;
+}

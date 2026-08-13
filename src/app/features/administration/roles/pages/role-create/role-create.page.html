@@ -1,0 +1,16 @@
+<div class="role-create-page">
+  <app-page-header
+    [eyebrow]="'roles.section' | translate"
+    [title]="'roles.create' | translate"
+    [description]="'roles.createDescription' | translate"
+    [backLabel]="'common.back' | translate"
+    backUrl="/app/admin/roles" />
+
+  <app-role-form
+    [name]="name()"
+    (nameChange)="name.set($event)"
+    [saving]="saving()"
+    submitLabel="roles.create"
+    (submitted)="save()"
+    (cancelled)="cancel()" />
+</div>

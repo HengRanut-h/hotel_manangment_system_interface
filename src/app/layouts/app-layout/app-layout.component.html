@@ -1,0 +1,481 @@
+<div
+  class="app-shell"
+  [class.app-shell--collapsed]="collapsed()">
+
+  <!-- ======================================================
+       MOBILE BACKDROP
+       ====================================================== -->
+
+  @if (mobileOpen()) {
+
+    <button
+      class="mobile-backdrop"
+      type="button"
+      aria-label="Close navigation"
+      (click)="closeMobile()">
+    </button>
+
+  }
+
+  <!-- ======================================================
+       SIDEBAR
+       ====================================================== -->
+
+  <aside
+    class="sidebar"
+    [class.sidebar--mobile-open]="mobileOpen()">
+
+    <!-- ====================================================
+         BRAND
+         ==================================================== -->
+
+    <div class="brand">
+
+      <div class="brand__mark">
+
+        <svg lucideCommand></svg>
+
+      </div>
+
+      @if (!collapsed()) {
+
+        <div>
+
+          <strong>
+            Aurelia
+          </strong>
+
+          <span>
+            Hotel Management
+          </span>
+
+        </div>
+
+      }
+
+      <button
+        class="sidebar__mobile-close"
+        type="button"
+        aria-label="Close navigation"
+        (click)="closeMobile()">
+
+        <svg lucideX></svg>
+
+      </button>
+
+    </div>
+
+    <!-- ====================================================
+         NAVIGATION SEARCH
+         ==================================================== -->
+
+    @if (!collapsed()) {
+
+      <div class="nav-search">
+
+        <svg lucideSearch></svg>
+
+        <input
+          type="search"
+          placeholder="Search menu..."
+          [value]="navSearch()"
+          (input)="setSearch($event)">
+
+        <kbd>
+          ⌘ K
+        </kbd>
+
+      </div>
+
+    }
+
+    <!-- ====================================================
+         NAVIGATION
+         ==================================================== -->
+
+    <nav class="sidebar-nav">
+
+      @for (
+        group of groups();
+        track group.label
+      ) {
+
+        <section class="nav-group">
+
+          @if (!collapsed()) {
+
+            <h3>
+              {{ group.label }}
+            </h3>
+
+          }
+
+          @for (
+            item of group.items;
+            track item.path
+          ) {
+
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="is-active"
+              (click)="closeMobile()"
+              [attr.title]="
+                collapsed()
+                  ? item.label
+                  : null
+              ">
+
+              <app-navigation-icon
+                [icon]="item.icon" />
+
+              @if (!collapsed()) {
+
+                <span>
+                  {{ item.label }}
+                </span>
+
+              }
+
+            </a>
+
+          }
+
+        </section>
+
+      }
+
+    </nav>
+
+    <!-- ====================================================
+         USER
+         ==================================================== -->
+
+    <div class="sidebar-user">
+
+      <button
+        class="user-card"
+        type="button"
+        (click)="goProfile()">
+
+        <span class="avatar">
+
+          {{ initials() }}
+
+        </span>
+
+        @if (!collapsed()) {
+
+          <span class="user-card__text">
+
+            <strong>
+              {{ auth.displayName() }}
+            </strong>
+
+            <small>
+
+              {{
+                auth.user()
+                  ?.roles?.[0]
+                  ??
+                  'User'
+              }}
+
+            </small>
+
+          </span>
+
+        }
+
+      </button>
+
+      @if (!collapsed()) {
+
+        <button
+          type="button"
+          class="logout-button"
+          title="Logout"
+          (click)="logout()">
+
+          <svg lucideLogOut></svg>
+
+        </button>
+
+      }
+
+    </div>
+
+  </aside>
+
+  <!-- ======================================================
+       WORKSPACE
+       ====================================================== -->
+
+  <div class="workspace">
+
+    <!-- ====================================================
+         TOPBAR
+         ==================================================== -->
+
+    <header class="topbar">
+
+      <!-- ==================================================
+           TOPBAR LEFT
+           ================================================== -->
+
+      <div class="topbar__left">
+
+        <button
+          type="button"
+          class="icon-button mobile-menu"
+          aria-label="Open navigation"
+          (click)="mobileOpen.set(true)">
+
+          <svg lucideMenu></svg>
+
+        </button>
+
+        <button
+          type="button"
+          class="icon-button collapse-button"
+          aria-label="Toggle sidebar"
+          (click)="toggleCollapsed()">
+
+          @if (collapsed()) {
+
+            <svg lucideChevronRight></svg>
+
+          } @else {
+
+            <svg lucideChevronLeft></svg>
+
+          }
+
+        </button>
+
+        <div class="topbar__context">
+
+          <span>
+            Workspace
+          </span>
+
+          <strong>
+            Hotel Operations
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ==================================================
+           TOPBAR ACTIONS
+           ================================================== -->
+
+      <div class="topbar__actions">
+
+        <!-- ================================================
+             LANGUAGE
+             ================================================ -->
+
+        <div class="language-switcher">
+
+          <!-- LANGUAGE BUTTON -->
+
+          <button
+            type="button"
+            class="language-button"
+            aria-haspopup="menu"
+            [attr.aria-expanded]="languageMenuOpen()"
+            (click)="toggleLanguageMenu()">
+
+            <span
+              class="language-flag language-flag--current">
+
+              {{ language.current().flag }}
+
+            </span>
+
+            <span class="language-button__text">
+
+              {{
+                language.current()
+                  .nativeName
+              }}
+
+            </span>
+
+            <svg
+              class="language-chevron"
+              lucideChevronDown>
+            </svg>
+
+          </button>
+
+          <!-- LANGUAGE DROPDOWN -->
+
+          @if (languageMenuOpen()) {
+
+            <div
+              class="language-menu"
+              role="menu">
+
+              <!-- HEADER -->
+
+              <div class="language-menu__header">
+
+                <div>
+
+                  <strong>
+                    LANGUAGE
+                  </strong>
+
+                  <span>
+                    Choose display language
+                  </span>
+
+                </div>
+
+                <small>
+                  ភាសា
+                </small>
+
+              </div>
+
+              <!-- OPTIONS -->
+
+              <div class="language-options">
+
+                @for (
+                  option
+                  of language.languages;
+                  track option.code
+                ) {
+
+                  <button
+                    type="button"
+                    role="menuitem"
+                    class="language-option"
+                    [class.is-active]="
+                      language.isCurrent(
+                        option.code
+                      )
+                    "
+                    (click)="
+                      changeLanguage(
+                        option.code
+                      )
+                    ">
+
+                    <!-- FLAG -->
+
+                    <span
+                      class="language-flag">
+
+                      {{ option.flag }}
+
+                    </span>
+
+                    <!-- NAME -->
+
+                    <span
+                      class="language-option__content">
+
+                      <strong>
+                        {{ option.nativeName }}
+                      </strong>
+
+                      <small>
+                        {{ option.name }}
+                      </small>
+
+                    </span>
+
+                    <!-- CHECK -->
+
+                    @if (
+                      language.isCurrent(
+                        option.code
+                      )
+                    ) {
+
+                      <svg
+                        class="language-option__check"
+                        lucideCheck>
+                      </svg>
+
+                    }
+
+                  </button>
+
+                }
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+        <!-- ================================================
+             NOTIFICATIONS
+             ================================================ -->
+
+        <button
+          class="icon-button notification-button"
+          type="button"
+          aria-label="Notifications"
+          routerLink="/app/admin/notifications">
+
+          <svg lucideBell></svg>
+
+          <i></i>
+
+        </button>
+
+        <!-- ================================================
+             PROFILE
+             ================================================ -->
+
+        <button
+          class="topbar-profile"
+          type="button"
+          (click)="goProfile()">
+
+          <span
+            class="avatar avatar--small">
+
+            {{ initials() }}
+
+          </span>
+
+          <span>
+
+            <strong>
+              {{ auth.displayName() }}
+            </strong>
+
+            <small>
+              {{ auth.user()?.email }}
+            </small>
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </header>
+
+    <!-- ====================================================
+         PAGE
+         ==================================================== -->
+
+    <main class="page-container">
+
+      <router-outlet />
+
+    </main>
+
+  </div>
+
+</div>

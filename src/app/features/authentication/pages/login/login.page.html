@@ -1,0 +1,150 @@
+<div class="login-page">
+
+  <form
+    class="login-card"
+    (ngSubmit)="submit()">
+
+    <!-- =====================================================
+         ICON
+         ===================================================== -->
+
+    <div class="login-icon">
+      <svg lucideKeyRound></svg>
+    </div>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <span class="eyebrow">
+      Welcome back
+    </span>
+
+    <h1>
+      Sign in to your workspace
+    </h1>
+
+    <p class="subtitle">
+      Use your hotel management account to continue.
+    </p>
+
+    <!-- =====================================================
+         EMAIL
+         ===================================================== -->
+
+    <label class="field">
+
+      <span>
+        Email address
+      </span>
+
+      <div class="input-wrap">
+
+        <svg lucideMail></svg>
+
+        <input
+          type="email"
+          autocomplete="email"
+          placeholder="name@hotel.com"
+          [value]="email()"
+          (input)="setEmail($event)">
+
+      </div>
+
+    </label>
+
+    <!-- =====================================================
+         PASSWORD
+         ===================================================== -->
+
+    <label class="field">
+
+      <span>
+        Password
+      </span>
+
+      <div class="input-wrap">
+
+        <svg lucideLockKeyhole></svg>
+
+        <input
+          [type]="show() ? 'text' : 'password'"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+          [value]="password()"
+          (input)="setPassword($event)">
+
+        <button
+          type="button"
+          class="password-toggle"
+          aria-label="Show or hide password"
+          (click)="toggleShow()">
+
+          @if (show()) {
+
+            <svg lucideEyeOff></svg>
+
+          } @else {
+
+            <svg lucideEye></svg>
+
+          }
+
+        </button>
+
+      </div>
+
+    </label>
+
+    <!-- =====================================================
+         LOGIN
+         ===================================================== -->
+
+    <button
+      class="login-button"
+      type="submit"
+      [disabled]="auth.loading()">
+
+      {{
+        auth.loading()
+          ? 'Signing in...'
+          : 'Sign in'
+      }}
+
+    </button>
+
+    <!-- =====================================================
+         REGISTER
+         ===================================================== -->
+
+    <div class="auth-switch">
+
+      <span>
+        Don't have an account?
+      </span>
+
+      <a routerLink="/auth/register">
+        Create account
+      </a>
+
+    </div>
+
+    <!-- =====================================================
+         DEVELOPMENT ACCOUNT
+         ===================================================== -->
+
+    <div class="demo-note">
+
+      <strong>
+        Development account
+      </strong>
+
+      <span>
+        admin@hotel.local / ChangeMe123!
+      </span>
+
+    </div>
+
+  </form>
+
+</div>

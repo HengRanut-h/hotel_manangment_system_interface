@@ -1,0 +1,31 @@
+<div class="dashboard-head"><div><span class="eyebrow">Live operations</span><h1>Dashboard</h1><p>Hotel performance, guest flow and operational health in one view.</p></div><div class="dashboard-head__actions"><span class="live-pill"><i></i>Live data</span><button class="btn btn--secondary" type="button" (click)="load()"><svg lucideRefreshCw></svg>Refresh</button></div></div>
+@if(loading()){
+  <div class="kpi-grid">@for(i of [1,2,3,4,5,6];track i){<div class="kpi-card skeleton-card"></div>}</div><div class="dashboard-grid"><div class="panel dashboard-card skeleton-panel"></div><div class="panel dashboard-card skeleton-panel"></div></div>
+}@else if(data();as d){
+<div class="kpi-grid">
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon green"><svg lucideCircleDollarSign></svg></span><span class="trend positive">+ this year</span></div><span class="kpi-label">Total Revenue</span><strong>{{ d.revenueTotal | currency:'USD':'symbol':'1.0-0' }}</strong><div class="spark green-spark"></div></article>
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon blue"><svg lucideDoorOpen></svg></span><span class="trend">{{ occupancyNow() }}%</span></div><span class="kpi-label">Occupancy</span><strong>{{ d.summary.occupiedRooms }}/{{ d.summary.totalRooms }}</strong><div class="spark blue-spark"></div></article>
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon violet"><svg lucideCalendarCheck2></svg></span><span class="trend">Today</span></div><span class="kpi-label">Arrivals</span><strong>{{ d.summary.arrivalsToday }}</strong><div class="spark violet-spark"></div></article>
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon orange"><svg lucideBedDouble></svg></span><span class="trend">Ready now</span></div><span class="kpi-label">Available Rooms</span><strong>{{ d.summary.availableRooms }}</strong><div class="spark orange-spark"></div></article>
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon rose"><svg lucideCircleDollarSign></svg></span><span class="trend negative">Outstanding</span></div><span class="kpi-label">Open Balance</span><strong>{{ d.invoiceOutstanding | currency:'USD':'symbol':'1.0-0' }}</strong><div class="spark rose-spark"></div></article>
+ <article class="kpi-card"><div class="kpi-card__top"><span class="kpi-icon cyan"><svg lucideUsers></svg></span><span class="trend">On system</span></div><span class="kpi-label">Employees</span><strong>{{ d.staffCount }}</strong><div class="spark cyan-spark"></div></article>
+</div>
+<div class="dashboard-grid dashboard-grid--hero">
+ <section class="panel dashboard-card revenue-card"><header class="card-head"><div><h2>Revenue Performance</h2><p>Monthly collected revenue for {{ currentYear }}</p></div><div class="metric-inline"><span>Monthly avg.</span><strong>{{ avgRevenue() | currency:'USD':'symbol':'1.0-0' }}</strong></div></header><app-line-chart [labels]="d.months" [series]="[{name:'Revenue',values:d.monthlyRevenue,color:'#16a36a'}]" [height]="300"/></section>
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>Room Allocation</h2><p>Current room readiness and occupancy</p></div><span class="mini-badge">{{ d.summary.totalRooms }} rooms</span></header><app-donut-chart [segments]="d.roomStatus" centerLabel="Rooms"/><div class="mini-metrics"><div><span>Current guests</span><strong>{{ d.summary.currentGuests }}</strong></div><div><span>Departures</span><strong>{{ d.summary.departuresToday }}</strong></div></div></section>
+</div>
+<div class="dashboard-grid dashboard-grid--three">
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>7-Day Occupancy</h2><p>Daily occupancy rate trend</p></div><svg lucideTrendingUp class="head-icon"></svg></header><app-bar-chart [labels]="d.weeklyDays" [values]="d.occupancy" color="#2b63e8"/></section>
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>Payment Mix</h2><p>Revenue split by payment method</p></div></header><app-donut-chart [segments]="d.paymentMethods" centerLabel="Paid"/></section>
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>Reservation Status</h2><p>Current reservation pipeline</p></div></header><app-donut-chart [segments]="d.reservationStatus" centerLabel="Bookings"/></section>
+</div>
+<div class="dashboard-grid dashboard-grid--lower">
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>Recent Reservations</h2><p>Latest guest stay activity</p></div><span class="mini-badge">{{ d.reservationCount }} loaded</span></header><div class="mini-table"><div class="mini-table__head"><span>Guest</span><span>Room</span><span>Status</span><span>Check-in</span></div>@for(r of d.recentReservations;track $index){<div class="mini-table__row"><strong>{{ text(r,'guestName') }}</strong><span>{{ text(r,'roomNumber') }}</span><app-status-badge [value]="text(r,'status')"/><span>{{ text(r,'checkInDate') }}</span></div>}@empty{<div class="empty-state">No recent reservations available.</div>}</div></section>
+ <section class="panel dashboard-card"><header class="card-head"><div><h2>Operations Health</h2><p>Housekeeping and maintenance queue</p></div><svg lucideSparkles class="head-icon"></svg></header><div class="status-list">@for(s of d.operationalStatus;track s.label){<div><span><i></i>{{ s.label }}</span><strong>{{ s.value | number:'1.0-0' }}</strong></div>}@empty{<div class="empty-state">Operational tasks are clear.</div>}</div><div class="risk-box"><span>Dirty rooms</span><strong>{{ d.summary.dirtyRooms }}</strong><small>Rooms waiting for housekeeping attention</small></div></section>
+</div>
+<div class="dashboard-grid dashboard-grid--three compact-row">
+ <section class="panel insight-card"><span>RevPAR estimate</span><strong>{{ revpar() | currency:'USD':'symbol':'1.0-0' }}</strong><small>Revenue per available room / month</small></section>
+ <section class="panel insight-card"><span>Current guest load</span><strong>{{ d.summary.currentGuests }}</strong><small>Guests currently checked in</small></section>
+ <section class="panel insight-card"><span>Room turnaround</span><strong>{{ d.summary.dirtyRooms }}</strong><small>Rooms requiring housekeeping</small></section>
+</div>
+}

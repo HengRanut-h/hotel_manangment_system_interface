@@ -1,0 +1,70 @@
+<form
+  class="permission-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-card">
+    <header class="form-card__header">
+      <span class="form-icon">
+        <svg lucideShield></svg>
+      </span>
+
+      <div>
+        <strong>{{ 'permissions.formTitle' | translate }}</strong>
+        <span>{{ 'permissions.formDescription' | translate }}</span>
+      </div>
+    </header>
+
+    <div class="form-field">
+      <label for="permission-name">
+        {{ 'permissions.name' | translate }}
+      </label>
+
+      <input
+        id="permission-name"
+        type="text"
+        autocomplete="off"
+        placeholder="rooms.view"
+        maxlength="150"
+        [value]="name()"
+        [class.invalid]="isInvalid()"
+        [disabled]="submitting() || disabled()"
+        (input)="setName($event)"
+        (blur)="touched.set(true)">
+
+      <small>{{ 'permissions.nameHelp' | translate }}</small>
+
+      @if (isInvalid()) {
+        <span class="field-error">
+          {{ validationMessage() }}
+        </span>
+      }
+    </div>
+  </section>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      <svg lucideX></svg>
+      <span>{{ 'common.cancel' | translate }}</span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting() || disabled()">
+
+      @if (submitting()) {
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="'common.saving' | translate" />
+      } @else {
+        <svg lucideCheck></svg>
+        <span>{{ submitLabel() | translate }}</span>
+      }
+    </button>
+  </div>
+</form>

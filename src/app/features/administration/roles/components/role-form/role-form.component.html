@@ -1,0 +1,57 @@
+<form class="role-form" (ngSubmit)="submit()">
+  <section class="form-card">
+    <div class="form-group">
+      <label for="roleName">
+        {{ 'roles.name' | translate }}
+      </label>
+
+      <input
+        id="roleName"
+        type="text"
+        name="roleName"
+        maxlength="100"
+        autocomplete="off"
+        [placeholder]="'roles.namePlaceholder' | translate"
+        [disabled]="saving()"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)">
+
+      <div class="field-footer">
+        <span>{{ 'roles.nameHelp' | translate }}</span>
+
+        <span
+          class="character-count"
+          [class.character-count--limit]="name().length >= 100">
+          {{ name().length }}/100
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      <svg lucideX></svg>
+      <span>{{ 'common.cancel' | translate }}</span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving() || !name().trim()">
+
+      @if (saving()) {
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="'common.saving' | translate" />
+      } @else {
+        <svg lucideCheck></svg>
+        <span>{{ submitLabel() | translate }}</span>
+      }
+    </button>
+  </div>
+</form>

@@ -1,0 +1,5 @@
+<div class="bar-chart">
+  @for (value of values(); track $index; let i=$index) {
+    <div class="bar-col"><div class="bar-wrap"><span class="bar-value">{{ value | number:'1.0-0' }}</span><div class="bar" [style.height.%]="height(value)" [style.background]="color()"></div></div><span class="bar-label">{{ labels()[i] }}</span></div>
+  }
+</div>

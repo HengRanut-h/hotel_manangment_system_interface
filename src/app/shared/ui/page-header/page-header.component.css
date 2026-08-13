@@ -1,0 +1,222 @@
+:host {
+  display: block;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+  display: grid;
+
+  justify-items: start;
+
+  gap: 22px;
+
+  margin-bottom: 24px;
+}
+
+/* =========================================================
+   BACK
+   ========================================================= */
+
+.page-back {
+  min-height: 38px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px solid
+    #d9e0ea;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.page-back:hover {
+  border-color: #c7d0dc;
+
+  background: #f8fafc;
+
+  color: #101828;
+
+  box-shadow:
+    0 2px 6px
+    rgba(
+      16,
+      24,
+      40,
+      0.04
+    );
+}
+
+.page-back:focus-visible {
+  outline: none;
+
+  border-color: #7997dd;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      43,
+      99,
+      232,
+      0.09
+    );
+}
+
+.page-back svg {
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 auto;
+
+  stroke-width: 1.8;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.page-header__content {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 5px;
+}
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.page-header__eyebrow {
+  color: #748197;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.page-header h1 {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 28px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.04em;
+}
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.page-header p {
+  max-width: 680px;
+
+  margin: 1px 0 0;
+
+  color: #7d8796;
+
+  font-size: 10.5px;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+:host-context(html[lang='km'])
+.page-header h1 {
+  line-height: 1.45;
+
+  letter-spacing: 0;
+}
+
+:host-context(html[lang='km'])
+.page-header__eyebrow {
+  line-height: 1.5;
+
+  letter-spacing: 0.04em;
+}
+
+:host-context(html[lang='km'])
+.page-header p {
+  line-height: 1.7;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 600px
+) {
+
+  .page-header {
+    gap: 17px;
+
+    margin-bottom: 20px;
+  }
+
+  .page-back {
+    min-height: 36px;
+
+    padding:
+      0
+      10px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 10px;
+  }
+}

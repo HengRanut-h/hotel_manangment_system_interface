@@ -1,0 +1,6 @@
+<div class="donut-layout">
+  <div class="donut" [style.background]="gradient()"><div class="donut__center"><strong>{{ total() | number:'1.0-0' }}</strong><span>{{ centerLabel() }}</span></div></div>
+  <div class="donut-legend">
+    @for (segment of segments(); track segment.label; let i=$index) { <div><span class="legend-name"><i [style.background]="color(i)"></i>{{ segment.label }}</span><strong>{{ percent(segment.value) }}%</strong></div> }
+  </div>
+</div>

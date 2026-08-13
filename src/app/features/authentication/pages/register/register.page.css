@@ -1,0 +1,529 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.register-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(420px, 0.9fr);
+
+  min-height: 100vh;
+}
+
+/* =========================================================
+   LEFT VISUAL
+   ========================================================= */
+
+.register-visual {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  padding:
+    30px
+    42px;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 70% 20%,
+      #1d3b74 0,
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #07101e,
+      #0d1d35 55%,
+      #143562
+    );
+}
+
+.register-visual::after {
+  content: "";
+
+  position: absolute;
+
+  top: -210px;
+  right: -220px;
+
+  width: 500px;
+  height: 500px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 90px
+      rgba(255, 255, 255, 0.018),
+    0 0 0 180px
+      rgba(255, 255, 255, 0.012);
+}
+
+.visual-nav {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  color: #879bb8;
+
+  font-size: 10px;
+}
+
+.visual-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #ffffff;
+}
+
+.visual-brand > span {
+  display: grid;
+
+  width: 34px;
+  height: 34px;
+
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #0b1b31;
+}
+
+.visual-brand svg {
+  width: 17px;
+}
+
+.visual-brand strong {
+  font-size: 12px;
+}
+
+.visual-content {
+  position: relative;
+  z-index: 1;
+
+  max-width: 650px;
+
+  margin: auto 0;
+}
+
+.visual-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #9fb4d3;
+
+  font-size: 10px;
+}
+
+.visual-eyebrow svg {
+  width: 14px;
+}
+
+.visual-content h1 {
+  margin:
+    18px 0
+    15px;
+
+  font-size:
+    clamp(
+      42px,
+      5vw,
+      70px
+    );
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+}
+
+.visual-content h1 em {
+  color: #82a9ff;
+
+  font-style: normal;
+}
+
+.visual-content p {
+  max-width: 570px;
+
+  color: #94a8c4;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   STEPS
+   ========================================================= */
+
+.visual-steps {
+  display: grid;
+
+  gap: 10px;
+
+  max-width: 430px;
+
+  margin-top: 34px;
+}
+
+.visual-steps > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+.visual-steps strong {
+  color: #82a9ff;
+
+  font-size: 10px;
+}
+
+.visual-steps span {
+  color: #b2c1d6;
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   REGISTER PANEL
+   ========================================================= */
+
+.register-panel {
+  display: grid;
+
+  place-items: center;
+
+  padding: 32px;
+
+  background: #f7f8fa;
+}
+
+.register-card {
+  width:
+    min(
+      410px,
+      100%
+    );
+
+  padding: 32px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 50px
+    rgba(20, 33, 55, 0.07);
+}
+
+.register-icon {
+  display: grid;
+
+  width: 40px;
+  height: 40px;
+
+  place-items: center;
+
+  margin-bottom: 18px;
+
+  border-radius: 12px;
+
+  background: #eef3ff;
+
+  color: #2b63e8;
+}
+
+.register-icon svg {
+  width: 18px;
+}
+
+.eyebrow {
+  color: #73809a;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.register-card h2 {
+  margin:
+    6px 0
+    6px;
+
+  font-size: 23px;
+
+  letter-spacing: -0.035em;
+}
+
+.register-card > p {
+  margin:
+    0 0
+    20px;
+
+  color: #8a95a5;
+
+  font-size: 11px;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.register-card label {
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 13px;
+}
+
+.register-card label > span {
+  color: #566273;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.input-wrap {
+  display: flex;
+
+  min-height: 43px;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0
+    11px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 10px;
+
+  background: #ffffff;
+}
+
+.input-wrap:focus-within {
+  border-color: #7998df;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(43, 99, 232, 0.08);
+}
+
+.input-wrap > svg {
+  width: 14px;
+
+  flex: 0 0 auto;
+
+  color: #98a2b1;
+}
+
+.input-wrap input,
+.input-wrap select {
+  width: 100%;
+
+  min-width: 0;
+
+  flex: 1;
+
+  border: 0;
+
+  outline: 0;
+
+  background: transparent;
+
+  font: inherit;
+
+  font-size: 12px;
+}
+
+.input-wrap select {
+  cursor: pointer;
+}
+
+.input-wrap button {
+  display: grid;
+
+  place-items: center;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #8792a2;
+
+  cursor: pointer;
+}
+
+.input-wrap button svg {
+  width: 14px;
+}
+
+.input-error {
+  border-color: #d84a4a;
+}
+
+.field-error {
+  color: #d84a4a;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   REGISTER BUTTON
+   ========================================================= */
+
+.register-button {
+  width: 100%;
+  height: 43px;
+
+  margin-top: 20px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #0c1729;
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px
+    rgba(12, 23, 41, 0.15);
+}
+
+.register-button:hover:not(:disabled) {
+  background: #16243a;
+}
+
+.register-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   AUTH SWITCH
+   ========================================================= */
+
+.auth-switch {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 18px;
+
+  color: #7a8697;
+
+  font-size: 10px;
+}
+
+.auth-switch a {
+  color: #245dd8;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .register-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .register-visual {
+    display: none;
+  }
+
+  .register-panel {
+    min-height: 100vh;
+
+    padding: 20px;
+  }
+}
+
+@media (
+  max-width: 480px
+) {
+
+  .register-panel {
+    padding: 14px;
+  }
+
+  .register-card {
+    padding:
+      26px
+      20px;
+  }
+
+  .register-card h2 {
+    font-size: 21px;
+  }
+}

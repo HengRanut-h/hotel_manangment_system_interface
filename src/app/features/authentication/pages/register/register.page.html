@@ -1,0 +1,357 @@
+<div class="register-layout">
+
+  <!-- ======================================================
+       LEFT SIDE
+       ====================================================== -->
+
+  <section class="register-visual">
+
+    <div class="visual-nav">
+
+      <div class="visual-brand">
+
+        <span>
+          <svg lucideBuilding2></svg>
+        </span>
+
+        <strong>
+          Aurelia Hotels
+        </strong>
+
+      </div>
+
+      <span>
+        Operations Suite
+      </span>
+
+    </div>
+
+    <div class="visual-content">
+
+      <span class="visual-eyebrow">
+
+        <svg lucideShieldCheck></svg>
+
+        Secure hospitality operations
+
+      </span>
+
+      <h1>
+        Start your hotel.
+        <br>
+
+        <em>
+          Manage everything.
+        </em>
+      </h1>
+
+      <p>
+        Create your hotel workspace and manage
+        reservations, rooms, guests, finance,
+        housekeeping, inventory and employees
+        from one secure platform.
+      </p>
+
+      <div class="visual-steps">
+
+        <div>
+          <strong>01</strong>
+
+          <span>
+            Create hotel workspace
+          </span>
+        </div>
+
+        <div>
+          <strong>02</strong>
+
+          <span>
+            Create administrator account
+          </span>
+        </div>
+
+        <div>
+          <strong>03</strong>
+
+          <span>
+            Start hotel operations
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       REGISTER PANEL
+       ====================================================== -->
+
+  <section class="register-panel">
+
+    <form
+      class="register-card"
+      (ngSubmit)="submit()">
+
+      <div class="register-icon">
+        <svg lucideKeyRound></svg>
+      </div>
+
+      <span class="eyebrow">
+        Create workspace
+      </span>
+
+      <h2>
+        Create your account
+      </h2>
+
+      <p>
+        Set up your hotel workspace and administrator account.
+      </p>
+
+      <!-- ==================================================
+           FULL NAME
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Full name
+        </span>
+
+        <div class="input-wrap">
+
+          <svg lucideUserRound></svg>
+
+          <input
+            type="text"
+            autocomplete="name"
+            placeholder="Your full name"
+            [value]="fullName()"
+            (input)="setFullName($event)">
+
+        </div>
+
+      </label>
+
+      <!-- ==================================================
+           HOTEL NAME
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Hotel name
+        </span>
+
+        <div class="input-wrap">
+
+          <svg lucideBuilding2></svg>
+
+          <input
+            type="text"
+            autocomplete="organization"
+            placeholder="Aurelia Hotel"
+            [value]="hotelName()"
+            (input)="setHotelName($event)">
+
+        </div>
+
+      </label>
+
+      <!-- ==================================================
+           EMAIL
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Email address
+        </span>
+
+        <div class="input-wrap">
+
+          <svg lucideMail></svg>
+
+          <input
+            type="email"
+            autocomplete="email"
+            placeholder="admin@hotel.com"
+            [value]="email()"
+            (input)="setEmail($event)">
+
+        </div>
+
+      </label>
+
+      <!-- ==================================================
+           CURRENCY
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Default currency
+        </span>
+
+        <div class="input-wrap">
+
+          <select
+            [value]="currency()"
+            (change)="setCurrency($event)">
+
+            <option value="USD">
+              USD — US Dollar
+            </option>
+
+            <option value="KHR">
+              KHR — Cambodian Riel
+            </option>
+
+            <option value="THB">
+              THB — Thai Baht
+            </option>
+
+            <option value="EUR">
+              EUR — Euro
+            </option>
+
+          </select>
+
+        </div>
+
+      </label>
+
+      <!-- ==================================================
+           PASSWORD
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Password
+        </span>
+
+        <div class="input-wrap">
+
+          <svg lucideLockKeyhole></svg>
+
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            autocomplete="new-password"
+            placeholder="Minimum 8 characters"
+            [value]="password()"
+            (input)="setPassword($event)">
+
+          <button
+            type="button"
+            aria-label="Show or hide password"
+            (click)="togglePassword()">
+
+            @if (showPassword()) {
+
+              <svg lucideEyeOff></svg>
+
+            } @else {
+
+              <svg lucideEye></svg>
+
+            }
+
+          </button>
+
+        </div>
+
+      </label>
+
+      <!-- ==================================================
+           CONFIRM PASSWORD
+           ================================================== -->
+
+      <label>
+
+        <span>
+          Confirm password
+        </span>
+
+        <div
+          class="input-wrap"
+          [class.input-error]="passwordMismatch()">
+
+          <svg lucideLockKeyhole></svg>
+
+          <input
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            autocomplete="new-password"
+            placeholder="Repeat password"
+            [value]="confirmPassword()"
+            (input)="setConfirmPassword($event)">
+
+          <button
+            type="button"
+            aria-label="Show or hide confirm password"
+            (click)="toggleConfirmPassword()">
+
+            @if (showConfirmPassword()) {
+
+              <svg lucideEyeOff></svg>
+
+            } @else {
+
+              <svg lucideEye></svg>
+
+            }
+
+          </button>
+
+        </div>
+
+        @if (passwordMismatch()) {
+
+          <small class="field-error">
+            Passwords do not match.
+          </small>
+
+        }
+
+      </label>
+
+      <!-- ==================================================
+           CREATE ACCOUNT
+           ================================================== -->
+
+      <button
+        class="register-button"
+        type="submit"
+        [disabled]="!canSubmit()">
+
+        {{
+          auth.loading()
+            ? 'Creating account...'
+            : 'Create account'
+        }}
+
+      </button>
+
+      <!-- ==================================================
+           LOGIN LINK
+           ================================================== -->
+
+      <div class="auth-switch">
+
+        <span>
+          Already have an account?
+        </span>
+
+        <a routerLink="/auth/login">
+          Sign in
+        </a>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

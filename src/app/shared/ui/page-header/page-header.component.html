@@ -1,0 +1,62 @@
+<header class="page-header">
+
+  <!-- ======================================================
+       BACK
+       ====================================================== -->
+
+  @if (showBack()) {
+
+    @if (backUrl()) {
+
+      <a
+        class="page-back"
+        [routerLink]="backUrl()"
+        [attr.aria-label]="backLabel()">
+
+        <svg lucideArrowLeft></svg>
+
+        <span>
+          {{ backLabel() }}
+        </span>
+
+      </a>
+
+    }
+
+  }
+
+  <!-- ======================================================
+       CONTENT
+       ====================================================== -->
+
+  <div class="page-header__content">
+
+    @if (eyebrow()) {
+
+      <span class="page-header__eyebrow">
+
+        {{ eyebrow() }}
+
+      </span>
+
+    }
+
+    <h1>
+
+      {{ title() }}
+
+    </h1>
+
+    @if (description()) {
+
+      <p>
+
+        {{ description() }}
+
+      </p>
+
+    }
+
+  </div>
+
+</header>

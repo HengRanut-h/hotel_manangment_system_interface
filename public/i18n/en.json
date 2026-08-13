@@ -1,0 +1,92 @@
+{
+  "common": {
+    "back": "Back",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "create": "Create",
+    "edit": "Edit",
+    "update": "Update",
+    "delete": "Delete",
+    "details": "Details",
+    "search": "Search",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "more": "more"
+  },
+
+  "roles": {
+    "section": "Administration",
+
+    "title": "Roles & Access",
+
+    "subtitle": "Create roles and control access to hotel operations.",
+
+    "roles": "roles",
+
+    "user": "user",
+
+    "users": "users",
+
+    "totalRoles": "Total roles",
+
+    "assignedUsers": "Assigned users",
+
+    "permissions": "Permissions",
+
+    "searchPlaceholder": "Search roles or permissions...",
+
+    "add": "Add role",
+
+    "loading": "Loading roles...",
+
+    "loadFailed": "Unable to load roles.",
+
+    "noRoles": "No roles found",
+
+    "noPermissions": "No permissions assigned",
+
+    "create": "Create Role",
+
+    "creating": "Creating...",
+
+    "createDescription": "Create a new role for hotel staff access control.",
+
+    "createPermissionsHint": "Create the role first. Permissions can be assigned afterward.",
+
+    "edit": "Edit Role",
+
+    "editDescription": "Update the role name and information.",
+
+    "detail": "Role Details",
+
+    "name": "Role name",
+
+    "namePlaceholder": "Example: Front Desk Manager",
+
+    "nameHelp": "Use a clear name that describes the staff responsibility.",
+
+    "update": "Update role",
+
+    "managePermissions": "Manage permissions",
+
+    "savePermissions": "Save permissions",
+
+    "createSuccess": "Role created successfully.",
+
+    "createFailed": "Unable to create role.",
+
+    "updateSuccess": "Role updated successfully.",
+
+    "updateFailed": "Unable to update role.",
+
+    "deleteSuccess": "Role deleted successfully.",
+
+    "deleteFailed": "Unable to delete role.",
+
+    "deleteAssignedError": "This role is assigned to users and cannot be deleted.",
+
+    "deleteConfirm": "Delete role \"{{name}}\"?"
+  }
+}

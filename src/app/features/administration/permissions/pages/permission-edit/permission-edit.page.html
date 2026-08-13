@@ -1,0 +1,36 @@
+<div class="permission-edit-page">
+  <app-page-header
+    [eyebrow]="'permissions.section' | translate"
+    [title]="'permissions.edit' | translate"
+    [description]="'permissions.editDescription' | translate"
+    [backLabel]="'common.back' | translate"
+    backUrl="/app/admin/permissions" />
+
+  @if (loading()) {
+    <app-spin
+      [label]="'permissions.loadingOne' | translate"
+      size="large" />
+
+  } @else if (errorMessage()) {
+    <section class="state state--error">
+      <strong>{{ 'permissions.loadOneFailed' | translate }}</strong>
+      <span>{{ errorMessage() }}</span>
+
+      <button
+        type="button"
+        class="retry-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <app-permission-form
+      [initialName]="permissionName()"
+      submitLabel="permissions.update"
+      [submitting]="submitting()"
+      (submitted)="submit($event)"
+      (cancelled)="cancel()" />
+  }
+</div>
