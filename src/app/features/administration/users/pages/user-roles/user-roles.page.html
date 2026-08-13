@@ -1,0 +1,221 @@
+@if (loading()) {
+
+  <app-spin
+    [label]="'users.loadingRoles' | translate"
+    size="large"
+    [fullscreen]="true" />
+
+} @else if (errorMessage()) {
+
+  <section class="state state--error">
+
+    <span class="state-icon">
+      <svg lucideShieldCheck></svg>
+    </span>
+
+    <strong>
+      {{ 'users.rolesLoadFailed' | translate }}
+    </strong>
+
+    <span>
+      {{ errorMessage() }}
+    </span>
+
+    <button
+      type="button"
+      class="state-action"
+      (click)="load()">
+
+      <svg lucideRefreshCw></svg>
+
+      <span>
+        {{ 'common.tryAgain' | translate }}
+      </span>
+
+    </button>
+
+  </section>
+
+} @else if (user(); as currentUser) {
+
+  <div class="user-roles-page">
+
+    <app-page-header
+      [eyebrow]="'users.section' | translate"
+      [title]="currentUser.fullName"
+      [description]="'users.manageRolesDescription' | translate"
+      [backLabel]="'common.back' | translate"
+      [backUrl]="backUrl()" />
+
+    <section class="summary-card">
+
+      <span class="summary-icon">
+        <svg lucideShieldCheck></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'users.selectedRoles' | translate }}
+        </span>
+
+        <strong>
+          {{ selected().length }}
+          /
+          {{ roles().length }}
+        </strong>
+      </div>
+
+    </section>
+
+    <section class="toolbar">
+
+      <label class="search">
+
+        <svg lucideSearch></svg>
+
+        <input
+          type="search"
+          autocomplete="off"
+          [placeholder]="'users.searchRoles' | translate"
+          [value]="search()"
+          (input)="setSearch($event)">
+
+        @if (search()) {
+
+          <button
+            type="button"
+            class="search-clear"
+            (click)="clearSearch()">
+
+            <svg lucideX></svg>
+
+          </button>
+
+        }
+
+      </label>
+
+      <div class="toolbar-actions">
+
+        <button
+          type="button"
+          class="toolbar-button"
+          [disabled]="saving()"
+          (click)="selectAll()">
+
+          <svg lucideCheck></svg>
+
+          <span>
+            {{ 'users.selectAllRoles' | translate }}
+          </span>
+
+        </button>
+
+        <button
+          type="button"
+          class="toolbar-button"
+          [disabled]="saving()"
+          (click)="clearAll()">
+
+          <svg lucideX></svg>
+
+          <span>
+            {{ 'users.clearRoles' | translate }}
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+    @if (filteredRoles().length === 0) {
+
+      <section class="empty">
+        {{ 'users.noAvailableRoles' | translate }}
+      </section>
+
+    } @else {
+
+      <section class="role-grid">
+
+        @for (
+          roleName of filteredRoles();
+          track roleName
+        ) {
+
+          <button
+            type="button"
+            class="role-card"
+            [class.role-card--selected]="hasRole(roleName)"
+            [disabled]="saving()"
+            (click)="toggleRole(roleName)">
+
+            <span class="role-check">
+
+              @if (hasRole(roleName)) {
+                <svg lucideCheck></svg>
+              }
+
+            </span>
+
+            <svg lucideShieldCheck></svg>
+
+            <span>
+              {{ roleName }}
+            </span>
+
+          </button>
+
+        }
+
+      </section>
+
+    }
+
+    <div class="save-bar">
+
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="saving()"
+        (click)="cancel()">
+
+        <svg lucideX></svg>
+
+        <span>
+          {{ 'common.cancel' | translate }}
+        </span>
+
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="saving()"
+        (click)="save()">
+
+        @if (saving()) {
+
+          <app-spin
+            [inline]="true"
+            size="small"
+            [label]="'common.saving' | translate" />
+
+        } @else {
+
+          <svg lucideSave></svg>
+
+          <span>
+            {{ 'users.saveRoles' | translate }}
+          </span>
+
+        }
+
+      </button>
+
+    </div>
+
+  </div>
+
+}

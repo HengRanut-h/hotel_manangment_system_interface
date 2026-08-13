@@ -1,0 +1,216 @@
+<form
+  class="user-form"
+  (ngSubmit)="submit()">
+
+  <section class="form-card">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label for="userFullName">
+          {{ 'users.fullName' | translate }}
+        </label>
+
+        <div class="input-shell">
+          <svg lucideUser></svg>
+
+          <input
+            id="userFullName"
+            type="text"
+            name="userFullName"
+            maxlength="200"
+            autocomplete="name"
+            [disabled]="saving()"
+            [placeholder]="'users.fullNamePlaceholder' | translate"
+            [ngModel]="fullName()"
+            (ngModelChange)="fullName.set($event)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="userEmail">
+          {{ 'users.email' | translate }}
+        </label>
+
+        <div class="input-shell">
+          <svg lucideMail></svg>
+
+          <input
+            id="userEmail"
+            type="email"
+            name="userEmail"
+            maxlength="200"
+            autocomplete="email"
+            [disabled]="saving()"
+            [placeholder]="'users.emailPlaceholder' | translate"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)">
+        </div>
+      </div>
+
+      <div class="form-group form-group--wide">
+        <label for="userBranchId">
+          {{ 'users.branchId' | translate }}
+        </label>
+
+        <div class="input-shell">
+          <svg lucideMapPin></svg>
+
+          <input
+            id="userBranchId"
+            type="text"
+            name="userBranchId"
+            autocomplete="off"
+            [disabled]="saving()"
+            [placeholder]="'users.branchIdPlaceholder' | translate"
+            [ngModel]="branchId() ?? ''"
+            (ngModelChange)="branchId.set($event || null)">
+        </div>
+
+        <small>
+          {{ 'users.branchIdHelp' | translate }}
+        </small>
+      </div>
+
+      @if (showStatus()) {
+
+        <div class="form-group form-group--wide">
+
+          <label>
+            {{ 'users.status' | translate }}
+          </label>
+
+          <button
+            type="button"
+            class="status-toggle"
+            [class.status-toggle--active]="isActive()"
+            [disabled]="saving()"
+            (click)="isActive.set(!isActive())">
+
+            <span class="status-dot"></span>
+
+            <span>
+              {{
+                isActive()
+                  ? ('users.active' | translate)
+                  : ('users.inactive' | translate)
+              }}
+            </span>
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+    <div class="roles-section">
+
+      <div class="roles-heading">
+
+        <span class="roles-heading__icon">
+          <svg lucideShieldCheck></svg>
+        </span>
+
+        <div>
+          <strong>
+            {{ 'users.roles' | translate }}
+          </strong>
+
+          <small>
+            {{ 'users.rolesHelp' | translate }}
+          </small>
+        </div>
+
+      </div>
+
+      @if (availableRoles().length === 0) {
+
+        <div class="roles-empty">
+          {{ 'users.noAvailableRoles' | translate }}
+        </div>
+
+      } @else {
+
+        <div class="role-options">
+
+          @for (
+            roleName of availableRoles();
+            track roleName
+          ) {
+
+            <button
+              type="button"
+              class="role-option"
+              [class.role-option--selected]="hasRole(roleName)"
+              [disabled]="saving()"
+              (click)="toggleRole(roleName)">
+
+              <span class="role-checkbox">
+
+                @if (hasRole(roleName)) {
+                  <svg lucideCheck></svg>
+                }
+
+              </span>
+
+              <span>
+                {{ roleName }}
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+
+      <svg lucideX></svg>
+
+      <span>
+        {{ 'common.cancel' | translate }}
+      </span>
+
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving() || !valid()">
+
+      @if (saving()) {
+
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="'common.saving' | translate" />
+
+      } @else {
+
+        <svg lucideCheck></svg>
+
+        <span>
+          {{ submitLabel() | translate }}
+        </span>
+
+      }
+
+    </button>
+
+  </div>
+
+</form>

@@ -14,31 +14,26 @@ export const administrationRoutes:
   // /app/admin/users
   // =========================================================
 
-  {
-    path:
-      'users',
+ {
+  path: 'users',
 
-    loadComponent:
-      () =>
-        import(
-          './pages/users/users.page'
-        )
-          .then(
-            module =>
-              module.UsersPage
-          ),
+  loadComponent: () =>
+    import(
+      './pages/users/users.page'
+    )
+      .then(
+        module =>
+          module.UsersPage
+      ),
 
-    canActivate:
-    [
-      permissionGuard
-    ],
+  canActivate: [
+    permissionGuard
+  ],
 
-    data:
-    {
-      permission:
-        'users.manage'
-    }
-  },
+  data: {
+    permission: 'users.manage'
+  }
+},
 
   // =========================================================
   // ROLES

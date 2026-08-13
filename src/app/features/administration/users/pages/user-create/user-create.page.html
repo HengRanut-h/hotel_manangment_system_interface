@@ -1,0 +1,500 @@
+<div
+  class="create-user-overlay"
+  (click)="cancel()">
+
+  <section
+    class="create-user-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="createUserTitle"
+    (click)="$event.stopPropagation()">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="dialog-header">
+
+      <div class="dialog-heading">
+
+        <h1 id="createUserTitle">
+          {{ 'users.addUser' | translate }}
+        </h1>
+
+        <p>
+          {{ 'users.addUserDescription' | translate }}
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-button"
+        [disabled]="saving()"
+        [attr.aria-label]="'common.close' | translate"
+        (click)="cancel()">
+
+        <svg lucideX></svg>
+
+      </button>
+
+    </header>
+
+    <!-- =====================================================
+         FORM
+         ===================================================== -->
+
+    <form
+      class="create-user-form"
+      (submit)="$event.preventDefault(); save()">
+
+      <div class="dialog-body">
+
+        <!-- =================================================
+             ACCOUNT INFORMATION
+             ================================================= -->
+
+        <div class="form-grid">
+
+          <!-- FULL NAME -->
+
+          <div class="form-group">
+
+            <label for="createUserFullName">
+              {{ 'users.fullName' | translate }}
+            </label>
+
+            <div
+              class="input-shell"
+              [class.input-shell--invalid]="
+                submitted() &&
+                !fullNameValid()
+              ">
+
+              <svg lucideUser></svg>
+
+              <input
+                id="createUserFullName"
+                type="text"
+                maxlength="200"
+                autocomplete="name"
+                [disabled]="saving()"
+                [value]="fullName()"
+                [placeholder]="
+                  'users.fullNamePlaceholder'
+                    | translate
+                "
+                (input)="setFullName($event)">
+
+            </div>
+
+            @if (
+              submitted() &&
+              !fullNameValid()
+            ) {
+
+              <small class="field-error">
+                {{
+                  'users.fullNameRequired'
+                    | translate
+                }}
+              </small>
+
+            }
+
+          </div>
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label for="createUserEmail">
+              {{ 'users.email' | translate }}
+            </label>
+
+            <div
+              class="input-shell"
+              [class.input-shell--invalid]="
+                submitted() &&
+                !emailValid()
+              ">
+
+              <svg lucideMail></svg>
+
+              <input
+                id="createUserEmail"
+                type="email"
+                maxlength="200"
+                autocomplete="email"
+                [disabled]="saving()"
+                [value]="email()"
+                [placeholder]="
+                  'users.emailPlaceholder'
+                    | translate
+                "
+                (input)="setEmail($event)">
+
+            </div>
+
+            @if (
+              submitted() &&
+              !emailValid()
+            ) {
+
+              <small class="field-error">
+                {{
+                  'users.emailInvalid'
+                    | translate
+                }}
+              </small>
+
+            }
+
+          </div>
+
+          <!-- PASSWORD -->
+
+          <div class="form-group">
+
+            <label for="createUserPassword">
+              {{
+                'users.temporaryPassword'
+                  | translate
+              }}
+            </label>
+
+            <div
+              class="input-shell"
+              [class.input-shell--invalid]="
+                submitted() &&
+                !passwordValid()
+              ">
+
+              <svg lucideLockKeyhole></svg>
+
+              <input
+                id="createUserPassword"
+                [type]="
+                  showPassword()
+                    ? 'text'
+                    : 'password'
+                "
+                maxlength="200"
+                autocomplete="new-password"
+                [disabled]="saving()"
+                [value]="password()"
+                [placeholder]="
+                  'users.passwordPlaceholder'
+                    | translate
+                "
+                (input)="setPassword($event)">
+
+              <button
+                type="button"
+                class="password-toggle"
+                [disabled]="saving()"
+                [attr.aria-label]="
+                  'users.togglePassword'
+                    | translate
+                "
+                (click)="togglePassword()">
+
+                @if (showPassword()) {
+
+                  <svg lucideEyeOff></svg>
+
+                } @else {
+
+                  <svg lucideEye></svg>
+
+                }
+
+              </button>
+
+            </div>
+
+            <small
+              [class.field-error]="
+                submitted() &&
+                !passwordValid()
+              "
+              class="field-help">
+
+              {{ 'users.passwordHelp' | translate }}
+
+            </small>
+
+          </div>
+
+          <!-- CURRENT HOTEL / BRANCH -->
+
+          <div class="scope-card">
+
+            <span class="scope-card__icon">
+              <svg lucideShieldCheck></svg>
+            </span>
+
+            <div>
+
+              <strong>
+                {{
+                  'users.automaticScopeTitle'
+                    | translate
+                }}
+              </strong>
+
+              <small>
+                {{
+                  'users.automaticScopeDescription'
+                    | translate
+                }}
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =================================================
+             ROLES
+             ================================================= -->
+
+        <fieldset
+          class="roles-fieldset"
+          [class.roles-fieldset--invalid]="
+            submitted() &&
+            !rolesValid()
+          ">
+
+          <legend>
+
+            <span>
+              {{ 'users.roles' | translate }}
+            </span>
+
+            @if (
+              roleNames().length > 0
+            ) {
+
+              <span class="selected-count">
+                {{ roleNames().length }}
+              </span>
+
+            }
+
+          </legend>
+
+          <div class="roles-header">
+
+            <div>
+
+              <strong>
+                {{
+                  'users.assignRoles'
+                    | translate
+                }}
+              </strong>
+
+              <small>
+                {{
+                  'users.rolesHelp'
+                    | translate
+                }}
+              </small>
+
+            </div>
+
+            <div class="role-search">
+
+              <svg lucideSearch></svg>
+
+              <input
+                type="search"
+                [disabled]="
+                  saving() ||
+                  loadingRoles()
+                "
+                [value]="roleSearch()"
+                [placeholder]="
+                  'users.searchRoles'
+                    | translate
+                "
+                (input)="setRoleSearch($event)">
+
+            </div>
+
+          </div>
+
+          <!-- LOADING -->
+
+          @if (loadingRoles()) {
+
+            <div class="roles-state">
+
+              <app-spin
+                [inline]="true"
+                size="small"
+                [label]="
+                  'users.loadingRoles'
+                    | translate
+                " />
+
+            </div>
+
+          } @else if (roleLoadError()) {
+
+            <div
+              class="
+                roles-state
+                roles-state--error
+              ">
+
+              <span>
+                {{ roleLoadError() }}
+              </span>
+
+              <button
+                type="button"
+                [disabled]="saving()"
+                (click)="loadRoles()">
+
+                {{ 'common.tryAgain' | translate }}
+
+              </button>
+
+            </div>
+
+          } @else if (
+            availableRoles().length === 0
+          ) {
+
+            <div class="roles-state">
+
+              <span>
+                {{
+                  'users.noAvailableRoles'
+                    | translate
+                }}
+              </span>
+
+            </div>
+
+          } @else {
+
+            <div class="role-grid">
+
+              @for (
+                roleName of availableRoles();
+                track roleName
+              ) {
+
+                <button
+                  type="button"
+                  class="role-option"
+                  [class.role-option--selected]="
+                    hasRole(roleName)
+                  "
+                  [disabled]="saving()"
+                  (click)="toggleRole(roleName)">
+
+                  <span class="role-checkbox">
+
+                    @if (
+                      hasRole(roleName)
+                    ) {
+
+                      <svg lucideCheck></svg>
+
+                    }
+
+                  </span>
+
+                  <span class="role-name">
+                    {{ roleName }}
+                  </span>
+
+                </button>
+
+              }
+
+            </div>
+
+          }
+
+          @if (
+            submitted() &&
+            !rolesValid()
+          ) {
+
+            <div class="roles-validation">
+              {{
+                'users.roleRequired'
+                  | translate
+              }}
+            </div>
+
+          }
+
+        </fieldset>
+
+      </div>
+
+      <!-- =====================================================
+           FOOTER
+           ===================================================== -->
+
+      <footer class="dialog-footer">
+
+        <button
+          type="button"
+          class="
+            dialog-button
+            dialog-button--secondary
+          "
+          [disabled]="saving()"
+          (click)="cancel()">
+
+          {{ 'common.cancel' | translate }}
+
+        </button>
+
+        <button
+          type="submit"
+          class="
+            dialog-button
+            dialog-button--primary
+          "
+          [disabled]="
+            saving() ||
+            !formValid()
+          ">
+
+          @if (saving()) {
+
+            <app-spin
+              [inline]="true"
+              size="small"
+              label="" />
+
+            <span>
+              {{ 'common.saving' | translate }}
+            </span>
+
+          } @else {
+
+            <span>
+              {{ 'users.saveUser' | translate }}
+            </span>
+
+          }
+
+        </button>
+
+      </footer>
+
+    </form>
+
+  </section>
+
+</div>

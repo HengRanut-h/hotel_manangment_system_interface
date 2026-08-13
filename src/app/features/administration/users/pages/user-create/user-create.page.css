@@ -1,0 +1,1038 @@
+:host {
+  display: block;
+}
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.create-user-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1200;
+
+  display: grid;
+  place-items: center;
+
+  padding: 32px;
+
+  overflow: auto;
+
+  background:
+    rgba(
+      15,
+      23,
+      42,
+      0.48
+    );
+
+  backdrop-filter:
+    blur(5px);
+}
+
+/* =========================================================
+   DIALOG
+   ========================================================= */
+
+.create-user-dialog {
+  width:
+    min(
+      1140px,
+      100%
+    );
+
+  max-height:
+    calc(
+      100vh - 64px
+    );
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    );
+
+  border-radius: 28px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 28px 80px
+    rgba(
+      15,
+      23,
+      42,
+      0.22
+    );
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dialog-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding:
+    30px 32px
+    26px;
+
+  border-bottom:
+    1px solid #e9edf3;
+}
+
+.dialog-heading {
+  min-width: 0;
+
+  display: grid;
+  gap: 7px;
+}
+
+.dialog-heading h1 {
+  margin: 0;
+
+  color: #182230;
+
+  font-size: 27px;
+  line-height: 1.2;
+
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dialog-heading p {
+  margin: 0;
+
+  color: #7a8699;
+
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.close-button {
+  width: 50px;
+  height: 50px;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 16px;
+
+  background: #f7f9fc;
+
+  color: #101828;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.close-button:hover:not(:disabled) {
+  background: #eef2f7;
+
+  color: #002c8c;
+
+  transform:
+    translateY(-1px);
+}
+
+.close-button svg {
+  width: 23px;
+  height: 23px;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.create-user-form {
+  min-height: 0;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.dialog-body {
+  min-height: 0;
+
+  flex: 1;
+
+  padding:
+    32px;
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    22px 20px;
+
+  margin-bottom: 28px;
+}
+
+.form-group {
+  min-width: 0;
+
+  display: grid;
+  gap: 9px;
+
+  align-content: start;
+}
+
+.form-group label {
+  color: #4b5b70;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  font-weight: 750;
+}
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.input-shell {
+  min-height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid #dce3ec;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.input-shell:focus-within {
+  border-color: #597ef7;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(
+      22,
+      119,
+      255,
+      0.08
+    );
+}
+
+.input-shell--invalid {
+  border-color: #ff7875;
+}
+
+.input-shell--invalid:focus-within {
+  border-color: #ff4d4f;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(
+      255,
+      77,
+      79,
+      0.08
+    );
+}
+
+.input-shell > svg {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 auto;
+
+  color: #98a2b3;
+}
+
+.input-shell input {
+  min-width: 0;
+
+  flex: 1;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #182230;
+
+  font: inherit;
+
+  font-size: 14px;
+}
+
+.input-shell input::placeholder {
+  color: #a3adbd;
+}
+
+.password-toggle {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #f7f9fc;
+
+  color: #667085;
+
+  cursor: pointer;
+}
+
+.password-toggle:hover:not(:disabled) {
+  background: #eef2f7;
+
+  color: #002c8c;
+}
+
+.password-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   HELP / VALIDATION
+   ========================================================= */
+
+.field-help,
+.field-error {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.field-help {
+  color: #8a95a5;
+}
+
+.field-error {
+  color: #cf1322;
+}
+
+/* =========================================================
+   AUTOMATIC HOTEL / BRANCH
+   ========================================================= */
+
+.scope-card {
+  min-height: 88px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding:
+    15px 17px;
+
+  align-self: end;
+
+  border:
+    1px solid #d6e4ff;
+
+  border-radius: 15px;
+
+  background: #f0f5ff;
+}
+
+.scope-card__icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 12px;
+
+  background: #d6e4ff;
+
+  color: #002c8c;
+}
+
+.scope-card__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.scope-card > div {
+  min-width: 0;
+
+  display: grid;
+  gap: 4px;
+}
+
+.scope-card strong {
+  color: #10239e;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.scope-card small {
+  color: #59719a;
+
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   ROLES FIELDSET
+   ========================================================= */
+
+.roles-fieldset {
+  min-width: 0;
+
+  margin: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid #dfe5ec;
+
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.roles-fieldset--invalid {
+  border-color: #ff7875;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      255,
+      77,
+      79,
+      0.06
+    );
+}
+
+.roles-fieldset legend {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-left: 18px;
+
+  padding:
+    0 8px;
+
+  background: #ffffff;
+
+  color: #59677b;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.selected-count {
+  min-width: 22px;
+  height: 22px;
+
+  display: inline-grid;
+  place-items: center;
+
+  padding:
+    0 6px;
+
+  border-radius: 999px;
+
+  background: #e6f4ff;
+
+  color: #0958d9;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   ROLE HEADER
+   ========================================================= */
+
+.roles-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    20px 22px;
+
+  border-bottom:
+    1px solid #edf0f4;
+}
+
+.roles-header > div:first-child {
+  min-width: 0;
+
+  display: grid;
+  gap: 4px;
+}
+
+.roles-header strong {
+  color: #344054;
+
+  font-size: 13px;
+}
+
+.roles-header small {
+  color: #98a2b3;
+
+  font-size: 11.5px;
+}
+
+/* =========================================================
+   ROLE SEARCH
+   ========================================================= */
+
+.role-search {
+  width: min(
+    280px,
+    100%
+  );
+
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid #dfe5ec;
+
+  border-radius: 11px;
+
+  background: #ffffff;
+}
+
+.role-search:focus-within {
+  border-color: #597ef7;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      22,
+      119,
+      255,
+      0.07
+    );
+}
+
+.role-search svg {
+  width: 15px;
+  height: 15px;
+
+  flex: 0 0 auto;
+
+  color: #98a2b3;
+}
+
+.role-search input {
+  min-width: 0;
+
+  flex: 1;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #344054;
+
+  font: inherit;
+  font-size: 12px;
+}
+
+/* =========================================================
+   ROLE GRID
+   ========================================================= */
+
+.role-grid {
+  max-height: 260px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 10px;
+
+  padding: 20px;
+
+  overflow-y: auto;
+}
+
+.role-option {
+  min-width: 0;
+  min-height: 50px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid #e2e7ee;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #475467;
+
+  text-align: left;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.role-option:hover:not(:disabled) {
+  border-color: #adc6ff;
+
+  background: #f7faff;
+
+  transform:
+    translateY(-1px);
+}
+
+.role-option--selected {
+  border-color: #91caff;
+
+  background: #e6f4ff;
+
+  color: #002c8c;
+}
+
+.role-checkbox {
+  width: 20px;
+  height: 20px;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border:
+    1px solid #cfd6df;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+}
+
+.role-option--selected
+.role-checkbox {
+  border-color: #1677ff;
+
+  background: #1677ff;
+
+  color: #ffffff;
+}
+
+.role-checkbox svg {
+  width: 12px;
+  height: 12px;
+}
+
+.role-name {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ROLE STATES
+   ========================================================= */
+
+.roles-state {
+  min-height: 120px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 24px;
+
+  color: #8a95a5;
+
+  font-size: 12px;
+}
+
+.roles-state--error {
+  flex-direction: column;
+
+  color: #b42318;
+}
+
+.roles-state--error button {
+  min-height: 34px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid #ffccc7;
+
+  border-radius: 8px;
+
+  background: #fff1f0;
+
+  color: #cf1322;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.roles-validation {
+  padding:
+    0 20px
+    16px;
+
+  color: #cf1322;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.dialog-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding:
+    20px 32px
+    30px;
+
+  border-top:
+    1px solid #edf0f4;
+
+  background: #ffffff;
+}
+
+.dialog-button {
+  min-height: 50px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding:
+    0 18px;
+
+  border-radius: 13px;
+
+  font: inherit;
+
+  font-size: 13px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.dialog-button--secondary {
+  border:
+    1px solid #dce3ec;
+
+  background: #ffffff;
+
+  color: #59677b;
+}
+
+.dialog-button--secondary:hover:not(:disabled) {
+  border-color: #b9c3d0;
+
+  background: #f8fafc;
+
+  color: #344054;
+}
+
+.dialog-button--primary {
+  border:
+    1px solid #0c1729;
+
+  background: #0c1729;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 7px 18px
+    rgba(
+      15,
+      23,
+      42,
+      0.14
+    );
+}
+
+.dialog-button--primary:hover:not(:disabled) {
+  border-color: #002c8c;
+
+  background: #002c8c;
+
+  transform:
+    translateY(-1px);
+}
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+button:disabled,
+input:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .create-user-overlay {
+    padding: 20px;
+  }
+
+  .create-user-dialog {
+    max-height:
+      calc(
+        100vh - 40px
+      );
+
+    border-radius: 22px;
+  }
+
+  .role-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 640px
+) {
+
+  .create-user-overlay {
+    display: block;
+
+    padding: 0;
+
+    background: #ffffff;
+  }
+
+  .create-user-dialog {
+    width: 100%;
+    min-height: 100vh;
+    max-height: none;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+  .dialog-header {
+    padding:
+      22px 20px;
+  }
+
+  .dialog-heading h1 {
+    font-size: 23px;
+  }
+
+  .close-button {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 13px;
+  }
+
+  .dialog-body {
+    padding:
+      24px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .scope-card {
+    align-self: stretch;
+  }
+
+  .roles-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .role-search {
+    width: 100%;
+  }
+
+  .role-grid {
+    grid-template-columns:
+      1fr;
+
+    max-height: none;
+  }
+
+  .dialog-footer {
+    position: sticky;
+    bottom: 0;
+
+    padding:
+      16px 20px
+      calc(
+        16px +
+        env(
+          safe-area-inset-bottom
+        )
+      );
+
+    box-shadow:
+      0 -8px 24px
+      rgba(
+        15,
+        23,
+        42,
+        0.05
+      );
+  }
+
+  .dialog-button {
+    flex: 1;
+  }
+
+}

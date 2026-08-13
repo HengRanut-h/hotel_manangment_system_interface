@@ -1,0 +1,367 @@
+<div class="user-list-page">
+
+  <div class="page-heading-row">
+
+    <app-page-header
+      [showBack]="false"
+      [eyebrow]="'users.section' | translate"
+      [title]="'users.title' | translate"
+      [description]="'users.description' | translate" />
+
+    <button
+      type="button"
+      class="create-button"
+      (click)="createUser()">
+
+      <svg lucideCirclePlus></svg>
+
+      <span>
+        {{ 'users.create' | translate }}
+      </span>
+
+    </button>
+
+  </div>
+
+  @if (loading()) {
+
+    <app-spin
+      [label]="'users.loading' | translate"
+      size="large" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <span class="state-icon">
+        <svg lucideUsers></svg>
+      </span>
+
+      <strong>
+        {{ 'users.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+
+      </button>
+
+    </section>
+
+  } @else {
+
+    <section class="stats">
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--users">
+          <svg lucideUsers></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.totalUsers' | translate }}
+          </span>
+
+          <strong>
+            {{ users().length }}
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--active">
+          <svg lucideUserCheck></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.activeUsers' | translate }}
+          </span>
+
+          <strong>
+            {{ activeCount() }}
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-icon stat-icon--inactive">
+          <svg lucideUserX></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.inactiveUsers' | translate }}
+          </span>
+
+          <strong>
+            {{ inactiveCount() }}
+          </strong>
+        </div>
+
+      </article>
+
+    </section>
+
+    <section class="panel">
+
+      <header class="toolbar">
+
+        <label class="search">
+
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [placeholder]="'users.searchPlaceholder' | translate"
+            [value]="search()"
+            (input)="setSearch($event)">
+
+          @if (search()) {
+
+            <button
+              type="button"
+              class="search-clear"
+              [title]="'common.clear' | translate"
+              [attr.aria-label]="'common.clear' | translate"
+              (click)="clearSearch()">
+
+              <svg lucideX></svg>
+
+            </button>
+
+          }
+
+        </label>
+
+        <span class="result-count">
+
+          <strong>
+            {{ filteredUsers().length }}
+          </strong>
+
+          {{ 'users.title' | translate }}
+
+        </span>
+
+      </header>
+
+      @if (filteredUsers().length === 0) {
+
+        <div class="empty">
+
+          <svg lucideUsers></svg>
+
+          <strong>
+            {{ 'users.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'users.noResultsDescription' | translate }}
+          </span>
+
+        </div>
+
+      } @else {
+
+        <div class="user-list">
+
+          @for (
+            user of filteredUsers();
+            track user.id
+          ) {
+
+            <article class="user-item">
+
+              <div class="user-main">
+
+                <span class="avatar">
+                  {{ user.fullName.slice(0, 1).toUpperCase() }}
+                </span>
+
+                <div class="user-info">
+
+                  <strong>
+                    {{ user.fullName }}
+                  </strong>
+
+                  <small>
+                    {{ user.email }}
+                  </small>
+
+                  <div class="role-chips">
+
+                    @for (
+                      role of user.roles;
+                      track role
+                    ) {
+
+                      <span class="role-chip">
+                        {{ role }}
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <span
+                class="status-badge"
+                [class.status-badge--active]="user.isActive">
+
+                {{
+                  user.isActive
+                    ? ('users.active' | translate)
+                    : ('users.inactive' | translate)
+                }}
+
+              </span>
+
+              <div class="user-actions">
+
+                <a
+                  class="action-button action-button--view"
+                  [routerLink]="[
+                    '/app/admin/users',
+                    user.id
+                  ]"
+                  [title]="'common.view' | translate"
+                  [attr.aria-label]="'common.view' | translate">
+
+                  <svg lucideEye></svg>
+
+                </a>
+
+                <a
+                  class="action-button action-button--roles"
+                  [routerLink]="[
+                    '/app/admin/users',
+                    user.id,
+                    'roles'
+                  ]"
+                  [title]="'users.manageRoles' | translate"
+                  [attr.aria-label]="'users.manageRoles' | translate">
+
+                  <svg lucideShieldCheck></svg>
+
+                </a>
+
+                <a
+                  class="action-button action-button--password"
+                  [routerLink]="[
+                    '/app/admin/users',
+                    user.id,
+                    'reset-password'
+                  ]"
+                  [title]="'users.resetPassword' | translate"
+                  [attr.aria-label]="'users.resetPassword' | translate">
+
+                  <svg lucideKeyRound></svg>
+
+                </a>
+
+                <a
+                  class="action-button action-button--edit"
+                  [routerLink]="[
+                    '/app/admin/users',
+                    user.id,
+                    'edit'
+                  ]"
+                  [title]="'common.edit' | translate"
+                  [attr.aria-label]="'common.edit' | translate">
+
+                  <svg lucidePencil></svg>
+
+                </a>
+
+                <button
+                  type="button"
+                  class="action-button"
+                  [class.action-button--enable]="!user.isActive"
+                  [class.action-button--disable]="user.isActive"
+                  [disabled]="actionUserId() !== null"
+                  [title]="
+                    user.isActive
+                      ? ('users.disable' | translate)
+                      : ('users.enable' | translate)
+                  "
+                  (click)="toggleStatus(user)">
+
+                  @if (actionUserId() === user.id) {
+
+                    <app-spin
+                      [inline]="true"
+                      size="small"
+                      label="" />
+
+                  } @else if (user.isActive) {
+
+                    <svg lucideUserX></svg>
+
+                  } @else {
+
+                    <svg lucideUserCheck></svg>
+
+                  }
+
+                </button>
+
+                <button
+                  type="button"
+                  class="action-button action-button--delete"
+                  [disabled]="actionUserId() !== null"
+                  [title]="'common.delete' | translate"
+                  [attr.aria-label]="'common.delete' | translate"
+                  (click)="remove(user)">
+
+                  @if (actionUserId() === user.id) {
+
+                    <app-spin
+                      [inline]="true"
+                      size="small"
+                      label="" />
+
+                  } @else {
+
+                    <svg lucideTrash2></svg>
+
+                  }
+
+                </button>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  }
+
+</div>

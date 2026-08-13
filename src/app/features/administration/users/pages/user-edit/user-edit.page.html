@@ -1,0 +1,65 @@
+<div class="user-edit-page">
+
+  <app-page-header
+    [eyebrow]="'users.section' | translate"
+    [title]="'users.edit' | translate"
+    [description]="'users.editDescription' | translate"
+    [backLabel]="'common.back' | translate"
+    [backUrl]="'/app/admin/users/' + id()" />
+
+  @if (loading()) {
+
+    <app-spin
+      [label]="'users.loadingOne' | translate"
+      size="large" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <strong>
+        {{ 'users.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="retry-button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+
+      </button>
+
+    </section>
+
+  } @else {
+
+    <app-user-form
+      [fullName]="fullName()"
+      (fullNameChange)="fullName.set($event)"
+      [email]="email()"
+      (emailChange)="email.set($event)"
+      [branchId]="branchId()"
+      (branchIdChange)="branchId.set($event)"
+      [isActive]="isActive()"
+      (isActiveChange)="isActive.set($event)"
+      [roleNames]="roleNames()"
+      (roleNamesChange)="roleNames.set($event)"
+      [availableRoles]="availableRoles()"
+      [showStatus]="true"
+      [saving]="saving()"
+      submitLabel="users.update"
+      (submitted)="save()"
+      (cancelled)="cancel()" />
+
+  }
+
+</div>

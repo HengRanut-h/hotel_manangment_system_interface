@@ -1,0 +1,280 @@
+@if (loading()) {
+
+  <app-spin
+    [label]="'users.loadingOne' | translate"
+    size="large"
+    [fullscreen]="true" />
+
+} @else if (errorMessage()) {
+
+  <section class="state state--error">
+
+    <span class="state-icon">
+      <svg lucideUsers></svg>
+    </span>
+
+    <strong>
+      {{ 'users.loadOneFailed' | translate }}
+    </strong>
+
+    <span>
+      {{ errorMessage() }}
+    </span>
+
+    <button
+      type="button"
+      class="state-action"
+      (click)="load()">
+
+      <svg lucideRefreshCw></svg>
+
+      <span>
+        {{ 'common.tryAgain' | translate }}
+      </span>
+
+    </button>
+
+  </section>
+
+} @else if (user(); as currentUser) {
+
+  <div class="user-detail-page">
+
+    <header class="page-header">
+
+      <div class="page-header__content">
+
+        <button
+          type="button"
+          class="icon-button icon-button--back"
+          (click)="back()">
+
+          <svg lucideArrowLeft></svg>
+
+        </button>
+
+        <div class="page-title">
+
+          <span class="eyebrow">
+            {{ 'users.detail' | translate }}
+          </span>
+
+          <h1>
+            {{ currentUser.fullName }}
+          </h1>
+
+          <p>
+            {{ currentUser.email }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        <a
+          class="icon-button icon-button--roles"
+          [routerLink]="[
+            '/app/admin/users',
+            currentUser.id,
+            'roles'
+          ]"
+          [title]="'users.manageRoles' | translate">
+
+          <svg lucideShieldCheck></svg>
+
+        </a>
+
+        <a
+          class="icon-button icon-button--password"
+          [routerLink]="[
+            '/app/admin/users',
+            currentUser.id,
+            'reset-password'
+          ]"
+          [title]="'users.resetPassword' | translate">
+
+          <svg lucideKeyRound></svg>
+
+        </a>
+
+        <a
+          class="icon-button icon-button--edit"
+          [routerLink]="[
+            '/app/admin/users',
+            currentUser.id,
+            'edit'
+          ]"
+          [title]="'common.edit' | translate">
+
+          <svg lucidePencil></svg>
+
+        </a>
+
+        <button
+          type="button"
+          class="icon-button"
+          [class.icon-button--enable]="!currentUser.isActive"
+          [class.icon-button--disable]="currentUser.isActive"
+          [disabled]="actionLoading()"
+          (click)="toggleStatus()">
+
+          @if (actionLoading()) {
+
+            <app-spin
+              [inline]="true"
+              size="small"
+              label="" />
+
+          } @else if (currentUser.isActive) {
+
+            <svg lucideUserX></svg>
+
+          } @else {
+
+            <svg lucideUserCheck></svg>
+
+          }
+
+        </button>
+
+        <button
+          type="button"
+          class="icon-button icon-button--delete"
+          [disabled]="actionLoading()"
+          [title]="'common.delete' | translate"
+          (click)="remove()">
+
+          <svg lucideTrash2></svg>
+
+        </button>
+
+      </div>
+
+    </header>
+
+    <section class="info-grid">
+
+      <article class="info-card">
+
+        <span class="info-icon info-icon--email">
+          <svg lucideMail></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.email' | translate }}
+          </span>
+
+          <strong>
+            {{ currentUser.email }}
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="info-card">
+
+        <span class="info-icon info-icon--status">
+
+          @if (currentUser.isActive) {
+            <svg lucideUserCheck></svg>
+          } @else {
+            <svg lucideUserX></svg>
+          }
+
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.status' | translate }}
+          </span>
+
+          <strong>
+            {{
+              currentUser.isActive
+                ? ('users.active' | translate)
+                : ('users.inactive' | translate)
+            }}
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="info-card">
+
+        <span class="info-icon info-icon--branch">
+          <svg lucideMapPin></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'users.branchId' | translate }}
+          </span>
+
+          <strong>
+            {{ currentUser.branchId || '-' }}
+          </strong>
+        </div>
+
+      </article>
+
+    </section>
+
+    <section class="roles-panel">
+
+      <header>
+
+        <span class="roles-panel__icon">
+          <svg lucideShieldCheck></svg>
+        </span>
+
+        <div>
+          <strong>
+            {{ 'users.roles' | translate }}
+          </strong>
+
+          <small>
+            {{ 'users.rolesDescription' | translate }}
+          </small>
+        </div>
+
+      </header>
+
+      @if (currentUser.roles.length === 0) {
+
+        <div class="roles-empty">
+          {{ 'users.noRolesAssigned' | translate }}
+        </div>
+
+      } @else {
+
+        <div class="role-grid">
+
+          @for (
+            role of currentUser.roles;
+            track role
+          ) {
+
+            <span class="role-item">
+
+              <svg lucideShieldCheck></svg>
+
+              <span>
+                {{ role }}
+              </span>
+
+            </span>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  </div>
+
+}
