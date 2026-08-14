@@ -1,0 +1,171 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.form-page {
+  width: min(900px, 100%);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.form-page__header {
+  margin-bottom: 20px;
+}
+
+.form-page__header p {
+  margin: 16px 0 5px;
+
+  color: #667085;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.form-page__header h1 {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.form-page__header > span {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #667085;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BACK LINK
+   ========================================================= */
+
+.back-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #667085;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    color 0.15s ease;
+}
+
+
+/* =========================================================
+   BACK ICON
+   ========================================================= */
+
+.back-link__icon {
+  width: 40px;
+  height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 40px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.back-link__icon svg {
+  width: 18px;
+  height: 18px;
+
+  stroke-width: 2;
+}
+
+
+/* =========================================================
+   BACK TEXT
+   ========================================================= */
+
+.back-link__text {
+  color: inherit;
+}
+
+
+/* =========================================================
+   BACK HOVER
+   ========================================================= */
+
+.back-link:hover {
+  color: #344054;
+}
+
+.back-link:hover
+.back-link__icon {
+  border-color: #c4cbd4;
+
+  background: #f9fafb;
+
+  color: #344054;
+}
+
+.back-link:active
+.back-link__icon {
+  transform: scale(0.95);
+}
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+.state-box {
+  min-height: 280px;
+
+  display: grid;
+
+  place-content: center;
+
+  justify-items: center;
+
+  gap: 10px;
+
+  padding: 24px;
+
+  text-align: center;
+}
+
+.state-box--error {
+  color: #b42318;
+}

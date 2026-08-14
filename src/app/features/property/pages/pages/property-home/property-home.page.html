@@ -1,0 +1,121 @@
+<section class="property-page">
+
+  <header class="hero">
+
+    <div>
+      <p class="eyebrow">
+        Hotel Management
+      </p>
+
+      <h1>
+        Property
+      </h1>
+
+      <p class="hero__description">
+        Manage the complete physical property structure from hotels and branches
+        down to buildings, floors, room types, rooms, amenities and rates.
+      </p>
+    </div>
+
+    <div class="hero__summary">
+      <span>
+        Available modules
+      </span>
+
+      <strong>
+        {{ visibleCount() }}
+      </strong>
+    </div>
+
+  </header>
+
+  @if (visibleFeatures().length > 0) {
+
+    <section
+      class="feature-grid"
+      aria-label="Property modules">
+
+      @for (
+        feature of visibleFeatures();
+        track feature.key
+      ) {
+
+        <a
+          class="feature-card"
+          [routerLink]="feature.route">
+
+          <div class="feature-card__icon">
+
+            @switch (feature.icon) {
+
+              @case ('hotel') {
+                <svg lucideHotel></svg>
+              }
+
+              @case ('git-branch') {
+                <svg lucideGitBranch></svg>
+              }
+
+              @case ('building') {
+                <svg lucideBuilding2></svg>
+              }
+
+              @case ('layers') {
+                <svg lucideLayers3></svg>
+              }
+
+              @case ('bed-double') {
+                <svg lucideBedDouble></svg>
+              }
+
+              @case ('door-open') {
+                <svg lucideDoorOpen></svg>
+              }
+
+              @case ('sparkles') {
+                <svg lucideSparkles></svg>
+              }
+
+              @case ('badge-dollar-sign') {
+                <svg lucideBadgeDollarSign></svg>
+              }
+
+            }
+
+          </div>
+
+          <div class="feature-card__content">
+            <h2>
+              {{ feature.title }}
+            </h2>
+
+            <p>
+              {{ feature.description }}
+            </p>
+          </div>
+
+          <span class="feature-card__arrow">
+            →
+          </span>
+
+        </a>
+
+      }
+
+    </section>
+
+  } @else {
+
+    <section class="empty-state">
+      <h2>
+        No property modules available
+      </h2>
+
+      <p>
+        Your account does not currently have permission to view any Property modules.
+      </p>
+    </section>
+
+  }
+
+</section>

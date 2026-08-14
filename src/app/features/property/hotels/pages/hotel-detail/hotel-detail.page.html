@@ -1,0 +1,368 @@
+<section class="detail-page">
+
+  @if (loading()) {
+
+    <div class="state-box">
+
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'hotels.loadingOne'
+            | translate
+        " />
+
+    </div>
+
+  }
+
+
+  @else if (error()) {
+
+    <div
+      class="
+        state-box
+        state-box--error
+      ">
+
+      <strong>
+        {{ 'hotels.loadOneFailed' | translate }}
+      </strong>
+
+      <p>
+        {{ error() }}
+      </p>
+
+
+      <button
+        type="button"
+        class="
+          button
+          button--secondary
+        "
+        (click)="load()">
+
+        {{ 'hotels.tryAgain' | translate }}
+
+      </button>
+
+    </div>
+
+  }
+
+
+  @else if (
+    hotel();
+    as item
+  ) {
+
+    <!-- ===================================================
+         HEADER
+         =================================================== -->
+
+    <header class="detail-header">
+
+      <div class="detail-header__main">
+
+        <a
+          class="back-button"
+          routerLink="/app/property/hotels">
+
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+
+          <span class="back-button__text">
+            {{ 'hotels.title' | translate }}
+          </span>
+
+        </a>
+
+
+        <p class="eyebrow">
+          {{ 'hotels.section' | translate }}
+        </p>
+
+
+        <div class="title-row">
+
+          <div>
+
+            <h1>
+              {{ item.name }}
+            </h1>
+
+            <p class="subline">
+
+              <span class="hotel-code">
+                {{ item.code }}
+              </span>
+
+              <span class="dot">
+                •
+              </span>
+
+              <span>
+                {{ item.currency }}
+              </span>
+
+            </p>
+
+          </div>
+
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="
+              item.isActive
+            "
+            [class.status-badge--inactive]="
+              !item.isActive
+            ">
+
+            {{
+              (
+                item.isActive
+                  ? 'hotels.active'
+                  : 'hotels.inactive'
+              )
+                | translate
+            }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      @if (
+        auth.hasPermission(
+          'hotels.update'
+        )
+      ) {
+
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/property/hotels',
+            item.id,
+            'edit'
+          ]">
+
+          <svg lucidePencil></svg>
+
+          <span>
+            {{ 'hotels.edit' | translate }}
+          </span>
+
+        </a>
+
+      }
+
+    </header>
+
+
+    <!-- ===================================================
+         INFORMATION
+         =================================================== -->
+
+    <section class="info-card">
+
+      <header class="info-card__header">
+
+        <div>
+
+          <p class="eyebrow">
+            {{ 'hotels.overview' | translate }}
+          </p>
+
+          <h2>
+            {{
+              'hotels.hotelInformation'
+                | translate
+            }}
+          </h2>
+
+          <p class="info-description">
+            {{
+              'hotels.hotelInformationDescription'
+                | translate
+            }}
+          </p>
+
+        </div>
+
+      </header>
+
+
+      <dl class="info-grid">
+
+        <div class="info-item">
+
+          <dt>
+            {{ 'hotels.name' | translate }}
+          </dt>
+
+          <dd>
+            {{ item.name }}
+          </dd>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <dt>
+            {{ 'hotels.code' | translate }}
+          </dt>
+
+          <dd>
+            <span class="code-value">
+              {{ item.code }}
+            </span>
+          </dd>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <dt>
+            {{
+              'hotels.defaultCurrency'
+                | translate
+            }}
+          </dt>
+
+          <dd>
+            {{ item.currency }}
+          </dd>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <dt>
+            {{ 'hotels.status' | translate }}
+          </dt>
+
+          <dd>
+
+            <span
+              class="status-badge"
+              [class.status-badge--active]="
+                item.isActive
+              "
+              [class.status-badge--inactive]="
+                !item.isActive
+              ">
+
+              {{
+                (
+                  item.isActive
+                    ? 'hotels.active'
+                    : 'hotels.inactive'
+                )
+                  | translate
+              }}
+
+            </span>
+
+          </dd>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <dt>
+            {{ 'hotels.created' | translate }}
+          </dt>
+
+          <dd>
+            {{
+              item.createdAtUtc
+                |
+              date:
+                'dd MMM yyyy, h:mm a'
+            }}
+          </dd>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <dt>
+            {{ 'hotels.hotelId' | translate }}
+          </dt>
+
+          <dd>
+            <span class="id-value">
+              {{ item.id }}
+            </span>
+          </dd>
+
+        </div>
+
+      </dl>
+
+    </section>
+
+
+    <!-- ===================================================
+         PROPERTY STRUCTURE
+         =================================================== -->
+
+    <section class="related-card">
+
+      <div class="related-card__content">
+
+        <p class="eyebrow">
+          {{ 'hotels.section' | translate }}
+        </p>
+
+        <h2>
+          {{
+            'hotels.propertyStructure'
+              | translate
+          }}
+        </h2>
+
+        <p>
+          {{
+            'hotels.propertyStructureDescription'
+              | translate
+          }}
+        </p>
+
+      </div>
+
+
+      <div class="related-links">
+
+        <a routerLink="/app/property/branches">
+          {{ 'hotels.branches' | translate }}
+        </a>
+
+        <a routerLink="/app/property/buildings">
+          {{ 'hotels.buildings' | translate }}
+        </a>
+
+        <a routerLink="/app/property/floors">
+          {{ 'hotels.floors' | translate }}
+        </a>
+
+        <a routerLink="/app/property/rooms">
+          {{ 'hotels.rooms' | translate }}
+        </a>
+
+      </div>
+
+    </section>
+
+  }
+
+</section>

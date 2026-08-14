@@ -1,0 +1,104 @@
+<section class="form-page">
+
+  @if (loading()) {
+
+    <div class="state-box">
+
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'hotels.loadingOne'
+            | translate
+        " />
+
+    </div>
+
+  }
+
+
+  @else if (error()) {
+
+    <div
+      class="
+        state-box
+        state-box--error
+      ">
+
+      <p>
+        {{ error() }}
+      </p>
+
+      <button
+        type="button"
+        (click)="load()">
+
+        {{ 'hotels.tryAgain' | translate }}
+
+      </button>
+
+    </div>
+
+  }
+
+
+  @else if (
+    hotel();
+    as item
+  ) {
+
+    <header class="form-page__header">
+
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/property/hotels',
+          item.id
+        ]">
+
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+
+      </a>
+
+
+      <p>
+        {{ 'hotels.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'hotels.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'hotels.editDescription'
+            | translate
+        }}
+      </span>
+
+    </header>
+
+
+    <app-hotel-form
+      [name]="item.name"
+      [code]="item.code"
+      [currency]="item.currency"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [submitLabel]="
+        'hotels.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+
+  }
+
+</section>

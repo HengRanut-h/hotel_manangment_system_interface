@@ -160,5 +160,147 @@
     "deleteConfirm": "Delete user {{name}}?",
     "deleteSuccess": "User deleted successfully.",
     "deleteFailed": "Unable to delete user."
+  },
+   "hotels": {
+  "section": "Property management",
+
+  "title": "Hotels",
+  "hotel": "Hotel",
+  "description": "Manage hotel organizations, currencies, status, and property structure.",
+
+  "create": "Add hotel",
+  "createTitle": "Create hotel",
+  "createDescription": "Create a new hotel and configure its default currency and status.",
+
+  "edit": "Edit hotel",
+  "editTitle": "Edit hotel",
+  "editDescription": "Update hotel identity, default currency, and active status.",
+
+  "detail": "Hotel details",
+  "overview": "Overview",
+
+  "hotelInformation": "Hotel information",
+  "hotelInformationDescription": "Basic hotel identity and configuration.",
+
+  "name": "Hotel name",
+  "namePlaceholder": "Enter hotel name",
+
+  "code": "Hotel code",
+  "codePlaceholder": "Example: AGH01",
+
+  "currency": "Currency",
+  "defaultCurrency": "Default currency",
+  "currencyPlaceholder": "USD",
+
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+
+  "created": "Created",
+  "hotelId": "Hotel ID",
+
+  "search": "Search",
+  "searchPlaceholder": "Name, code, currency or ID",
+
+  "all": "All",
+
+  "sortBy": "Sort by",
+  "direction": "Direction",
+
+  "sortName": "Name",
+  "sortCode": "Code",
+  "sortCurrency": "Currency",
+  "sortStatus": "Status",
+  "sortCreated": "Created",
+
+  "ascending": "Ascending",
+  "descending": "Descending",
+
+  "clear": "Clear",
+  "apply": "Apply",
+
+  "actions": "Actions",
+
+  "viewAction": "View hotel",
+  "editAction": "Edit hotel",
+  "activateAction": "Activate hotel",
+  "deactivateAction": "Deactivate hotel",
+  "deleteAction": "Delete hotel",
+
+  "loading": "Loading hotels...",
+  "loadingOne": "Loading hotel...",
+
+  "loadFailed": "Unable to load hotels.",
+  "loadOneFailed": "Unable to load hotel.",
+  "missingId": "Hotel ID is missing.",
+
+  "noResults": "No hotels found",
+  "noResultsDescription": "Change the filters or create a hotel.",
+
+  "tryAgain": "Try again",
+
+  "totalHotels": "total hotels",
+  "page": "Page",
+  "of": "of",
+  "previous": "Previous",
+  "next": "Next",
+
+  "save": "Save hotel",
+  "saveChanges": "Save changes",
+  "saving": "Saving...",
+
+  "cancel": "Cancel",
+
+  "createSuccess": "Hotel created successfully.",
+  "createFailed": "Unable to create hotel.",
+
+  "updateSuccess": "Hotel updated successfully.",
+  "updateFailed": "Unable to update hotel.",
+
+  "activateSuccess": "Hotel activated successfully.",
+  "activateFailed": "Unable to activate hotel.",
+
+  "deactivateSuccess": "Hotel deactivated successfully.",
+  "deactivateFailed": "Unable to deactivate hotel.",
+
+  "deleteConfirm": "Delete hotel \"{{name}}\"?",
+  "deleteSuccess": "Hotel deleted successfully.",
+  "deleteFailed": "Unable to delete hotel.",
+
+  "propertyStructure": "Property structure",
+  "propertyStructureDescription": "Continue managing branches, buildings, floors and rooms.",
+
+  "branches": "Branches",
+  "buildings": "Buildings",
+  "floors": "Floors",
+  "roomTypes": "Room Types",
+  "rooms": "Rooms",
+  "amenities": "Amenities",
+  "rates": "Rates",
+
+  "form": {
+    "identity": "Hotel identity",
+    "identityDescription": "Enter the basic information used to identify this hotel.",
+
+    "name": "Hotel name",
+    "namePlaceholder": "Example: Aurora Grand Hotel",
+    "nameRequired": "Hotel name is required.",
+
+    "code": "Hotel code",
+    "codePlaceholder": "Example: AGH01",
+    "codeHelp": "Use a short unique code for the hotel.",
+    "codeRequired": "Hotel code is required.",
+
+    "currency": "Default currency",
+    "currencyPlaceholder": "USD",
+    "currencyHelp": "Use a 3-letter currency code such as USD, KHR or EUR.",
+    "currencyRequired": "Currency is required.",
+
+    "status": "Hotel status",
+    "statusDescription": "Inactive hotels remain in the system but cannot be used for normal operations.",
+
+    "active": "Active",
+    "inactive": "Inactive"
   }
+}
 }

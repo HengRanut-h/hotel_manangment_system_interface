@@ -1,0 +1,300 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <!-- =====================================================
+       IDENTITY
+       ===================================================== -->
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+
+      <h2>
+        {{ 'hotels.form.identity' | translate }}
+      </h2>
+
+      <p>
+        {{
+          'hotels.form.identityDescription'
+            | translate
+        }}
+      </p>
+
+    </header>
+
+
+    <div class="form-grid">
+
+
+      <!-- NAME -->
+
+      <div class="form-field form-field--full">
+
+        <label for="hotelName">
+
+          {{ 'hotels.form.name' | translate }}
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="hotelName"
+          type="text"
+          autocomplete="off"
+          [placeholder]="
+            'hotels.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="
+            formName.set($event)
+          "
+          name="hotelName">
+
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+
+          <small class="field-error">
+            {{
+              'hotels.form.nameRequired'
+                | translate
+            }}
+          </small>
+
+        }
+
+      </div>
+
+
+      <!-- CODE -->
+
+      <div class="form-field">
+
+        <label for="hotelCode">
+
+          {{ 'hotels.form.code' | translate }}
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="hotelCode"
+          type="text"
+          autocomplete="off"
+          [placeholder]="
+            'hotels.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="
+            formCode.set($event)
+          "
+          name="hotelCode">
+
+
+        <small class="field-help">
+          {{
+            'hotels.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+
+          <small class="field-error">
+            {{
+              'hotels.form.codeRequired'
+                | translate
+            }}
+          </small>
+
+        }
+
+      </div>
+
+
+      <!-- CURRENCY -->
+
+      <div class="form-field">
+
+        <label for="hotelCurrency">
+
+          {{
+            'hotels.form.currency'
+              | translate
+          }}
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="hotelCurrency"
+          type="text"
+          maxlength="3"
+          autocomplete="off"
+          [placeholder]="
+            'hotels.form.currencyPlaceholder'
+              | translate
+          "
+          [ngModel]="formCurrency()"
+          (ngModelChange)="
+            formCurrency.set($event)
+          "
+          name="hotelCurrency">
+
+
+        <small class="field-help">
+          {{
+            'hotels.form.currencyHelp'
+              | translate
+          }}
+        </small>
+
+
+        @if (
+          touched()
+          &&
+          !formCurrency().trim()
+        ) {
+
+          <small class="field-error">
+            {{
+              'hotels.form.currencyRequired'
+                | translate
+            }}
+          </small>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STATUS
+       ===================================================== -->
+
+  @if (
+    showStatus()
+  ) {
+
+    <section class="form-card">
+
+      <header class="form-card__header">
+
+        <h2>
+          {{ 'hotels.form.status' | translate }}
+        </h2>
+
+        <p>
+          {{
+            'hotels.form.statusDescription'
+              | translate
+          }}
+        </p>
+
+      </header>
+
+
+      <label class="status-control">
+
+        <input
+          type="checkbox"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="
+            formIsActive.set($event)
+          "
+          name="hotelIsActive">
+
+
+        <span>
+
+          {{
+            (
+              formIsActive()
+                ? 'hotels.form.active'
+                : 'hotels.form.inactive'
+            )
+              | translate
+          }}
+
+        </span>
+
+      </label>
+
+    </section>
+
+  }
+
+
+  <!-- =====================================================
+       ACTIONS
+       ===================================================== -->
+
+  <footer class="form-actions">
+
+    <button
+      type="button"
+      class="
+        button
+        button--secondary
+      "
+      [disabled]="saving()"
+      (click)="cancel()">
+
+      {{ 'common.cancel' | translate }}
+
+    </button>
+
+
+    <button
+      type="submit"
+      class="
+        button
+        button--primary
+      "
+      [disabled]="saving()">
+
+      @if (saving()) {
+
+        {{ 'common.saving' | translate }}
+
+      } @else {
+
+        {{ submitLabel() }}
+
+      }
+
+    </button>
+
+  </footer>
+
+</form>

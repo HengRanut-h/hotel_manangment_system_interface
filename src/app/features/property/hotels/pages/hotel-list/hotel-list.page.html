@@ -1,0 +1,716 @@
+<section class="hotel-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        {{ 'hotels.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'hotels.title' | translate }}
+      </h1>
+
+      <p class="page-description">
+        {{ 'hotels.description' | translate }}
+      </p>
+
+    </div>
+
+
+    @if (
+      auth.hasPermission(
+        'hotels.create'
+      )
+    ) {
+
+      <a
+        class="primary-link"
+        routerLink="create">
+
+        <svg lucidePlus></svg>
+
+        <span>
+          {{ 'hotels.create' | translate }}
+        </span>
+
+      </a>
+
+    }
+
+  </header>
+
+
+  <!-- =====================================================
+       FILTER
+       ===================================================== -->
+
+  <section class="filters">
+
+
+    <!-- SEARCH -->
+
+    <div
+      class="
+        filter-field
+        filter-field--search
+      ">
+
+      <label for="hotelSearch">
+        {{ 'hotels.search' | translate }}
+      </label>
+
+
+      <div class="input-with-icon">
+
+        <svg lucideSearch></svg>
+
+
+        <input
+          id="hotelSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'hotels.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="
+            search.set($event)
+          "
+          (keyup.enter)="
+            applyFilters()
+          ">
+
+      </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="filter-field">
+
+      <label for="hotelStatus">
+        {{ 'hotels.status' | translate }}
+      </label>
+
+
+      <select
+        id="hotelStatus"
+        [ngModel]="status()"
+        (ngModelChange)="
+          status.set($event)
+        ">
+
+        <option value="all">
+          {{ 'hotels.all' | translate }}
+        </option>
+
+        <option value="active">
+          {{ 'hotels.active' | translate }}
+        </option>
+
+        <option value="inactive">
+          {{ 'hotels.inactive' | translate }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- CURRENCY -->
+
+    <div class="filter-field">
+
+      <label for="hotelCurrency">
+        {{ 'hotels.currency' | translate }}
+      </label>
+
+
+      <input
+        id="hotelCurrency"
+        type="text"
+        maxlength="3"
+        autocomplete="off"
+        [placeholder]="
+          'hotels.currencyPlaceholder'
+            | translate
+        "
+        [ngModel]="currency()"
+        (ngModelChange)="
+          currency.set($event)
+        ">
+
+    </div>
+
+
+    <!-- SORT -->
+
+    <div class="filter-field">
+
+      <label for="hotelSort">
+        {{ 'hotels.sortBy' | translate }}
+      </label>
+
+
+      <select
+        id="hotelSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="
+          sortBy.set($event)
+        ">
+
+        <option value="name">
+          {{ 'hotels.sortName' | translate }}
+        </option>
+
+        <option value="code">
+          {{ 'hotels.sortCode' | translate }}
+        </option>
+
+        <option value="currency">
+          {{ 'hotels.sortCurrency' | translate }}
+        </option>
+
+        <option value="isActive">
+          {{ 'hotels.sortStatus' | translate }}
+        </option>
+
+        <option value="createdAt">
+          {{ 'hotels.sortCreated' | translate }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- DIRECTION -->
+
+    <div class="filter-field">
+
+      <label for="hotelDirection">
+        {{ 'hotels.direction' | translate }}
+      </label>
+
+
+      <select
+        id="hotelDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="
+          sortDirection.set($event)
+        ">
+
+        <option value="asc">
+          {{ 'hotels.ascending' | translate }}
+        </option>
+
+        <option value="desc">
+          {{ 'hotels.descending' | translate }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="filter-actions">
+
+      <button
+        type="button"
+        class="
+          button
+          button--secondary
+        "
+        [disabled]="loading()"
+        (click)="clearFilters()">
+
+        <svg lucideRotateCcw></svg>
+
+        <span>
+          {{ 'hotels.clear' | translate }}
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="
+          button
+          button--primary
+        "
+        [disabled]="loading()"
+        (click)="applyFilters()">
+
+        <svg lucideFilter></svg>
+
+        <span>
+          {{ 'hotels.apply' | translate }}
+        </span>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       TABLE CARD
+       ===================================================== -->
+
+  <section class="table-card">
+
+
+    @if (loading()) {
+
+      <div class="state-box">
+
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'hotels.loading'
+              | translate
+          " />
+
+      </div>
+
+    }
+
+
+    @else if (error()) {
+
+      <div
+        class="
+          state-box
+          state-box--error
+        ">
+
+        <strong>
+          {{ 'hotels.loadFailed' | translate }}
+        </strong>
+
+        <p>
+          {{ error() }}
+        </p>
+
+
+        <button
+          type="button"
+          class="
+            button
+            button--secondary
+          "
+          (click)="load()">
+
+          {{ 'hotels.tryAgain' | translate }}
+
+        </button>
+
+      </div>
+
+    }
+
+
+    @else if (
+      displayedHotels().length === 0
+    ) {
+
+      <div class="state-box">
+
+        <strong>
+          {{ 'hotels.noResults' | translate }}
+        </strong>
+
+        <span>
+          {{
+            'hotels.noResultsDescription'
+              | translate
+          }}
+        </span>
+
+      </div>
+
+    }
+
+
+    @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                {{ 'hotels.hotel' | translate }}
+              </th>
+
+              <th>
+                {{ 'hotels.code' | translate }}
+              </th>
+
+              <th>
+                {{ 'hotels.currency' | translate }}
+              </th>
+
+              <th>
+                {{ 'hotels.status' | translate }}
+              </th>
+
+              <th>
+                {{ 'hotels.created' | translate }}
+              </th>
+
+              <th class="actions-column">
+                {{ 'hotels.actions' | translate }}
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              hotel of displayedHotels();
+              track hotel.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      hotel.id
+                    ]">
+
+                    {{ hotel.name }}
+
+                  </a>
+
+                </td>
+
+
+                <td>
+
+                  <span class="hotel-code">
+                    {{ hotel.code }}
+                  </span>
+
+                </td>
+
+
+                <td>
+                  {{ hotel.currency }}
+                </td>
+
+
+                <td>
+
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="
+                      hotel.isActive
+                    "
+                    [class.status-badge--inactive]="
+                      !hotel.isActive
+                    ">
+
+                    {{
+                      (
+                        hotel.isActive
+                          ? 'hotels.active'
+                          : 'hotels.inactive'
+                      )
+                        | translate
+                    }}
+
+                  </span>
+
+                </td>
+
+
+                <td>
+
+                  {{
+                    hotel.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+
+                    <!-- VIEW -->
+
+                    <a
+                      class="
+                        icon-action
+                        icon-action--view
+                      "
+                      [routerLink]="[
+                        hotel.id
+                      ]"
+                      [title]="
+                        'hotels.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'hotels.viewAction'
+                          | translate
+                      ">
+
+                      <svg lucideEye></svg>
+
+                    </a>
+
+
+                    <!-- EDIT -->
+
+                    @if (
+                      auth.hasPermission(
+                        'hotels.update'
+                      )
+                    ) {
+
+                      <a
+                        class="
+                          icon-action
+                          icon-action--edit
+                        "
+                        [routerLink]="[
+                          hotel.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'hotels.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'hotels.editAction'
+                            | translate
+                        ">
+
+                        <svg lucidePencil></svg>
+
+                      </a>
+
+
+                      <!-- STATUS -->
+
+                      <button
+                        type="button"
+                        class="
+                          icon-action
+                          icon-action--status
+                        "
+                        [class.icon-action--activate]="
+                          !hotel.isActive
+                        "
+                        [class.icon-action--deactivate]="
+                          hotel.isActive
+                        "
+                        [disabled]="
+                          mutatingId()
+                          ===
+                          hotel.id
+                        "
+                        [title]="
+                          (
+                            hotel.isActive
+                              ? 'hotels.deactivateAction'
+                              : 'hotels.activateAction'
+                          )
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            hotel.isActive
+                              ? 'hotels.deactivateAction'
+                              : 'hotels.activateAction'
+                          )
+                            | translate
+                        "
+                        (click)="
+                          setActive(
+                            hotel,
+                            !hotel.isActive
+                          )
+                        ">
+
+                        <svg lucidePower></svg>
+
+                      </button>
+
+                    }
+
+
+                    <!-- DELETE -->
+
+                    @if (
+                      auth.hasPermission(
+                        'hotels.delete'
+                      )
+                    ) {
+
+                      <button
+                        type="button"
+                        class="
+                          icon-action
+                          icon-action--delete
+                        "
+                        [disabled]="
+                          mutatingId()
+                          ===
+                          hotel.id
+                        "
+                        [title]="
+                          'hotels.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'hotels.deleteAction'
+                            | translate
+                        "
+                        (click)="
+                          deleteHotel(
+                            hotel
+                          )
+                        ">
+
+                        <svg lucideTrash2></svg>
+
+                      </button>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         PAGINATION
+         =================================================== -->
+
+    <footer class="pagination">
+
+      <div class="pagination__summary">
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+
+        <span>
+          {{ 'hotels.totalHotels' | translate }}
+        </span>
+
+      </div>
+
+
+      <div class="pagination__controls">
+
+        <button
+          type="button"
+          class="
+            button
+            button--secondary
+            pagination-button
+          "
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+
+          <svg lucideChevronLeft></svg>
+
+          <span>
+            {{ 'hotels.previous' | translate }}
+          </span>
+
+        </button>
+
+
+        <span class="pagination__page">
+
+          {{ 'hotels.page' | translate }}
+
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+
+          {{ 'hotels.of' | translate }}
+
+          <strong>
+            {{ totalPages() }}
+          </strong>
+
+        </span>
+
+
+        <button
+          type="button"
+          class="
+            button
+            button--secondary
+            pagination-button
+          "
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+
+          <span>
+            {{ 'hotels.next' | translate }}
+          </span>
+
+          <svg lucideChevronRight></svg>
+
+        </button>
+
+      </div>
+
+    </footer>
+
+  </section>
+
+</section>
