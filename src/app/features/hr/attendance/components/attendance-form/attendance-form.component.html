@@ -1,0 +1,190 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+    <header class="form-card__header">
+      <h2>
+        {{ 'attendance.form.record' | translate }}
+      </h2>
+      <p>
+        {{ 'attendance.form.recordDescription' | translate }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+      <div class="form-field form-field--full">
+        <label for="attendanceTitle">
+          {{ 'attendance.form.title' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="attendanceTitle"
+          type="text"
+          name="attendanceTitle"
+          autocomplete="off"
+          [placeholder]="'attendance.form.titlePlaceholder' | translate"
+          [ngModel]="formTitle()"
+          (ngModelChange)="formTitle.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formTitle().trim()
+        ) {
+          <small class="field-error">
+            {{ 'attendance.form.titleRequired' | translate }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="attendanceEventAt">
+          {{ 'attendance.form.eventAt' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="attendanceEventAt"
+          type="datetime-local"
+          name="attendanceEventAt"
+          [ngModel]="formEventAt()"
+          (ngModelChange)="formEventAt.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formEventAt()
+        ) {
+          <small class="field-error">
+            {{ 'attendance.form.eventAtRequired' | translate }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="attendanceAmount">
+          {{ 'attendance.form.amount' | translate }}
+        </label>
+        <input
+          id="attendanceAmount"
+          type="number"
+          name="attendanceAmount"
+          min="0"
+          step="0.01"
+          [ngModel]="formAmount()"
+          (ngModelChange)="formAmount.set($event)">
+      </div>
+
+      @if (showStatus()) {
+        <div class="form-field">
+          <label for="attendanceStatus">
+            {{ 'attendance.form.status' | translate }}
+          </label>
+          <input
+            id="attendanceStatus"
+            type="text"
+            name="attendanceStatus"
+            autocomplete="off"
+            [placeholder]="'attendance.form.statusPlaceholder' | translate"
+            [ngModel]="formStatus()"
+            (ngModelChange)="formStatus.set($event)">
+        </div>
+      }
+
+      <div class="form-field form-field--full">
+        <label for="attendanceNotes">
+          {{ 'attendance.form.notes' | translate }}
+        </label>
+        <textarea
+          id="attendanceNotes"
+          name="attendanceNotes"
+          rows="4"
+          [placeholder]="'attendance.form.notesPlaceholder' | translate"
+          [ngModel]="formNotes()"
+          (ngModelChange)="formNotes.set($event)">
+        </textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card">
+    <header class="form-card__header">
+      <h2>
+        {{ 'attendance.form.context' | translate }}
+      </h2>
+      <p>
+        {{ 'attendance.form.contextDescription' | translate }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+      @if (showBranch()) {
+        <div class="form-field">
+          <label for="attendanceBranchId">
+            {{ 'attendance.form.branchId' | translate }}
+          </label>
+          <input
+            id="attendanceBranchId"
+            type="text"
+            name="attendanceBranchId"
+            autocomplete="off"
+            [placeholder]="'attendance.form.branchIdPlaceholder' | translate"
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+        </div>
+      }
+
+      <div class="form-field">
+        <label for="attendanceRelatedEntityId">
+          {{ 'attendance.form.relatedEntityId' | translate }}
+        </label>
+        <input
+          id="attendanceRelatedEntityId"
+          type="text"
+          name="attendanceRelatedEntityId"
+          autocomplete="off"
+          [placeholder]="'attendance.form.relatedEntityIdPlaceholder' | translate"
+          [ngModel]="formRelatedEntityId()"
+          (ngModelChange)="formRelatedEntityId.set($event)">
+      </div>
+
+      <div class="form-field">
+        <label for="attendanceRelatedEntityType">
+          {{ 'attendance.form.relatedEntityType' | translate }}
+        </label>
+        <input
+          id="attendanceRelatedEntityType"
+          type="text"
+          name="attendanceRelatedEntityType"
+          autocomplete="off"
+          [placeholder]="'attendance.form.relatedEntityTypePlaceholder' | translate"
+          [ngModel]="formRelatedEntityType()"
+          (ngModelChange)="formRelatedEntityType.set($event)">
+      </div>
+    </div>
+  </section>
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+</form>

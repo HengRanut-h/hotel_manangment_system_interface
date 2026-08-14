@@ -1,0 +1,192 @@
+<section class="detail-page">
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="'leaveRequests.loadingOne' | translate" />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'leaveRequests.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'leaveRequests.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (record(); as item) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/hr/leave-requests">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'leaveRequests.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'leaveRequests.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.title }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.referenceNumber }}
+              </span>
+            </p>
+          </div>
+
+          <span class="status-badge">
+            {{ statusLabel(item.status) }}
+          </span>
+        </div>
+      </div>
+
+      @if (auth.hasPermission('leave-requests.update')) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/hr/leave-requests',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'leaveRequests.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'leaveRequests.overview' | translate }}
+          </p>
+          <h2>
+            {{ 'leaveRequests.recordInformation' | translate }}
+          </h2>
+          <p class="info-description">
+            {{ 'leaveRequests.recordInformationDescription' | translate }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.reference' | translate }}
+          </dt>
+          <dd>
+            <span class="code-value">
+              {{ item.referenceNumber }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.titleLabel' | translate }}
+          </dt>
+          <dd>
+            {{ item.title }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.status' | translate }}
+          </dt>
+          <dd>
+            <span class="status-badge">
+              {{ statusLabel(item.status) }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.amount' | translate }}
+          </dt>
+          <dd>
+            {{ item.amount }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.eventAt' | translate }}
+          </dt>
+          <dd>
+            {{ item.eventAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.created' | translate }}
+          </dt>
+          <dd>
+            {{ item.createdAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.branchId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.branchId || ('leaveRequests.defaultBranch' | translate) }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'leaveRequests.relatedEntity' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{
+                item.relatedEntityId
+                  ? item.relatedEntityId
+                  : ('leaveRequests.noRelatedEntity' | translate)
+              }}
+            </span>
+            @if (item.relatedEntityType) {
+              <span>
+                {{ item.relatedEntityType }}
+              </span>
+            }
+          </dd>
+        </div>
+
+        <div class="info-item info-item--full">
+          <dt>
+            {{ 'leaveRequests.notes' | translate }}
+          </dt>
+          <dd>
+            {{ item.notes || ('leaveRequests.noNotes' | translate) }}
+          </dd>
+        </div>
+      </dl>
+    </section>
+  }
+</section>

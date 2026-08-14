@@ -1,0 +1,50 @@
+@import "../../../../property/hotels/components/hotel-form/hotel-form.component.css";
+
+.form-field textarea {
+  width: 100%;
+  min-height: 104px;
+
+  box-sizing: border-box;
+
+  padding: 12px 13px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #101828;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.form-field textarea::placeholder {
+  color: #98a2b3;
+}
+
+.form-field textarea:hover {
+  border-color: #b8c0cc;
+}
+
+.form-field textarea:focus {
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      99,
+      102,
+      241,
+      0.12
+    );
+}

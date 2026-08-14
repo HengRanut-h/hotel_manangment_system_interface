@@ -1,0 +1,5 @@
+@import "../../../../property/buildings/pages/building-edit/building-edit.page.css";
+
+app-attendance-form {
+  display: block;
+}

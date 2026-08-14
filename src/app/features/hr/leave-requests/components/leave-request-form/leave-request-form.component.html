@@ -1,0 +1,200 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+    <header class="form-card__header">
+      <h2>
+        {{ 'leaveRequests.form.record' | translate }}
+      </h2>
+      <p>
+        {{ 'leaveRequests.form.recordDescription' | translate }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+      <div class="form-field form-field--full">
+        <label for="leave-requestTitle">
+          {{ 'leaveRequests.form.title' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="leave-requestTitle"
+          type="text"
+          name="leave-requestTitle"
+          autocomplete="off"
+          [placeholder]="'leaveRequests.form.titlePlaceholder' | translate"
+          [ngModel]="formTitle()"
+          (ngModelChange)="formTitle.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formTitle().trim()
+        ) {
+          <small class="field-error">
+            {{ 'leaveRequests.form.titleRequired' | translate }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="leave-requestEventAt">
+          {{ 'leaveRequests.form.eventAt' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="leave-requestEventAt"
+          type="datetime-local"
+          name="leave-requestEventAt"
+          [ngModel]="formEventAt()"
+          (ngModelChange)="formEventAt.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formEventAt()
+        ) {
+          <small class="field-error">
+            {{ 'leaveRequests.form.eventAtRequired' | translate }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="leave-requestAmount">
+          {{ 'leaveRequests.form.amount' | translate }}
+        </label>
+        <input
+          id="leave-requestAmount"
+          type="number"
+          name="leave-requestAmount"
+          min="0"
+          step="0.01"
+          [ngModel]="formAmount()"
+          (ngModelChange)="formAmount.set($event)">
+      </div>
+
+      @if (showStatus()) {
+        <div class="form-field">
+          <label for="leave-requestStatus">
+            {{ 'leaveRequests.form.status' | translate }}
+          </label>
+          <select
+            id="leave-requestStatus"
+            name="leave-requestStatus"
+            [ngModel]="formStatus()"
+            (ngModelChange)="formStatus.set($event)">
+            <option value="Pending">
+              {{ 'leaveRequests.statuses.pending' | translate }}
+            </option>
+            <option value="Approved">
+              {{ 'leaveRequests.statuses.approved' | translate }}
+            </option>
+            <option value="Rejected">
+              {{ 'leaveRequests.statuses.rejected' | translate }}
+            </option>
+            <option value="Cancelled">
+              {{ 'leaveRequests.statuses.cancelled' | translate }}
+            </option>
+          </select>
+        </div>
+      }
+
+      <div class="form-field form-field--full">
+        <label for="leave-requestNotes">
+          {{ 'leaveRequests.form.notes' | translate }}
+        </label>
+        <textarea
+          id="leave-requestNotes"
+          name="leave-requestNotes"
+          rows="4"
+          [placeholder]="'leaveRequests.form.notesPlaceholder' | translate"
+          [ngModel]="formNotes()"
+          (ngModelChange)="formNotes.set($event)">
+        </textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card">
+    <header class="form-card__header">
+      <h2>
+        {{ 'leaveRequests.form.context' | translate }}
+      </h2>
+      <p>
+        {{ 'leaveRequests.form.contextDescription' | translate }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+      @if (showBranch()) {
+        <div class="form-field">
+          <label for="leave-requestBranchId">
+            {{ 'leaveRequests.form.branchId' | translate }}
+          </label>
+          <input
+            id="leave-requestBranchId"
+            type="text"
+            name="leave-requestBranchId"
+            autocomplete="off"
+            [placeholder]="'leaveRequests.form.branchIdPlaceholder' | translate"
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+        </div>
+      }
+
+      <div class="form-field">
+        <label for="leave-requestRelatedEntityId">
+          {{ 'leaveRequests.form.relatedEntityId' | translate }}
+        </label>
+        <input
+          id="leave-requestRelatedEntityId"
+          type="text"
+          name="leave-requestRelatedEntityId"
+          autocomplete="off"
+          [placeholder]="'leaveRequests.form.relatedEntityIdPlaceholder' | translate"
+          [ngModel]="formRelatedEntityId()"
+          (ngModelChange)="formRelatedEntityId.set($event)">
+      </div>
+
+      <div class="form-field">
+        <label for="leave-requestRelatedEntityType">
+          {{ 'leaveRequests.form.relatedEntityType' | translate }}
+        </label>
+        <input
+          id="leave-requestRelatedEntityType"
+          type="text"
+          name="leave-requestRelatedEntityType"
+          autocomplete="off"
+          [placeholder]="'leaveRequests.form.relatedEntityTypePlaceholder' | translate"
+          [ngModel]="formRelatedEntityType()"
+          (ngModelChange)="formRelatedEntityType.set($event)">
+      </div>
+    </div>
+  </section>
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+</form>

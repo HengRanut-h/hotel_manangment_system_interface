@@ -1,0 +1,63 @@
+<section class="form-page">
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="'leaveRequests.loadingOne' | translate" />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'leaveRequests.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (record(); as item) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/hr/leave-requests',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.referenceNumber }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'leaveRequests.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'leaveRequests.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{ 'leaveRequests.editDescription' | translate }}
+      </span>
+    </header>
+
+    <app-leave-request-form
+      [title]="item.title"
+      [notes]="item.notes"
+      [amount]="item.amount"
+      [eventAtUtc]="item.eventAtUtc"
+      [relatedEntityId]="item.relatedEntityId"
+      [relatedEntityType]="item.relatedEntityType"
+      [status]="item.status"
+      [saving]="saving()"
+      [submitLabel]="'leaveRequests.saveChanges' | translate"
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+</section>

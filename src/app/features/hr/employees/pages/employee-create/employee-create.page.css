@@ -1,0 +1,5 @@
+@import "../../../../property/hotels/pages/hotel-create/hotel-create.page.css";
+
+app-employee-form {
+  display: block;
+}

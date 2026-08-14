@@ -1,0 +1,60 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/hr/employees">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'employees.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'employees.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'employees.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'employees.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="'employees.loadingReferences' | translate" />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="loadReferences()">
+        {{ 'employees.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else {
+    <app-employee-form
+      [departments]="departments()"
+      [positions]="positions()"
+      [saving]="saving()"
+      [submitLabel]="'employees.create' | translate"
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

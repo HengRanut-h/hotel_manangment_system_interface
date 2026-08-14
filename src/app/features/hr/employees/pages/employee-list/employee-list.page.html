@@ -1,0 +1,430 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'employees.section' | translate }}
+      </p>
+      <h1>
+        {{ 'employees.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'employees.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'employees.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'employees.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideUsers></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'employees.totalEmployees' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ activeOnPage() }}
+        </strong>
+        <span>
+          {{ 'employees.activeOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--inactive">
+        <svg lucideCircleX></svg>
+      </span>
+      <div>
+        <strong>
+          {{ inactiveOnPage() }}
+        </strong>
+        <span>
+          {{ 'employees.inactiveOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <section class="filters">
+
+    <div class="filter-field filter-field--search">
+      <label for="employeeSearch">
+        {{ 'employees.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="employeeSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'employees.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="employeeStatus">
+        {{ 'employees.status' | translate }}
+      </label>
+      <select
+        id="employeeStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="all">
+          {{ 'employees.all' | translate }}
+        </option>
+        <option value="active">
+          {{ 'employees.active' | translate }}
+        </option>
+        <option value="inactive">
+          {{ 'employees.inactive' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="employeeSort">
+        {{ 'employees.sortBy' | translate }}
+      </label>
+      <select
+        id="employeeSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="name">
+          {{ 'employees.sortFullName' | translate }}
+        </option>
+        <option value="employeeNumber">
+          {{ 'employees.sortEmployeeNumber' | translate }}
+        </option>
+        <option value="createdAt">
+          {{ 'employees.sortCreated' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="employeeDirection">
+        {{ 'employees.direction' | translate }}
+      </label>
+      <select
+        id="employeeDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'employees.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'employees.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'employees.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'employees.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'employees.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'employees.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'employees.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      pagedEmployees().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'employees.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'employees.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'employees.employee' | translate }}
+              </th>
+              <th>
+                {{ 'employees.department' | translate }}
+              </th>
+              <th>
+                {{ 'employees.position' | translate }}
+              </th>
+              <th>
+                {{ 'employees.branchId' | translate }}
+              </th>
+              <th>
+                {{ 'employees.status' | translate }}
+              </th>
+              <th>
+                {{ 'employees.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'employees.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              employee of pagedEmployees();
+              track employee.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      employee.id
+                    ]">
+                    {{ employee.fullName }}
+                  </a>
+                  <div class="employee-subline">
+                    <span class="hotel-code">
+                      {{ employee.employeeNumber }}
+                    </span>
+                    @if (employee.email) {
+                      <span>
+                        {{ employee.email }}
+                      </span>
+                    }
+                  </div>
+                </td>
+                <td>
+                  {{ departmentLabel(employee) }}
+                </td>
+                <td>
+                  {{ positionLabel(employee) }}
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{ employee.branchId || ('employees.defaultBranch' | translate) }}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="employee.isActive"
+                    [class.status-badge--inactive]="!employee.isActive">
+                    {{
+                      (
+                        employee.isActive
+                          ? 'employees.active'
+                          : 'employees.inactive'
+                      )
+                      | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    employee.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        employee.id
+                      ]"
+                      [title]="
+                        'employees.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'employees.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (auth.hasPermission('employees.update')) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          employee.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'employees.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'employees.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'employees.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === employee.id"
+                        [title]="
+                          'employees.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'employees.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteEmployee(employee)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'employees.totalEmployees' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'employees.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'employees.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'employees.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'employees.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

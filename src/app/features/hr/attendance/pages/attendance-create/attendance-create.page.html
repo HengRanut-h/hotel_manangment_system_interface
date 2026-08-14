@@ -1,0 +1,34 @@
+<section class="form-page">
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/hr/attendance">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'attendance.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'attendance.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'attendance.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{ 'attendance.createDescription' | translate }}
+    </span>
+  </header>
+
+  <app-attendance-form
+    [saving]="saving()"
+    [showBranch]="true"
+    [showStatus]="true"
+    [submitLabel]="'attendance.create' | translate"
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+</section>

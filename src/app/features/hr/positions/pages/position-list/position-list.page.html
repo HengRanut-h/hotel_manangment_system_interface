@@ -1,0 +1,464 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'positions.section' | translate }}
+      </p>
+      <h1>
+        {{ 'positions.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'positions.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'positions.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'positions.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideBriefcaseBusiness></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'positions.totalPositions' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ activeOnPage() }}
+        </strong>
+        <span>
+          {{ 'positions.activeOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--inactive">
+        <svg lucideCircleX></svg>
+      </span>
+      <div>
+        <strong>
+          {{ inactiveOnPage() }}
+        </strong>
+        <span>
+          {{ 'positions.inactiveOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <section class="filters">
+
+    <div class="filter-field filter-field--search">
+      <label for="positionSearch">
+        {{ 'positions.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="positionSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'positions.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="positionStatus">
+        {{ 'positions.status' | translate }}
+      </label>
+      <select
+        id="positionStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="all">
+          {{ 'positions.all' | translate }}
+        </option>
+        <option value="active">
+          {{ 'positions.active' | translate }}
+        </option>
+        <option value="inactive">
+          {{ 'positions.inactive' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="positionSort">
+        {{ 'positions.sortBy' | translate }}
+      </label>
+      <select
+        id="positionSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="name">
+          {{ 'positions.sortName' | translate }}
+        </option>
+        <option value="code">
+          {{ 'positions.sortCode' | translate }}
+        </option>
+        <option value="createdAt">
+          {{ 'positions.sortCreated' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="positionDirection">
+        {{ 'positions.direction' | translate }}
+      </label>
+      <select
+        id="positionDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'positions.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'positions.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'positions.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'positions.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'positions.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'positions.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'positions.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      positions().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'positions.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'positions.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'positions.position' | translate }}
+              </th>
+              <th>
+                {{ 'positions.code' | translate }}
+              </th>
+              <th>
+                {{ 'positions.branchId' | translate }}
+              </th>
+              <th>
+                {{ 'positions.descriptionLabel' | translate }}
+              </th>
+              <th>
+                {{ 'positions.status' | translate }}
+              </th>
+              <th>
+                {{ 'positions.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'positions.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              position of positions();
+              track position.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      position.id
+                    ]">
+                    {{ position.name }}
+                  </a>
+                </td>
+                <td>
+                  <span class="hotel-code">
+                    {{ position.code }}
+                  </span>
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{
+                      position.branchId
+                      ||
+                      ('positions.defaultBranch' | translate)
+                    }}
+                  </span>
+                </td>
+                <td class="description-cell">
+                  {{
+                    position.description
+                    ||
+                    ('positions.noDescription' | translate)
+                  }}
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="position.isActive"
+                    [class.status-badge--inactive]="!position.isActive">
+                    {{
+                      (
+                        position.isActive
+                          ? 'positions.active'
+                          : 'positions.inactive'
+                      )
+                      | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    position.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        position.id
+                      ]"
+                      [title]="
+                        'positions.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'positions.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'positions.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          position.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'positions.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'positions.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                      <button
+                        type="button"
+                        class="icon-action icon-action--status"
+                        [class.icon-action--activate]="!position.isActive"
+                        [class.icon-action--deactivate]="position.isActive"
+                        [disabled]="mutatingId() === position.id"
+                        [title]="
+                          (
+                            position.isActive
+                              ? 'positions.deactivateAction'
+                              : 'positions.activateAction'
+                          )
+                          | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            position.isActive
+                              ? 'positions.deactivateAction'
+                              : 'positions.activateAction'
+                          )
+                          | translate
+                        "
+                        (click)="
+                          setActive(
+                            position,
+                            !position.isActive
+                          )
+                        ">
+                        <svg lucidePower></svg>
+                      </button>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'positions.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === position.id"
+                        [title]="
+                          'positions.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'positions.deleteAction'
+                            | translate
+                        "
+                        (click)="deletePosition(position)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'positions.totalPositions' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'positions.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'positions.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'positions.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'positions.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

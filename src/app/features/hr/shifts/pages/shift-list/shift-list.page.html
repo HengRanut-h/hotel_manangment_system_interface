@@ -1,0 +1,464 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'shifts.section' | translate }}
+      </p>
+      <h1>
+        {{ 'shifts.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'shifts.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'shifts.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'shifts.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideClock3></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'shifts.totalShifts' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ activeOnPage() }}
+        </strong>
+        <span>
+          {{ 'shifts.activeOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--inactive">
+        <svg lucideCircleX></svg>
+      </span>
+      <div>
+        <strong>
+          {{ inactiveOnPage() }}
+        </strong>
+        <span>
+          {{ 'shifts.inactiveOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <section class="filters">
+
+    <div class="filter-field filter-field--search">
+      <label for="ShiftSearch">
+        {{ 'shifts.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="ShiftSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'shifts.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="ShiftStatus">
+        {{ 'shifts.status' | translate }}
+      </label>
+      <select
+        id="ShiftStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="all">
+          {{ 'shifts.all' | translate }}
+        </option>
+        <option value="active">
+          {{ 'shifts.active' | translate }}
+        </option>
+        <option value="inactive">
+          {{ 'shifts.inactive' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="ShiftSort">
+        {{ 'shifts.sortBy' | translate }}
+      </label>
+      <select
+        id="ShiftSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="name">
+          {{ 'shifts.sortName' | translate }}
+        </option>
+        <option value="code">
+          {{ 'shifts.sortCode' | translate }}
+        </option>
+        <option value="createdAt">
+          {{ 'shifts.sortCreated' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="ShiftDirection">
+        {{ 'shifts.direction' | translate }}
+      </label>
+      <select
+        id="ShiftDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'shifts.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'shifts.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'shifts.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'shifts.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'shifts.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'shifts.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'shifts.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      shifts().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'shifts.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'shifts.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'shifts.shift' | translate }}
+              </th>
+              <th>
+                {{ 'shifts.code' | translate }}
+              </th>
+              <th>
+                {{ 'shifts.branchId' | translate }}
+              </th>
+              <th>
+                {{ 'shifts.descriptionLabel' | translate }}
+              </th>
+              <th>
+                {{ 'shifts.status' | translate }}
+              </th>
+              <th>
+                {{ 'shifts.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'shifts.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              shift of shifts();
+              track shift.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      shift.id
+                    ]">
+                    {{ shift.name }}
+                  </a>
+                </td>
+                <td>
+                  <span class="hotel-code">
+                    {{ shift.code }}
+                  </span>
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{
+                      shift.branchId
+                      ||
+                      ('shifts.defaultBranch' | translate)
+                    }}
+                  </span>
+                </td>
+                <td class="description-cell">
+                  {{
+                    shift.description
+                    ||
+                    ('shifts.noDescription' | translate)
+                  }}
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="shift.isActive"
+                    [class.status-badge--inactive]="!shift.isActive">
+                    {{
+                      (
+                        shift.isActive
+                          ? 'shifts.active'
+                          : 'shifts.inactive'
+                      )
+                      | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    shift.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        shift.id
+                      ]"
+                      [title]="
+                        'shifts.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'shifts.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'shifts.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          shift.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'shifts.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'shifts.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                      <button
+                        type="button"
+                        class="icon-action icon-action--status"
+                        [class.icon-action--activate]="!shift.isActive"
+                        [class.icon-action--deactivate]="shift.isActive"
+                        [disabled]="mutatingId() === shift.id"
+                        [title]="
+                          (
+                            shift.isActive
+                              ? 'shifts.deactivateAction'
+                              : 'shifts.activateAction'
+                          )
+                          | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            shift.isActive
+                              ? 'shifts.deactivateAction'
+                              : 'shifts.activateAction'
+                          )
+                          | translate
+                        "
+                        (click)="
+                          setActive(
+                            shift,
+                            !shift.isActive
+                          )
+                        ">
+                        <svg lucidePower></svg>
+                      </button>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'shifts.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === shift.id"
+                        [title]="
+                          'shifts.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'shifts.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteShift(shift)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'shifts.totalShifts' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'shifts.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'shifts.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'shifts.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'shifts.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

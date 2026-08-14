@@ -1,0 +1,199 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'departments.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'departments.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+        <label for="departmentName">
+          {{ 'departments.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="departmentName"
+          type="text"
+          autocomplete="off"
+          name="departmentName"
+          [placeholder]="
+            'departments.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'departments.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="departmentCode">
+          {{ 'departments.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="departmentCode"
+          type="text"
+          autocomplete="off"
+          name="departmentCode"
+          [placeholder]="
+            'departments.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'departments.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'departments.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field form-field--full">
+        <label for="departmentDescription">
+          {{ 'departments.form.description' | translate }}
+        </label>
+        <textarea
+          id="departmentDescription"
+          name="departmentDescription"
+          rows="4"
+          [placeholder]="
+            'departments.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+      </div>
+
+      @if (
+        showBranch()
+      ) {
+        <div class="form-field">
+          <label for="departmentBranchId">
+            {{ 'departments.form.branchId' | translate }}
+          </label>
+          <input
+            id="departmentBranchId"
+            type="text"
+            autocomplete="off"
+            name="departmentBranchId"
+            [placeholder]="
+              'departments.form.branchIdPlaceholder'
+                | translate
+            "
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+
+          <small class="field-help">
+            {{
+              'departments.form.branchIdHelp'
+                | translate
+            }}
+          </small>
+        </div>
+      }
+
+    </div>
+
+  </section>
+
+  @if (
+    showStatus()
+  ) {
+    <section class="form-card">
+      <header class="form-card__header">
+        <h2>
+          {{ 'departments.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'departments.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="departmentIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'departments.form.active'
+                : 'departments.form.inactive'
+            )
+              | translate
+          }}
+        </span>
+      </label>
+    </section>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

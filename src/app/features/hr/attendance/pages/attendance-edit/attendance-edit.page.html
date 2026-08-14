@@ -1,0 +1,63 @@
+<section class="form-page">
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="'attendance.loadingOne' | translate" />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'attendance.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (record(); as item) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/hr/attendance',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.referenceNumber }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'attendance.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'attendance.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{ 'attendance.editDescription' | translate }}
+      </span>
+    </header>
+
+    <app-attendance-form
+      [title]="item.title"
+      [notes]="item.notes"
+      [amount]="item.amount"
+      [eventAtUtc]="item.eventAtUtc"
+      [relatedEntityId]="item.relatedEntityId"
+      [relatedEntityType]="item.relatedEntityType"
+      [status]="item.status"
+      [saving]="saving()"
+      [submitLabel]="'attendance.saveChanges' | translate"
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+</section>

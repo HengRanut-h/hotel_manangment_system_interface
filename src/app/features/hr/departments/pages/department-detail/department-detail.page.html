@@ -1,0 +1,213 @@
+<section class="detail-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'departments.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'departments.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'departments.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    department();
+    as item
+  ) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/hr/departments">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'departments.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'departments.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.name }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.code }}
+              </span>
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="item.isActive"
+            [class.status-badge--inactive]="!item.isActive">
+            {{
+              (
+                item.isActive
+                  ? 'departments.active'
+                  : 'departments.inactive'
+              )
+              | translate
+            }}
+          </span>
+        </div>
+      </div>
+
+      @if (
+        auth.hasPermission(
+          'departments.update'
+        )
+      ) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/hr/departments',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'departments.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'departments.overview' | translate }}
+          </p>
+          <h2>
+            {{
+              'departments.departmentInformation'
+                | translate
+            }}
+          </h2>
+          <p class="info-description">
+            {{
+              'departments.departmentInformationDescription'
+                | translate
+            }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'departments.name' | translate }}
+          </dt>
+          <dd>
+            {{ item.name }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.code' | translate }}
+          </dt>
+          <dd>
+            <span class="code-value">
+              {{ item.code }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.status' | translate }}
+          </dt>
+          <dd>
+            <span
+              class="status-badge"
+              [class.status-badge--active]="item.isActive"
+              [class.status-badge--inactive]="!item.isActive">
+              {{
+                (
+                  item.isActive
+                    ? 'departments.active'
+                    : 'departments.inactive'
+                )
+                | translate
+              }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.descriptionLabel' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.description
+              ||
+              ('departments.noDescription' | translate)
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.created' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.createdAtUtc
+                |
+              date:
+                'dd MMM yyyy, h:mm a'
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.hotelId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.hotelId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'departments.branchId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.branchId || ('departments.defaultBranch' | translate) }}
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+  }
+
+</section>

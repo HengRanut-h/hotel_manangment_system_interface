@@ -1,0 +1,42 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/hr/shifts">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'shifts.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'shifts.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'shifts.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'shifts.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  <app-shift-form
+    [saving]="saving()"
+    [showBranch]="true"
+    [showStatus]="false"
+    [submitLabel]="
+      'shifts.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>

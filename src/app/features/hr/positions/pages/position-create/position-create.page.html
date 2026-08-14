@@ -1,0 +1,42 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/hr/positions">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'positions.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'positions.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'positions.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'positions.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  <app-position-form
+    [saving]="saving()"
+    [showBranch]="true"
+    [showStatus]="false"
+    [submitLabel]="
+      'positions.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>

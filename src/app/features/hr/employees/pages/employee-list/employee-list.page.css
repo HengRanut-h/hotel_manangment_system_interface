@@ -1,0 +1,97 @@
+@import "../../../../property/hotels/pages/hotel-list/hotel-list.page.css";
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 92px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.summary-card strong {
+  display: block;
+  color: #111827;
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.summary-card span:last-child {
+  display: block;
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.summary-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+
+.summary-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.summary-icon--total {
+  color: #4f46e5;
+  background: #eef2ff;
+}
+
+.summary-icon--active {
+  color: #047857;
+  background: #ecfdf5;
+}
+
+.summary-icon--inactive {
+  color: #b91c1c;
+  background: #fef2f2;
+}
+
+.filters {
+  grid-template-columns:
+    minmax(240px, 1.7fr)
+    minmax(140px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    auto;
+}
+
+.description-cell {
+  max-width: 280px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.employee-subline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  color: #667085;
+  font-size: 12px;
+}
+
+@media (max-width: 820px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

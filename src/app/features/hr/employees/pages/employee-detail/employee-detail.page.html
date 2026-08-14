@@ -1,0 +1,245 @@
+<section class="detail-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'employees.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'employees.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'employees.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    employee();
+    as item
+  ) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/hr/employees">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'employees.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'employees.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.fullName }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.employeeNumber }}
+              </span>
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="item.isActive"
+            [class.status-badge--inactive]="!item.isActive">
+            {{
+              (
+                item.isActive
+                  ? 'employees.active'
+                  : 'employees.inactive'
+              )
+              | translate
+            }}
+          </span>
+        </div>
+      </div>
+
+      @if (
+        auth.hasPermission(
+          'employees.update'
+        )
+      ) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/hr/employees',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'employees.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'employees.overview' | translate }}
+          </p>
+          <h2>
+            {{
+              'employees.employeeInformation'
+                | translate
+            }}
+          </h2>
+          <p class="info-description">
+            {{
+              'employees.employeeInformationDescription'
+                | translate
+            }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'employees.fullName' | translate }}
+          </dt>
+          <dd>
+            {{ item.fullName }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.employeeNumber' | translate }}
+          </dt>
+          <dd>
+            <span class="code-value">
+              {{ item.employeeNumber }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.status' | translate }}
+          </dt>
+          <dd>
+            <span
+              class="status-badge"
+              [class.status-badge--active]="item.isActive"
+              [class.status-badge--inactive]="!item.isActive">
+              {{
+                (
+                  item.isActive
+                    ? 'employees.active'
+                    : 'employees.inactive'
+                )
+                | translate
+              }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.email' | translate }}
+          </dt>
+          <dd>
+            {{ item.email || ('employees.noEmail' | translate) }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.created' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.createdAtUtc
+                |
+              date:
+                'dd MMM yyyy, h:mm a'
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.hotelId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.hotelId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.branchId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.branchId || ('employees.defaultBranch' | translate) }}
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'employees.overview' | translate }}
+          </p>
+          <h2>
+            {{ 'employees.workInformation' | translate }}
+          </h2>
+          <p class="info-description">
+            {{ 'employees.workInformationDescription' | translate }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'employees.department' | translate }}
+          </dt>
+          <dd>
+            {{ departmentLabel(item) }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'employees.position' | translate }}
+          </dt>
+          <dd>
+            {{ positionLabel(item) }}
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+  }
+
+</section>

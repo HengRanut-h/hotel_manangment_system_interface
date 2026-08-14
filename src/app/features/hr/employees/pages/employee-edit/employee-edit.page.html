@@ -1,0 +1,79 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'employees.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'employees.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    employee();
+    as item
+  ) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+            '/app/hr/employees',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.fullName }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'employees.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'employees.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'employees.editDescription'
+            | translate
+        }}
+      </span>
+    </header>
+
+    <app-employee-form
+      [employeeNumber]="item.employeeNumber"
+      [fullName]="item.fullName"
+      [email]="item.email"
+      [departmentId]="item.departmentId"
+      [positionId]="item.positionId"
+      [branchId]="item.branchId"
+      [employeeNumberReadonly]="true"
+      [departments]="departments()"
+      [positions]="positions()"
+      [saving]="saving()"
+      [submitLabel]="
+        'employees.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

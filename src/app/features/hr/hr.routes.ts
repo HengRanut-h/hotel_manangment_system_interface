@@ -1,5 +1,40 @@
-import { Routes } from '@angular/router';import { permissionGuard } from '../../core/guards/permission.guard';
-export const hrRoutes:Routes=[
- {path:'employees',loadComponent:()=>import('./pages/employees/employees.page').then(m=>m.EmployeesPage),canActivate:[permissionGuard],data:{permission:'employees.view'}},
- ...['departments','positions','shifts','attendance','leave-requests'].map(path=>({path,loadComponent:()=>import('../../shared/resource/resource-page.component').then(m=>m.ResourcePageComponent),canActivate:[permissionGuard],data:{resource:path,permission:`${path}.view`}}))
+import { Routes } from '@angular/router';
+
+export const hrRoutes: Routes = [
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('./employees/employees.routes')
+        .then(m => m.employeeRoutes)
+  },
+  {
+    path: 'departments',
+    loadChildren: () =>
+      import('./departments/departments.routes')
+        .then(m => m.departmentRoutes)
+  },
+  {
+    path: 'positions',
+    loadChildren: () =>
+      import('./positions/positions.routes')
+        .then(m => m.positionRoutes)
+  },
+  {
+    path: 'shifts',
+    loadChildren: () =>
+      import('./shifts/shifts.routes')
+        .then(m => m.shiftRoutes)
+  },
+  {
+    path: 'attendance',
+    loadChildren: () =>
+      import('./attendance/attendance.routes')
+        .then(m => m.attendanceRoutes)
+  },
+  {
+    path: 'leave-requests',
+    loadChildren: () =>
+      import('./leave-requests/leave-requests.routes')
+        .then(m => m.leaveRequestRoutes)
+  }
 ];

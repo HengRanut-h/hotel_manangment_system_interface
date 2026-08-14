@@ -1,0 +1,408 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'leaveRequests.section' | translate }}
+      </p>
+      <h1>
+        {{ 'leaveRequests.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'leaveRequests.description' | translate }}
+      </p>
+    </div>
+
+    @if (auth.hasPermission('leave-requests.create')) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'leaveRequests.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideCalendarCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'leaveRequests.totalRecords' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ approvedOnPage() }}
+        </strong>
+        <span>
+          {{ 'leaveRequests.approvedOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--warning">
+        <svg lucideClock></svg>
+      </span>
+      <div>
+        <strong>
+          {{ pendingOnPage() }}
+        </strong>
+        <span>
+          {{ 'leaveRequests.pendingOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div class="filter-field filter-field--search">
+      <label for="leave-requestSearch">
+        {{ 'leaveRequests.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="leave-requestSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="'leaveRequests.searchPlaceholder' | translate"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="leave-requestStatus">
+        {{ 'leaveRequests.status' | translate }}
+      </label>
+      <select
+        id="leave-requestStatus"
+        [attr.aria-label]="'leaveRequests.status' | translate"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="">
+          {{ 'leaveRequests.allStatuses' | translate }}
+        </option>
+        <option value="Pending">
+          {{ 'leaveRequests.statuses.pending' | translate }}
+        </option>
+        <option value="Approved">
+          {{ 'leaveRequests.statuses.approved' | translate }}
+        </option>
+        <option value="Rejected">
+          {{ 'leaveRequests.statuses.rejected' | translate }}
+        </option>
+        <option value="Cancelled">
+          {{ 'leaveRequests.statuses.cancelled' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="leave-requestSort">
+        {{ 'leaveRequests.sortBy' | translate }}
+      </label>
+      <select
+        id="leave-requestSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="createdAt">
+          {{ 'leaveRequests.sortCreated' | translate }}
+        </option>
+        <option value="eventAt">
+          {{ 'leaveRequests.sortEventAt' | translate }}
+        </option>
+        <option value="reference">
+          {{ 'leaveRequests.sortReference' | translate }}
+        </option>
+        <option value="title">
+          {{ 'leaveRequests.sortTitle' | translate }}
+        </option>
+        <option value="status">
+          {{ 'leaveRequests.sortStatus' | translate }}
+        </option>
+        <option value="amount">
+          {{ 'leaveRequests.sortAmount' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="leave-requestDirection">
+        {{ 'leaveRequests.direction' | translate }}
+      </label>
+      <select
+        id="leave-requestDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'leaveRequests.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'leaveRequests.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'leaveRequests.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'leaveRequests.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="'leaveRequests.loading' | translate" />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'leaveRequests.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'leaveRequests.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (records().length === 0) {
+      <div class="state-box">
+        <strong>
+          {{ 'leaveRequests.noResults' | translate }}
+        </strong>
+        <span>
+          {{ 'leaveRequests.noResultsDescription' | translate }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'leaveRequests.reference' | translate }}
+              </th>
+              <th>
+                {{ 'leaveRequests.titleLabel' | translate }}
+              </th>
+              <th>
+                {{ 'leaveRequests.status' | translate }}
+              </th>
+              <th>
+                {{ 'leaveRequests.amount' | translate }}
+              </th>
+              <th>
+                {{ 'leaveRequests.eventAt' | translate }}
+              </th>
+              <th>
+                {{ 'leaveRequests.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'leaveRequests.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              record of records();
+              track record.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-code"
+                    [routerLink]="[
+                      record.id
+                    ]">
+                    {{ record.referenceNumber }}
+                  </a>
+                </td>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      record.id
+                    ]">
+                    {{ record.title }}
+                  </a>
+                  @if (record.notes) {
+                    <div class="description-cell">
+                      {{ record.notes }}
+                    </div>
+                  }
+                </td>
+                <td>
+                  @if (auth.hasPermission('leave-requests.manage')) {
+                    <select
+                      class="status-select"
+                      [disabled]="mutatingId() === record.id"
+                      [ngModel]="record.status"
+                      (change)="changeStatus(record, $event)">
+                      <option [value]="record.status">
+                        {{ statusLabel(record.status) }}
+                      </option>
+                      <option value="Pending">
+                        {{ 'leaveRequests.statuses.pending' | translate }}
+                      </option>
+                      <option value="Approved">
+                        {{ 'leaveRequests.statuses.approved' | translate }}
+                      </option>
+                      <option value="Rejected">
+                        {{ 'leaveRequests.statuses.rejected' | translate }}
+                      </option>
+                      <option value="Cancelled">
+                        {{ 'leaveRequests.statuses.cancelled' | translate }}
+                      </option>
+                    </select>
+                  } @else {
+                    <span
+                      class="status-badge"
+                      [class]="statusClass(record.status)">
+                      {{ statusLabel(record.status) }}
+                    </span>
+                  }
+                </td>
+                <td>
+                  {{ record.amount }}
+                </td>
+                <td>
+                  {{ record.eventAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+                </td>
+                <td>
+                  {{ record.createdAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        record.id
+                      ]"
+                      [title]="'leaveRequests.viewAction' | translate"
+                      [attr.aria-label]="'leaveRequests.viewAction' | translate">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (auth.hasPermission('leave-requests.update')) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          record.id,
+                          'edit'
+                        ]"
+                        [title]="'leaveRequests.editAction' | translate"
+                        [attr.aria-label]="'leaveRequests.editAction' | translate">
+                        <svg lucidePencil></svg>
+                      </a>
+                    }
+
+                    @if (auth.hasPermission('leave-requests.delete')) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === record.id"
+                        [title]="'leaveRequests.deleteAction' | translate"
+                        [attr.aria-label]="'leaveRequests.deleteAction' | translate"
+                        (click)="deleteRecord(record)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'leaveRequests.totalRecords' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="!hasPreviousPage() || loading()"
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'leaveRequests.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'leaveRequests.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'leaveRequests.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="!hasNextPage() || loading()"
+          (click)="nextPage()">
+          <span>
+            {{ 'leaveRequests.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+</section>

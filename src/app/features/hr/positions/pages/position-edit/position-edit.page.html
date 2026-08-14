@@ -1,0 +1,75 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'positions.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'positions.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    position();
+    as item
+  ) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+            '/app/hr/positions',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'positions.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'positions.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'positions.editDescription'
+            | translate
+        }}
+      </span>
+    </header>
+
+    <app-position-form
+      [name]="item.name"
+      [code]="item.code"
+      [description]="item.description"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [submitLabel]="
+        'positions.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

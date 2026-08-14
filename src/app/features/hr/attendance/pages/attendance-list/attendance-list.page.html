@@ -1,0 +1,387 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'attendance.section' | translate }}
+      </p>
+      <h1>
+        {{ 'attendance.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'attendance.description' | translate }}
+      </p>
+    </div>
+
+    @if (auth.hasPermission('attendance.create')) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'attendance.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideCalendarCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'attendance.totalRecords' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ completedOnPage() }}
+        </strong>
+        <span>
+          {{ 'attendance.completedOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--warning">
+        <svg lucideClock></svg>
+      </span>
+      <div>
+        <strong>
+          {{ openOnPage() }}
+        </strong>
+        <span>
+          {{ 'attendance.openOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div class="filter-field filter-field--search">
+      <label for="attendanceSearch">
+        {{ 'attendance.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="attendanceSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="'attendance.searchPlaceholder' | translate"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="attendanceStatus">
+        {{ 'attendance.status' | translate }}
+      </label>
+      <input
+        id="attendanceStatus"
+        type="text"
+        autocomplete="off"
+        [placeholder]="'attendance.statusPlaceholder' | translate"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)"
+        (keyup.enter)="applyFilters()">
+    </div>
+
+    <div class="filter-field">
+      <label for="attendanceSort">
+        {{ 'attendance.sortBy' | translate }}
+      </label>
+      <select
+        id="attendanceSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="createdAt">
+          {{ 'attendance.sortCreated' | translate }}
+        </option>
+        <option value="eventAt">
+          {{ 'attendance.sortEventAt' | translate }}
+        </option>
+        <option value="reference">
+          {{ 'attendance.sortReference' | translate }}
+        </option>
+        <option value="title">
+          {{ 'attendance.sortTitle' | translate }}
+        </option>
+        <option value="status">
+          {{ 'attendance.sortStatus' | translate }}
+        </option>
+        <option value="amount">
+          {{ 'attendance.sortAmount' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="attendanceDirection">
+        {{ 'attendance.direction' | translate }}
+      </label>
+      <select
+        id="attendanceDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'attendance.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'attendance.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'attendance.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'attendance.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="'attendance.loading' | translate" />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'attendance.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'attendance.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (records().length === 0) {
+      <div class="state-box">
+        <strong>
+          {{ 'attendance.noResults' | translate }}
+        </strong>
+        <span>
+          {{ 'attendance.noResultsDescription' | translate }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'attendance.reference' | translate }}
+              </th>
+              <th>
+                {{ 'attendance.titleLabel' | translate }}
+              </th>
+              <th>
+                {{ 'attendance.status' | translate }}
+              </th>
+              <th>
+                {{ 'attendance.amount' | translate }}
+              </th>
+              <th>
+                {{ 'attendance.eventAt' | translate }}
+              </th>
+              <th>
+                {{ 'attendance.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'attendance.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              record of records();
+              track record.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-code"
+                    [routerLink]="[
+                      record.id
+                    ]">
+                    {{ record.referenceNumber }}
+                  </a>
+                </td>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      record.id
+                    ]">
+                    {{ record.title }}
+                  </a>
+                  @if (record.notes) {
+                    <div class="description-cell">
+                      {{ record.notes }}
+                    </div>
+                  }
+                </td>
+                <td>
+                  @if (auth.hasPermission('attendance.manage')) {
+                    <select
+                      class="status-select"
+                      [disabled]="mutatingId() === record.id"
+                      [ngModel]="record.status"
+                      (change)="changeStatus(record, $event)">
+                      <option [value]="record.status">
+                        {{ record.status }}
+                      </option>
+                      <option value="Open">Open</option>
+                      <option value="InProgress">InProgress</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  } @else {
+                    <span
+                      class="status-badge"
+                      [class]="statusClass(record.status)">
+                      {{ record.status }}
+                    </span>
+                  }
+                </td>
+                <td>
+                  {{ record.amount }}
+                </td>
+                <td>
+                  {{ record.eventAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+                </td>
+                <td>
+                  {{ record.createdAtUtc | date: 'dd MMM yyyy, h:mm a' }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        record.id
+                      ]"
+                      [title]="'attendance.viewAction' | translate"
+                      [attr.aria-label]="'attendance.viewAction' | translate">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (auth.hasPermission('attendance.update')) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          record.id,
+                          'edit'
+                        ]"
+                        [title]="'attendance.editAction' | translate"
+                        [attr.aria-label]="'attendance.editAction' | translate">
+                        <svg lucidePencil></svg>
+                      </a>
+                    }
+
+                    @if (auth.hasPermission('attendance.delete')) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === record.id"
+                        [title]="'attendance.deleteAction' | translate"
+                        [attr.aria-label]="'attendance.deleteAction' | translate"
+                        (click)="deleteRecord(record)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'attendance.totalRecords' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="!hasPreviousPage() || loading()"
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'attendance.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'attendance.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'attendance.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="!hasNextPage() || loading()"
+          (click)="nextPage()">
+          <span>
+            {{ 'attendance.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+</section>

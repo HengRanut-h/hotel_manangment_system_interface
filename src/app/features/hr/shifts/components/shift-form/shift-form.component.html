@@ -1,0 +1,199 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'shifts.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'shifts.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+        <label for="ShiftName">
+          {{ 'shifts.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="ShiftName"
+          type="text"
+          autocomplete="off"
+          name="ShiftName"
+          [placeholder]="
+            'shifts.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'shifts.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="ShiftCode">
+          {{ 'shifts.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="ShiftCode"
+          type="text"
+          autocomplete="off"
+          name="ShiftCode"
+          [placeholder]="
+            'shifts.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'shifts.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'shifts.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field form-field--full">
+        <label for="ShiftDescription">
+          {{ 'shifts.form.description' | translate }}
+        </label>
+        <textarea
+          id="ShiftDescription"
+          name="ShiftDescription"
+          rows="4"
+          [placeholder]="
+            'shifts.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+      </div>
+
+      @if (
+        showBranch()
+      ) {
+        <div class="form-field">
+          <label for="ShiftBranchId">
+            {{ 'shifts.form.branchId' | translate }}
+          </label>
+          <input
+            id="ShiftBranchId"
+            type="text"
+            autocomplete="off"
+            name="ShiftBranchId"
+            [placeholder]="
+              'shifts.form.branchIdPlaceholder'
+                | translate
+            "
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+
+          <small class="field-help">
+            {{
+              'shifts.form.branchIdHelp'
+                | translate
+            }}
+          </small>
+        </div>
+      }
+
+    </div>
+
+  </section>
+
+  @if (
+    showStatus()
+  ) {
+    <section class="form-card">
+      <header class="form-card__header">
+        <h2>
+          {{ 'shifts.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'shifts.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="ShiftIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'shifts.form.active'
+                : 'shifts.form.inactive'
+            )
+              | translate
+          }}
+        </span>
+      </label>
+    </section>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

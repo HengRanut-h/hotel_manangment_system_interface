@@ -1,0 +1,1078 @@
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/components/hotel-form/hotel-form.component.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/components/hotel-form/hotel-form.component[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/components/hotel-form/hotel-form.component.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/components/hotel-form/hotel-form.component[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/components/department-form/department-form.component.ts:34:19:
+[37m      34 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/components/hotel-form/hotel-form.component.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/components/hotel-form/hotel-form.component[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/components/hotel-form/hotel-form.component.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/components/hotel-form/hotel-form.component[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.ts:53:19:
+[37m      53 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/components/hotel-form/hotel-form.component.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/components/department-form/department-form.component.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/components/hotel-form/hotel-form.component[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-create/hotel-create.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-create/department-create.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-create/hotel-create.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:2:2:
+[37m      2 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../buildings/pages/building-edit/building-edit.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-edit/department-edit.page.css:1:8:
+[37m      1 │ @import [32m"../../../buildings/pages/building-edit/building-edit.page.[37m...
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2724: '"@angular/core"' has no exported member named 'ChangeDetectionStdepartmentgy'. Did you mean 'ChangeDetectionStrategy'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:6:2:
+[37m      6 │   [32mChangeDetectionStdepartmentgy[37m,
+        ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: changeDetection must be a member of ChangeDetectionStrategy enum from @angular/core
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy.OnPush[37m
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.ts:64:19:
+[37m      64 │   changeDetection: [32mChangeDetectionStdepartmentgy[37m.OnPush
+         ╵                    [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../../hotels/pages/hotel-detail/hotel-detail.page.css"[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/departments/pages/department-detail/department-detail.page.css:1:8:
+[37m      1 │ @import [32m"../../../hotels/pages/hotel-detail/hotel-detail.page.css"[37m;
+        ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loading' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:31:7:
+[37m      31 │   @if ([32mloading[37m()) {
+         ╵        [32m~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'app-spin' is not a known element:
+1. If 'app-spin' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-spin' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:33:6:
+[37m      33 │       [32m<app-spin[37m
+         ╵       [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'inline' since it isn't a known property of 'app-spin'.
+1. If 'app-spin' is an Angular component and it has 'inline' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-spin' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:34:8:
+[37m      34 │         [32m[inline]="true"[37m
+         ╵         [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'label' since it isn't a known property of 'app-spin'.
+1. If 'app-spin' is an Angular component and it has 'label' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-spin' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:36:8:
+[37m      36 │         [32m[label]="'employees.loadingReferences' | translate"[37m />
+         ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'error' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:38:14:
+[37m      38 │   } @else if ([32merror[37m()) {
+         ╵               [32m~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'error' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:41:11:
+[37m      41 │         {{ [32merror[37m() }}
+         ╵            [32m~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loadReferences' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:46:17:
+[37m      46 │         (click)="[32mloadReferences[37m()">
+         ╵                  [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'departments' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:52:21:
+[37m      52 │       [departments]="[32mdepartments[37m()"
+         ╵                      [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'positions' does not exist on type 'EmployeeCreatePage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.html:53:19:
+[37m      53 │       [positions]="[32mpositions[37m()"
+         ╵                    [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeCreatePage.
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:51:15:
+[37m      51 │   templateUrl: [32m'./employee-create.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only specify known properties, and 'name' does not exist in type 'CreateEmployeeRequest'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:98:8:
+[37m      98 │         [32mname[37m:
+         ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'name' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:99:16:
+[37m      99 │           value.[32mname[37m,
+         ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'code' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:101:16:
+[37m      101 │           value.[32mcode[37m,
+          ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'description' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-create/employee-create.page.ts:103:16:
+[37m      103 │           value.[32mdescription[37m,
+          ╵                 [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'departmentLabel' does not exist on type 'EmployeeDetailPage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-detail/employee-detail.page.html:228:15:
+[37m      228 │             {{ [32mdepartmentLabel[37m(item) }}
+          ╵                [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeDetailPage.
+
+    src/app/features/hr/employees/pages/employee-detail/employee-detail.page.ts:62:15:
+[37m      62 │   templateUrl: [32m'./employee-detail.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'positionLabel' does not exist on type 'EmployeeDetailPage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-detail/employee-detail.page.html:237:15:
+[37m      237 │             {{ [32mpositionLabel[37m(item) }}
+          ╵                [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeDetailPage.
+
+    src/app/features/hr/employees/pages/employee-detail/employee-detail.page.ts:62:15:
+[37m      62 │   templateUrl: [32m'./employee-detail.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'name' does not exist on type 'Employee'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.html:40:18:
+[37m      40 │           {{ item.[32mname[37m }}
+         ╵                   [32m~~~~[0m
+
+  Error occurs in the template of component EmployeeEditPage.
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:62:15:
+[37m      62 │   templateUrl: [32m'./employee-edit.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'departments' does not exist on type 'EmployeeEditPage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.html:68:21:
+[37m      68 │       [departments]="[32mdepartments[37m()"
+         ╵                      [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeEditPage.
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:62:15:
+[37m      62 │   templateUrl: [32m'./employee-edit.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'positions' does not exist on type 'EmployeeEditPage'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.html:69:19:
+[37m      69 │       [positions]="[32mpositions[37m()"
+         ╵                    [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component EmployeeEditPage.
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:62:15:
+[37m      62 │   templateUrl: [32m'./employee-edit.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only specify known properties, and 'name' does not exist in type 'UpdateEmployeeRequest'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:207:10:
+[37m      207 │           [32mname[37m:
+          ╵           [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'name' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:208:18:
+[37m      208 │             value.[32mname[37m,
+          ╵                   [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'code' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:210:18:
+[37m      210 │             value.[32mcode[37m,
+          ╵                   [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'description' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:212:18:
+[37m      212 │             value.[32mdescription[37m,
+          ╵                   [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isActive' does not exist on type 'EmployeeFormValue'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:214:18:
+[37m      214 │             value.[32misActive[37m
+          ╵                   [32m~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'name' does not exist on type 'Employee'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.html:40:18:
+[37m      40 │           {{ item.[32mname[37m }}
+         ╵                   [32m~~~~[0m
+
+  Error occurs in the template of component EmployeeEditPage.
+
+    src/app/features/hr/employees/pages/employee-edit/employee-edit.page.ts:78:15:
+[37m      78 │   templateUrl: [32m'./employee-edit.page.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

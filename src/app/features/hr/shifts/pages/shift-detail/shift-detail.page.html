@@ -1,0 +1,213 @@
+<section class="detail-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'shifts.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'shifts.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'shifts.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    shift();
+    as item
+  ) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/hr/shifts">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'shifts.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'shifts.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.name }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.code }}
+              </span>
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="item.isActive"
+            [class.status-badge--inactive]="!item.isActive">
+            {{
+              (
+                item.isActive
+                  ? 'shifts.active'
+                  : 'shifts.inactive'
+              )
+              | translate
+            }}
+          </span>
+        </div>
+      </div>
+
+      @if (
+        auth.hasPermission(
+          'shifts.update'
+        )
+      ) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/hr/shifts',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'shifts.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'shifts.overview' | translate }}
+          </p>
+          <h2>
+            {{
+              'shifts.shiftInformation'
+                | translate
+            }}
+          </h2>
+          <p class="info-description">
+            {{
+              'shifts.shiftInformationDescription'
+                | translate
+            }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.name' | translate }}
+          </dt>
+          <dd>
+            {{ item.name }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.code' | translate }}
+          </dt>
+          <dd>
+            <span class="code-value">
+              {{ item.code }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.status' | translate }}
+          </dt>
+          <dd>
+            <span
+              class="status-badge"
+              [class.status-badge--active]="item.isActive"
+              [class.status-badge--inactive]="!item.isActive">
+              {{
+                (
+                  item.isActive
+                    ? 'shifts.active'
+                    : 'shifts.inactive'
+                )
+                | translate
+              }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.descriptionLabel' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.description
+              ||
+              ('shifts.noDescription' | translate)
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.created' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.createdAtUtc
+                |
+              date:
+                'dd MMM yyyy, h:mm a'
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.hotelId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.hotelId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'shifts.branchId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.branchId || ('shifts.defaultBranch' | translate) }}
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+  }
+
+</section>
