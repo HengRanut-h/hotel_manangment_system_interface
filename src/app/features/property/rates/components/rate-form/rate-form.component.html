@@ -1,0 +1,171 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'rates.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'rates.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+        <label for="rateName">
+          {{ 'rates.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="rateName"
+          type="text"
+          autocomplete="off"
+          name="rateName"
+          [placeholder]="
+            'rates.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'rates.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="rateCode">
+          {{ 'rates.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="rateCode"
+          type="text"
+          autocomplete="off"
+          name="rateCode"
+          [placeholder]="
+            'rates.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'rates.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'rates.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field form-field--full">
+        <label for="rateDescription">
+          {{ 'rates.form.description' | translate }}
+        </label>
+        <textarea
+          id="rateDescription"
+          name="rateDescription"
+          rows="4"
+          [placeholder]="
+            'rates.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+      </div>
+
+    </div>
+
+  </section>
+
+  @if (
+    showStatus()
+  ) {
+    <section class="form-card">
+      <header class="form-card__header">
+        <h2>
+          {{ 'rates.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'rates.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="rateIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'rates.form.active'
+                : 'rates.form.inactive'
+            )
+              | translate
+          }}
+        </span>
+      </label>
+    </section>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

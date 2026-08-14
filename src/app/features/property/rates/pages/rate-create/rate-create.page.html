@@ -1,0 +1,41 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/property/rates">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'rates.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'rates.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'rates.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'rates.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  <app-rate-form
+    [saving]="saving()"
+    [showStatus]="false"
+    [submitLabel]="
+      'rates.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>

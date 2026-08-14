@@ -2,10 +2,6 @@ import {
   Routes
 } from '@angular/router';
 
-import {
-  permissionGuard
-} from '../../core/guards/permission.guard';
-
 export const propertyRoutes: Routes = [
 
   // =========================================================
@@ -118,32 +114,17 @@ export const propertyRoutes: Routes = [
   },
 
   // =========================================================
-  // GENERIC PROPERTY RESOURCES
+  // RATES
   // =========================================================
 
-  ...[
-    'rates'
-  ].map(
-    path => ({
-      path,
+  {
+    path: 'rates',
 
-      loadComponent: () =>
-        import(
-          '../../shared/resource/resource-page.component'
-        ).then(
-          m =>
-            m.ResourcePageComponent
-        ),
-
-      canActivate: [
-        permissionGuard
-      ],
-
-      data: {
-        resource: path,
-        permission:
-          `${path}.view`
-      }
-    })
-  )
+    loadChildren: () =>
+      import(
+        './rates/rates.routes'
+      ).then(
+        m => m.rateRoutes
+      )
+  }
 ];

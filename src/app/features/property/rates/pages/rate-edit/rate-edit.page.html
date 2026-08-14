@@ -1,0 +1,75 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'rates.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'rates.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    rate();
+    as item
+  ) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/property/rates',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'rates.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'rates.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'rates.editDescription'
+            | translate
+        }}
+      </span>
+    </header>
+
+    <app-rate-form
+      [name]="item.name"
+      [code]="item.code"
+      [description]="item.description"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [submitLabel]="
+        'rates.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>
