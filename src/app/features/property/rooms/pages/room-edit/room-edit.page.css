@@ -1,0 +1,5 @@
+@import "../../../hotels/pages/hotel-create/hotel-create.page.css";
+
+app-room-form {
+  display: block;
+}

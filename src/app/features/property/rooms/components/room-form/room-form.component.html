@@ -1,0 +1,196 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'rooms.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'rooms.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field">
+        <label for="roomNumber">
+          {{ 'rooms.form.roomNumber' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="roomNumber"
+          type="text"
+          autocomplete="off"
+          maxlength="20"
+          name="roomNumber"
+          [placeholder]="
+            'rooms.form.roomNumberPlaceholder'
+              | translate
+          "
+          [ngModel]="formRoomNumber()"
+          (ngModelChange)="formRoomNumber.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formRoomNumber().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'rooms.form.roomNumberRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="roomTypeId">
+          {{ 'rooms.form.roomType' | translate }}
+          <span class="required">*</span>
+        </label>
+        <select
+          id="roomTypeId"
+          name="roomTypeId"
+          [disabled]="loadingOptions()"
+          [ngModel]="formRoomTypeId()"
+          (ngModelChange)="formRoomTypeId.set($event)">
+          <option value="">
+            {{ 'rooms.form.selectRoomType' | translate }}
+          </option>
+          @for (
+            option of roomTypeOptions();
+            track option.id
+          ) {
+            <option [value]="option.id">
+              {{ option.name }}
+              @if (option.code) {
+                - {{ option.code }}
+              }
+            </option>
+          }
+        </select>
+
+        @if (
+          touched()
+          &&
+          !formRoomTypeId()
+        ) {
+          <small class="field-error">
+            {{
+              'rooms.form.roomTypeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      @if (
+        showBranch()
+      ) {
+        <div class="form-field">
+          <label for="branchId">
+            {{ 'rooms.form.branch' | translate }}
+          </label>
+          <select
+            id="branchId"
+            name="branchId"
+            [disabled]="loadingOptions()"
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+            <option value="">
+              {{ 'rooms.form.defaultBranch' | translate }}
+            </option>
+            @for (
+              option of branchOptions();
+              track option.id
+            ) {
+              <option [value]="option.id">
+                {{ option.name }}
+                @if (option.code) {
+                  - {{ option.code }}
+                }
+              </option>
+            }
+          </select>
+          <small class="field-help">
+            {{
+              'rooms.form.branchHelp'
+                | translate
+            }}
+          </small>
+        </div>
+      }
+
+      <div class="form-field">
+        <label for="floor">
+          {{ 'rooms.form.floor' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="floor"
+          type="number"
+          min="0"
+          max="1000"
+          step="1"
+          name="floor"
+          [ngModel]="formFloor()"
+          (ngModelChange)="formFloor.set(+$event)">
+
+        @if (
+          touched()
+          &&
+          (
+            formFloor() < 0
+            ||
+            formFloor() > 1000
+          )
+        ) {
+          <small class="field-error">
+            {{
+              'rooms.form.floorInvalid'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="
+        saving()
+        ||
+        loadingOptions()
+      ">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

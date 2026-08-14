@@ -79,20 +79,12 @@ export const propertyRoutes: Routes = [
   {
     path: 'rooms',
 
-    loadComponent: () =>
+    loadChildren: () =>
       import(
-        './pages/rooms/rooms.page'
+        './rooms/rooms.routes'
       ).then(
-        m => m.RoomsPage
-      ),
-
-    canActivate: [
-      permissionGuard
-    ],
-
-    data: {
-      permission: 'rooms.view'
-    }
+        m => m.roomRoutes
+      )
   },
 
   // =========================================================

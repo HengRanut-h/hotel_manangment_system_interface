@@ -1119,3 +1119,178 @@
          ╵                             [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 [39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: SpinComponent is not used within the template of RoomCreatePage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:64:4:
+[37m      64 │     [32mSpinComponent[37m,
+         ╵     [32m~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../branches/data-access/branch-api.service' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:39:7:
+[37m      39 │ } from [32m'../../branches/data-access/branch-api.service'[37m;
+         ╵        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../room-types/data-access/room-type-api.service' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:43:7:
+[37m      43 │ } from [32m'../../room-types/data-access/room-type-api.service'[37m;
+         ╵        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:144:4:
+[37m      144 │     [32mthis.roomTypeApi[37m
+          ╵     [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'result' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:151:10:
+[37m      151 │           [32mresult[37m => {
+          ╵           [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'item' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:155:16:
+[37m      155 │                 [32mitem[37m => ({
+          ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'error' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:171:10:
+[37m      171 │           [32merror[37m => {
+          ╵           [32m~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:188:4:
+[37m      188 │     [32mthis.branchApi[37m
+          ╵     [32m~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'result' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:196:10:
+[37m      196 │           [32mresult[37m => {
+          ╵           [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'item' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:200:16:
+[37m      200 │                 [32mitem[37m => ({
+          ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../branches/data-access/branch-api.service"[0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:9:33:
+[37m      9 │ ...hApiService } from [32m'../../branches/data-access/branch-api.service'[37m;
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../room-types/data-access/room-type-api.service"[0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:10:35:
+[37m      10 │ ...rvice } from [32m'../../room-types/data-access/room-type-api.service'[37m;
+         ╵                 [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: SpinComponent is not used within the template of RoomCreatePage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:64:4:
+[37m      64 │     [32mSpinComponent[37m,
+         ╵     [32m~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../branches/data-access/branch-api.service' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:39:7:
+[37m      39 │ } from [32m'../../branches/data-access/branch-api.service'[37m;
+         ╵        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../room-types/data-access/room-type-api.service' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:43:7:
+[37m      43 │ } from [32m'../../room-types/data-access/room-type-api.service'[37m;
+         ╵        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:144:4:
+[37m      144 │     [32mthis.roomTypeApi[37m
+          ╵     [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'result' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:151:10:
+[37m      151 │           [32mresult[37m => {
+          ╵           [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'item' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:155:16:
+[37m      155 │                 [32mitem[37m => ({
+          ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'error' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:171:10:
+[37m      171 │           [32merror[37m => {
+          ╵           [32m~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:188:4:
+[37m      188 │     [32mthis.branchApi[37m
+          ╵     [32m~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'result' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:196:10:
+[37m      196 │           [32mresult[37m => {
+          ╵           [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'item' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:200:16:
+[37m      200 │                 [32mitem[37m => ({
+          ╵                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../branches/data-access/branch-api.service"[0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:9:33:
+[37m      9 │ ...hApiService } from [32m'../../branches/data-access/branch-api.service'[37m;
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../room-types/data-access/room-type-api.service"[0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:10:35:
+[37m      10 │ ...rvice } from [32m'../../room-types/data-access/room-type-api.service'[37m;
+         ╵                 [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: SpinComponent is not used within the template of RoomCreatePage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/property/rooms/pages/room-create/room-create.page.ts:64:4:
+[37m      64 │     [32mSpinComponent[37m,
+         ╵     [32m~~~~~~~~~~~~~[0m
+
+[39m[22m

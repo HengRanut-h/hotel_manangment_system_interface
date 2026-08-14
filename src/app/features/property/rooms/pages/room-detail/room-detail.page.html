@@ -1,0 +1,261 @@
+<section class="detail-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'rooms.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'rooms.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'rooms.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    room();
+    as item
+  ) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/property/rooms">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'rooms.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'rooms.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.roomNumber }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.roomTypeName }}
+              </span>
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="item.status === 'Available'"
+            [class.status-badge--inactive]="item.status === 'Blocked'"
+            [class.status-badge--warning]="
+              item.status === 'Dirty'
+              ||
+              item.status === 'Cleaning'
+              ||
+              item.status === 'Maintenance'
+            "
+            [class.status-badge--danger]="item.status === 'OutOfOrder'">
+            {{
+              statusKey(
+                item.status
+              )
+                | translate
+            }}
+          </span>
+        </div>
+      </div>
+
+      @if (
+        auth.hasPermission(
+          'rooms.update'
+        )
+      ) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/property/rooms',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'rooms.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'rooms.overview' | translate }}
+          </p>
+          <h2>
+            {{
+              'rooms.roomInformation'
+                | translate
+            }}
+          </h2>
+          <p class="info-description">
+            {{
+              'rooms.roomInformationDescription'
+                | translate
+            }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.roomNumber' | translate }}
+          </dt>
+          <dd>
+            {{ item.roomNumber }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.roomType' | translate }}
+          </dt>
+          <dd>
+            {{ item.roomTypeName }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.floor' | translate }}
+          </dt>
+          <dd>
+            {{
+              'rooms.floorValue'
+                | translate:
+                  {
+                    floor: item.floor
+                  }
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.status' | translate }}
+          </dt>
+          <dd>
+            <span
+              class="status-badge"
+              [class.status-badge--active]="item.status === 'Available'"
+              [class.status-badge--inactive]="item.status === 'Blocked'"
+              [class.status-badge--warning]="
+                item.status === 'Dirty'
+                ||
+                item.status === 'Cleaning'
+                ||
+                item.status === 'Maintenance'
+              "
+              [class.status-badge--danger]="item.status === 'OutOfOrder'">
+              {{
+                statusKey(
+                  item.status
+                )
+                  | translate
+              }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.hotelId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.hotelId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.branchId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.branchId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.roomTypeId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.roomTypeId }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'rooms.roomId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.id }}
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="related-card">
+      <div class="related-card__content">
+        <p class="eyebrow">
+          {{ 'rooms.section' | translate }}
+        </p>
+        <h2>
+          {{ 'rooms.propertyStructure' | translate }}
+        </h2>
+        <p>
+          {{
+            'rooms.propertyStructureDescription'
+              | translate
+          }}
+        </p>
+      </div>
+
+      <div class="related-links">
+        <a routerLink="/app/property/room-types">
+          {{ 'rooms.roomTypes' | translate }}
+        </a>
+        <a routerLink="/app/property/amenities">
+          {{ 'rooms.amenities' | translate }}
+        </a>
+        <a routerLink="/app/property/rates">
+          {{ 'rooms.rates' | translate }}
+        </a>
+      </div>
+    </section>
+  }
+
+</section>

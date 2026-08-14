@@ -1,0 +1,11 @@
+@import "../../../hotels/pages/hotel-detail/hotel-detail.page.css";
+
+.status-badge--warning {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.status-badge--danger {
+  background: #fef3f2;
+  color: #b42318;
+}

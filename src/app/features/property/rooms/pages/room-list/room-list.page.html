@@ -1,0 +1,370 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'rooms.section' | translate }}
+      </p>
+      <h1>
+        {{ 'rooms.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'rooms.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'rooms.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'rooms.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="filters filters--rooms">
+
+    <div class="filter-field filter-field--search">
+      <label for="roomSearch">
+        {{ 'rooms.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="roomSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'rooms.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applySearch()">
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearSearch()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'rooms.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applySearch()">
+        <svg lucideSearch></svg>
+        <span>
+          {{ 'rooms.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'rooms.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'rooms.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'rooms.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      rooms().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'rooms.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'rooms.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'rooms.room' | translate }}
+              </th>
+              <th>
+                {{ 'rooms.roomType' | translate }}
+              </th>
+              <th>
+                {{ 'rooms.floor' | translate }}
+              </th>
+              <th>
+                {{ 'rooms.branchId' | translate }}
+              </th>
+              <th>
+                {{ 'rooms.status' | translate }}
+              </th>
+              @if (
+                auth.hasPermission(
+                  'rooms.change-status'
+                )
+              ) {
+                <th>
+                  {{ 'rooms.changeStatus' | translate }}
+                </th>
+              }
+              <th class="actions-column">
+                {{ 'rooms.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              room of rooms();
+              track room.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="room-name"
+                    [routerLink]="[
+                      room.id
+                    ]">
+                    <svg lucideDoorOpen></svg>
+                    <span>
+                      {{ room.roomNumber }}
+                    </span>
+                  </a>
+                </td>
+                <td>
+                  <span class="room-type">
+                    <svg lucideBedDouble></svg>
+                    {{ room.roomTypeName }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    'rooms.floorValue'
+                      | translate:
+                        {
+                          floor: room.floor
+                        }
+                  }}
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{ room.branchId }}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="room.status === 'Available'"
+                    [class.status-badge--inactive]="room.status === 'Blocked'"
+                    [class.status-badge--warning]="
+                      room.status === 'Dirty'
+                      ||
+                      room.status === 'Cleaning'
+                      ||
+                      room.status === 'Maintenance'
+                    "
+                    [class.status-badge--danger]="room.status === 'OutOfOrder'">
+                    {{
+                      statusKey(
+                        room.status
+                      )
+                        | translate
+                    }}
+                  </span>
+                </td>
+                @if (
+                  auth.hasPermission(
+                    'rooms.change-status'
+                  )
+                ) {
+                  <td>
+                    <select
+                      class="status-select"
+                      [disabled]="mutatingId() === room.id"
+                      [ngModel]="room.status"
+                      (ngModelChange)="
+                        changeStatus(
+                          room,
+                          $event
+                        )
+                      ">
+                      @for (
+                        status of statusOptions;
+                        track status
+                      ) {
+                        <option [value]="status">
+                          {{
+                            statusKey(
+                              status
+                            )
+                              | translate
+                          }}
+                        </option>
+                      }
+                    </select>
+                  </td>
+                }
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        room.id
+                      ]"
+                      [title]="
+                        'rooms.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'rooms.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'rooms.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          room.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'rooms.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'rooms.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'rooms.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === room.id"
+                        [title]="
+                          'rooms.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'rooms.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteRoom(room)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'rooms.totalRooms' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'rooms.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'rooms.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'rooms.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'rooms.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

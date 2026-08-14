@@ -257,3 +257,58 @@ Component update sent to client(s).
 Application bundle generation complete. [0.004 seconds] - 2026-08-14T18:05:57.649Z
 
 Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.650 seconds] - 2026-08-14T18:19:56.454Z
+
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.002 seconds] - 2026-08-14T18:20:48.536Z
+
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-KUW7DCWZ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m73.76 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-7PP5KDL6.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m67.50 kB[39m[2m | [22m
+[32mchunk-JPRICGOC.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m67.12 kB[39m[2m | [22m
+[32mchunk-CYJ33G5A.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m66.52 kB[39m[2m | [22m
+[32mchunk-LGRRUPEO.js[39m  [2m | [22m[2mpermission-list-page[22m   [2m | [22m [36m65.38 kB[39m[2m | [22m
+[32mchunk-MXHJ7JLF.js[39m  [2m | [22m[2mdashboard-page[22m         [2m | [22m [36m65.12 kB[39m[2m | [22m
+[32mchunk-MFY6ESP3.js[39m  [2m | [22m[2mroom-list-page[22m         [2m | [22m [36m62.68 kB[39m[2m | [22m
+[32mchunk-FB2BFVRV.js[39m  [2m | [22m[2mroom-type-list-page[22m    [2m | [22m [36m60.91 kB[39m[2m | [22m
+[32mchunk-LSY7DX45.js[39m  [2m | [22m[2mrole-permissions-page[22m  [2m | [22m [36m45.27 kB[39m[2m | [22m
+[32mchunk-2NHKTRTF.js[39m  [2m | [22m[2mrole-list-page[22m         [2m | [22m [36m45.05 kB[39m[2m | [22m
+[32mchunk-7554A3Q6.js[39m  [2m | [22m[2mbuilding-detail-page[22m   [2m | [22m [36m40.48 kB[39m[2m | [22m
+[32mchunk-HGVLH4NC.js[39m  [2m | [22m[2mroom-detail-page[22m       [2m | [22m [36m40.24 kB[39m[2m | [22m
+[32mchunk-D2DFSZAI.js[39m  [2m | [22m[2mfloor-detail-page[22m      [2m | [22m [36m39.44 kB[39m[2m | [22m
+[2m...and 83 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.482 seconds] - 2026-08-14T18:21:08.066Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m           [2m | [22m[1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m            [2m | [22m[36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m           [2m | [22m[1mRaw size[22m
+[32mchunk-YECVNMMV.js[39m  [2m | [22m[2mroom-create-page[22m[2m | [22m[36m16.53 kB[39m[2m | [22m
+[32mchunk-AALTKEXB.js[39m  [2m | [22m[2mproperty-routes[22m [2m | [22m [36m2.35 kB[39m[2m | [22m
+[32mchunk-INISDOL4.js[39m  [2m | [22m[2mrooms-routes[22m    [2m | [22m [36m1.17 kB[39m[2m | [22m
+
+Application bundle generation complete. [0.279 seconds] - 2026-08-14T18:21:28.364Z
+
+Page reload sent to client(s).

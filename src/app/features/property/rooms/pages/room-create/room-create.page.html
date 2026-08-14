@@ -1,0 +1,58 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/property/rooms">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'rooms.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'rooms.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'rooms.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'rooms.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  @if (optionsError()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ optionsError() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="loadOptions()">
+        {{ 'rooms.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else {
+    <app-room-form
+      [branchOptions]="branchOptions()"
+      [roomTypeOptions]="roomTypeOptions()"
+      [showBranch]="true"
+      [loadingOptions]="loadingOptions()"
+      [saving]="saving()"
+      [submitLabel]="
+        'rooms.create'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

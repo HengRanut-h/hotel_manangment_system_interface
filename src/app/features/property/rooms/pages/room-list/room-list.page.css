@@ -1,0 +1,54 @@
+@import "../../../hotels/pages/hotel-list/hotel-list.page.css";
+
+.filters--rooms {
+  grid-template-columns:
+    minmax(240px, 1fr)
+    auto;
+}
+
+.room-name,
+.room-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.room-name svg,
+.room-type svg {
+  width: 16px;
+  height: 16px;
+}
+
+.room-name {
+  color: #101828;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.room-name:hover {
+  color: #4f46e5;
+}
+
+.room-type {
+  color: #475467;
+}
+
+.status-select {
+  min-width: 140px;
+  padding: 8px 10px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #101828;
+  font: inherit;
+}
+
+.status-badge--warning {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.status-badge--danger {
+  background: #fef3f2;
+  color: #b42318;
+}
