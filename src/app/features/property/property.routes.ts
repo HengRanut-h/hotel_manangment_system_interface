@@ -103,11 +103,25 @@ export const propertyRoutes: Routes = [
   },
 
   // =========================================================
+  // AMENITIES
+  // =========================================================
+
+  {
+    path: 'amenities',
+
+    loadChildren: () =>
+      import(
+        './amenities/amenities.routes'
+      ).then(
+        m => m.amenityRoutes
+      )
+  },
+
+  // =========================================================
   // GENERIC PROPERTY RESOURCES
   // =========================================================
 
   ...[
-    'amenities',
     'rates'
   ].map(
     path => ({
