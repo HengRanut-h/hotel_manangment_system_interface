@@ -1,0 +1,408 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'branches.section' | translate }}
+      </p>
+      <h1>
+        {{ 'branches.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'branches.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'branches.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'branches.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="filters">
+
+    <div class="filter-field filter-field--search">
+      <label for="branchSearch">
+        {{ 'branches.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="branchSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'branches.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="branchStatus">
+        {{ 'branches.status' | translate }}
+      </label>
+      <select
+        id="branchStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="all">
+          {{ 'branches.all' | translate }}
+        </option>
+        <option value="active">
+          {{ 'branches.active' | translate }}
+        </option>
+        <option value="inactive">
+          {{ 'branches.inactive' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="branchSort">
+        {{ 'branches.sortBy' | translate }}
+      </label>
+      <select
+        id="branchSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="name">
+          {{ 'branches.sortName' | translate }}
+        </option>
+        <option value="code">
+          {{ 'branches.sortCode' | translate }}
+        </option>
+        <option value="createdAt">
+          {{ 'branches.sortCreated' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="branchDirection">
+        {{ 'branches.direction' | translate }}
+      </label>
+      <select
+        id="branchDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'branches.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'branches.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'branches.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'branches.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'branches.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'branches.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'branches.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      branches().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'branches.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'branches.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'branches.branch' | translate }}
+              </th>
+              <th>
+                {{ 'branches.code' | translate }}
+              </th>
+              <th>
+                {{ 'branches.descriptionLabel' | translate }}
+              </th>
+              <th>
+                {{ 'branches.status' | translate }}
+              </th>
+              <th>
+                {{ 'branches.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'branches.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              branch of branches();
+              track branch.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      branch.id
+                    ]">
+                    {{ branch.name }}
+                  </a>
+                </td>
+                <td>
+                  <span class="hotel-code">
+                    {{ branch.code }}
+                  </span>
+                </td>
+                <td class="description-cell">
+                  {{
+                    branch.description
+                    ||
+                    ('branches.noDescription' | translate)
+                  }}
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="branch.isActive"
+                    [class.status-badge--inactive]="!branch.isActive">
+                    {{
+                      (
+                        branch.isActive
+                          ? 'branches.active'
+                          : 'branches.inactive'
+                      )
+                      | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    branch.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        branch.id
+                      ]"
+                      [title]="
+                        'branches.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'branches.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'branches.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          branch.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'branches.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'branches.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                      <button
+                        type="button"
+                        class="icon-action icon-action--status"
+                        [class.icon-action--activate]="!branch.isActive"
+                        [class.icon-action--deactivate]="branch.isActive"
+                        [disabled]="mutatingId() === branch.id"
+                        [title]="
+                          (
+                            branch.isActive
+                              ? 'branches.deactivateAction'
+                              : 'branches.activateAction'
+                          )
+                          | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            branch.isActive
+                              ? 'branches.deactivateAction'
+                              : 'branches.activateAction'
+                          )
+                          | translate
+                        "
+                        (click)="
+                          setActive(
+                            branch,
+                            !branch.isActive
+                          )
+                        ">
+                        <svg lucidePower></svg>
+                      </button>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'branches.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === branch.id"
+                        [title]="
+                          'branches.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'branches.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteBranch(branch)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'branches.totalBranches' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'branches.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'branches.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'branches.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'branches.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

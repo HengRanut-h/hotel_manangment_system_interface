@@ -25,6 +25,54 @@ export const propertyRoutes: Routes = [
   },
 
   // =========================================================
+  // BRANCHES
+  // Full custom feature
+  // =========================================================
+
+  {
+    path: 'branches',
+
+    loadChildren: () =>
+      import(
+        './branches/branches.routes'
+      ).then(
+        m => m.branchRoutes
+      )
+  },
+
+  // =========================================================
+  // BUILDINGS
+  // Full custom feature
+  // =========================================================
+
+  {
+    path: 'buildings',
+
+    loadChildren: () =>
+      import(
+        './buildings/buildings.routes'
+      ).then(
+        m => m.buildingRoutes
+      )
+  },
+
+  // =========================================================
+  // FLOORS
+  // Full custom feature
+  // =========================================================
+
+  {
+    path: 'floors',
+
+    loadChildren: () =>
+      import(
+        './floors/floors.routes'
+      ).then(
+        m => m.floorRoutes
+      )
+  },
+
+  // =========================================================
   // ROOMS
   // =========================================================
 
@@ -75,9 +123,6 @@ export const propertyRoutes: Routes = [
   // =========================================================
 
   ...[
-    'branches',
-    'buildings',
-    'floors',
     'amenities',
     'rates'
   ].map(

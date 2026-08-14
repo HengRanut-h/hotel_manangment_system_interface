@@ -1,0 +1,171 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'floors.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'floors.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+        <label for="floorName">
+          {{ 'floors.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="floorName"
+          type="text"
+          autocomplete="off"
+          name="floorName"
+          [placeholder]="
+            'floors.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'floors.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="floorCode">
+          {{ 'floors.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="floorCode"
+          type="text"
+          autocomplete="off"
+          name="floorCode"
+          [placeholder]="
+            'floors.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'floors.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'floors.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field form-field--full">
+        <label for="floorDescription">
+          {{ 'floors.form.description' | translate }}
+        </label>
+        <textarea
+          id="floorDescription"
+          name="floorDescription"
+          rows="4"
+          [placeholder]="
+            'floors.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+      </div>
+
+    </div>
+
+  </section>
+
+  @if (
+    showStatus()
+  ) {
+    <section class="form-card">
+      <header class="form-card__header">
+        <h2>
+          {{ 'floors.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'floors.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="floorIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'floors.form.active'
+                : 'floors.form.inactive'
+            )
+              | translate
+          }}
+        </span>
+      </label>
+    </section>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

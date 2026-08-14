@@ -1,0 +1,75 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'branches.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'branches.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    branch();
+    as item
+  ) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/property/branches',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'branches.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'branches.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'branches.editDescription'
+            | translate
+        }}
+      </span>
+    </header>
+
+    <app-branch-form
+      [name]="item.name"
+      [code]="item.code"
+      [description]="item.description"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [submitLabel]="
+        'branches.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

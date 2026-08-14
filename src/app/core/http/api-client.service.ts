@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { unwrapApiResponse } from './api-response.models';
+import { ApiResponse, unwrapApiResponse } from './api-response.models';
 
 export type ApiQueryParams = Record<
   string,
@@ -23,6 +23,13 @@ export class ApiClientService {
         params: this.buildParams(params)
       })
       .pipe(map(response => unwrapApiResponse<T>(response)));
+  }
+
+  getResponse<T>(path: string, params?: ApiQueryParams) {
+    return this.http
+      .get<ApiResponse<T>>(this.url(path), {
+        params: this.buildParams(params)
+      });
   }
 
   // =========================================================

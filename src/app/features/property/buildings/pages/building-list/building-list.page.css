@@ -1,0 +1,33 @@
+@import "../../../hotels/pages/hotel-list/hotel-list.page.css";
+
+.filters {
+  grid-template-columns:
+    minmax(240px, 1.7fr)
+    minmax(140px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    auto;
+}
+
+.id-value {
+  display: inline-block;
+
+  max-width: 180px;
+
+  overflow: hidden;
+
+  color: #475467;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 10.5px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

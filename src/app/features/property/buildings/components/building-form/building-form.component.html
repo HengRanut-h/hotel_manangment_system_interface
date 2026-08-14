@@ -1,0 +1,253 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+
+      <h2>
+        {{ 'buildings.form.identity' | translate }}
+      </h2>
+
+      <p>
+        {{
+          'buildings.form.identityDescription'
+            | translate
+        }}
+      </p>
+
+    </header>
+
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+
+        <label for="buildingName">
+          {{ 'buildings.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="buildingName"
+          type="text"
+          autocomplete="off"
+          name="buildingName"
+          [placeholder]="
+            'buildings.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'buildings.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label for="buildingCode">
+          {{ 'buildings.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="buildingCode"
+          type="text"
+          autocomplete="off"
+          name="buildingCode"
+          [placeholder]="
+            'buildings.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'buildings.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'buildings.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+
+      </div>
+
+
+      @if (
+        allowBranchSelection()
+      ) {
+
+        <div class="form-field">
+
+          <label for="buildingBranch">
+            {{ 'buildings.form.branch' | translate }}
+          </label>
+
+          <select
+            id="buildingBranch"
+            name="buildingBranch"
+            [disabled]="branchOptionsLoading()"
+            [ngModel]="formBranchId()"
+            (ngModelChange)="formBranchId.set($event)">
+
+            <option value="">
+              {{
+                'buildings.form.defaultBranch'
+                  | translate
+              }}
+            </option>
+
+            @for (
+              branch of branchOptions();
+              track branch.id
+            ) {
+              <option [value]="branch.id">
+                {{ branch.name }} ({{ branch.code }})
+              </option>
+            }
+
+          </select>
+
+          <small class="field-help">
+            @if (branchOptionsLoading()) {
+              {{
+                'buildings.form.loadingBranches'
+                  | translate
+              }}
+            } @else if (branchOptionsError()) {
+              {{ branchOptionsError() }}
+            } @else {
+              {{
+                'buildings.form.branchHelp'
+                  | translate
+              }}
+            }
+          </small>
+
+        </div>
+
+      }
+
+
+      <div class="form-field form-field--full">
+
+        <label for="buildingDescription">
+          {{ 'buildings.form.description' | translate }}
+        </label>
+
+        <textarea
+          id="buildingDescription"
+          name="buildingDescription"
+          rows="4"
+          [placeholder]="
+            'buildings.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  @if (
+    showStatus()
+  ) {
+
+    <section class="form-card">
+
+      <header class="form-card__header">
+        <h2>
+          {{ 'buildings.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'buildings.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="buildingIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'buildings.form.active'
+                : 'buildings.form.inactive'
+            )
+              | translate
+          }}
+        </span>
+      </label>
+
+    </section>
+
+  }
+
+
+  <footer class="form-actions">
+
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+
+    </button>
+
+  </footer>
+
+</form>

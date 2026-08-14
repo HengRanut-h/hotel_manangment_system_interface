@@ -1,0 +1,5 @@
+@import "../../../buildings/pages/building-edit/building-edit.page.css";
+
+app-branch-form {
+  display: block;
+}

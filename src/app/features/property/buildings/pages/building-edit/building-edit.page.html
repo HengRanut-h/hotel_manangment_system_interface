@@ -1,0 +1,80 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'buildings.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'buildings.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    building();
+    as item
+  ) {
+
+    <header class="form-page__header">
+
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/property/buildings',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'buildings.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'buildings.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'buildings.editDescription'
+            | translate
+        }}
+      </span>
+
+    </header>
+
+    <app-building-form
+      [name]="item.name"
+      [code]="item.code"
+      [description]="item.description"
+      [branchId]="item.branchId"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [allowBranchSelection]="false"
+      [submitLabel]="
+        'buildings.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>

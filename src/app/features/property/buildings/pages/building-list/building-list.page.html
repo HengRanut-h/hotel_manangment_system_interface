@@ -1,0 +1,415 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+
+    <div>
+      <p class="eyebrow">
+        {{ 'buildings.section' | translate }}
+      </p>
+      <h1>
+        {{ 'buildings.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'buildings.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'buildings.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'buildings.create' | translate }}
+        </span>
+      </a>
+    }
+
+  </header>
+
+  <section class="filters">
+
+    <div class="filter-field filter-field--search">
+      <label for="buildingSearch">
+        {{ 'buildings.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="buildingSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'buildings.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="buildingStatus">
+        {{ 'buildings.status' | translate }}
+      </label>
+      <select
+        id="buildingStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="all">
+          {{ 'buildings.all' | translate }}
+        </option>
+        <option value="active">
+          {{ 'buildings.active' | translate }}
+        </option>
+        <option value="inactive">
+          {{ 'buildings.inactive' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="buildingSort">
+        {{ 'buildings.sortBy' | translate }}
+      </label>
+      <select
+        id="buildingSort"
+        [ngModel]="sortBy()"
+        (ngModelChange)="sortBy.set($event)">
+        <option value="name">
+          {{ 'buildings.sortName' | translate }}
+        </option>
+        <option value="code">
+          {{ 'buildings.sortCode' | translate }}
+        </option>
+        <option value="createdAt">
+          {{ 'buildings.sortCreated' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="buildingDirection">
+        {{ 'buildings.direction' | translate }}
+      </label>
+      <select
+        id="buildingDirection"
+        [ngModel]="sortDirection()"
+        (ngModelChange)="sortDirection.set($event)">
+        <option value="asc">
+          {{ 'buildings.ascending' | translate }}
+        </option>
+        <option value="desc">
+          {{ 'buildings.descending' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'buildings.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>
+          {{ 'buildings.apply' | translate }}
+        </span>
+      </button>
+    </div>
+
+  </section>
+
+  <section class="table-card">
+
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'buildings.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'buildings.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'buildings.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      displayedBuildings().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'buildings.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'buildings.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'buildings.building' | translate }}
+              </th>
+              <th>
+                {{ 'buildings.code' | translate }}
+              </th>
+              <th>
+                {{ 'buildings.branchId' | translate }}
+              </th>
+              <th>
+                {{ 'buildings.status' | translate }}
+              </th>
+              <th>
+                {{ 'buildings.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'buildings.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              building of displayedBuildings();
+              track building.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      building.id
+                    ]">
+                    {{ building.name }}
+                  </a>
+                </td>
+                <td>
+                  <span class="hotel-code">
+                    {{ building.code }}
+                  </span>
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{
+                      building.branchId
+                      ||
+                      ('buildings.defaultBranch' | translate)
+                    }}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="building.isActive"
+                    [class.status-badge--inactive]="!building.isActive">
+                    {{
+                      (
+                        building.isActive
+                          ? 'buildings.active'
+                          : 'buildings.inactive'
+                      )
+                        | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    building.createdAtUtc
+                      |
+                    date:
+                      'dd MMM yyyy, h:mm a'
+                  }}
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        building.id
+                      ]"
+                      [title]="
+                        'buildings.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'buildings.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'buildings.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          building.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'buildings.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'buildings.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                      <button
+                        type="button"
+                        class="icon-action icon-action--status"
+                        [class.icon-action--activate]="!building.isActive"
+                        [class.icon-action--deactivate]="building.isActive"
+                        [disabled]="mutatingId() === building.id"
+                        [title]="
+                          (
+                            building.isActive
+                              ? 'buildings.deactivateAction'
+                              : 'buildings.activateAction'
+                          )
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            building.isActive
+                              ? 'buildings.deactivateAction'
+                              : 'buildings.activateAction'
+                          )
+                            | translate
+                        "
+                        (click)="
+                          setActive(
+                            building,
+                            !building.isActive
+                          )
+                        ">
+                        <svg lucidePower></svg>
+                      </button>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'buildings.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === building.id"
+                        [title]="
+                          'buildings.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'buildings.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteBuilding(building)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'buildings.totalBuildings' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'buildings.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'buildings.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'buildings.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'buildings.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+
+  </section>
+
+</section>

@@ -1,0 +1,5 @@
+@import "../../../hotels/pages/hotel-create/hotel-create.page.css";
+
+app-floor-form {
+  display: block;
+}

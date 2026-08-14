@@ -1,0 +1,33 @@
+@import "../../../hotels/pages/hotel-create/hotel-create.page.css";
+
+app-building-form {
+  display: block;
+}
+
+.state-box {
+  min-height: 320px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 32px;
+
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  text-align: center;
+}
+
+.state-box--error {
+  color: #b42318;
+}

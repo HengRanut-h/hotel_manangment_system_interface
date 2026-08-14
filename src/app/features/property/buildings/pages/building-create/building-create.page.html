@@ -1,0 +1,47 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+
+    <a
+      class="back-link"
+      routerLink="/app/property/buildings">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'buildings.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'buildings.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'buildings.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'buildings.createDescription'
+          | translate
+      }}
+    </span>
+
+  </header>
+
+  <app-building-form
+    [saving]="saving()"
+    [showStatus]="false"
+    [allowBranchSelection]="true"
+    [branchOptions]="branchOptions()"
+    [branchOptionsLoading]="branchOptionsLoading()"
+    [branchOptionsError]="branchOptionsError()"
+    [submitLabel]="
+      'buildings.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>

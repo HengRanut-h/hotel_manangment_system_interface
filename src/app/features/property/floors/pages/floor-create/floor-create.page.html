@@ -1,0 +1,41 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/property/floors">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'floors.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'floors.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'floors.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'floors.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  <app-floor-form
+    [saving]="saving()"
+    [showStatus]="false"
+    [submitLabel]="
+      'floors.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>
