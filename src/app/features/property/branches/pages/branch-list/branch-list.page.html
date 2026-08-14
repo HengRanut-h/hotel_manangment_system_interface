@@ -29,6 +29,50 @@
     }
   </header>
 
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideHotel></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'branches.totalBranches' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--active">
+        <svg lucideCircleCheck></svg>
+      </span>
+      <div>
+        <strong>
+          {{ activeOnPage() }}
+        </strong>
+        <span>
+          {{ 'branches.activeOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--inactive">
+        <svg lucideCircleX></svg>
+      </span>
+      <div>
+        <strong>
+          {{ inactiveOnPage() }}
+        </strong>
+        <span>
+          {{ 'branches.inactiveOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
   <section class="filters">
 
     <div class="filter-field filter-field--search">

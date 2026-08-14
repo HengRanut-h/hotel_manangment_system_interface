@@ -6,6 +6,10 @@
     auto;
 }
 
+.summary-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .room-name,
 .room-type {
   display: inline-flex;

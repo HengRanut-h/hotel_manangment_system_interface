@@ -5,6 +5,7 @@ import {
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   OnInit,
   signal
@@ -19,6 +20,8 @@ import {
 } from '@angular/router';
 
 import {
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
@@ -28,6 +31,7 @@ import {
   LucidePower,
   LucideRotateCcw,
   LucideSearch,
+  LucideSparkles,
   LucideTrash2
 } from '@lucide/angular';
 
@@ -87,6 +91,8 @@ type SortDirection =
     DatePipe,
     TranslationPipe,
     SpinComponent,
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
@@ -96,6 +102,7 @@ type SortDirection =
     LucidePower,
     LucideRotateCcw,
     LucideSearch,
+    LucideSparkles,
     LucideTrash2
   ],
   templateUrl: './amenity-list.page.html',
@@ -193,6 +200,28 @@ export class AmenityListPage
   readonly hasNextPage =
     signal(
       false
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.amenities()
+          .filter(
+            amenity =>
+              amenity.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.amenities()
+          .filter(
+            amenity =>
+              !amenity.isActive
+          )
+          .length
     );
 
   ngOnInit(): void {

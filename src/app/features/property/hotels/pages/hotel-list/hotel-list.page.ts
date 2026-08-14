@@ -20,10 +20,13 @@ import {
 } from '@angular/router';
 
 import {
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
   LucideFilter,
+  LucideHotel,
   LucidePencil,
   LucidePlus,
   LucidePower,
@@ -99,10 +102,13 @@ type SortDirection =
 
     SpinComponent,
 
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
     LucideFilter,
+    LucideHotel,
     LucidePencil,
     LucidePlus,
     LucidePower,
@@ -385,6 +391,28 @@ export class HotelListPage
         return items;
 
       }
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.hotels()
+          .filter(
+            hotel =>
+              hotel.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.hotels()
+          .filter(
+            hotel =>
+              !hotel.isActive
+          )
+          .length
     );
 
 

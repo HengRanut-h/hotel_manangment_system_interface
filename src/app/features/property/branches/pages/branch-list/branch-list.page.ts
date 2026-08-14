@@ -3,6 +3,7 @@ import {
 } from '@angular/common';
 
 import {
+  computed,
   ChangeDetectionStrategy,
   Component,
   inject,
@@ -19,6 +20,8 @@ import {
 } from '@angular/router';
 
 import {
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
@@ -28,6 +31,7 @@ import {
   LucidePower,
   LucideRotateCcw,
   LucideSearch,
+  LucideHotel,
   LucideTrash2
 } from '@lucide/angular';
 
@@ -87,6 +91,8 @@ type SortDirection =
     DatePipe,
     TranslationPipe,
     SpinComponent,
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
@@ -96,6 +102,7 @@ type SortDirection =
     LucidePower,
     LucideRotateCcw,
     LucideSearch,
+    LucideHotel,
     LucideTrash2
   ],
   templateUrl: './branch-list.page.html',
@@ -193,6 +200,28 @@ export class BranchListPage
   readonly hasNextPage =
     signal(
       false
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.branches()
+          .filter(
+            branch =>
+              branch.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.branches()
+          .filter(
+            branch =>
+              !branch.isActive
+          )
+          .length
     );
 
   ngOnInit(): void {

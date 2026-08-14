@@ -29,6 +29,22 @@
     }
   </header>
 
+  <section class="summary-grid summary-grid--single">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideBedDouble></svg>
+      </span>
+      <div>
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'rooms.totalRooms' | translate }}
+        </span>
+      </div>
+    </article>
+  </section>
+
   <section class="filters filters--rooms">
 
     <div class="filter-field filter-field--search">

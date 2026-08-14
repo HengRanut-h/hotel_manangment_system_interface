@@ -20,6 +20,9 @@ import {
 } from '@angular/router';
 
 import {
+  LucideBuilding2,
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
@@ -88,6 +91,9 @@ type SortDirection =
     DatePipe,
     TranslationPipe,
     SpinComponent,
+    LucideBuilding2,
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
@@ -170,6 +176,28 @@ export class BuildingListPage
     computed(
       () =>
         this.buildings()
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.buildings()
+          .filter(
+            building =>
+              building.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.buildings()
+          .filter(
+            building =>
+              !building.isActive
+          )
+          .length
     );
 
   readonly pageNumber =

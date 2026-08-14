@@ -5,6 +5,7 @@ import {
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   OnInit,
   signal
@@ -19,6 +20,9 @@ import {
 } from '@angular/router';
 
 import {
+  LucideBedDouble,
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
@@ -72,6 +76,9 @@ import {
     DecimalPipe,
     TranslationPipe,
     SpinComponent,
+    LucideBedDouble,
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
@@ -162,6 +169,28 @@ export class RoomTypeListPage
   readonly hasNextPage =
     signal(
       false
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.roomTypes()
+          .filter(
+            roomType =>
+              roomType.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.roomTypes()
+          .filter(
+            roomType =>
+              !roomType.isActive
+          )
+          .length
     );
 
   ngOnInit(): void {

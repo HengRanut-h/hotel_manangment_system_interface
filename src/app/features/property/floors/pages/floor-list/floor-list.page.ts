@@ -5,6 +5,7 @@ import {
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   OnInit,
   signal
@@ -19,10 +20,13 @@ import {
 } from '@angular/router';
 
 import {
+  LucideCircleCheck,
+  LucideCircleX,
   LucideChevronLeft,
   LucideChevronRight,
   LucideEye,
   LucideFilter,
+  LucideLayers3,
   LucidePencil,
   LucidePlus,
   LucidePower,
@@ -87,10 +91,13 @@ type SortDirection =
     DatePipe,
     TranslationPipe,
     SpinComponent,
+    LucideCircleCheck,
+    LucideCircleX,
     LucideChevronLeft,
     LucideChevronRight,
     LucideEye,
     LucideFilter,
+    LucideLayers3,
     LucidePencil,
     LucidePlus,
     LucidePower,
@@ -193,6 +200,28 @@ export class FloorListPage
   readonly hasNextPage =
     signal(
       false
+    );
+
+  readonly activeOnPage =
+    computed(
+      () =>
+        this.floors()
+          .filter(
+            floor =>
+              floor.isActive
+          )
+          .length
+    );
+
+  readonly inactiveOnPage =
+    computed(
+      () =>
+        this.floors()
+          .filter(
+            floor =>
+              !floor.isActive
+          )
+          .length
     );
 
   ngOnInit(): void {
