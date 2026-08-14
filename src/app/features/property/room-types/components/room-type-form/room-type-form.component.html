@@ -1,0 +1,256 @@
+<form
+  class="hotel-form"
+  (submit)="
+    $event.preventDefault();
+    submit()
+  ">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <h2>
+        {{ 'roomTypes.form.identity' | translate }}
+      </h2>
+      <p>
+        {{
+          'roomTypes.form.identityDescription'
+            | translate
+        }}
+      </p>
+    </header>
+
+    <div class="form-grid">
+
+      <div class="form-field form-field--full">
+        <label for="roomTypeName">
+          {{ 'roomTypes.form.name' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="roomTypeName"
+          type="text"
+          autocomplete="off"
+          name="roomTypeName"
+          [placeholder]="
+            'roomTypes.form.namePlaceholder'
+              | translate
+          "
+          [ngModel]="formName()"
+          (ngModelChange)="formName.set($event)">
+
+        @if (
+          touched()
+          &&
+          !formName().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'roomTypes.form.nameRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="roomTypeCode">
+          {{ 'roomTypes.form.code' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="roomTypeCode"
+          type="text"
+          autocomplete="off"
+          name="roomTypeCode"
+          [placeholder]="
+            'roomTypes.form.codePlaceholder'
+              | translate
+          "
+          [ngModel]="formCode()"
+          (ngModelChange)="formCode.set($event)">
+
+        <small class="field-help">
+          {{
+            'roomTypes.form.codeHelp'
+              | translate
+          }}
+        </small>
+
+        @if (
+          touched()
+          &&
+          !formCode().trim()
+        ) {
+          <small class="field-error">
+            {{
+              'roomTypes.form.codeRequired'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="roomTypeBaseRate">
+          {{ 'roomTypes.form.baseRate' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="roomTypeBaseRate"
+          type="number"
+          min="0"
+          step="0.01"
+          name="roomTypeBaseRate"
+          [ngModel]="formBaseRate()"
+          (ngModelChange)="formBaseRate.set(+$event)">
+
+        @if (
+          touched()
+          &&
+          (
+            formBaseRate() < 0
+          )
+        ) {
+          <small class="field-error">
+            {{
+              'roomTypes.form.baseRateInvalid'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="roomTypeMaxAdults">
+          {{ 'roomTypes.form.maxAdults' | translate }}
+          <span class="required">*</span>
+        </label>
+        <input
+          id="roomTypeMaxAdults"
+          type="number"
+          min="1"
+          step="1"
+          name="roomTypeMaxAdults"
+          [ngModel]="formMaxAdults()"
+          (ngModelChange)="formMaxAdults.set(+$event)">
+
+        @if (
+          touched()
+          &&
+          formMaxAdults() < 1
+        ) {
+          <small class="field-error">
+            {{
+              'roomTypes.form.maxAdultsInvalid'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="roomTypeMaxChildren">
+          {{ 'roomTypes.form.maxChildren' | translate }}
+        </label>
+        <input
+          id="roomTypeMaxChildren"
+          type="number"
+          min="0"
+          step="1"
+          name="roomTypeMaxChildren"
+          [ngModel]="formMaxChildren()"
+          (ngModelChange)="formMaxChildren.set(+$event)">
+
+        @if (
+          touched()
+          &&
+          formMaxChildren() < 0
+        ) {
+          <small class="field-error">
+            {{
+              'roomTypes.form.maxChildrenInvalid'
+                | translate
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-field form-field--full">
+        <label for="roomTypeDescription">
+          {{ 'roomTypes.form.description' | translate }}
+        </label>
+        <textarea
+          id="roomTypeDescription"
+          name="roomTypeDescription"
+          rows="4"
+          [placeholder]="
+            'roomTypes.form.descriptionPlaceholder'
+              | translate
+          "
+          [ngModel]="formDescription()"
+          (ngModelChange)="formDescription.set($event)">
+        </textarea>
+      </div>
+
+    </div>
+
+  </section>
+
+  @if (
+    showStatus()
+  ) {
+    <section class="form-card">
+      <header class="form-card__header">
+        <h2>
+          {{ 'roomTypes.form.status' | translate }}
+        </h2>
+        <p>
+          {{
+            'roomTypes.form.statusDescription'
+              | translate
+          }}
+        </p>
+      </header>
+
+      <label class="status-control">
+        <input
+          type="checkbox"
+          name="roomTypeIsActive"
+          [ngModel]="formIsActive()"
+          (ngModelChange)="formIsActive.set($event)">
+        <span>
+          {{
+            (
+              formIsActive()
+                ? 'roomTypes.form.active'
+                : 'roomTypes.form.inactive'
+            )
+            | translate
+          }}
+        </span>
+      </label>
+    </section>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="saving()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="saving()">
+      @if (saving()) {
+        {{ 'common.saving' | translate }}
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+  </footer>
+
+</form>

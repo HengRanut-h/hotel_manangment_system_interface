@@ -1,0 +1,246 @@
+<section class="detail-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'roomTypes.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <strong>
+        {{ 'roomTypes.loadOneFailed' | translate }}
+      </strong>
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'roomTypes.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    roomType();
+    as item
+  ) {
+    <header class="detail-header">
+      <div class="detail-header__main">
+        <a
+          class="back-button"
+          routerLink="/app/property/room-types">
+          <span class="back-button__icon">
+            <svg lucideArrowLeft></svg>
+          </span>
+          <span class="back-button__text">
+            {{ 'roomTypes.title' | translate }}
+          </span>
+        </a>
+
+        <p class="eyebrow">
+          {{ 'roomTypes.section' | translate }}
+        </p>
+
+        <div class="title-row">
+          <div>
+            <h1>
+              {{ item.name }}
+            </h1>
+            <p class="subline">
+              <span class="hotel-code">
+                {{ item.code }}
+              </span>
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="item.isActive"
+            [class.status-badge--inactive]="!item.isActive">
+            {{
+              (
+                item.isActive
+                  ? 'roomTypes.active'
+                  : 'roomTypes.inactive'
+              )
+              | translate
+            }}
+          </span>
+        </div>
+      </div>
+
+      @if (
+        auth.hasPermission(
+          'room-types.update'
+        )
+      ) {
+        <a
+          class="primary-link"
+          [routerLink]="[
+            '/app/property/room-types',
+            item.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          <span>
+            {{ 'roomTypes.edit' | translate }}
+          </span>
+        </a>
+      }
+    </header>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <div>
+          <p class="eyebrow">
+            {{ 'roomTypes.overview' | translate }}
+          </p>
+          <h2>
+            {{
+              'roomTypes.roomTypeInformation'
+                | translate
+            }}
+          </h2>
+          <p class="info-description">
+            {{
+              'roomTypes.roomTypeInformationDescription'
+                | translate
+            }}
+          </p>
+        </div>
+      </header>
+
+      <dl class="info-grid">
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.name' | translate }}
+          </dt>
+          <dd>
+            {{ item.name }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.code' | translate }}
+          </dt>
+          <dd>
+            <span class="code-value">
+              {{ item.code }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.baseRate' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.baseRate
+                |
+              number:
+                '1.2-2'
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.capacity' | translate }}
+          </dt>
+          <dd>
+            {{
+              'roomTypes.capacityValue'
+                | translate:
+                  {
+                    adults: item.maxAdults,
+                    children: item.maxChildren
+                  }
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.status' | translate }}
+          </dt>
+          <dd>
+            <span
+              class="status-badge"
+              [class.status-badge--active]="item.isActive"
+              [class.status-badge--inactive]="!item.isActive">
+              {{
+                (
+                  item.isActive
+                    ? 'roomTypes.active'
+                    : 'roomTypes.inactive'
+                )
+                | translate
+              }}
+            </span>
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.descriptionLabel' | translate }}
+          </dt>
+          <dd>
+            {{
+              item.description
+              ||
+              ('roomTypes.noDescription' | translate)
+            }}
+          </dd>
+        </div>
+
+        <div class="info-item">
+          <dt>
+            {{ 'roomTypes.roomTypeId' | translate }}
+          </dt>
+          <dd>
+            <span class="id-value">
+              {{ item.id }}
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="related-card">
+      <div class="related-card__content">
+        <p class="eyebrow">
+          {{ 'roomTypes.section' | translate }}
+        </p>
+        <h2>
+          {{ 'roomTypes.propertyStructure' | translate }}
+        </h2>
+        <p>
+          {{
+            'roomTypes.propertyStructureDescription'
+              | translate
+          }}
+        </p>
+      </div>
+
+      <div class="related-links">
+        <a routerLink="/app/property/rooms">
+          {{ 'roomTypes.rooms' | translate }}
+        </a>
+        <a routerLink="/app/property/amenities">
+          {{ 'roomTypes.amenities' | translate }}
+        </a>
+        <a routerLink="/app/property/rates">
+          {{ 'roomTypes.rates' | translate }}
+        </a>
+      </div>
+    </section>
+  }
+
+</section>

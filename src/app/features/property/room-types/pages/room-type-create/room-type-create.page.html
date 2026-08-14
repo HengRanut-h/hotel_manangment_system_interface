@@ -1,0 +1,41 @@
+<section class="form-page">
+
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/property/room-types">
+      <span class="back-link__icon">
+        <svg lucideArrowLeft></svg>
+      </span>
+      <span class="back-link__text">
+        {{ 'roomTypes.title' | translate }}
+      </span>
+    </a>
+
+    <p>
+      {{ 'roomTypes.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'roomTypes.createTitle' | translate }}
+    </h1>
+
+    <span class="form-page__description">
+      {{
+        'roomTypes.createDescription'
+          | translate
+      }}
+    </span>
+  </header>
+
+  <app-room-type-form
+    [saving]="saving()"
+    [showStatus]="false"
+    [submitLabel]="
+      'roomTypes.create'
+        | translate
+    "
+    (submitted)="save($event)"
+    (cancelled)="cancel()" />
+
+</section>

@@ -102,20 +102,12 @@ export const propertyRoutes: Routes = [
   {
     path: 'room-types',
 
-    loadComponent: () =>
+    loadChildren: () =>
       import(
-        './pages/room-types/room-types.page'
+        './room-types/room-types.routes'
       ).then(
-        m => m.RoomTypesPage
-      ),
-
-    canActivate: [
-      permissionGuard
-    ],
-
-    data: {
-      permission: 'room-types.view'
-    }
+        m => m.roomTypeRoutes
+      )
   },
 
   // =========================================================

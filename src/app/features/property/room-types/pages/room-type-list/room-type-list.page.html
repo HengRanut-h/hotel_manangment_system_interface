@@ -1,0 +1,364 @@
+<section class="hotel-page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'roomTypes.section' | translate }}
+      </p>
+      <h1>
+        {{ 'roomTypes.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'roomTypes.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'room-types.create'
+      )
+    ) {
+      <a
+        class="primary-link"
+        routerLink="create">
+        <svg lucidePlus></svg>
+        <span>
+          {{ 'roomTypes.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  <section class="filters filters--room-types">
+
+    <div class="filter-field filter-field--search">
+      <label for="roomTypeSearch">
+        {{ 'roomTypes.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="roomTypeSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="
+            'roomTypes.searchPlaceholder'
+              | translate
+          "
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="applySearch()">
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="clearSearch()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'roomTypes.clear' | translate }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary"
+        [disabled]="loading()"
+        (click)="applySearch()">
+        <svg lucideSearch></svg>
+        <span>
+          {{ 'roomTypes.apply' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-box">
+        <app-spin
+          [inline]="true"
+          size="small"
+          [label]="
+            'roomTypes.loading'
+              | translate
+          " />
+      </div>
+    } @else if (error()) {
+      <div class="state-box state-box--error">
+        <strong>
+          {{ 'roomTypes.loadFailed' | translate }}
+        </strong>
+        <p>
+          {{ error() }}
+        </p>
+        <button
+          type="button"
+          class="button button--secondary"
+          (click)="load()">
+          {{ 'roomTypes.tryAgain' | translate }}
+        </button>
+      </div>
+    } @else if (
+      roomTypes().length === 0
+    ) {
+      <div class="state-box">
+        <strong>
+          {{ 'roomTypes.noResults' | translate }}
+        </strong>
+        <span>
+          {{
+            'roomTypes.noResultsDescription'
+              | translate
+          }}
+        </span>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'roomTypes.roomType' | translate }}
+              </th>
+              <th>
+                {{ 'roomTypes.code' | translate }}
+              </th>
+              <th>
+                {{ 'roomTypes.baseRate' | translate }}
+              </th>
+              <th>
+                {{ 'roomTypes.capacity' | translate }}
+              </th>
+              <th>
+                {{ 'roomTypes.descriptionLabel' | translate }}
+              </th>
+              <th>
+                {{ 'roomTypes.status' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'roomTypes.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              roomType of roomTypes();
+              track roomType.id
+            ) {
+              <tr>
+                <td>
+                  <a
+                    class="hotel-name"
+                    [routerLink]="[
+                      roomType.id
+                    ]">
+                    {{ roomType.name }}
+                  </a>
+                </td>
+                <td>
+                  <span class="hotel-code">
+                    {{ roomType.code }}
+                  </span>
+                </td>
+                <td>
+                  {{
+                    roomType.baseRate
+                      |
+                    number:
+                      '1.2-2'
+                  }}
+                </td>
+                <td>
+                  {{
+                    'roomTypes.capacityValue'
+                      | translate:
+                        {
+                          adults: roomType.maxAdults,
+                          children: roomType.maxChildren
+                        }
+                  }}
+                </td>
+                <td class="description-cell">
+                  {{
+                    roomType.description
+                    ||
+                    ('roomTypes.noDescription' | translate)
+                  }}
+                </td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="roomType.isActive"
+                    [class.status-badge--inactive]="!roomType.isActive">
+                    {{
+                      (
+                        roomType.isActive
+                          ? 'roomTypes.active'
+                          : 'roomTypes.inactive'
+                      )
+                      | translate
+                    }}
+                  </span>
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        roomType.id
+                      ]"
+                      [title]="
+                        'roomTypes.viewAction'
+                          | translate
+                      "
+                      [attr.aria-label]="
+                        'roomTypes.viewAction'
+                          | translate
+                      ">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'room-types.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          roomType.id,
+                          'edit'
+                        ]"
+                        [title]="
+                          'roomTypes.editAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'roomTypes.editAction'
+                            | translate
+                        ">
+                        <svg lucidePencil></svg>
+                      </a>
+
+                      <button
+                        type="button"
+                        class="icon-action icon-action--status"
+                        [class.icon-action--activate]="!roomType.isActive"
+                        [class.icon-action--deactivate]="roomType.isActive"
+                        [disabled]="mutatingId() === roomType.id"
+                        [title]="
+                          (
+                            roomType.isActive
+                              ? 'roomTypes.deactivateAction'
+                              : 'roomTypes.activateAction'
+                          )
+                          | translate
+                        "
+                        [attr.aria-label]="
+                          (
+                            roomType.isActive
+                              ? 'roomTypes.deactivateAction'
+                              : 'roomTypes.activateAction'
+                          )
+                          | translate
+                        "
+                        (click)="
+                          setActive(
+                            roomType,
+                            !roomType.isActive
+                          )
+                        ">
+                        <svg lucidePower></svg>
+                      </button>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'room-types.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === roomType.id"
+                        [title]="
+                          'roomTypes.deleteAction'
+                            | translate
+                        "
+                        [attr.aria-label]="
+                          'roomTypes.deleteAction'
+                            | translate
+                        "
+                        (click)="deleteRoomType(roomType)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <footer class="pagination">
+      <div class="pagination__summary">
+        <strong>
+          {{ totalCount() }}
+        </strong>
+        <span>
+          {{ 'roomTypes.totalRoomTypes' | translate }}
+        </span>
+      </div>
+
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasPreviousPage()
+            ||
+            loading()
+          "
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+          <span>
+            {{ 'roomTypes.previous' | translate }}
+          </span>
+        </button>
+
+        <span class="pagination__page">
+          {{ 'roomTypes.page' | translate }}
+          <strong>
+            {{ pageNumber() }}
+          </strong>
+          {{ 'roomTypes.of' | translate }}
+          <strong>
+            {{ totalPages() }}
+          </strong>
+        </span>
+
+        <button
+          type="button"
+          class="button button--secondary pagination-button"
+          [disabled]="
+            !hasNextPage()
+            ||
+            loading()
+          "
+          (click)="nextPage()">
+          <span>
+            {{ 'roomTypes.next' | translate }}
+          </span>
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+</section>

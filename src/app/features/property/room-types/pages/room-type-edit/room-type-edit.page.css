@@ -1,0 +1,5 @@
+@import "../../../buildings/pages/building-edit/building-edit.page.css";
+
+app-room-type-form {
+  display: block;
+}

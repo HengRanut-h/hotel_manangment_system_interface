@@ -1,0 +1,78 @@
+<section class="form-page">
+
+  @if (loading()) {
+    <div class="state-box">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="
+          'roomTypes.loadingOne'
+            | translate
+        " />
+    </div>
+  } @else if (error()) {
+    <div class="state-box state-box--error">
+      <p>
+        {{ error() }}
+      </p>
+      <button
+        type="button"
+        class="button button--secondary"
+        (click)="load()">
+        {{ 'roomTypes.tryAgain' | translate }}
+      </button>
+    </div>
+  } @else if (
+    roomType();
+    as item
+  ) {
+    <header class="form-page__header">
+      <a
+        class="back-link"
+        [routerLink]="[
+          '/app/property/room-types',
+          item.id
+        ]">
+        <span class="back-link__icon">
+          <svg lucideArrowLeft></svg>
+        </span>
+        <span class="back-link__text">
+          {{ item.name }}
+        </span>
+      </a>
+
+      <p>
+        {{ 'roomTypes.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'roomTypes.editTitle' | translate }}
+      </h1>
+
+      <span class="form-page__description">
+        {{
+          'roomTypes.editDescription'
+            | translate
+        }}
+      </span>
+    </header>
+
+    <app-room-type-form
+      [name]="item.name"
+      [code]="item.code"
+      [baseRate]="item.baseRate"
+      [maxAdults]="item.maxAdults"
+      [maxChildren]="item.maxChildren"
+      [description]="item.description"
+      [isActive]="item.isActive"
+      [saving]="saving()"
+      [showStatus]="true"
+      [submitLabel]="
+        'roomTypes.saveChanges'
+          | translate
+      "
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+
+</section>
