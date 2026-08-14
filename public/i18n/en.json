@@ -2859,5 +2859,271 @@
 
       "relatedEntityTypePlaceholder": "Optional type, such as Employee"
     }
+  },
+
+  "housekeeping": {
+    "section": "Operations",
+
+    "title": "Housekeeping",
+
+    "description": "Coordinate room cleaning tasks, priorities, completion, and room turnover work.",
+
+    "create": "New task",
+
+    "createTitle": "Create housekeeping task",
+
+    "detail": "Housekeeping details",
+
+    "totalTasks": "Total tasks",
+
+    "inProgressOnPage": "in progress on this page",
+
+    "openOnPage": "Open on this page",
+
+    "completedOnPage": "Completed on this page",
+
+    "unassignedOnPage": "Unassigned on this page",
+
+    "room": "Room",
+
+    "roomPrefix": "Room",
+
+    "selectRoom": "Select room",
+
+    "taskType": "Task type",
+
+    "defaultTaskType": "Checkout Cleaning",
+
+    "priority": "Priority",
+
+    "status": "Status",
+
+    "assignee": "Assignee",
+
+    "unassigned": "Unassigned",
+
+    "created": "Created",
+
+    "search": "Search",
+
+    "searchPlaceholder": "Room number or task type",
+
+    "allStatuses": "All statuses",
+
+    "allPriorities": "All priorities",
+
+    "clear": "Clear",
+
+    "actions": "Actions",
+
+    "view": "View",
+
+    "complete": "Complete",
+
+    "viewMode": "Housekeeping view mode",
+
+    "boardView": "Board",
+
+    "listView": "List",
+
+    "viewAction": "View housekeeping task",
+
+    "completeAction": "Mark completed",
+
+    "loading": "Loading housekeeping tasks...",
+
+    "loadingOne": "Loading housekeeping task...",
+
+    "loadingRooms": "Loading rooms...",
+
+    "loadFailed": "Unable to load housekeeping tasks.",
+
+    "tryAgain": "Please try again.",
+
+    "retry": "Retry",
+
+    "loadOneFailed": "Unable to load housekeeping task.",
+
+    "roomsLoadFailed": "Unable to load rooms.",
+
+    "noResults": "No housekeeping tasks found",
+
+    "noResultsDescription": "Change the filters or create a housekeeping task.",
+
+    "noTasksFiltered": "No housekeeping tasks found",
+
+    "noTasksFilteredDescription": "Try changing or clearing the current filters.",
+
+    "noTasksYet": "No housekeeping tasks yet",
+
+    "noTasksYetDescription": "Create a new housekeeping task to get started.",
+
+    "clearFilters": "Clear filters",
+
+    "showing": "Showing",
+
+    "previous": "Previous",
+
+    "next": "Next",
+
+    "page": "Page",
+
+    "of": "of",
+
+    "createSuccess": "Housekeeping task created successfully.",
+
+    "createFailed": "Unable to create housekeeping task.",
+
+    "completeSuccess": "Housekeeping task completed successfully.",
+
+    "completeFailed": "Unable to complete housekeeping task.",
+
+    "statuses": {
+      "pending": "Pending",
+
+      "assigned": "Assigned",
+
+      "inprogress": "In progress",
+
+      "completed": "Completed",
+
+      "cancelled": "Cancelled"
+    },
+
+    "priorities": {
+      "low": "Low",
+
+      "normal": "Normal",
+
+      "high": "High",
+
+      "urgent": "Urgent"
+    }
+  },
+
+  "roomInspections": {
+    "section": "Operations",
+    "title": "Room Inspections",
+    "description": "Review room quality, readiness records, and inspection outcomes.",
+    "create": "New inspection",
+    "createTitle": "Create room inspection",
+    "editTitle": "Edit room inspection",
+    "detailTitle": "Room inspection details",
+    "totalInspections": "Total inspections",
+    "openOnPage": "Open on this page",
+    "completedOnPage": "Completed on this page",
+    "cancelledOnPage": "Cancelled on this page",
+    "search": "Search",
+    "searchPlaceholder": "Reference or inspection title",
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "apply": "Apply",
+    "clear": "Clear",
+    "clearFilters": "Clear filters",
+    "reference": "Reference",
+    "inspection": "Inspection",
+    "inspectionTitle": "Inspection title",
+    "inspectionDate": "Inspection date",
+    "created": "Created",
+    "actions": "Actions",
+    "viewAction": "View room inspection",
+    "editAction": "Edit room inspection",
+    "deleteAction": "Delete room inspection",
+    "loading": "Loading room inspections...",
+    "loadingOne": "Loading room inspection...",
+    "loadFailed": "Unable to load room inspections.",
+    "loadOneFailed": "Unable to load room inspection.",
+    "tryAgain": "Please try again.",
+    "retry": "Retry",
+    "noResults": "No room inspections found",
+    "noResultsDescription": "Try changing or clearing the current filters.",
+    "noInspectionsYet": "No room inspections yet",
+    "noInspectionsYetDescription": "Create a room inspection record to get started.",
+    "notes": "Notes",
+    "noNotes": "No notes",
+    "relatedEntity": "Related entity",
+    "notAvailable": "Not available",
+    "saveChanges": "Save changes",
+    "showing": "Showing",
+    "previous": "Previous",
+    "next": "Next",
+    "of": "of",
+    "createSuccess": "Room inspection created successfully.",
+    "createFailed": "Unable to create room inspection.",
+    "updateSuccess": "Room inspection updated successfully.",
+    "updateFailed": "Unable to update room inspection.",
+    "statusSuccess": "Room inspection status updated successfully.",
+    "statusFailed": "Unable to update room inspection status.",
+    "deleteConfirm": "Delete this room inspection?",
+    "deleteSuccess": "Room inspection deleted successfully.",
+    "deleteFailed": "Unable to delete room inspection.",
+    "statuses": {
+      "open": "Open",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "inprogress": "In progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+
+  "maintenance": {
+    "section": "Operations",
+    "title": "Maintenance",
+    "description": "Track and complete hotel maintenance work orders.",
+    "newRequest": "New request",
+    "createTitle": "Create maintenance request",
+    "detailTitle": "Maintenance details",
+    "totalRequests": "Total requests",
+    "openRequests": "Open requests",
+    "inProgressRequests": "In progress",
+    "completedRequests": "Completed",
+    "search": "Search",
+    "searchPlaceholder": "Room, category, or issue",
+    "status": "Status",
+    "priority": "Priority",
+    "allStatuses": "All statuses",
+    "allPriorities": "All priorities",
+    "apply": "Apply",
+    "clear": "Clear",
+    "clearFilters": "Clear filters",
+    "issue": "Issue",
+    "room": "Room",
+    "category": "Category",
+    "descriptionLabel": "Description",
+    "assignee": "Assigned to",
+    "created": "Created",
+    "actions": "Actions",
+    "noRoom": "No room",
+    "unassigned": "Unassigned",
+    "viewAction": "View maintenance request",
+    "completeAction": "Complete maintenance request",
+    "loading": "Loading maintenance requests...",
+    "loadingOne": "Loading maintenance request...",
+    "loadFailed": "Unable to load maintenance requests.",
+    "loadOneFailed": "Unable to load maintenance request.",
+    "tryAgain": "Please try again.",
+    "retry": "Retry",
+    "noResults": "No maintenance requests found",
+    "noResultsDescription": "Try changing or clearing the current filters.",
+    "noRequestsYet": "No maintenance requests yet",
+    "noRequestsYetDescription": "Create a maintenance request when an issue needs attention.",
+    "showing": "Showing",
+    "previous": "Previous",
+    "next": "Next",
+    "of": "of",
+    "createSuccess": "Maintenance request created successfully.",
+    "createFailed": "Unable to create maintenance request.",
+    "completeSuccess": "Maintenance request completed successfully.",
+    "completeFailed": "Unable to complete maintenance request.",
+    "statuses": {
+      "open": "Open",
+      "assigned": "Assigned",
+      "inprogress": "In progress",
+      "onhold": "On hold",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
   }
 }

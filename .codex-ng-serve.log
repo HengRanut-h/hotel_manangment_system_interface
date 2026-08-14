@@ -713,3 +713,511 @@ Page reload sent to client(s).
 Application bundle generation complete. [0.003 seconds] - 2026-08-14T20:04:07.098Z
 
 Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-TCJINGJF.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m [36m91.67 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m    [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-VAS5XPKK.js[39m  [2m | [22m[2memployee-detail-page[22m  [2m | [22m [36m40.63 kB[39m[2m | [22m
+[32mchunk-C42V7DAA.js[39m  [2m | [22m[2memployee-edit-page[22m    [2m | [22m [36m19.61 kB[39m[2m | [22m
+[32mchunk-LTSJGLOK.js[39m  [2m | [22m[2memployee-create-page[22m  [2m | [22m [36m17.39 kB[39m[2m | [22m
+[32mchunk-YQAZMLNE.js[39m  [2m | [22m[2madministration-routes[22m [2m | [22m  [36m3.93 kB[39m[2m | [22m
+[32mchunk-NDGZ7JZ4.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-JOP265OT.js[39m  [2m | [22m[2mleave-requests-routes[22m [2m | [22m  [36m1.26 kB[39m[2m | [22m
+[32mchunk-5NKXPARJ.js[39m  [2m | [22m[2mpositions-routes[22m      [2m | [22m  [36m1.21 kB[39m[2m | [22m
+[32mchunk-S3LCMHYI.js[39m  [2m | [22m[2memployees-routes[22m      [2m | [22m  [36m1.21 kB[39m[2m | [22m
+[32mchunk-Z4KHRCGF.js[39m  [2m | [22m[2mshifts-routes[22m         [2m | [22m  [36m1.18 kB[39m[2m | [22m
+[32mchunk-OC5JW4XG.js[39m  [2m | [22m[2mhr-routes[22m             [2m | [22m[36m858 bytes[39m[2m | [22m
+[32mchunk-MWIRYQMA.js[39m  [2m | [22m[2mroles-routes[22m          [2m | [22m[36m823 bytes[39m[2m | [22m
+[32mchunk-GWBNP46X.js[39m  [2m | [22m[2mguest-routes[22m          [2m | [22m[36m551 bytes[39m[2m | [22m
+[32mchunk-7YN6PGVA.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.579 seconds] - 2026-08-14T20:15:36.082Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-TCJINGJF.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m [36m91.67 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.003 seconds] - 2026-08-14T20:16:10.938Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-D6MPAMFQ.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m [36m91.60 kB[39m[2m | [22m
+[32mchunk-YW6OMROK.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-EWFURCEG.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.418 seconds] - 2026-08-14T20:16:29.199Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.462 seconds] - 2026-08-14T20:27:45.631Z
+
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-SLGKO2OM.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m[36m103.45 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.396 seconds] - 2026-08-14T20:28:07.837Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-7V35UUCN.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m103.52 kB[39m[2m | [22m
+[32mchunk-GN4NIING.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-7J6MS5HE.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.383 seconds] - 2026-08-14T20:28:18.327Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-6AY6LYKF.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m104.76 kB[39m[2m | [22m
+[32mchunk-T7AY7VSF.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-5424YLPS.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.352 seconds] - 2026-08-14T20:28:26.334Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-HMCY7Q5I.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m110.46 kB[39m[2m | [22m
+[32mchunk-5W3Q5ZSP.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-MIKKYZCG.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.398 seconds] - 2026-08-14T20:28:52.172Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-HMCY7Q5I.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m[36m110.46 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.003 seconds] - 2026-08-14T20:28:57.040Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-HMCY7Q5I.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m[36m110.46 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.004 seconds] - 2026-08-14T20:29:03.400Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-BW6XZGM7.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m111.26 kB[39m[2m | [22m
+[32mchunk-GLLQCUWJ.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-TR5AKGJ6.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.460 seconds] - 2026-08-14T20:34:35.112Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-77WYPJOJ.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m118.14 kB[39m[2m | [22m
+[32mchunk-QJOGTHXP.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-KJ24ZKVK.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.406 seconds] - 2026-08-14T20:34:57.174Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-VWMKFW4J.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m127.34 kB[39m[2m | [22m
+[32mchunk-7BKU2ZMV.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.46 kB[39m[2m | [22m
+[32mchunk-TZA6OR6U.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.437 seconds] - 2026-08-14T20:35:41.798Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-VWMKFW4J.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m[36m127.34 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.003 seconds] - 2026-08-14T20:35:49.295Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                   [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                 [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                      [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                      [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m          [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                  [2m | [22m [1mRaw size[22m
+[32mchunk-VWMKFW4J.js[39m  [2m | [22m[2mhousekeeping-list-page[22m [2m | [22m[36m127.34 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m[2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m[2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m        [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m   [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m   [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m     [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m     [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m        [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m         [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m     [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m        [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m   [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m      [2m | [22m [36m73.48 kB[39m[2m | [22m
+[32mchunk-JACF5MFR.js[39m  [2m | [22m[2mbranch-list-page[22m       [2m | [22m [36m73.19 kB[39m[2m | [22m
+[2m...and 140 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.004 seconds] - 2026-08-14T20:35:57.076Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-5IWZK75K.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m127.36 kB[39m[2m | [22m
+[32mchunk-5RTO5GBE.js[39m  [2m | [22m[2mrole-permissions-page[22m    [2m | [22m [36m45.27 kB[39m[2m | [22m
+[32mchunk-VKKVKA6C.js[39m  [2m | [22m[2madministration-routes[22m    [2m | [22m  [36m3.93 kB[39m[2m | [22m
+[32mchunk-4QX5Y2HQ.js[39m  [2m | [22m[2moperations-routes[22m        [2m | [22m  [36m1.55 kB[39m[2m | [22m
+[32mchunk-XROY4EK5.js[39m  [2m | [22m[2mdepartments-routes[22m       [2m | [22m  [36m1.24 kB[39m[2m | [22m
+[32mchunk-YADQJOQ4.js[39m  [2m | [22m[2mattendance-routes[22m        [2m | [22m  [36m1.23 kB[39m[2m | [22m
+[32mchunk-2PSMRJLW.js[39m  [2m | [22m[2memployees-routes[22m         [2m | [22m  [36m1.21 kB[39m[2m | [22m
+[32mchunk-XK2WRV7H.js[39m  [2m | [22m[2mshifts-routes[22m            [2m | [22m  [36m1.18 kB[39m[2m | [22m
+[32mchunk-ETERP3OA.js[39m  [2m | [22m[2mhr-routes[22m                [2m | [22m[36m858 bytes[39m[2m | [22m
+[32mchunk-IUI5Y5AM.js[39m  [2m | [22m[2mroles-routes[22m             [2m | [22m[36m823 bytes[39m[2m | [22m
+[32mchunk-4IWWEOM2.js[39m  [2m | [22m[2mpermissions-routes[22m       [2m | [22m[36m608 bytes[39m[2m | [22m
+[32mchunk-XPJIERO5.js[39m  [2m | [22m[2mroom-inspections-routes[22m  [2m | [22m[36m569 bytes[39m[2m | [22m
+[32mchunk-KTAKK3PR.js[39m  [2m | [22m[2mguest-routes[22m             [2m | [22m[36m551 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.534 seconds] - 2026-08-14T20:44:32.072Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+[32mchunk-WENIWTOD.js[39m  [2m | [22m[2m-[22m                        [2m | [22m  [36m9.59 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                   [2m | [22m  [36m3.19 kB[39m[2m | [22m
+[32mchunk-2NIEGNM2.js[39m  [2m | [22m[2m-[22m                        [2m | [22m  [36m1.25 kB[39m[2m | [22m
+[32mchunk-VUJOFXKG.js[39m  [2m | [22m[2m-[22m                        [2m | [22m[36m938 bytes[39m[2m | [22m
+[32mchunk-CY6IU5AO.js[39m  [2m | [22m[2m-[22m                        [2m | [22m[36m700 bytes[39m[2m | [22m
+[32mchunk-UD4WAX7Z.js[39m  [2m | [22m[2m-[22m                        [2m | [22m[36m509 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m            [2m | [22m [1m37.23 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-5IWZK75K.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m127.36 kB[39m[2m | [22m
+[32mchunk-VWMKFW4J.js[39m  [2m | [22m[2mhousekeeping-list-page[22m   [2m | [22m[36m127.34 kB[39m[2m | [22m
+[32mchunk-AZVOL3L3.js[39m  [2m | [22m[2mresource-page-component[22m  [2m | [22m [36m92.57 kB[39m[2m | [22m
+[32mchunk-UQURJYX6.js[39m  [2m | [22m[2mleave-request-list-page[22m  [2m | [22m [36m82.42 kB[39m[2m | [22m
+[32mchunk-CLAOIXFQ.js[39m  [2m | [22m[2mhotel-list-page[22m          [2m | [22m [36m80.40 kB[39m[2m | [22m
+[32mchunk-VNCAXBQD.js[39m  [2m | [22m[2mattendance-list-page[22m     [2m | [22m [36m78.60 kB[39m[2m | [22m
+[32mchunk-MXX7KDVG.js[39m  [2m | [22m[2mdepartment-list-page[22m     [2m | [22m [36m77.70 kB[39m[2m | [22m
+[32mchunk-BNX7MKNB.js[39m  [2m | [22m[2memployee-list-page[22m       [2m | [22m [36m77.52 kB[39m[2m | [22m
+[32mchunk-FCAAQ2WH.js[39m  [2m | [22m[2mposition-list-page[22m       [2m | [22m [36m77.19 kB[39m[2m | [22m
+[32mchunk-HXDAYOME.js[39m  [2m | [22m[2mshift-list-page[22m          [2m | [22m [36m76.29 kB[39m[2m | [22m
+[32mchunk-B6OB44WD.js[39m  [2m | [22m[2mrate-list-page[22m           [2m | [22m [36m75.11 kB[39m[2m | [22m
+[32mchunk-SZLHTNAT.js[39m  [2m | [22m[2mbuilding-list-page[22m       [2m | [22m [36m74.20 kB[39m[2m | [22m
+[32mchunk-F257Q44W.js[39m  [2m | [22m[2mfloor-list-page[22m          [2m | [22m [36m73.78 kB[39m[2m | [22m
+[32mchunk-GNKRNLP7.js[39m  [2m | [22m[2mapp-layout-component[22m     [2m | [22m [36m73.69 kB[39m[2m | [22m
+[32mchunk-TA6MEGCT.js[39m  [2m | [22m[2mamenity-list-page[22m        [2m | [22m [36m73.48 kB[39m[2m | [22m
+[2m...and 142 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.004 seconds] - 2026-08-14T20:45:18.483Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-6FSDTTWG.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m127.39 kB[39m[2m | [22m
+[32mchunk-WINDBLV6.js[39m  [2m | [22m[2moperations-routes[22m        [2m | [22m  [36m1.55 kB[39m[2m | [22m
+[32mchunk-UNJCI4M3.js[39m  [2m | [22m[2mroom-inspections-routes[22m  [2m | [22m[36m569 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.475 seconds] - 2026-08-14T20:49:26.197Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-L2IOPBJB.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m129.71 kB[39m[2m | [22m
+[32mchunk-CEX34QFX.js[39m  [2m | [22m[2moperations-routes[22m        [2m | [22m  [36m1.55 kB[39m[2m | [22m
+[32mchunk-6A56OZLK.js[39m  [2m | [22m[2mroom-inspections-routes[22m  [2m | [22m[36m569 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.387 seconds] - 2026-08-14T20:49:40.292Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-5JUC5XM2.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m130.84 kB[39m[2m | [22m
+[32mchunk-3E7JFPXF.js[39m  [2m | [22m[2mhousekeeping-list-page[22m   [2m | [22m[36m128.48 kB[39m[2m | [22m
+[32mchunk-WWZLRS4X.js[39m  [2m | [22m[2mleave-request-list-page[22m  [2m | [22m [36m83.56 kB[39m[2m | [22m
+[32mchunk-THVBKKD5.js[39m  [2m | [22m[2mhotel-list-page[22m          [2m | [22m [36m81.54 kB[39m[2m | [22m
+[32mchunk-H52YMRST.js[39m  [2m | [22m[2mattendance-list-page[22m     [2m | [22m [36m79.74 kB[39m[2m | [22m
+[32mchunk-SKC5HOUQ.js[39m  [2m | [22m[2mdepartment-list-page[22m     [2m | [22m [36m78.84 kB[39m[2m | [22m
+[32mchunk-NODRL537.js[39m  [2m | [22m[2memployee-list-page[22m       [2m | [22m [36m78.66 kB[39m[2m | [22m
+[32mchunk-FBG2APKR.js[39m  [2m | [22m[2mposition-list-page[22m       [2m | [22m [36m78.33 kB[39m[2m | [22m
+[32mchunk-CQ53NDG2.js[39m  [2m | [22m[2mshift-list-page[22m          [2m | [22m [36m77.43 kB[39m[2m | [22m
+[32mchunk-BUYQD6GV.js[39m  [2m | [22m[2mrate-list-page[22m           [2m | [22m [36m76.25 kB[39m[2m | [22m
+[32mchunk-LZMO4EXU.js[39m  [2m | [22m[2mbuilding-list-page[22m       [2m | [22m [36m75.34 kB[39m[2m | [22m
+[32mchunk-JAARYH4P.js[39m  [2m | [22m[2mfloor-list-page[22m          [2m | [22m [36m74.91 kB[39m[2m | [22m
+[32mchunk-NXXUC5LS.js[39m  [2m | [22m[2mamenity-list-page[22m        [2m | [22m [36m74.61 kB[39m[2m | [22m
+[32mchunk-QGVQZCAN.js[39m  [2m | [22m[2mbranch-list-page[22m         [2m | [22m [36m74.33 kB[39m[2m | [22m
+[32mchunk-KJALBARW.js[39m  [2m | [22m[2mroom-type-list-page[22m      [2m | [22m [36m68.71 kB[39m[2m | [22m
+[2m...and 20 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [1.845 seconds] - 2026-08-14T21:07:11.614Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                  [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw size[22m
+[32mchunk-J76N52TM.js[39m  [2m | [22m[2mhousekeeping-list-page[22m[2m | [22m[36m128.53 kB[39m[2m | [22m
+[32mchunk-HPHBTB2S.js[39m  [2m | [22m[2moperations-routes[22m     [2m | [22m  [36m1.55 kB[39m[2m | [22m
+[32mchunk-LWGXQGBF.js[39m  [2m | [22m[2mhousekeeping-routes[22m   [2m | [22m[36m549 bytes[39m[2m | [22m
+
+Application bundle generation complete. [0.411 seconds] - 2026-08-14T21:07:17.563Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                     [2m | [22m [36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                    [2m | [22m [1mRaw size[22m
+[32mchunk-QKIZVHMH.js[39m  [2m | [22m[2mroom-inspection-list-page[22m[2m | [22m[36m130.88 kB[39m[2m | [22m
+[32mchunk-LK24ZOEE.js[39m  [2m | [22m[2mhousekeeping-list-page[22m   [2m | [22m[36m128.57 kB[39m[2m | [22m
+[32mchunk-G44YB6QQ.js[39m  [2m | [22m[2mleave-request-list-page[22m  [2m | [22m [36m83.59 kB[39m[2m | [22m
+[32mchunk-MDSIMBW6.js[39m  [2m | [22m[2mhotel-list-page[22m          [2m | [22m [36m81.57 kB[39m[2m | [22m
+[32mchunk-B2HKYPZL.js[39m  [2m | [22m[2mattendance-list-page[22m     [2m | [22m [36m79.78 kB[39m[2m | [22m
+[32mchunk-5P5XUQDB.js[39m  [2m | [22m[2mdepartment-list-page[22m     [2m | [22m [36m78.87 kB[39m[2m | [22m
+[32mchunk-53FNCNYX.js[39m  [2m | [22m[2memployee-list-page[22m       [2m | [22m [36m78.70 kB[39m[2m | [22m
+[32mchunk-NX2B4UGO.js[39m  [2m | [22m[2mposition-list-page[22m       [2m | [22m [36m78.37 kB[39m[2m | [22m
+[32mchunk-I4FYC6VT.js[39m  [2m | [22m[2mshift-list-page[22m          [2m | [22m [36m77.47 kB[39m[2m | [22m
+[32mchunk-33V6TIXV.js[39m  [2m | [22m[2mrate-list-page[22m           [2m | [22m [36m76.28 kB[39m[2m | [22m
+[32mchunk-JZTHFHVD.js[39m  [2m | [22m[2mbuilding-list-page[22m       [2m | [22m [36m75.38 kB[39m[2m | [22m
+[32mchunk-O2VZINYO.js[39m  [2m | [22m[2mfloor-list-page[22m          [2m | [22m [36m74.95 kB[39m[2m | [22m
+[32mchunk-RWA27HCJ.js[39m  [2m | [22m[2mamenity-list-page[22m        [2m | [22m [36m74.65 kB[39m[2m | [22m
+[32mchunk-566OJCM3.js[39m  [2m | [22m[2mbranch-list-page[22m         [2m | [22m [36m74.36 kB[39m[2m | [22m
+[32mchunk-D7BKUJ4Q.js[39m  [2m | [22m[2mroom-type-list-page[22m      [2m | [22m [36m68.74 kB[39m[2m | [22m
+[2m...and 92 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.452 seconds] - 2026-08-14T21:07:27.837Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                [2m | [22m[1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                 [2m | [22m[36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                [2m | [22m[1mRaw size[22m
+[32mchunk-XVR7ER4F.js[39m  [2m | [22m[2musers-page[22m           [2m | [22m[36m38.49 kB[39m[2m | [22m
+[32mchunk-WAXZL3YI.js[39m  [2m | [22m[2madministration-routes[22m[2m | [22m [36m3.93 kB[39m[2m | [22m
+
+Application bundle generation complete. [0.319 seconds] - 2026-08-14T21:07:50.865Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                [2m | [22m[1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                 [2m | [22m[36m21.05 kB[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                [2m | [22m[1mRaw size[22m
+[32mchunk-LBV6KKQN.js[39m  [2m | [22m[2musers-page[22m           [2m | [22m[36m40.29 kB[39m[2m | [22m
+[32mchunk-W3KMFR5M.js[39m  [2m | [22m[2madministration-routes[22m[2m | [22m [36m3.93 kB[39m[2m | [22m
+
+Application bundle generation complete. [0.338 seconds] - 2026-08-14T21:08:47.795Z
+
+Component update sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.255 seconds] - 2026-08-14T21:19:28.182Z
+
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.002 seconds] - 2026-08-14T21:22:36.355Z
+
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [0.001 seconds] - 2026-08-14T21:22:59.216Z
+

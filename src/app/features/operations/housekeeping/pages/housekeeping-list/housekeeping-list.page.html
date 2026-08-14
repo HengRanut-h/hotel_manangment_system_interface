@@ -1,0 +1,591 @@
+<section class="page-shell">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'housekeeping.section' | translate }}
+      </p>
+      <h1>
+        {{ 'housekeeping.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'housekeeping.description' | translate }}
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>
+          {{ 'common.refresh' | translate }}
+        </span>
+      </button>
+
+      @if (auth.hasPermission('housekeeping.manage')) {
+        <button
+          type="button"
+          class="primary-button"
+          (click)="openCreate()">
+          <svg lucideCirclePlus></svg>
+          <span>
+            {{ 'housekeeping.create' | translate }}
+          </span>
+        </button>
+      }
+    </div>
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideSparkles></svg>
+      </span>
+      <span>
+        <strong>
+          {{ filteredRows().length }}
+        </strong>
+        <span>
+          {{ 'housekeeping.totalTasks' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--info">
+        <svg lucideClock></svg>
+      </span>
+      <span>
+        <strong>
+          {{ openOnPage() }}
+        </strong>
+        <span>
+          {{ 'housekeeping.openOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--success">
+        <svg lucideCheck></svg>
+      </span>
+      <span>
+        <strong>
+          {{ completedOnPage() }}
+        </strong>
+        <span>
+          {{ 'housekeeping.completedOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--warning">
+        <svg lucideUserRound></svg>
+      </span>
+      <span>
+        <strong>
+          {{ unassignedOnPage() }}
+        </strong>
+        <span>
+          {{ 'housekeeping.unassignedOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div class="filter-field">
+      <label for="housekeepingSearch">
+        {{ 'housekeeping.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="housekeepingSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="'housekeeping.searchPlaceholder' | translate"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event); pageNumber.set(1)" />
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="housekeepingStatus">
+        {{ 'housekeeping.status' | translate }}
+      </label>
+      <select
+        id="housekeepingStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event); pageNumber.set(1)">
+        <option value="">
+          {{ 'housekeeping.allStatuses' | translate }}
+        </option>
+        @for (item of statuses; track item) {
+          <option [value]="item">
+            {{ statusLabel(item) }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="housekeepingPriority">
+        {{ 'housekeeping.priority' | translate }}
+      </label>
+      <select
+        id="housekeepingPriority"
+        [ngModel]="priority()"
+        (ngModelChange)="priority.set($event); pageNumber.set(1)">
+        <option value="">
+          {{ 'housekeeping.allPriorities' | translate }}
+        </option>
+        @for (item of priorities; track item) {
+          <option [value]="item">
+            {{ priorityLabel(item) }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <button
+      type="button"
+      class="secondary-button filter-clear"
+      (click)="clearFilters()">
+      <svg lucideRotateCcw></svg>
+      <span>
+        {{ 'housekeeping.clear' | translate }}
+      </span>
+    </button>
+  </section>
+
+  <section
+    class="view-switch"
+    [attr.aria-label]="'housekeeping.viewMode' | translate">
+    <button
+      type="button"
+      class="view-switch__button"
+      [class.view-switch__button--active]="viewMode() === 'board'"
+      (click)="viewMode.set('board')">
+      <svg lucideLayoutGrid></svg>
+      <span>
+        {{ 'housekeeping.boardView' | translate }}
+      </span>
+    </button>
+    <button
+      type="button"
+      class="view-switch__button"
+      [class.view-switch__button--active]="viewMode() === 'list'"
+      (click)="viewMode.set('list')">
+      <svg lucideList></svg>
+      <span>
+        {{ 'housekeeping.listView' | translate }}
+      </span>
+    </button>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-row">
+        <app-spin
+          size="small"
+          [label]="'housekeeping.loading' | translate" />
+      </div>
+    } @else if (error()) {
+      <div class="alert-card alert-card--error">
+        <span class="alert-card__icon">
+          <svg lucideCircleAlert></svg>
+        </span>
+        <div class="alert-card__content">
+          <strong>
+            {{ 'housekeeping.loadFailed' | translate }}
+          </strong>
+          <span>
+            {{ 'housekeeping.tryAgain' | translate }}
+          </span>
+        </div>
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="load()">
+          {{ 'housekeeping.retry' | translate }}
+        </button>
+      </div>
+    } @else if (!pagedRows().length) {
+      <div class="empty-state">
+        <span class="empty-state__icon">
+          <svg lucideSparkles></svg>
+        </span>
+        <strong>
+          {{
+            hasActiveFilters()
+              ? ('housekeeping.noTasksFiltered' | translate)
+              : ('housekeeping.noTasksYet' | translate)
+          }}
+        </strong>
+        <span>
+          {{
+            hasActiveFilters()
+              ? ('housekeeping.noTasksFilteredDescription' | translate)
+              : ('housekeeping.noTasksYetDescription' | translate)
+          }}
+        </span>
+        <div class="empty-state__actions">
+          @if (hasActiveFilters()) {
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="clearFilters()">
+              <svg lucideRotateCcw></svg>
+              <span>
+                {{ 'housekeeping.clearFilters' | translate }}
+              </span>
+            </button>
+          }
+
+          @if (auth.hasPermission('housekeeping.manage')) {
+            <button
+              type="button"
+              class="primary-button"
+              (click)="openCreate()">
+              <svg lucideCirclePlus></svg>
+              <span>
+                {{ 'housekeeping.create' | translate }}
+              </span>
+            </button>
+          }
+        </div>
+      </div>
+    } @else if (viewMode() === 'board') {
+      <div class="board-grid">
+        @for (row of pagedRows(); track row.id) {
+          <article class="task-card">
+            <header class="task-card__header">
+              <div>
+                <span class="task-card__eyebrow">
+                  {{ 'housekeeping.roomPrefix' | translate }}
+                </span>
+                <strong>
+                  {{ row.roomNumber }}
+                </strong>
+              </div>
+              <span [class]="statusClass(row.status)">
+                {{ statusLabel(row.status) }}
+              </span>
+            </header>
+
+            <div class="task-card__body">
+              <strong>
+                {{ row.taskType }}
+              </strong>
+              <dl class="task-card__meta">
+                <div>
+                  <dt>
+                    {{ 'housekeeping.priority' | translate }}
+                  </dt>
+                  <dd>
+                    {{ priorityLabel(row.priority) }}
+                  </dd>
+                </div>
+                <div>
+                  <dt>
+                    {{ 'housekeeping.assignee' | translate }}
+                  </dt>
+                  <dd class="id-value">
+                    {{ row.assignedUserId || ('housekeeping.unassigned' | translate) }}
+                  </dd>
+                </div>
+                <div>
+                  <dt>
+                    {{ 'housekeeping.created' | translate }}
+                  </dt>
+                  <dd>
+                    {{ row.createdAtUtc | date:'medium' }}
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <footer class="task-card__actions">
+              <button
+                type="button"
+                class="secondary-button"
+                (click)="view(row)">
+                <svg lucideEye></svg>
+                <span>
+                  {{ 'housekeeping.view' | translate }}
+                </span>
+              </button>
+
+              @if (canComplete(row)) {
+                <button
+                  type="button"
+                  class="primary-button primary-button--success"
+                  [disabled]="mutatingId() === row.id"
+                  (click)="complete(row)">
+                  <svg lucideCheck></svg>
+                  <span>
+                    {{ 'housekeeping.complete' | translate }}
+                  </span>
+                </button>
+              }
+            </footer>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'housekeeping.room' | translate }}
+              </th>
+              <th>
+                {{ 'housekeeping.taskType' | translate }}
+              </th>
+              <th>
+                {{ 'housekeeping.priority' | translate }}
+              </th>
+              <th>
+                {{ 'housekeeping.status' | translate }}
+              </th>
+              <th>
+                {{ 'housekeeping.assignee' | translate }}
+              </th>
+              <th>
+                {{ 'housekeeping.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'housekeeping.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of pagedRows(); track row.id) {
+              <tr>
+                <td>
+                  <strong>
+                    {{ 'housekeeping.roomPrefix' | translate }}
+                    {{ row.roomNumber }}
+                  </strong>
+                </td>
+                <td>
+                  {{ row.taskType }}
+                </td>
+                <td>
+                  {{ priorityLabel(row.priority) }}
+                </td>
+                <td>
+                  <span [class]="statusClass(row.status)">
+                    {{ statusLabel(row.status) }}
+                  </span>
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{ row.assignedUserId || ('housekeeping.unassigned' | translate) }}
+                  </span>
+                </td>
+                <td>
+                  {{ row.createdAtUtc | date:'medium' }}
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="icon-action icon-action--view"
+                      [title]="'housekeeping.viewAction' | translate"
+                      [attr.aria-label]="'housekeeping.viewAction' | translate"
+                      (click)="view(row)">
+                      <svg lucideEye></svg>
+                    </button>
+
+                    @if (
+                      canComplete(row)
+                    ) {
+                        <button
+                          type="button"
+                          class="icon-action icon-action--success"
+                          [disabled]="mutatingId() === row.id"
+                          [title]="'housekeeping.completeAction' | translate"
+                          [attr.aria-label]="'housekeeping.completeAction' | translate"
+                        (click)="complete(row)">
+                        <svg lucideCheck></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+
+  @if (filteredRows().length) {
+    <footer class="pagination">
+      <span class="pagination__summary">
+        {{ 'housekeeping.showing' | translate }}
+        <strong>{{ firstResultNumber() }}</strong>
+        -
+        <strong>{{ lastResultNumber() }}</strong>
+        {{ 'housekeeping.of' | translate }}
+        <strong>{{ filteredRows().length }}</strong>
+      </span>
+      <div class="pagination__controls">
+      <button
+        type="button"
+        class="pagination-button"
+        [disabled]="pageNumber() <= 1"
+        [title]="'housekeeping.previous' | translate"
+        [attr.aria-label]="'housekeeping.previous' | translate"
+        (click)="previousPage()">
+        <svg lucideChevronLeft></svg>
+      </button>
+      <span class="pagination__page">
+        <strong>{{ pageNumber() }}</strong>
+        /
+        <strong>{{ totalPages() }}</strong>
+      </span>
+      <button
+        type="button"
+        class="pagination-button"
+        [disabled]="pageNumber() >= totalPages()"
+        [title]="'housekeeping.next' | translate"
+        [attr.aria-label]="'housekeeping.next' | translate"
+        (click)="nextPage()">
+        <svg lucideChevronRight></svg>
+      </button>
+      </div>
+    </footer>
+  }
+</section>
+
+<app-modal
+  [open]="modalOpen()"
+  [title]="'housekeeping.createTitle' | translate"
+  (closed)="modalOpen.set(false)">
+  <form
+    class="housekeeping-form"
+    (ngSubmit)="save()">
+    @if (roomsLoading()) {
+      <app-spin
+        size="small"
+        [label]="'housekeeping.loadingRooms' | translate" />
+    } @else if (roomLoadError()) {
+      <div class="state-row state-row--error">
+        {{ roomLoadError() }}
+      </div>
+    }
+
+    <label>
+      <span>
+        {{ 'housekeeping.room' | translate }}
+      </span>
+      <select
+        name="roomId"
+        required
+        [(ngModel)]="roomId">
+        <option value="">
+          {{ 'housekeeping.selectRoom' | translate }}
+        </option>
+        @for (room of rooms(); track room.id) {
+          <option [value]="room.id">
+            {{ 'housekeeping.roomPrefix' | translate }}
+            {{ room.roomNumber }}
+          </option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>
+        {{ 'housekeeping.taskType' | translate }}
+      </span>
+      <input
+        name="taskType"
+        required
+        maxlength="100"
+        [(ngModel)]="taskType" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'housekeeping.priority' | translate }}
+      </span>
+      <select
+        name="priority"
+        [(ngModel)]="formPriority">
+        @for (item of priorities; track item) {
+          <option [value]="item">
+            {{ priorityLabel(item) }}
+          </option>
+        }
+      </select>
+    </label>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="saving()"
+        (click)="modalOpen.set(false)">
+        {{ 'common.cancel' | translate }}
+      </button>
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="saving() || !roomId || !taskType.trim()">
+        {{ 'housekeeping.create' | translate }}
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal
+  [open]="detailOpen()"
+  [title]="'housekeeping.detail' | translate"
+  (closed)="detailOpen.set(false)">
+  @if (detailLoading()) {
+    <app-spin
+      size="small"
+      [label]="'housekeeping.loadingOne' | translate" />
+  } @else if (detail(); as item) {
+    <dl class="detail-grid">
+      <div>
+        <dt>{{ 'housekeeping.room' | translate }}</dt>
+        <dd>
+          {{ 'housekeeping.roomPrefix' | translate }}
+          {{ item.roomNumber }}
+        </dd>
+      </div>
+      <div>
+        <dt>{{ 'housekeeping.taskType' | translate }}</dt>
+        <dd>{{ item.taskType }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'housekeeping.priority' | translate }}</dt>
+        <dd>{{ priorityLabel(item.priority) }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'housekeeping.status' | translate }}</dt>
+        <dd>
+          <span [class]="statusClass(item.status)">
+            {{ statusLabel(item.status) }}
+          </span>
+        </dd>
+      </div>
+      <div>
+        <dt>{{ 'housekeeping.assignee' | translate }}</dt>
+        <dd>{{ item.assignedUserId || ('housekeeping.unassigned' | translate) }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'housekeeping.created' | translate }}</dt>
+        <dd>{{ item.createdAtUtc | date:'medium' }}</dd>
+      </div>
+    </dl>
+  }
+</app-modal>

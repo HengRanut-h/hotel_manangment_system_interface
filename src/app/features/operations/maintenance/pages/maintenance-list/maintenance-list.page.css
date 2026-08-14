@@ -1,0 +1,134 @@
+@import "../../../housekeeping/pages/housekeeping-list/housekeeping-list.page.css";
+
+.filters {
+  grid-template-columns:
+    minmax(260px, 1.5fr)
+    minmax(170px, 1fr)
+    minmax(170px, 1fr)
+    auto;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}
+
+.filter-button {
+  min-height: 48px;
+}
+
+.summary-icon--warning {
+  color: #b54708;
+  background: #fffaeb;
+}
+
+.issue-title {
+  display: block;
+  color: #111827;
+  font-size: 13px;
+}
+
+.issue-description {
+  display: block;
+  max-width: 420px;
+  margin-top: 4px;
+  overflow: hidden;
+  color: #6b7280;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-code {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: #f2f4f7;
+  color: #344054;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.priority-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.priority-pill--low {
+  color: #475467;
+  border-color: #d0d5dd;
+  background: #f9fafb;
+}
+
+.priority-pill--normal {
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+
+.priority-pill--high {
+  color: #b54708;
+  border-color: #fedf89;
+  background: #fffaeb;
+}
+
+.priority-pill--urgent {
+  color: #dc2626;
+  border-color: #fecaca;
+  background: #fff5f5;
+}
+
+.maintenance-form {
+  display: grid;
+  gap: 16px;
+}
+
+.maintenance-form label {
+  display: grid;
+  gap: 7px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.maintenance-form input,
+.maintenance-form select,
+.maintenance-form textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #ffffff;
+  color: #111827;
+  font: inherit;
+  font-weight: 500;
+}
+
+.maintenance-form textarea {
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.detail-grid__wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

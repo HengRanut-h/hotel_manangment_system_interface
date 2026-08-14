@@ -1,0 +1,516 @@
+<section class="page-shell">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'roomInspections.section' | translate }}
+      </p>
+      <h1>
+        {{ 'roomInspections.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'roomInspections.description' | translate }}
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>
+          {{ 'common.refresh' | translate }}
+        </span>
+      </button>
+
+      @if (auth.hasPermission('room-inspections.create')) {
+        <button
+          type="button"
+          class="primary-button"
+          (click)="openCreate()">
+          <svg lucideCirclePlus></svg>
+          <span>
+            {{ 'roomInspections.create' | translate }}
+          </span>
+        </button>
+      }
+    </div>
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideClipboardCheck></svg>
+      </span>
+      <span>
+        <strong>
+          {{ pagination().totalItems }}
+        </strong>
+        <span>
+          {{ 'roomInspections.totalInspections' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--info">
+        <svg lucideClipboardCheck></svg>
+      </span>
+      <span>
+        <strong>
+          {{ openOnPage() }}
+        </strong>
+        <span>
+          {{ 'roomInspections.openOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--success">
+        <svg lucideCheck></svg>
+      </span>
+      <span>
+        <strong>
+          {{ completedOnPage() }}
+        </strong>
+        <span>
+          {{ 'roomInspections.completedOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--danger">
+        <svg lucideCircleX></svg>
+      </span>
+      <span>
+        <strong>
+          {{ cancelledOnPage() }}
+        </strong>
+        <span>
+          {{ 'roomInspections.cancelledOnPage' | translate }}
+        </span>
+      </span>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div class="filter-field">
+      <label for="inspectionSearch">
+        {{ 'roomInspections.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="inspectionSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="'roomInspections.searchPlaceholder' | translate"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)" />
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="inspectionStatus">
+        {{ 'roomInspections.status' | translate }}
+      </label>
+      <select
+        id="inspectionStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="">
+          {{ 'roomInspections.allStatuses' | translate }}
+        </option>
+        @for (item of statuses; track item) {
+          <option [value]="item">
+            {{ statusLabel(item) }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="secondary-button filter-button"
+        (click)="applyFilters()">
+        <svg lucideSearch></svg>
+        <span>
+          {{ 'roomInspections.apply' | translate }}
+        </span>
+      </button>
+      <button
+        type="button"
+        class="secondary-button filter-button"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>
+          {{ 'roomInspections.clear' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-row">
+        <app-spin
+          size="small"
+          [label]="'roomInspections.loading' | translate" />
+      </div>
+    } @else if (error()) {
+      <div class="alert-card alert-card--error">
+        <span class="alert-card__icon">
+          <svg lucideCircleAlert></svg>
+        </span>
+        <div class="alert-card__content">
+          <strong>
+            {{ 'roomInspections.loadFailed' | translate }}
+          </strong>
+          <span>
+            {{ 'roomInspections.tryAgain' | translate }}
+          </span>
+        </div>
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="load()">
+          {{ 'roomInspections.retry' | translate }}
+        </button>
+      </div>
+    } @else if (!rows().length) {
+      <div class="empty-state">
+        <span class="empty-state__icon">
+          <svg lucideClipboardCheck></svg>
+        </span>
+        <strong>
+          {{
+            hasActiveFilters()
+              ? ('roomInspections.noResults' | translate)
+              : ('roomInspections.noInspectionsYet' | translate)
+          }}
+        </strong>
+        <span>
+          {{
+            hasActiveFilters()
+              ? ('roomInspections.noResultsDescription' | translate)
+              : ('roomInspections.noInspectionsYetDescription' | translate)
+          }}
+        </span>
+        <div class="empty-state__actions">
+          @if (hasActiveFilters()) {
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="clearFilters()">
+              <svg lucideRotateCcw></svg>
+              <span>
+                {{ 'roomInspections.clearFilters' | translate }}
+              </span>
+            </button>
+          }
+
+          @if (auth.hasPermission('room-inspections.create')) {
+            <button
+              type="button"
+              class="primary-button"
+              (click)="openCreate()">
+              <svg lucideCirclePlus></svg>
+              <span>
+                {{ 'roomInspections.create' | translate }}
+              </span>
+            </button>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'roomInspections.reference' | translate }}
+              </th>
+              <th>
+                {{ 'roomInspections.inspection' | translate }}
+              </th>
+              <th>
+                {{ 'roomInspections.status' | translate }}
+              </th>
+              <th>
+                {{ 'roomInspections.inspectionDate' | translate }}
+              </th>
+              <th>
+                {{ 'roomInspections.created' | translate }}
+              </th>
+              <th class="actions-column">
+                {{ 'roomInspections.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of rows(); track row.id) {
+              <tr>
+                <td>
+                  <span class="reference-code">
+                    {{ row.referenceNumber }}
+                  </span>
+                </td>
+                <td>
+                  <strong class="inspection-title">
+                    {{ row.title }}
+                  </strong>
+                  @if (row.notes) {
+                    <span class="inspection-note">
+                      {{ row.notes }}
+                    </span>
+                  }
+                </td>
+                <td>
+                  @if (auth.hasPermission('room-inspections.manage')) {
+                    <select
+                      class="status-select"
+                      [disabled]="mutatingId() === row.id"
+                      [ngModel]="row.status"
+                      (ngModelChange)="changeStatus(row, $event)">
+                      @for (item of statuses; track item) {
+                        <option [value]="item">
+                          {{ statusLabel(item) }}
+                        </option>
+                      }
+                    </select>
+                  } @else {
+                    <span [class]="statusClass(row.status)">
+                      {{ statusLabel(row.status) }}
+                    </span>
+                  }
+                </td>
+                <td>
+                  {{ row.eventAtUtc | date:'medium' }}
+                </td>
+                <td>
+                  {{ row.createdAtUtc | date:'medium' }}
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="icon-action icon-action--view"
+                      [title]="'roomInspections.viewAction' | translate"
+                      [attr.aria-label]="'roomInspections.viewAction' | translate"
+                      (click)="view(row)">
+                      <svg lucideEye></svg>
+                    </button>
+
+                    @if (auth.hasPermission('room-inspections.update')) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--edit"
+                        [title]="'roomInspections.editAction' | translate"
+                        [attr.aria-label]="'roomInspections.editAction' | translate"
+                        (click)="openEdit(row)">
+                        <svg lucidePencil></svg>
+                      </button>
+                    }
+
+                    @if (auth.hasPermission('room-inspections.delete')) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="mutatingId() === row.id"
+                        [title]="'roomInspections.deleteAction' | translate"
+                        [attr.aria-label]="'roomInspections.deleteAction' | translate"
+                        (click)="remove(row)">
+                        <svg lucideTrash2></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+
+  @if (pagination().totalItems) {
+    <footer class="pagination">
+      <span class="pagination__summary">
+        {{ 'roomInspections.showing' | translate }}
+        <strong>{{ firstResultNumber() }}</strong>
+        -
+        <strong>{{ lastResultNumber() }}</strong>
+        {{ 'roomInspections.of' | translate }}
+        <strong>{{ pagination().totalItems }}</strong>
+      </span>
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="pagination-button"
+          [disabled]="!pagination().hasPreviousPage"
+          [title]="'roomInspections.previous' | translate"
+          [attr.aria-label]="'roomInspections.previous' | translate"
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+        </button>
+        <span class="pagination__page">
+          <strong>{{ pagination().pageNumber }}</strong>
+          /
+          <strong>{{ pagination().totalPages }}</strong>
+        </span>
+        <button
+          type="button"
+          class="pagination-button"
+          [disabled]="!pagination().hasNextPage"
+          [title]="'roomInspections.next' | translate"
+          [attr.aria-label]="'roomInspections.next' | translate"
+          (click)="nextPage()">
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  }
+</section>
+
+<app-modal
+  [open]="modalOpen()"
+  [title]="
+    editingId()
+      ? ('roomInspections.editTitle' | translate)
+      : ('roomInspections.createTitle' | translate)
+  "
+  (closed)="modalOpen.set(false)">
+  <form
+    class="inspection-form"
+    (ngSubmit)="save()">
+    <label>
+      <span>
+        {{ 'roomInspections.inspectionTitle' | translate }}
+      </span>
+      <input
+        name="title"
+        required
+        maxlength="250"
+        [ngModel]="form().title"
+        (ngModelChange)="updateForm('title', $event)" />
+    </label>
+
+    @if (!editingId()) {
+      <label>
+        <span>
+          {{ 'roomInspections.status' | translate }}
+        </span>
+        <select
+          name="status"
+          [ngModel]="form().status"
+          (ngModelChange)="updateForm('status', $event)">
+          @for (item of statuses; track item) {
+            <option [value]="item">
+              {{ statusLabel(item) }}
+            </option>
+          }
+        </select>
+      </label>
+    }
+
+    <label>
+      <span>
+        {{ 'roomInspections.inspectionDate' | translate }}
+      </span>
+      <input
+        name="eventAtUtc"
+        type="datetime-local"
+        required
+        [ngModel]="form().eventAtUtc"
+        (ngModelChange)="updateForm('eventAtUtc', $event)" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'roomInspections.notes' | translate }}
+      </span>
+      <textarea
+        name="notes"
+        rows="4"
+        [ngModel]="form().notes"
+        (ngModelChange)="updateForm('notes', $event)">
+      </textarea>
+    </label>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="saving()"
+        (click)="modalOpen.set(false)">
+        {{ 'common.cancel' | translate }}
+      </button>
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="saving() || !form().title.trim() || !form().eventAtUtc">
+        {{
+          editingId()
+            ? ('roomInspections.saveChanges' | translate)
+            : ('roomInspections.create' | translate)
+        }}
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal
+  [open]="detailOpen()"
+  [title]="'roomInspections.detailTitle' | translate"
+  (closed)="detailOpen.set(false)">
+  @if (detailLoading()) {
+    <app-spin
+      size="small"
+      [label]="'roomInspections.loadingOne' | translate" />
+  } @else if (detail(); as item) {
+    <dl class="detail-grid">
+      <div>
+        <dt>{{ 'roomInspections.reference' | translate }}</dt>
+        <dd>{{ item.referenceNumber }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'roomInspections.inspection' | translate }}</dt>
+        <dd>{{ item.title }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'roomInspections.status' | translate }}</dt>
+        <dd>
+          <span [class]="statusClass(item.status)">
+            {{ statusLabel(item.status) }}
+          </span>
+        </dd>
+      </div>
+      <div>
+        <dt>{{ 'roomInspections.inspectionDate' | translate }}</dt>
+        <dd>{{ item.eventAtUtc | date:'medium' }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'roomInspections.created' | translate }}</dt>
+        <dd>{{ item.createdAtUtc | date:'medium' }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'roomInspections.relatedEntity' | translate }}</dt>
+        <dd>
+          {{ item.relatedEntityType || ('roomInspections.notAvailable' | translate) }}
+          @if (item.relatedEntityId) {
+            <span class="id-value">
+              {{ item.relatedEntityId }}
+            </span>
+          }
+        </dd>
+      </div>
+      <div class="detail-grid__wide">
+        <dt>{{ 'roomInspections.notes' | translate }}</dt>
+        <dd>{{ item.notes || ('roomInspections.noNotes' | translate) }}</dd>
+      </div>
+    </dl>
+  }
+</app-modal>

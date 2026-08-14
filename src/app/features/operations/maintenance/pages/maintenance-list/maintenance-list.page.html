@@ -1,0 +1,464 @@
+<section class="page-shell">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'maintenance.section' | translate }}
+      </p>
+      <h1>
+        {{ 'maintenance.title' | translate }}
+      </h1>
+      <p class="page-description">
+        {{ 'maintenance.description' | translate }}
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.refresh' | translate }}</span>
+      </button>
+
+      @if (auth.hasPermission('maintenance.manage')) {
+        <button
+          type="button"
+          class="primary-button"
+          (click)="openCreate()">
+          <svg lucideCirclePlus></svg>
+          <span>{{ 'maintenance.newRequest' | translate }}</span>
+        </button>
+      }
+    </div>
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--total">
+        <svg lucideWrench></svg>
+      </span>
+      <span>
+        <strong>{{ rows().length }}</strong>
+        <span>{{ 'maintenance.totalRequests' | translate }}</span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--info">
+        <svg lucideCircleAlert></svg>
+      </span>
+      <span>
+        <strong>{{ openCount() }}</strong>
+        <span>{{ 'maintenance.openRequests' | translate }}</span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--warning">
+        <svg lucideClock></svg>
+      </span>
+      <span>
+        <strong>{{ inProgressCount() }}</strong>
+        <span>{{ 'maintenance.inProgressRequests' | translate }}</span>
+      </span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--success">
+        <svg lucideCheck></svg>
+      </span>
+      <span>
+        <strong>{{ completedCount() }}</strong>
+        <span>{{ 'maintenance.completedRequests' | translate }}</span>
+      </span>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div class="filter-field">
+      <label for="maintenanceSearch">
+        {{ 'maintenance.search' | translate }}
+      </label>
+      <div class="input-with-icon">
+        <svg lucideSearch></svg>
+        <input
+          id="maintenanceSearch"
+          type="search"
+          autocomplete="off"
+          [placeholder]="'maintenance.searchPlaceholder' | translate"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)" />
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label for="maintenanceStatus">
+        {{ 'maintenance.status' | translate }}
+      </label>
+      <select
+        id="maintenanceStatus"
+        [ngModel]="status()"
+        (ngModelChange)="status.set($event)">
+        <option value="">
+          {{ 'maintenance.allStatuses' | translate }}
+        </option>
+        @for (item of statuses; track item) {
+          <option [value]="item">
+            {{ statusLabel(item) }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="maintenancePriority">
+        {{ 'maintenance.priority' | translate }}
+      </label>
+      <select
+        id="maintenancePriority"
+        [ngModel]="priority()"
+        (ngModelChange)="priority.set($event)">
+        <option value="">
+          {{ 'maintenance.allPriorities' | translate }}
+        </option>
+        @for (item of priorities(); track item) {
+          <option [value]="item">
+            {{ item }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button
+        type="button"
+        class="secondary-button filter-button"
+        (click)="applyFilters()">
+        <svg lucideFilter></svg>
+        <span>{{ 'maintenance.apply' | translate }}</span>
+      </button>
+      <button
+        type="button"
+        class="secondary-button filter-button"
+        (click)="clearFilters()">
+        <svg lucideRotateCcw></svg>
+        <span>{{ 'maintenance.clear' | translate }}</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-row">
+        <app-spin
+          size="small"
+          [label]="'maintenance.loading' | translate" />
+      </div>
+    } @else if (error()) {
+      <div class="alert-card alert-card--error">
+        <span class="alert-card__icon">
+          <svg lucideCircleAlert></svg>
+        </span>
+        <div class="alert-card__content">
+          <strong>{{ 'maintenance.loadFailed' | translate }}</strong>
+          <span>{{ 'maintenance.tryAgain' | translate }}</span>
+        </div>
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="load()">
+          {{ 'maintenance.retry' | translate }}
+        </button>
+      </div>
+    } @else if (!filteredRows().length) {
+      <div class="empty-state">
+        <span class="empty-state__icon">
+          <svg lucideWrench></svg>
+        </span>
+        <strong>
+          {{
+            hasActiveFilters()
+              ? ('maintenance.noResults' | translate)
+              : ('maintenance.noRequestsYet' | translate)
+          }}
+        </strong>
+        <span>
+          {{
+            hasActiveFilters()
+              ? ('maintenance.noResultsDescription' | translate)
+              : ('maintenance.noRequestsYetDescription' | translate)
+          }}
+        </span>
+        <div class="empty-state__actions">
+          @if (hasActiveFilters()) {
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="clearFilters()">
+              <svg lucideRotateCcw></svg>
+              <span>{{ 'maintenance.clearFilters' | translate }}</span>
+            </button>
+          }
+
+          @if (auth.hasPermission('maintenance.manage')) {
+            <button
+              type="button"
+              class="primary-button"
+              (click)="openCreate()">
+              <svg lucideCirclePlus></svg>
+              <span>{{ 'maintenance.newRequest' | translate }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>{{ 'maintenance.issue' | translate }}</th>
+              <th>{{ 'maintenance.room' | translate }}</th>
+              <th>{{ 'maintenance.priority' | translate }}</th>
+              <th>{{ 'maintenance.status' | translate }}</th>
+              <th>{{ 'maintenance.assignee' | translate }}</th>
+              <th>{{ 'maintenance.created' | translate }}</th>
+              <th class="actions-column">
+                {{ 'maintenance.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of pagedRows(); track row.id) {
+              <tr>
+                <td>
+                  <strong class="issue-title">
+                    {{ row.category }}
+                  </strong>
+                  <span class="issue-description">
+                    {{ row.description }}
+                  </span>
+                </td>
+                <td>
+                  <span class="room-code">
+                    {{ row.roomNumber || ('maintenance.noRoom' | translate) }}
+                  </span>
+                </td>
+                <td>
+                  <span [class]="priorityClass(row.priority)">
+                    {{ row.priority }}
+                  </span>
+                </td>
+                <td>
+                  <span [class]="statusClass(row.status)">
+                    {{ statusLabel(row.status) }}
+                  </span>
+                </td>
+                <td>
+                  <span class="id-value">
+                    {{ row.assignedUserId || ('maintenance.unassigned' | translate) }}
+                  </span>
+                </td>
+                <td>
+                  {{ row.createdAtUtc | date:'medium' }}
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="icon-action icon-action--view"
+                      [title]="'maintenance.viewAction' | translate"
+                      [attr.aria-label]="'maintenance.viewAction' | translate"
+                      (click)="view(row)">
+                      <svg lucideEye></svg>
+                    </button>
+
+                    @if (canComplete(row)) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--success"
+                        [disabled]="mutatingId() === row.id"
+                        [title]="'maintenance.completeAction' | translate"
+                        [attr.aria-label]="'maintenance.completeAction' | translate"
+                        (click)="complete(row)">
+                        <svg lucideCheck></svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+
+  @if (filteredRows().length) {
+    <footer class="pagination">
+      <span class="pagination__summary">
+        {{ 'maintenance.showing' | translate }}
+        <strong>{{ firstResultNumber() }}</strong>
+        -
+        <strong>{{ lastResultNumber() }}</strong>
+        {{ 'maintenance.of' | translate }}
+        <strong>{{ filteredRows().length }}</strong>
+      </span>
+      <div class="pagination__controls">
+        <button
+          type="button"
+          class="pagination-button"
+          [disabled]="pageNumber() <= 1"
+          [title]="'maintenance.previous' | translate"
+          [attr.aria-label]="'maintenance.previous' | translate"
+          (click)="previousPage()">
+          <svg lucideChevronLeft></svg>
+        </button>
+        <span class="pagination__page">
+          <strong>{{ pageNumber() }}</strong>
+          /
+          <strong>{{ totalPages() }}</strong>
+        </span>
+        <button
+          type="button"
+          class="pagination-button"
+          [disabled]="pageNumber() >= totalPages()"
+          [title]="'maintenance.next' | translate"
+          [attr.aria-label]="'maintenance.next' | translate"
+          (click)="nextPage()">
+          <svg lucideChevronRight></svg>
+        </button>
+      </div>
+    </footer>
+  }
+</section>
+
+<app-modal
+  [open]="modalOpen()"
+  [title]="'maintenance.createTitle' | translate"
+  (closed)="modalOpen.set(false)">
+  <form
+    class="maintenance-form"
+    (ngSubmit)="save()">
+    <label>
+      <span>{{ 'maintenance.room' | translate }}</span>
+      <select
+        name="roomId"
+        [disabled]="roomsLoading() || !auth.hasPermission('rooms.view')"
+        [ngModel]="form().roomId"
+        (ngModelChange)="updateForm('roomId', $event)">
+        <option value="">
+          {{ 'maintenance.noRoom' | translate }}
+        </option>
+        @for (room of rooms(); track room.id) {
+          <option [value]="room.id">
+            {{ room.roomNumber }} - {{ room.roomTypeName }}
+          </option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>{{ 'maintenance.category' | translate }}</span>
+      <input
+        name="category"
+        required
+        maxlength="100"
+        [ngModel]="form().category"
+        (ngModelChange)="updateForm('category', $event)" />
+    </label>
+
+    <label>
+      <span>{{ 'maintenance.priority' | translate }}</span>
+      <input
+        name="priority"
+        required
+        maxlength="30"
+        [ngModel]="form().priority"
+        (ngModelChange)="updateForm('priority', $event)" />
+    </label>
+
+    <label>
+      <span>{{ 'maintenance.descriptionLabel' | translate }}</span>
+      <textarea
+        name="description"
+        required
+        maxlength="1000"
+        rows="4"
+        [ngModel]="form().description"
+        (ngModelChange)="updateForm('description', $event)">
+      </textarea>
+    </label>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="saving()"
+        (click)="modalOpen.set(false)">
+        {{ 'common.cancel' | translate }}
+      </button>
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="
+          saving() ||
+          !form().category.trim() ||
+          !form().description.trim() ||
+          !form().priority.trim()
+        ">
+        {{ 'maintenance.newRequest' | translate }}
+      </button>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal
+  [open]="detailOpen()"
+  [title]="'maintenance.detailTitle' | translate"
+  (closed)="detailOpen.set(false)">
+  @if (detailLoading()) {
+    <app-spin
+      size="small"
+      [label]="'maintenance.loadingOne' | translate" />
+  } @else if (detail(); as item) {
+    <dl class="detail-grid">
+      <div>
+        <dt>{{ 'maintenance.category' | translate }}</dt>
+        <dd>{{ item.category }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'maintenance.room' | translate }}</dt>
+        <dd>{{ item.roomNumber || ('maintenance.noRoom' | translate) }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'maintenance.priority' | translate }}</dt>
+        <dd>
+          <span [class]="priorityClass(item.priority)">
+            {{ item.priority }}
+          </span>
+        </dd>
+      </div>
+      <div>
+        <dt>{{ 'maintenance.status' | translate }}</dt>
+        <dd>
+          <span [class]="statusClass(item.status)">
+            {{ statusLabel(item.status) }}
+          </span>
+        </dd>
+      </div>
+      <div>
+        <dt>{{ 'maintenance.assignee' | translate }}</dt>
+        <dd>{{ item.assignedUserId || ('maintenance.unassigned' | translate) }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'maintenance.created' | translate }}</dt>
+        <dd>{{ item.createdAtUtc | date:'medium' }}</dd>
+      </div>
+      <div class="detail-grid__wide">
+        <dt>{{ 'maintenance.descriptionLabel' | translate }}</dt>
+        <dd>{{ item.description }}</dd>
+      </div>
+    </dl>
+  }
+</app-modal>

@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { LucideCirclePlus, LucideKeyRound, LucidePencil, LucideSearch, LucideShieldCheck, LucideTrash2, LucideUserRound, LucideUserX } from '@lucide/angular';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { ApiClientService } from '../../../../core/http/api-client.service';
+import { TranslationPipe } from '../../../../core/i18n/translation.pipe';
 import { ModalComponent } from '../../../../shared/ui/modal/modal.component';
 import { StatusBadgeComponent } from '../../../../shared/ui/status-badge/status-badge.component';
 import { ToastService } from '../../../../shared/ui/toast/toast.service';
 interface UserRow{id:string;fullName:string;email:string;isActive:boolean;hotelId?:string;branchId?:string;roles:string[]}
 interface RoleRow{id:string;name:string}
-@Component({selector:'app-users-page',standalone:true,imports:[FormsModule,LucideCirclePlus,LucideKeyRound,LucidePencil,LucideSearch,LucideShieldCheck,LucideTrash2,LucideUserRound,LucideUserX,ModalComponent,StatusBadgeComponent],templateUrl:'./users.page.html',styleUrl:'./users.page.css',changeDetection:ChangeDetectionStrategy.OnPush})
+@Component({selector:'app-users-page',standalone:true,imports:[FormsModule,LucideCirclePlus,LucideKeyRound,LucidePencil,LucideSearch,LucideShieldCheck,LucideTrash2,LucideUserRound,LucideUserX,ModalComponent,StatusBadgeComponent,TranslationPipe],templateUrl:'./users.page.html',styleUrl:'./users.page.css',changeDetection:ChangeDetectionStrategy.OnPush})
 export class UsersPage implements OnInit {
  readonly auth=inject(AuthStore);private readonly api=inject(ApiClientService);private readonly toast=inject(ToastService);readonly users=signal<UserRow[]>([]);readonly roles=signal<RoleRow[]>([]);readonly search=signal('');readonly modal=signal(false);readonly resetModal=signal(false);readonly editId=signal<string|null>(null);readonly resetUser=signal<UserRow|null>(null);fullName='';email='';password='';isActive=true;selectedRoles:string[]=[];
  // SECURITY/UX RULE: current authenticated user is removed before rendering or actions.
