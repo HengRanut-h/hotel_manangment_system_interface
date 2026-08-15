@@ -1,0 +1,512 @@
+<div class="detail-page">
+
+  <!-- ===================================================== -->
+  <!-- BACK -->
+  <!-- ===================================================== -->
+
+  <a
+    class="back-link"
+    routerLink="/app/inventory/stock-transactions">
+
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'stockTransactions.backToList' | translate }}
+    </span>
+
+  </a>
+
+
+  <!-- ===================================================== -->
+  <!-- LOADING -->
+  <!-- ===================================================== -->
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'stockTransactions.loadingOne' | translate" />
+
+  }
+
+
+  <!-- ===================================================== -->
+  <!-- ERROR -->
+  <!-- ===================================================== -->
+
+  @else if (errorMessage()) {
+
+    <section class="state">
+
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'stockTransactions.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+
+      </button>
+
+    </section>
+
+  }
+
+
+  <!-- ===================================================== -->
+  <!-- DETAIL -->
+  <!-- ===================================================== -->
+
+  @else if (item(); as transaction) {
+
+    <!-- =================================================== -->
+    <!-- HEADER -->
+    <!-- =================================================== -->
+
+    <header class="detail-heading">
+
+      <div>
+
+        <span>
+          {{ 'stockTransactions.section' | translate }}
+        </span>
+
+        <h1>
+          {{ transaction.referenceNumber || '—' }}
+        </h1>
+
+        <p>
+          {{ transaction.title || '—' }}
+        </p>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- HEADER ACTIONS -->
+      <!-- ================================================= -->
+
+      <div class="heading-actions">
+
+        <app-stock-transaction-status-badge
+          [status]="transaction.status" />
+
+
+        @if (
+          auth.hasPermission(
+            'stock-transactions.update'
+          )
+        ) {
+
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/inventory/stock-transactions',
+              transaction.id,
+              'edit'
+            ]">
+
+            <svg lucidePencil></svg>
+
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+
+          </a>
+
+        }
+
+      </div>
+
+    </header>
+
+
+    <!-- =================================================== -->
+    <!-- DETAIL GRID -->
+    <!-- =================================================== -->
+
+    <section class="detail-grid">
+
+
+      <!-- ================================================= -->
+      <!-- TRANSACTION DETAILS -->
+      <!-- ================================================= -->
+
+      <article class="detail-card">
+
+        <h2>
+          {{ 'stockTransactions.requestDetails' | translate }}
+        </h2>
+
+
+        <dl>
+
+          <!-- ============================================= -->
+          <!-- REFERENCE -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.reference' | translate }}
+            </dt>
+
+            <dd>
+              {{ transaction.referenceNumber || '—' }}
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- TITLE -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.titleLabel' | translate }}
+            </dt>
+
+            <dd>
+              {{ transaction.title || '—' }}
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- STATUS -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.status' | translate }}
+            </dt>
+
+            <dd>
+
+              <app-stock-transaction-status-badge
+                [status]="transaction.status" />
+
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- AMOUNT -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.amount' | translate }}
+            </dt>
+
+            <dd>
+
+              {{
+                transaction.amount === null
+                ||
+                transaction.amount === undefined
+                  ? '—'
+                  : (
+                      transaction.amount
+                        | number:'1.2-2'
+                    )
+              }}
+
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- EVENT DATE -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.eventAt' | translate }}
+            </dt>
+
+            <dd>
+
+              {{
+                transaction.eventAtUtc
+                  ? (
+                      transaction.eventAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- CREATED AT -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.createdAt' | translate }}
+            </dt>
+
+            <dd>
+
+              {{
+                transaction.createdAtUtc
+                  ? (
+                      transaction.createdAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+
+            </dd>
+
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <!-- ================================================= -->
+      <!-- RELATIONSHIP -->
+      <!-- ================================================= -->
+
+      <article class="detail-card">
+
+        <h2>
+          {{ 'stockTransactions.relationship' | translate }}
+        </h2>
+
+
+        <dl>
+
+          <!-- ============================================= -->
+          <!-- RELATED ENTITY TYPE -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{
+                'stockTransactions.relatedEntityType'
+                  | translate
+              }}
+            </dt>
+
+            <dd>
+              {{
+                transaction.relatedEntityType
+                ||
+                '—'
+              }}
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- INVENTORY ITEM -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.inventoryItem' | translate }}
+            </dt>
+
+            <dd>
+
+              @if (
+                isInventoryItemRelation(
+                  transaction.relatedEntityType
+                )
+              ) {
+
+                {{
+                  inventoryItemLabel(
+                    transaction.relatedEntityId
+                  )
+                }}
+
+              } @else {
+
+                —
+
+              }
+
+            </dd>
+
+          </div>
+
+
+          <!-- ============================================= -->
+          <!-- SCOPE -->
+          <!-- ============================================= -->
+
+          <div>
+
+            <dt>
+              {{ 'stockTransactions.scope' | translate }}
+            </dt>
+
+            <dd>
+
+              {{
+                (
+                  transaction.branchId
+                    ? 'stockTransactions.branchScope'
+                    : 'stockTransactions.hotelScope'
+                )
+                  | translate
+              }}
+
+            </dd>
+
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <!-- ================================================= -->
+      <!-- NOTES -->
+      <!-- ================================================= -->
+
+      <article
+        class="detail-card detail-card--full">
+
+        <h2>
+          {{ 'stockTransactions.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{
+            transaction.notes
+            ||
+            '—'
+          }}
+        </p>
+
+      </article>
+
+
+      <!-- ================================================= -->
+      <!-- STATUS MANAGEMENT -->
+      <!-- ================================================= -->
+
+      @if (
+        auth.hasPermission(
+          'stock-transactions.update'
+        )
+      ) {
+
+        <article
+          class="detail-card detail-card--full">
+
+          <h2>
+            {{ 'stockTransactions.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{
+              'stockTransactions.changeStatusHelp'
+                | translate
+            }}
+          </p>
+
+
+          <div class="status-editor">
+
+            <!-- =========================================== -->
+            <!-- STATUS INPUT -->
+            <!-- =========================================== -->
+
+            <input
+              type="text"
+              autocomplete="off"
+              [value]="statusDraft()"
+              [placeholder]="
+                'stockTransactions.statusPlaceholder'
+                  | translate
+              "
+              (input)="setStatusDraft($event)" />
+
+
+            <!-- =========================================== -->
+            <!-- SAVE STATUS -->
+            <!-- =========================================== -->
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+
+              @if (updatingStatus()) {
+
+                <app-spin
+                  [inline]="true"
+                  size="small"
+                  label="" />
+
+              } @else {
+
+                <svg lucideCheckCircle2></svg>
+
+              }
+
+
+              <span>
+
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'stockTransactions.updateStatus'
+                  )
+                    | translate
+                }}
+
+              </span>
+
+            </button>
+
+          </div>
+
+        </article>
+
+      }
+
+    </section>
+
+  }
+
+</div>

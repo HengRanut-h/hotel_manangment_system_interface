@@ -1,0 +1,123 @@
+<form
+  class="item-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <header class="form-heading">
+    <span class="form-icon">
+      <svg lucidePackagePlus></svg>
+    </span>
+
+    <div>
+      <h2>
+        {{ 'inventoryItems.itemInformation' | translate }}
+      </h2>
+
+      <p>
+        {{ 'inventoryItems.itemInformationDescription' | translate }}
+      </p>
+    </div>
+  </header>
+
+  <div class="form-grid">
+
+    <label>
+      <span>
+        {{ 'inventoryItems.sku' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="100"
+        autocomplete="off"
+        [value]="sku()"
+        [placeholder]="'inventoryItems.skuPlaceholder' | translate"
+        (input)="setSku($event)" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'inventoryItems.name' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="200"
+        autocomplete="off"
+        [value]="name()"
+        [placeholder]="'inventoryItems.namePlaceholder' | translate"
+        (input)="setName($event)" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'inventoryItems.unit' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="50"
+        autocomplete="off"
+        [value]="unit()"
+        [placeholder]="'inventoryItems.unitPlaceholder' | translate"
+        (input)="setUnit($event)" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'inventoryItems.quantityOnHand' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        [value]="quantityOnHand()"
+        (input)="setQuantity($event)" />
+    </label>
+
+    <label>
+      <span>
+        {{ 'inventoryItems.reorderLevel' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        [value]="reorderLevel()"
+        (input)="setReorderLevel($event)" />
+    </label>
+
+  </div>
+
+  @if (isInvalid()) {
+    <p class="form-error">
+      {{ 'inventoryItems.formInvalid' | translate }}
+    </p>
+  }
+
+  <footer>
+    <button
+      type="button"
+      class="button button--secondary"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary">
+      <svg lucideCheck></svg>
+
+      <span>
+        {{ 'inventoryItems.create' | translate }}
+      </span>
+    </button>
+  </footer>
+
+</form>

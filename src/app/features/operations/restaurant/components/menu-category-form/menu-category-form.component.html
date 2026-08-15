@@ -1,0 +1,38 @@
+<form
+  class="form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <label>
+    <span>
+      {{ 'restaurant.categoryName' | translate }}
+      <strong>*</strong>
+    </span>
+
+    <input
+      type="text"
+      maxlength="150"
+      [value]="name()"
+      [placeholder]="'restaurant.categoryNamePlaceholder' | translate"
+      (input)="setName($event)" />
+
+    @if (
+      touched()
+      &&
+      !name().trim()
+    ) {
+      <small>
+        {{ 'restaurant.categoryNameRequired' | translate }}
+      </small>
+    }
+  </label>
+
+  <button
+    type="submit">
+    <svg lucideCheck></svg>
+
+    <span>
+      {{ 'restaurant.createCategory' | translate }}
+    </span>
+  </button>
+
+</form>

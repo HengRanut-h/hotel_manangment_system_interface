@@ -1,0 +1,7 @@
+<span
+  class="badge"
+  [class.badge--healthy]="status() === 'healthy'"
+  [class.badge--low]="status() === 'low'"
+  [class.badge--out]="status() === 'out'">
+  {{ translationKey() | translate }}
+</span>

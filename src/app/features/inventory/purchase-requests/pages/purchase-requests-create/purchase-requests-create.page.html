@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'purchaseRequests.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'purchaseRequests.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'purchaseRequests.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-purchase-request-form
+    submitLabel="purchaseRequests.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

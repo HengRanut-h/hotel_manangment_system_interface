@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'stockTransactions.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'stockTransactions.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'stockTransactions.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-stock-transaction-form
+    submitLabel="stockTransactions.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

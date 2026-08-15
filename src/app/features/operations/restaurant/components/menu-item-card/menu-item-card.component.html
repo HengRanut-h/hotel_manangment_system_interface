@@ -1,0 +1,59 @@
+<article
+  class="menu-item-card"
+  [class.menu-item-card--unavailable]="!item().isAvailable">
+
+  <div class="menu-item-card__top">
+    <span class="menu-icon">
+      <svg lucideUtensils></svg>
+    </span>
+
+    <span
+      class="availability"
+      [class.availability--available]="item().isAvailable"
+      [class.availability--unavailable]="!item().isAvailable">
+      {{
+        (
+          item().isAvailable
+            ? 'restaurant.available'
+            : 'restaurant.unavailable'
+        )
+        | translate
+      }}
+    </span>
+  </div>
+
+  <div class="menu-item-card__body">
+    <span class="category">
+      {{ item().categoryName || '—' }}
+    </span>
+
+    <h3>
+      {{ item().name }}
+    </h3>
+  </div>
+
+  <footer>
+    <strong>
+      {{
+        item().price
+          | number:'1.2-2'
+      }}
+    </strong>
+
+    <button
+      type="button"
+      [disabled]="
+        !item().isAvailable
+        ||
+        !canOrder()
+      "
+      (click)="addItem()">
+      <svg lucidePlus></svg>
+
+      <span>
+        {{ 'restaurant.add' | translate }}
+      </span>
+    </button>
+  </footer>
+
+</article>

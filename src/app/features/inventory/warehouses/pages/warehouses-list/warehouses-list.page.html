@@ -1,0 +1,397 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'warehouses.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'warehouses.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'warehouses.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'warehouses.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/inventory/warehouses/create">
+        <svg lucideCirclePlus></svg>
+
+        <span>
+          {{ 'warehouses.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'warehouses.loading' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <svg lucideWarehouse></svg>
+
+      <strong>
+        {{ 'warehouses.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideWarehouse></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'warehouses.totalWarehouses' | translate }}
+          </span>
+
+          <strong>
+            {{ warehouses().length }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideWarehouse></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'warehouses.activeWarehouses' | translate }}
+          </span>
+
+          <strong>
+            {{ activeCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--gray">
+          <svg lucideArchive></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'warehouses.inactiveWarehouses' | translate }}
+          </span>
+
+          <strong>
+            {{ inactiveCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideWarehouse></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'warehouses.branchScoped' | translate }}
+          </span>
+
+          <strong>
+            {{ branchScopedCount() }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="panel">
+
+      <header class="toolbar">
+
+        <div class="search">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'warehouses.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+        </div>
+
+        <select
+          [value]="statusFilter()"
+          (change)="setStatusFilter($event)">
+          <option value="all">
+            {{ 'warehouses.allStatuses' | translate }}
+          </option>
+
+          <option value="active">
+            {{ 'warehouses.active' | translate }}
+          </option>
+
+          <option value="inactive">
+            {{ 'warehouses.inactive' | translate }}
+          </option>
+        </select>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+
+            {{ 'common.clear' | translate }}
+          </button>
+        }
+
+      </header>
+
+      @if (
+        filteredWarehouses().length === 0
+      ) {
+
+        <div class="empty">
+          <svg lucideWarehouse></svg>
+
+          <strong>
+            {{ 'warehouses.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'warehouses.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  {{ 'warehouses.warehouse' | translate }}
+                </th>
+
+                <th>
+                  {{ 'warehouses.code' | translate }}
+                </th>
+
+                <th>
+                  {{ 'warehouses.descriptionLabel' | translate }}
+                </th>
+
+                <th>
+                  {{ 'warehouses.status' | translate }}
+                </th>
+
+                <th>
+                  {{ 'warehouses.createdAt' | translate }}
+                </th>
+
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                warehouse of filteredWarehouses();
+                track warehouse.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="warehouse-name">
+                      {{ warehouse.name }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <span class="code">
+                      {{ warehouse.code }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="description-cell">
+                      {{
+                        warehouse.description
+                        ||
+                        '—'
+                      }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <app-warehouse-status-badge
+                      [isActive]="warehouse.isActive" />
+                  </td>
+
+                  <td>
+                    {{
+                      warehouse.createdAtUtc
+                        ? (
+                            warehouse.createdAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    <div class="row-actions">
+
+                      <a
+                        class="icon-action icon-action--view"
+                        [routerLink]="[
+                          '/app/inventory/warehouses',
+                          warehouse.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+
+                      @if (
+                        auth.hasPermission(
+                          'warehouses.update'
+                        )
+                      ) {
+                        <a
+                          class="icon-action icon-action--edit"
+                          [routerLink]="[
+                            '/app/inventory/warehouses',
+                            warehouse.id,
+                            'edit'
+                          ]"
+                          [title]="'common.edit' | translate"
+                          [attr.aria-label]="'common.edit' | translate">
+                          <svg lucidePencil></svg>
+                        </a>
+                      }
+
+                      @if (
+                        auth.hasPermission(
+                          'warehouses.delete'
+                        )
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-action icon-action--delete"
+                          [disabled]="deletingId() === warehouse.id"
+                          [title]="'common.delete' | translate"
+                          [attr.aria-label]="'common.delete' | translate"
+                          (click)="requestDelete(warehouse.id)">
+                          <svg lucideTrash2></svg>
+                        </button>
+                      }
+
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      }
+
+      <footer class="panel-footer">
+        {{
+          'warehouses.showingWarehouses'
+            | translate:{
+                shown:
+                  filteredWarehouses().length,
+                total:
+                  warehouses().length
+              }
+        }}
+      </footer>
+
+    </section>
+
+  }
+
+</div>
+
+@if (confirmDeleteId(); as id) {
+
+  <div
+    class="dialog-backdrop"
+    (click)="cancelDelete()">
+
+    <section
+      class="dialog"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()">
+
+      <span class="dialog__icon">
+        <svg lucideTrash2></svg>
+      </span>
+
+      <h2>
+        {{ 'warehouses.deleteTitle' | translate }}
+      </h2>
+
+      <p>
+        {{ 'warehouses.deleteDescription' | translate }}
+      </p>
+
+      <div class="dialog__actions">
+        <button
+          type="button"
+          class="dialog-button dialog-button--secondary"
+          [disabled]="deletingId() === id"
+          (click)="cancelDelete()">
+          {{ 'common.cancel' | translate }}
+        </button>
+
+        <button
+          type="button"
+          class="dialog-button dialog-button--danger"
+          [disabled]="deletingId() === id"
+          (click)="confirmDelete(id)">
+          {{
+            (
+              deletingId() === id
+                ? 'common.deleting'
+                : 'common.delete'
+            )
+              | translate
+          }}
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+}

@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'purchaseOrders.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'purchaseOrders.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'purchaseOrders.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-purchase-order-form
+    submitLabel="purchaseOrders.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

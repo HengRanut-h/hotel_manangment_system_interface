@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'securityIncidents.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'securityIncidents.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'securityIncidents.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-security-incident-form
+    submitLabel="securityIncidents.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

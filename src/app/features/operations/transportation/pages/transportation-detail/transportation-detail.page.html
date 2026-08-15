@@ -1,0 +1,259 @@
+<div class="detail-page">
+
+  <a
+    class="back-link"
+    routerLink="/app/operations/transportation">
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'transportation.backToList' | translate }}
+    </span>
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'transportation.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'transportation.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as request) {
+
+    <header class="detail-heading">
+      <div>
+        <span>
+          {{ 'transportation.section' | translate }}
+        </span>
+
+        <h1>
+          {{ request.referenceNumber }}
+        </h1>
+
+        <p>
+          {{ request.title }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+        <app-transportation-status-badge
+          [status]="request.status" />
+
+        @if (
+          auth.hasPermission(
+            'transportation.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/operations/transportation',
+              request.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>
+          {{ 'transportation.requestDetails' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'transportation.reference' | translate }}
+            </dt>
+            <dd>
+              {{ request.referenceNumber || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.titleLabel' | translate }}
+            </dt>
+            <dd>
+              {{ request.title || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.status' | translate }}
+            </dt>
+            <dd>
+              <app-transportation-status-badge
+                [status]="request.status" />
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.amount' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.amount === null
+                  ? '—'
+                  : (
+                      request.amount
+                        | number:'1.2-2'
+                    )
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.eventAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.eventAtUtc
+                  ? (
+                      request.eventAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.createdAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.createdAtUtc
+                  | date:'medium'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>
+          {{ 'transportation.relationship' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'transportation.relatedEntityType' | translate }}
+            </dt>
+            <dd>
+              {{ request.relatedEntityType || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.relatedEntityId' | translate }}
+            </dt>
+            <dd class="break-value">
+              {{ request.relatedEntityId || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'transportation.branchId' | translate }}
+            </dt>
+            <dd class="break-value">
+              {{ request.branchId || '—' }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card detail-card--full">
+        <h2>
+          {{ 'transportation.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{ request.notes || '—' }}
+        </p>
+      </article>
+
+      @if (
+        auth.hasPermission(
+          'transportation.update'
+        )
+      ) {
+        <article class="detail-card detail-card--full">
+          <h2>
+            {{ 'transportation.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{ 'transportation.changeStatusHelp' | translate }}
+          </p>
+
+          <div class="status-editor">
+            <input
+              type="text"
+              [value]="statusDraft()"
+              [placeholder]="'transportation.statusPlaceholder' | translate"
+              (input)="setStatusDraft($event)" />
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+              <svg lucideCheckCircle2></svg>
+
+              <span>
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'transportation.updateStatus'
+                  )
+                  | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      }
+
+    </section>
+
+  }
+
+</div>

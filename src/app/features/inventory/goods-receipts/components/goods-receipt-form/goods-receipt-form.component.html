@@ -1,0 +1,177 @@
+<form
+  class="request-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-card">
+
+    <div class="form-card__heading">
+      <span class="form-card__icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <div>
+        <h2>
+          {{ 'goodsReceipts.requestInformation' | translate }}
+        </h2>
+
+        <p>
+          {{ 'goodsReceipts.requestInformationDescription' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      @if (showReferenceNumber()) {
+        <label class="field">
+          <span>
+            {{ 'goodsReceipts.referenceNumber' | translate }}
+          </span>
+
+          <input
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            [value]="referenceNumber()"
+            [placeholder]="'goodsReceipts.referencePlaceholder' | translate"
+            (input)="setReferenceNumber($event)" />
+
+          @if (isReferenceNumberInvalid()) {
+            <small class="field-error">
+              {{ 'goodsReceipts.referenceRequired' | translate }}
+            </small>
+          }
+        </label>
+      }
+
+      <label class="field">
+        <span>
+          {{ 'goodsReceipts.titleLabel' | translate }}
+        </span>
+
+        <input
+          type="text"
+          maxlength="200"
+          autocomplete="off"
+          [value]="title()"
+          [placeholder]="'goodsReceipts.titlePlaceholder' | translate"
+          (input)="setTitle($event)" />
+
+        @if (isTitleInvalid()) {
+          <small class="field-error">
+            {{ 'goodsReceipts.titleRequired' | translate }}
+          </small>
+        }
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'goodsReceipts.purchaseOrder' | translate }}
+        </span>
+
+        <select
+          [value]="relatedEntityId()"
+          [disabled]="purchaseOrdersLoading()"
+          (change)="setPurchaseOrder($event)">
+          <option value="">
+            {{
+              (
+                purchaseOrdersLoading()
+                  ? 'goodsReceipts.loadingPurchaseOrders'
+                  : 'goodsReceipts.selectPurchaseOrder'
+              )
+                | translate
+            }}
+          </option>
+
+          @for (
+            order of purchaseOrders();
+            track order.id
+          ) {
+            <option [value]="order.id">
+              {{ order.referenceNumber }} — {{ order.title }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'goodsReceipts.eventAt' | translate }}
+        </span>
+
+        <input
+          type="datetime-local"
+          [value]="eventAtUtc()"
+          (input)="setEventAtUtc($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'goodsReceipts.amount' | translate }}
+        </span>
+
+        <input
+          type="number"
+          step="0.01"
+          [value]="amount()"
+          [placeholder]="'goodsReceipts.amountPlaceholder' | translate"
+          (input)="setAmount($event)" />
+
+        <small class="field-hint">
+          {{ 'goodsReceipts.amountHelp' | translate }}
+        </small>
+      </label>
+
+      <label class="field field--full">
+        <span>
+          {{ 'goodsReceipts.notes' | translate }}
+        </span>
+
+        <textarea
+          rows="5"
+          maxlength="2000"
+          [value]="notes()"
+          [placeholder]="'goodsReceipts.notesPlaceholder' | translate"
+          (input)="setNotes($event)"></textarea>
+      </label>
+
+    </div>
+
+  </section>
+
+  <footer class="form-actions">
+
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      <svg lucideArrowLeft></svg>
+
+      <span>
+        {{ 'common.cancel' | translate }}
+      </span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+      <svg lucideCheck></svg>
+
+      <span>
+        {{
+          (
+            submitting()
+              ? 'common.saving'
+              : submitLabel()
+          )
+            | translate
+        }}
+      </span>
+    </button>
+
+  </footer>
+
+</form>

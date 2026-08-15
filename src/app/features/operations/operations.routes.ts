@@ -302,6 +302,72 @@ export const operationsRoutes:
           module.laundryRoutes
       )
 },
+{
+  path:
+    'restaurant',
+
+  canActivate: [
+    permissionGuard
+  ],
+
+  data: {
+    permission:
+      'restaurant.view'
+  },
+
+  loadChildren: () =>
+    import(
+      './restaurant/restaurant.routes'
+    )
+      .then(
+        module =>
+          module.restaurantRoutes
+      )
+},
+{
+  path:
+    'transportation',
+
+  canActivate: [
+    permissionGuard
+  ],
+
+  data: {
+    permission:
+      'transportation.view'
+  },
+
+  loadChildren: () =>
+    import(
+      './transportation/transportation.routes'
+    )
+      .then(
+        module =>
+          module.transportationRoutes
+      )
+},
+{
+  path:
+    'security-incidents',
+
+  canActivate: [
+    permissionGuard
+  ],
+
+  data: {
+    permission:
+      'security-incidents.view'
+  },
+
+  loadChildren: () =>
+    import(
+      './security-incidents/security-incidents.routes'
+    )
+      .then(
+        module =>
+          module.securityIncidentsRoutes
+      )
+},
 
 
     // =====================================================

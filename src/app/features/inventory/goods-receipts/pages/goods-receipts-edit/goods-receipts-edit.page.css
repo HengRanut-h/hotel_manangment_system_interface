@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+.form-page {
+  width: min(940px, 100%);
+}
+
+.form-page > header {
+  margin-bottom: 20px;
+}
+
+.form-page > header span {
+  color: #667085;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.form-page > header h1 {
+  margin: 6px 0 0;
+  color: #101828;
+  font-size: 28px;
+}
+
+.form-page > header p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+}
+
+.state {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.state strong {
+  color: #101828;
+}
+
+.state span {
+  color: #667085;
+  font-size: 12px;
+}
+
+.state button {
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  background: #fff;
+  color: #344054;
+  cursor: pointer;
+}
+

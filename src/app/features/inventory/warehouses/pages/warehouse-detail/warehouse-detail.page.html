@@ -1,0 +1,153 @@
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/inventory/warehouses">
+    <svg lucideArrowLeft></svg>
+
+    {{ 'warehouses.backToWarehouses' | translate }}
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'warehouses.loadingWarehouse' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <div class="state state--error">
+      <p>
+        {{ errorMessage() }}
+      </p>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </div>
+
+  } @else if (warehouse(); as item) {
+
+    <header class="page-heading">
+
+      <div class="identity">
+        <span class="identity__icon">
+          <svg lucideWarehouse></svg>
+        </span>
+
+        <div>
+          <span class="eyebrow">
+            {{ 'warehouses.warehouse' | translate }}
+          </span>
+
+          <h1>
+            {{ item.name }}
+          </h1>
+
+          <span class="code">
+            {{ item.code }}
+          </span>
+        </div>
+      </div>
+
+      <div class="heading-actions">
+
+        <app-warehouse-status-badge
+          [isActive]="item.isActive" />
+
+        @if (
+          auth.hasPermission(
+            'warehouses.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/inventory/warehouses',
+              item.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+
+            {{ 'common.edit' | translate }}
+          </a>
+        }
+
+      </div>
+
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="card card--wide">
+        <span class="label">
+          {{ 'warehouses.descriptionLabel' | translate }}
+        </span>
+
+        <p>
+          {{
+            item.description
+            ||
+            ('warehouses.noDescription' | translate)
+          }}
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'warehouses.status' | translate }}
+        </span>
+
+        <strong>
+          {{
+            (
+              item.isActive
+                ? 'warehouses.active'
+                : 'warehouses.inactive'
+            )
+              | translate
+          }}
+        </strong>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'warehouses.scope' | translate }}
+        </span>
+
+        <strong>
+          {{
+            (
+              item.branchId
+                ? 'warehouses.branchScope'
+                : 'warehouses.hotelScope'
+            )
+              | translate
+          }}
+        </strong>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'warehouses.createdAt' | translate }}
+        </span>
+
+        <strong>
+          {{
+            item.createdAtUtc
+              ? (
+                  item.createdAtUtc
+                    | date:'medium'
+                )
+              : '—'
+          }}
+        </strong>
+      </article>
+
+    </section>
+
+  }
+
+</div>

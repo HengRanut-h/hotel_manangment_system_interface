@@ -1,0 +1,23 @@
+<div class="page">
+
+  <header>
+    <span>
+      {{ 'warehouses.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'warehouses.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'warehouses.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-warehouse-form
+    [submitting]="submitting()"
+    [showStatus]="false"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+
+</div>

@@ -1,0 +1,13 @@
+<span
+  class="badge"
+  [class.badge--active]="isActive()"
+  [class.badge--inactive]="!isActive()">
+  {{
+    (
+      isActive()
+        ? 'warehouses.active'
+        : 'warehouses.inactive'
+    )
+      | translate
+  }}
+</span>

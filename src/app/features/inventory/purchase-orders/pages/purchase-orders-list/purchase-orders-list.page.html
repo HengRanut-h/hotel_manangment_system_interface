@@ -1,0 +1,475 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'purchaseOrders.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'purchaseOrders.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'purchaseOrders.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'purchase-orders.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/inventory/purchase-orders/create">
+        <svg lucideCirclePlus></svg>
+
+        <span>
+          {{ 'purchaseOrders.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'purchaseOrders.loading' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <span class="state-icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <strong>
+        {{ 'purchaseOrders.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'purchaseOrders.totalRequests' | translate }}
+          </span>
+
+          <strong>
+            {{ totalItems() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'purchaseOrders.orderedOnPage' | translate }}
+          </span>
+
+          <strong>
+            {{ orderedOnPage() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'purchaseOrders.recordedAmountOnPage' | translate }}
+          </span>
+
+          <strong>
+            {{
+              recordedAmountOnPage()
+                | number:'1.0-2'
+            }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="panel">
+
+      <header class="toolbar">
+
+        <div class="search-field">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'purchaseOrders.searchPlaceholder' | translate"
+            (input)="setSearch($event)"
+            (keydown)="onSearchKeydown($event)" />
+        </div>
+
+        <input
+          class="filter-control"
+          type="text"
+          autocomplete="off"
+          [value]="status()"
+          [placeholder]="'purchaseOrders.statusFilterPlaceholder' | translate"
+          (input)="setStatus($event)"
+          (keydown)="onSearchKeydown($event)" />
+
+        <button
+          type="button"
+          class="filter-button"
+          [disabled]="loading()"
+          (click)="applyFilters()">
+          <svg lucideSearch></svg>
+
+          <span>
+            {{ 'common.search' | translate }}
+          </span>
+        </button>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+
+            <span>
+              {{ 'common.clear' | translate }}
+            </span>
+          </button>
+        }
+
+      </header>
+
+      @if (items().length === 0) {
+
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+
+          <strong>
+            {{ 'purchaseOrders.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'purchaseOrders.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  {{ 'purchaseOrders.reference' | translate }}
+                </th>
+
+                <th>
+                  {{ 'purchaseOrders.titleLabel' | translate }}
+                </th>
+
+                <th>
+                  {{ 'purchaseOrders.status' | translate }}
+                </th>
+
+                <th>
+                  {{ 'purchaseOrders.relatedTo' | translate }}
+                </th>
+
+                <th>
+                  {{ 'purchaseOrders.eventAt' | translate }}
+                </th>
+
+                <th>
+                  {{ 'purchaseOrders.amount' | translate }}
+                </th>
+
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                item of items();
+                track item.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="reference">
+                      {{ item.referenceNumber || '—' }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <div class="title-cell">
+                      <strong>
+                        {{ item.title || '—' }}
+                      </strong>
+
+                      @if (item.notes) {
+                        <small>
+                          {{ item.notes }}
+                        </small>
+                      }
+                    </div>
+                  </td>
+
+                  <td>
+                    <app-purchase-order-status-badge
+                      [status]="item.status" />
+                  </td>
+
+                  <td>
+                    <div class="related-cell">
+                      @if (
+                        item.relatedEntityType
+                          ?.trim()
+                          ?.toLowerCase()
+                        === 'supplier'
+                      ) {
+                        <strong>
+                          {{ supplierLabel(item.relatedEntityId) }}
+                        </strong>
+
+                        <small>
+                          {{ 'purchaseOrders.supplier' | translate }}
+                        </small>
+                      } @else {
+                        <strong>
+                          {{ item.relatedEntityType || '—' }}
+                        </strong>
+                      }
+                    </div>
+                  </td>
+
+                  <td>
+                    {{
+                      item.eventAtUtc
+                        ? (
+                            item.eventAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    {{
+                      item.amount === null
+                        ? '—'
+                        : (
+                            item.amount
+                              | number:'1.2-2'
+                          )
+                    }}
+                  </td>
+
+                  <td>
+                    <div class="row-actions">
+
+                      <a
+                        class="icon-action icon-action--view"
+                        [routerLink]="[
+                          '/app/inventory/purchase-orders',
+                          item.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+
+                      @if (
+                        auth.hasPermission(
+                          'purchase-orders.update'
+                        )
+                      ) {
+                        <a
+                          class="icon-action icon-action--edit"
+                          [routerLink]="[
+                            '/app/inventory/purchase-orders',
+                            item.id,
+                            'edit'
+                          ]"
+                          [title]="'common.edit' | translate"
+                          [attr.aria-label]="'common.edit' | translate">
+                          <svg lucidePencil></svg>
+                        </a>
+                      }
+
+                      @if (
+                        auth.hasPermission(
+                          'purchase-orders.delete'
+                        )
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-action icon-action--delete"
+                          [disabled]="deletingId() !== null"
+                          [title]="'common.delete' | translate"
+                          [attr.aria-label]="'common.delete' | translate"
+                          (click)="requestDelete(item)">
+                          @if (
+                            deletingId() === item.id
+                          ) {
+                            <app-spin
+                              [inline]="true"
+                              size="small"
+                              label="" />
+                          } @else {
+                            <svg lucideTrash2></svg>
+                          }
+                        </button>
+                      }
+
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="pagination">
+          <span>
+            {{
+              'purchaseOrders.showing'
+                | translate
+            }}
+            <strong>
+              {{ items().length }}
+            </strong>
+            /
+            <strong>
+              {{ totalItems() }}
+            </strong>
+          </span>
+
+          <div>
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="!hasPreviousPage() || loading()"
+              (click)="previousPage()">
+              <svg lucideChevronLeft></svg>
+              <span>
+                {{ 'common.previous' | translate }}
+              </span>
+            </button>
+
+            <span class="page-number">
+              {{ 'common.page' | translate }}
+              <strong>
+                {{ pageNumber() }}
+              </strong>
+              {{ 'common.of' | translate }}
+              <strong>
+                {{ totalPages() }}
+              </strong>
+            </span>
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="!hasNextPage() || loading()"
+              (click)="nextPage()">
+              <span>
+                {{ 'common.next' | translate }}
+              </span>
+              <svg lucideChevronRight></svg>
+            </button>
+          </div>
+        </footer>
+
+      }
+
+    </section>
+  }
+
+  @if (deleteTarget(); as item) {
+    <div
+      class="modal-backdrop"
+      (click)="cancelDelete()">
+
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        (click)="$event.stopPropagation()">
+
+        <span class="confirm-dialog__icon">
+          <svg lucideTrash2></svg>
+        </span>
+
+        <h2>
+          {{ 'purchaseOrders.deleteTitle' | translate }}
+        </h2>
+
+        <p>
+          {{
+            'purchaseOrders.deleteDescription'
+              | translate:{
+                  name:
+                    item.referenceNumber
+                    || item.title
+                }
+          }}
+        </p>
+
+        <div class="confirm-dialog__actions">
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="deletingId() !== null"
+            (click)="cancelDelete()">
+            {{ 'common.cancel' | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="deletingId() !== null"
+            (click)="confirmDelete()">
+            {{ 'common.delete' | translate }}
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+
+</div>

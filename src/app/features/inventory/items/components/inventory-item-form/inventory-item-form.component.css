@@ -1,0 +1,150 @@
+:host {
+  display: block;
+}
+
+.item-form {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.form-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.form-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.form-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.form-heading h2 {
+  margin: 1px 0 4px;
+  color: #101828;
+  font-size: 16px;
+}
+
+.form-heading p {
+  margin: 0;
+  color: #667085;
+  font-size: 11px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+}
+
+label > span {
+  color: #344054;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+label > span strong {
+  color: #d92d20;
+}
+
+input {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 11px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: #101828;
+  font: inherit;
+  font-size: 12px;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+input:focus {
+  border-color: #84adff;
+  box-shadow:
+    0 0 0 3px rgba(53, 56, 205, .08);
+}
+
+.form-error {
+  margin: 0;
+  color: #d92d20;
+  font-size: 11px;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.button--primary {
+  border: 1px solid #3538cd;
+  background: #3538cd;
+  color: #fff;
+}
+
+.button--secondary {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  color: #344054;
+}
+
+@media (max-width: 680px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column-reverse;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

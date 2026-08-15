@@ -1,0 +1,275 @@
+<div class="detail-page">
+
+  <a
+    class="back-link"
+    routerLink="/app/inventory/purchase-requests">
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'purchaseRequests.backToList' | translate }}
+    </span>
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'purchaseRequests.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'purchaseRequests.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as request) {
+
+    <header class="detail-heading">
+      <div>
+        <span>
+          {{ 'purchaseRequests.section' | translate }}
+        </span>
+
+        <h1>
+          {{ request.referenceNumber }}
+        </h1>
+
+        <p>
+          {{ request.title }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+        <app-purchase-request-status-badge
+          [status]="request.status" />
+
+        @if (
+          auth.hasPermission(
+            'purchase-requests.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/inventory/purchase-requests',
+              request.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>
+          {{ 'purchaseRequests.requestDetails' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'purchaseRequests.reference' | translate }}
+            </dt>
+            <dd>
+              {{ request.referenceNumber || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.titleLabel' | translate }}
+            </dt>
+            <dd>
+              {{ request.title || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.status' | translate }}
+            </dt>
+            <dd>
+              <app-purchase-request-status-badge
+                [status]="request.status" />
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.amount' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.amount === null
+                  ? '—'
+                  : (
+                      request.amount
+                        | number:'1.2-2'
+                    )
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.eventAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.eventAtUtc
+                  ? (
+                      request.eventAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.createdAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                request.createdAtUtc
+                  | date:'medium'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>
+          {{ 'purchaseRequests.relationship' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'purchaseRequests.relatedEntityType' | translate }}
+            </dt>
+            <dd>
+              {{ request.relatedEntityType || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.inventoryItem' | translate }}
+            </dt>
+            <dd>
+              @if (
+                request.relatedEntityType
+                  ?.trim()
+                  ?.toLowerCase()
+                === 'inventoryitem'
+              ) {
+                {{ inventoryItemLabel(request.relatedEntityId) }}
+              } @else {
+                —
+              }
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'purchaseRequests.scope' | translate }}
+            </dt>
+            <dd>
+              {{
+                (
+                  request.branchId
+                    ? 'purchaseRequests.branchScope'
+                    : 'purchaseRequests.hotelScope'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card detail-card--full">
+        <h2>
+          {{ 'purchaseRequests.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{ request.notes || '—' }}
+        </p>
+      </article>
+
+      @if (
+        auth.hasPermission(
+          'purchase-requests.update'
+        )
+      ) {
+        <article class="detail-card detail-card--full">
+          <h2>
+            {{ 'purchaseRequests.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{ 'purchaseRequests.changeStatusHelp' | translate }}
+          </p>
+
+          <div class="status-editor">
+            <input
+              type="text"
+              [value]="statusDraft()"
+              [placeholder]="'purchaseRequests.statusPlaceholder' | translate"
+              (input)="setStatusDraft($event)" />
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+              <svg lucideCheckCircle2></svg>
+
+              <span>
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'purchaseRequests.updateStatus'
+                  )
+                  | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      }
+
+    </section>
+
+  }
+
+</div>

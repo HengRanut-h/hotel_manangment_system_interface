@@ -1,0 +1,321 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'inventoryItems.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'inventoryItems.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'inventoryItems.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'inventory.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/inventory/items/create">
+        <svg lucideCirclePlus></svg>
+
+        <span>
+          {{ 'inventoryItems.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'inventoryItems.loading' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <svg lucidePackage></svg>
+
+      <strong>
+        {{ 'inventoryItems.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideBoxes></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'inventoryItems.totalItems' | translate }}
+          </span>
+
+          <strong>
+            {{ items().length }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideTrendingDown></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'inventoryItems.lowStockItems' | translate }}
+          </span>
+
+          <strong>
+            {{ lowStockCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--red">
+          <svg lucideAlertTriangle></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'inventoryItems.outOfStockItems' | translate }}
+          </span>
+
+          <strong>
+            {{ outOfStockCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucidePackage></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'inventoryItems.totalQuantity' | translate }}
+          </span>
+
+          <strong>
+            {{
+              totalQuantity()
+                | number:'1.0-2'
+            }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="panel">
+
+      <header class="toolbar">
+
+        <div class="search">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'inventoryItems.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+        </div>
+
+        <select
+          [value]="stockFilter()"
+          (change)="setStockFilter($event)">
+          <option value="all">
+            {{ 'inventoryItems.allStock' | translate }}
+          </option>
+
+          <option value="healthy">
+            {{ 'inventoryItems.healthyStock' | translate }}
+          </option>
+
+          <option value="low">
+            {{ 'inventoryItems.lowStock' | translate }}
+          </option>
+
+          <option value="out">
+            {{ 'inventoryItems.outOfStock' | translate }}
+          </option>
+        </select>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+
+            <span>
+              {{ 'common.clear' | translate }}
+            </span>
+          </button>
+        }
+
+      </header>
+
+      @if (
+        filteredItems().length === 0
+      ) {
+
+        <div class="empty">
+          <svg lucidePackage></svg>
+
+          <strong>
+            {{ 'inventoryItems.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'inventoryItems.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  {{ 'inventoryItems.item' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.sku' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.unit' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.quantityOnHand' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.reorderLevel' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.stockStatus' | translate }}
+                </th>
+
+                <th>
+                  {{ 'inventoryItems.createdAt' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                item of filteredItems();
+                track item.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="item-name">
+                      {{ item.name }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <span class="sku">
+                      {{ item.sku }}
+                    </span>
+                  </td>
+
+                  <td>
+                    {{ item.unit || '—' }}
+                  </td>
+
+                  <td>
+                    <strong>
+                      {{
+                        item.quantityOnHand
+                          | number:'1.0-2'
+                      }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    {{
+                      item.reorderLevel
+                        | number:'1.0-2'
+                    }}
+                  </td>
+
+                  <td>
+                    <app-inventory-stock-badge
+                      [quantity]="item.quantityOnHand"
+                      [reorderLevel]="item.reorderLevel" />
+                  </td>
+
+                  <td>
+                    {{
+                      item.createdAtUtc
+                        ? (
+                            item.createdAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      }
+
+      <footer class="panel-footer">
+        <span>
+          {{
+            'inventoryItems.showingItems'
+              | translate:{
+                  shown:
+                    filteredItems().length,
+                  total:
+                    items().length
+                }
+          }}
+        </span>
+
+        <span>
+          {{ 'inventoryItems.clientFilterNote' | translate }}
+        </span>
+      </footer>
+
+    </section>
+
+  }
+
+</div>

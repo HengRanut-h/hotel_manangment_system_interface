@@ -1,0 +1,170 @@
+<form
+  class="request-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-card">
+    <div class="form-card__heading">
+      <span class="form-card__icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <div>
+        <h2>
+          {{ 'securityIncidents.requestInformation' | translate }}
+        </h2>
+
+        <p>
+          {{ 'securityIncidents.requestInformationDescription' | translate }}
+        </p>
+
+        <p class="reporting-note">
+          {{ 'securityIncidents.reportingNote' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      @if (showReferenceNumber()) {
+        <label class="field">
+          <span>
+            {{ 'securityIncidents.referenceNumber' | translate }}
+            <strong>*</strong>
+          </span>
+
+          <input
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            [value]="referenceNumber()"
+            [class.field-control--invalid]="isReferenceNumberInvalid()"
+            [placeholder]="'securityIncidents.referencePlaceholder' | translate"
+            (input)="setReferenceNumber($event)" />
+
+          @if (isReferenceNumberInvalid()) {
+            <small class="field-error">
+              {{ 'securityIncidents.referenceRequired' | translate }}
+            </small>
+          }
+        </label>
+      }
+
+      <label class="field">
+        <span>
+          {{ 'securityIncidents.titleLabel' | translate }}
+          <strong>*</strong>
+        </span>
+
+        <input
+          type="text"
+          maxlength="200"
+          autocomplete="off"
+          [value]="title()"
+          [class.field-control--invalid]="isTitleInvalid()"
+          [placeholder]="'securityIncidents.titlePlaceholder' | translate"
+          (input)="setTitle($event)" />
+
+        @if (isTitleInvalid()) {
+          <small class="field-error">
+            {{ 'securityIncidents.titleRequired' | translate }}
+          </small>
+        }
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'securityIncidents.eventAt' | translate }}
+        </span>
+
+        <input
+          type="datetime-local"
+          [value]="eventAtUtc()"
+          (input)="setEventAtUtc($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'securityIncidents.amount' | translate }}
+        </span>
+
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          [value]="amount()"
+          [placeholder]="'securityIncidents.amountPlaceholder' | translate"
+          (input)="setAmount($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'securityIncidents.relatedEntityType' | translate }}
+        </span>
+
+        <input
+          type="text"
+          maxlength="100"
+          autocomplete="off"
+          [value]="relatedEntityType()"
+          [placeholder]="'securityIncidents.relatedEntityTypePlaceholder' | translate"
+          (input)="setRelatedEntityType($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'securityIncidents.relatedEntityId' | translate }}
+        </span>
+
+        <input
+          type="text"
+          autocomplete="off"
+          [value]="relatedEntityId()"
+          [placeholder]="'securityIncidents.relatedEntityIdPlaceholder' | translate"
+          (input)="setRelatedEntityId($event)" />
+      </label>
+
+      <label class="field field--full">
+        <span>
+          {{ 'securityIncidents.notes' | translate }}
+        </span>
+
+        <textarea
+          rows="5"
+          maxlength="2000"
+          [value]="notes()"
+          [placeholder]="'securityIncidents.notesPlaceholder' | translate"
+          (input)="setNotes($event)">
+        </textarea>
+      </label>
+    </div>
+  </section>
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      <svg lucideArrowLeft></svg>
+      <span>
+        {{ 'common.cancel' | translate }}
+      </span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+      <svg lucideCheck></svg>
+      <span>
+        {{
+          (
+            submitting()
+              ? 'common.saving'
+              : submitLabel()
+          )
+          | translate
+        }}
+      </span>
+    </button>
+  </footer>
+</form>

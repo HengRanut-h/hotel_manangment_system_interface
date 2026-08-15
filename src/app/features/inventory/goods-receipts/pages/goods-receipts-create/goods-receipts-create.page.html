@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'goodsReceipts.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'goodsReceipts.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'goodsReceipts.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-goods-receipt-form
+    submitLabel="goodsReceipts.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

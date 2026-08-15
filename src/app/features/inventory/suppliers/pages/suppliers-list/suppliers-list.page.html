@@ -1,0 +1,397 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'suppliers.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'suppliers.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'suppliers.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'suppliers.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/inventory/suppliers/create">
+        <svg lucideCirclePlus></svg>
+
+        <span>
+          {{ 'suppliers.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'suppliers.loading' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <svg lucideTruck></svg>
+
+      <strong>
+        {{ 'suppliers.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideTruck></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'suppliers.totalSuppliers' | translate }}
+          </span>
+
+          <strong>
+            {{ suppliers().length }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideTruck></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'suppliers.activeSuppliers' | translate }}
+          </span>
+
+          <strong>
+            {{ activeCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--gray">
+          <svg lucideArchive></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'suppliers.inactiveSuppliers' | translate }}
+          </span>
+
+          <strong>
+            {{ inactiveCount() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideTruck></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'suppliers.branchScoped' | translate }}
+          </span>
+
+          <strong>
+            {{ branchScopedCount() }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="panel">
+
+      <header class="toolbar">
+
+        <div class="search">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'suppliers.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+        </div>
+
+        <select
+          [value]="statusFilter()"
+          (change)="setStatusFilter($event)">
+          <option value="all">
+            {{ 'suppliers.allStatuses' | translate }}
+          </option>
+
+          <option value="active">
+            {{ 'suppliers.active' | translate }}
+          </option>
+
+          <option value="inactive">
+            {{ 'suppliers.inactive' | translate }}
+          </option>
+        </select>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+
+            {{ 'common.clear' | translate }}
+          </button>
+        }
+
+      </header>
+
+      @if (
+        filteredSuppliers().length === 0
+      ) {
+
+        <div class="empty">
+          <svg lucideTruck></svg>
+
+          <strong>
+            {{ 'suppliers.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'suppliers.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  {{ 'suppliers.supplier' | translate }}
+                </th>
+
+                <th>
+                  {{ 'suppliers.code' | translate }}
+                </th>
+
+                <th>
+                  {{ 'suppliers.descriptionLabel' | translate }}
+                </th>
+
+                <th>
+                  {{ 'suppliers.status' | translate }}
+                </th>
+
+                <th>
+                  {{ 'suppliers.createdAt' | translate }}
+                </th>
+
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                supplier of filteredSuppliers();
+                track supplier.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="supplier-name">
+                      {{ supplier.name }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <span class="code">
+                      {{ supplier.code }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="description-cell">
+                      {{
+                        supplier.description
+                        ||
+                        '—'
+                      }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <app-supplier-status-badge
+                      [isActive]="supplier.isActive" />
+                  </td>
+
+                  <td>
+                    {{
+                      supplier.createdAtUtc
+                        ? (
+                            supplier.createdAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    <div class="row-actions">
+
+                      <a
+                        class="icon-action icon-action--view"
+                        [routerLink]="[
+                          '/app/inventory/suppliers',
+                          supplier.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+
+                      @if (
+                        auth.hasPermission(
+                          'suppliers.update'
+                        )
+                      ) {
+                        <a
+                          class="icon-action icon-action--edit"
+                          [routerLink]="[
+                            '/app/inventory/suppliers',
+                            supplier.id,
+                            'edit'
+                          ]"
+                          [title]="'common.edit' | translate"
+                          [attr.aria-label]="'common.edit' | translate">
+                          <svg lucidePencil></svg>
+                        </a>
+                      }
+
+                      @if (
+                        auth.hasPermission(
+                          'suppliers.delete'
+                        )
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-action icon-action--delete"
+                          [disabled]="deletingId() === supplier.id"
+                          [title]="'common.delete' | translate"
+                          [attr.aria-label]="'common.delete' | translate"
+                          (click)="requestDelete(supplier.id)">
+                          <svg lucideTrash2></svg>
+                        </button>
+                      }
+
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      }
+
+      <footer class="panel-footer">
+        {{
+          'suppliers.showingSuppliers'
+            | translate:{
+                shown:
+                  filteredSuppliers().length,
+                total:
+                  suppliers().length
+              }
+        }}
+      </footer>
+
+    </section>
+
+  }
+
+</div>
+
+@if (confirmDeleteId(); as id) {
+
+  <div
+    class="dialog-backdrop"
+    (click)="cancelDelete()">
+
+    <section
+      class="dialog"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()">
+
+      <span class="dialog__icon">
+        <svg lucideTrash2></svg>
+      </span>
+
+      <h2>
+        {{ 'suppliers.deleteTitle' | translate }}
+      </h2>
+
+      <p>
+        {{ 'suppliers.deleteDescription' | translate }}
+      </p>
+
+      <div class="dialog__actions">
+        <button
+          type="button"
+          class="dialog-button dialog-button--secondary"
+          [disabled]="deletingId() === id"
+          (click)="cancelDelete()">
+          {{ 'common.cancel' | translate }}
+        </button>
+
+        <button
+          type="button"
+          class="dialog-button dialog-button--danger"
+          [disabled]="deletingId() === id"
+          (click)="confirmDelete(id)">
+          {{
+            (
+              deletingId() === id
+                ? 'common.deleting'
+                : 'common.delete'
+            )
+              | translate
+          }}
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+}

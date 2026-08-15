@@ -1,0 +1,869 @@
+<div class="page">
+
+  <!-- ===================================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ===================================================== -->
+
+  <header class="page-heading">
+
+    <div>
+
+      <span class="eyebrow">
+        {{ 'stockTransactions.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'stockTransactions.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'stockTransactions.description' | translate }}
+      </p>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- CREATE -->
+    <!-- =================================================== -->
+
+    @if (
+      auth.hasPermission(
+        'stock-transactions.create'
+      )
+    ) {
+
+      <a
+        class="create-button"
+        routerLink="/app/inventory/stock-transactions/create">
+
+        <svg lucideCirclePlus></svg>
+
+        <span>
+          {{ 'stockTransactions.create' | translate }}
+        </span>
+
+      </a>
+
+    }
+
+  </header>
+
+
+  <!-- ===================================================== -->
+  <!-- LOADING -->
+  <!-- ===================================================== -->
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'stockTransactions.loading' | translate" />
+
+  }
+
+
+  <!-- ===================================================== -->
+  <!-- ERROR -->
+  <!-- ===================================================== -->
+
+  @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <span class="state-icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <strong>
+        {{ 'stockTransactions.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+
+      </button>
+
+    </section>
+
+  }
+
+
+  <!-- ===================================================== -->
+  <!-- CONTENT -->
+  <!-- ===================================================== -->
+
+  @else {
+
+    <!-- =================================================== -->
+    <!-- SUMMARY -->
+    <!-- =================================================== -->
+
+    <section class="summary-grid">
+
+      <!-- TOTAL -->
+
+      <article class="summary-card">
+
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+
+          <span>
+            {{ 'stockTransactions.totalRequests' | translate }}
+          </span>
+
+          <strong>
+            {{ totalItems() }}
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- COMPLETED -->
+
+      <article class="summary-card">
+
+        <span class="summary-icon summary-icon--green">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+
+          <span>
+            {{ 'stockTransactions.completedOnPage' | translate }}
+          </span>
+
+          <strong>
+            {{ completedOnPage() }}
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- AMOUNT -->
+
+      <article class="summary-card">
+
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideClipboardList></svg>
+        </span>
+
+        <div>
+
+          <span>
+            {{
+              'stockTransactions.recordedAmountOnPage'
+                | translate
+            }}
+          </span>
+
+          <strong>
+            {{
+              recordedAmountOnPage()
+                | number:'1.0-2'
+            }}
+          </strong>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- TABLE PANEL -->
+    <!-- =================================================== -->
+
+    <section class="panel">
+
+
+      <!-- ================================================= -->
+      <!-- FILTER TOOLBAR -->
+      <!-- ================================================= -->
+
+      <header class="toolbar">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-field">
+
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="
+              'stockTransactions.searchPlaceholder'
+                | translate
+            "
+            (input)="setSearch($event)"
+            (keydown)="onSearchKeydown($event)" />
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <input
+          class="filter-control"
+          type="text"
+          autocomplete="off"
+          [value]="status()"
+          [placeholder]="
+            'stockTransactions.statusFilterPlaceholder'
+              | translate
+          "
+          (input)="setStatus($event)"
+          (keydown)="onSearchKeydown($event)" />
+
+
+        <!-- SEARCH BUTTON -->
+
+        <button
+          type="button"
+          class="filter-button"
+          [disabled]="loading()"
+          (click)="applyFilters()">
+
+          <svg lucideSearch></svg>
+
+          <span>
+            {{ 'common.search' | translate }}
+          </span>
+
+        </button>
+
+
+        <!-- CLEAR -->
+
+        @if (hasFilters()) {
+
+          <button
+            type="button"
+            class="clear-button"
+            [disabled]="loading()"
+            (click)="clearFilters()">
+
+            <svg lucideX></svg>
+
+            <span>
+              {{ 'common.clear' | translate }}
+            </span>
+
+          </button>
+
+        }
+
+      </header>
+
+
+      <!-- ================================================= -->
+      <!-- EMPTY -->
+      <!-- ================================================= -->
+
+      @if (items().length === 0) {
+
+        <div class="empty">
+
+          <svg lucideClipboardList></svg>
+
+          <strong>
+            {{ 'stockTransactions.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{
+              'stockTransactions.noResultsDescription'
+                | translate
+            }}
+          </span>
+
+        </div>
+
+      }
+
+
+      <!-- ================================================= -->
+      <!-- TABLE -->
+      <!-- ================================================= -->
+
+      @else {
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  {{ 'stockTransactions.reference' | translate }}
+                </th>
+
+                <th>
+                  {{ 'stockTransactions.titleLabel' | translate }}
+                </th>
+
+                <th>
+                  {{ 'stockTransactions.status' | translate }}
+                </th>
+
+                <th>
+                  {{ 'stockTransactions.relatedTo' | translate }}
+                </th>
+
+                <th>
+                  {{ 'stockTransactions.eventAt' | translate }}
+                </th>
+
+                <th>
+                  {{ 'stockTransactions.amount' | translate }}
+                </th>
+
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                item of items();
+                track item.id
+              ) {
+
+                <tr>
+
+
+                  <!-- ===================================== -->
+                  <!-- REFERENCE -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    <strong class="reference">
+                      {{
+                        item.referenceNumber
+                        ||
+                        '—'
+                      }}
+                    </strong>
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- TITLE -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    <div class="title-cell">
+
+                      <strong>
+                        {{
+                          item.title
+                          ||
+                          '—'
+                        }}
+                      </strong>
+
+
+                      @if (item.notes) {
+
+                        <small>
+                          {{ item.notes }}
+                        </small>
+
+                      }
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- STATUS -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    <app-stock-transaction-status-badge
+                      [status]="item.status" />
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- RELATED INVENTORY ITEM -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    <div class="related-cell">
+
+                      @if (
+                        isInventoryItemRelation(
+                          item.relatedEntityType
+                        )
+                      ) {
+
+                        <strong>
+                          {{
+                            inventoryItemLabel(
+                              item.relatedEntityId
+                            )
+                          }}
+                        </strong>
+
+                        <small>
+                          {{
+                            'stockTransactions.inventoryItem'
+                              | translate
+                          }}
+                        </small>
+
+                      } @else {
+
+                        <strong>
+                          {{
+                            item.relatedEntityType
+                            ||
+                            '—'
+                          }}
+                        </strong>
+
+                      }
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- EVENT DATE -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    {{
+                      item.eventAtUtc
+                        ? (
+                            item.eventAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- AMOUNT -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    {{
+                      item.amount === null
+                      ||
+                      item.amount === undefined
+                        ? '—'
+                        : (
+                            item.amount
+                              | number:'1.2-2'
+                          )
+                    }}
+
+                  </td>
+
+
+                  <!-- ===================================== -->
+                  <!-- ACTIONS -->
+                  <!-- ===================================== -->
+
+                  <td>
+
+                    <div class="row-actions">
+
+
+                      <!-- VIEW -->
+
+                      <a
+                        class="
+                          icon-action
+                          icon-action--view
+                        "
+                        [routerLink]="[
+                          '/app/inventory/stock-transactions',
+                          item.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="
+                          'common.view'
+                            | translate
+                        ">
+
+                        <svg lucideEye></svg>
+
+                      </a>
+
+
+                      <!-- EDIT -->
+
+                      @if (
+                        auth.hasPermission(
+                          'stock-transactions.update'
+                        )
+                      ) {
+
+                        <a
+                          class="
+                            icon-action
+                            icon-action--edit
+                          "
+                          [routerLink]="[
+                            '/app/inventory/stock-transactions',
+                            item.id,
+                            'edit'
+                          ]"
+                          [title]="
+                            'common.edit'
+                              | translate
+                          "
+                          [attr.aria-label]="
+                            'common.edit'
+                              | translate
+                          ">
+
+                          <svg lucidePencil></svg>
+
+                        </a>
+
+                      }
+
+
+                      <!-- DELETE -->
+
+                      @if (
+                        auth.hasPermission(
+                          'stock-transactions.delete'
+                        )
+                      ) {
+
+                        <button
+                          type="button"
+                          class="
+                            icon-action
+                            icon-action--delete
+                          "
+                          [disabled]="
+                            deletingId()
+                            !== null
+                          "
+                          [title]="
+                            'common.delete'
+                              | translate
+                          "
+                          [attr.aria-label]="
+                            'common.delete'
+                              | translate
+                          "
+                          (click)="requestDelete(item)">
+
+
+                          @if (
+                            deletingId()
+                            === item.id
+                          ) {
+
+                            <app-spin
+                              [inline]="true"
+                              size="small"
+                              label="" />
+
+                          } @else {
+
+                            <svg lucideTrash2></svg>
+
+                          }
+
+                        </button>
+
+                      }
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- =============================================== -->
+        <!-- PAGINATION -->
+        <!-- =============================================== -->
+
+        <footer class="pagination">
+
+          <span>
+
+            {{
+              'stockTransactions.showing'
+                | translate
+            }}
+
+            <strong>
+              {{ items().length }}
+            </strong>
+
+            /
+
+            <strong>
+              {{ totalItems() }}
+            </strong>
+
+          </span>
+
+
+          <div>
+
+
+            <!-- PREVIOUS -->
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="
+                !hasPreviousPage()
+                ||
+                loading()
+              "
+              (click)="previousPage()">
+
+              <svg lucideChevronLeft></svg>
+
+              <span>
+                {{ 'common.previous' | translate }}
+              </span>
+
+            </button>
+
+
+            <!-- PAGE -->
+
+            <span class="page-number">
+
+              {{ 'common.page' | translate }}
+
+              <strong>
+                {{ pageNumber() }}
+              </strong>
+
+              {{ 'common.of' | translate }}
+
+              <strong>
+                {{ totalPages() }}
+              </strong>
+
+            </span>
+
+
+            <!-- NEXT -->
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="
+                !hasNextPage()
+                ||
+                loading()
+              "
+              (click)="nextPage()">
+
+              <span>
+                {{ 'common.next' | translate }}
+              </span>
+
+              <svg lucideChevronRight></svg>
+
+            </button>
+
+          </div>
+
+        </footer>
+
+      }
+
+    </section>
+
+  }
+
+
+  <!-- ===================================================== -->
+  <!-- DELETE CONFIRMATION -->
+  <!-- ===================================================== -->
+
+  @if (
+    deleteTarget();
+    as deleteItem
+  ) {
+
+    <div
+      class="modal-backdrop"
+      role="presentation"
+      (click)="cancelDelete()">
+
+
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="
+          'stockTransactions.deleteTitle'
+            | translate
+        "
+        (click)="$event.stopPropagation()">
+
+
+        <!-- ICON -->
+
+        <span class="confirm-dialog__icon">
+          <svg lucideTrash2></svg>
+        </span>
+
+
+        <!-- TITLE -->
+
+        <h2>
+          {{ 'stockTransactions.deleteTitle' | translate }}
+        </h2>
+
+
+        <!-- DESCRIPTION -->
+
+        <p>
+
+          {{
+            'stockTransactions.deleteDescription'
+              | translate:{
+                  name:
+                    deleteItem.referenceNumber
+                    ||
+                    deleteItem.title
+                    ||
+                    deleteItem.id
+                }
+          }}
+
+        </p>
+
+
+        <!-- ACTIONS -->
+
+        <div class="confirm-dialog__actions">
+
+
+          <!-- CANCEL -->
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="
+              deletingId()
+              !== null
+            "
+            (click)="cancelDelete()">
+
+            {{ 'common.cancel' | translate }}
+
+          </button>
+
+
+          <!-- DELETE -->
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="
+              deletingId()
+              !== null
+            "
+            (click)="confirmDelete()">
+
+
+            @if (
+              deletingId()
+              !== null
+            ) {
+
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+
+            } @else {
+
+              <svg lucideTrash2></svg>
+
+            }
+
+
+            <span>
+
+              {{
+                (
+                  deletingId() !== null
+                    ? 'stockTransactions.deleting'
+                    : 'common.delete'
+                )
+                  | translate
+              }}
+
+            </span>
+
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  }
+
+</div>

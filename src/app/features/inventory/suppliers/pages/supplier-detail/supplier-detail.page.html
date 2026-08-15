@@ -1,0 +1,153 @@
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/inventory/suppliers">
+    <svg lucideArrowLeft></svg>
+
+    {{ 'suppliers.backToSuppliers' | translate }}
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'suppliers.loadingSupplier' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <div class="state state--error">
+      <p>
+        {{ errorMessage() }}
+      </p>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </div>
+
+  } @else if (supplier(); as item) {
+
+    <header class="page-heading">
+
+      <div class="identity">
+        <span class="identity__icon">
+          <svg lucideTruck></svg>
+        </span>
+
+        <div>
+          <span class="eyebrow">
+            {{ 'suppliers.supplier' | translate }}
+          </span>
+
+          <h1>
+            {{ item.name }}
+          </h1>
+
+          <span class="code">
+            {{ item.code }}
+          </span>
+        </div>
+      </div>
+
+      <div class="heading-actions">
+
+        <app-supplier-status-badge
+          [isActive]="item.isActive" />
+
+        @if (
+          auth.hasPermission(
+            'suppliers.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/inventory/suppliers',
+              item.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+
+            {{ 'common.edit' | translate }}
+          </a>
+        }
+
+      </div>
+
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="card card--wide">
+        <span class="label">
+          {{ 'suppliers.descriptionLabel' | translate }}
+        </span>
+
+        <p>
+          {{
+            item.description
+            ||
+            ('suppliers.noDescription' | translate)
+          }}
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'suppliers.status' | translate }}
+        </span>
+
+        <strong>
+          {{
+            (
+              item.isActive
+                ? 'suppliers.active'
+                : 'suppliers.inactive'
+            )
+              | translate
+          }}
+        </strong>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'suppliers.scope' | translate }}
+        </span>
+
+        <strong>
+          {{
+            (
+              item.branchId
+                ? 'suppliers.branchScope'
+                : 'suppliers.hotelScope'
+            )
+              | translate
+          }}
+        </strong>
+      </article>
+
+      <article class="card">
+        <span class="label">
+          {{ 'suppliers.createdAt' | translate }}
+        </span>
+
+        <strong>
+          {{
+            item.createdAtUtc
+              ? (
+                  item.createdAtUtc
+                    | date:'medium'
+                )
+              : '—'
+          }}
+        </strong>
+      </article>
+
+    </section>
+
+  }
+
+</div>

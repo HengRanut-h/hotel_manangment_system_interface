@@ -1,0 +1,23 @@
+<div class="page">
+
+  <header>
+    <span>
+      {{ 'suppliers.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'suppliers.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'suppliers.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-supplier-form
+    [submitting]="submitting()"
+    [showStatus]="false"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+
+</div>

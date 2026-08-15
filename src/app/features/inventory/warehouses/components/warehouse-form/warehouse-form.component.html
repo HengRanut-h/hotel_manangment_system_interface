@@ -1,0 +1,121 @@
+<form
+  class="warehouse-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <header class="form-heading">
+    <span class="form-heading__icon">
+      <svg lucideWarehouse></svg>
+    </span>
+
+    <div>
+      <h2>
+        {{ 'warehouses.information' | translate }}
+      </h2>
+
+      <p>
+        {{ 'warehouses.informationDescription' | translate }}
+      </p>
+    </div>
+  </header>
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        {{ 'warehouses.name' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="200"
+        autocomplete="off"
+        [value]="name()"
+        [placeholder]="'warehouses.namePlaceholder' | translate"
+        (input)="setName($event)" />
+    </label>
+
+    <label class="field">
+      <span>
+        {{ 'warehouses.code' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="100"
+        autocomplete="off"
+        [value]="code()"
+        [placeholder]="'warehouses.codePlaceholder' | translate"
+        (input)="setCode($event)" />
+    </label>
+
+    <label class="field field--wide">
+      <span>
+        {{ 'warehouses.descriptionLabel' | translate }}
+      </span>
+
+      <textarea
+        rows="5"
+        maxlength="1000"
+        [value]="description()"
+        [placeholder]="'warehouses.descriptionPlaceholder' | translate"
+        (input)="setDescription($event)"></textarea>
+    </label>
+
+    @if (showStatus()) {
+      <label class="status-field field--wide">
+        <span class="status-copy">
+          <strong>
+            {{ 'warehouses.activeStatus' | translate }}
+          </strong>
+
+          <small>
+            {{ 'warehouses.activeStatusDescription' | translate }}
+          </small>
+        </span>
+
+        <input
+          type="checkbox"
+          [checked]="isActive()"
+          (change)="setStatus($event)" />
+      </label>
+    }
+
+  </div>
+
+  @if (isInvalid()) {
+    <p class="form-error">
+      {{ 'warehouses.formInvalid' | translate }}
+    </p>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+      <svg lucideCheck></svg>
+
+      <span>
+        {{
+          (
+            submitting()
+              ? 'common.saving'
+              : 'common.save'
+          )
+            | translate
+        }}
+      </span>
+    </button>
+  </footer>
+
+</form>

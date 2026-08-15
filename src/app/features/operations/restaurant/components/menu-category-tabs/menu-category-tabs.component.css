@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.tabs button {
+  min-height: 36px;
+  flex: 0 0 auto;
+  padding: 0 13px;
+  border: 1px solid #d0d5dd;
+  border-radius: 999px;
+  background: #fff;
+  color: #475467;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.tabs button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: #b2b7c2;
+  background: #f9fafb;
+}
+
+.tabs button.tab--active {
+  border-color: #c7d7fe;
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.tabs button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}

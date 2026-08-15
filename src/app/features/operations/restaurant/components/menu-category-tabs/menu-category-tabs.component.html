@@ -1,0 +1,29 @@
+<div
+  class="tabs"
+  role="tablist">
+
+  <button
+    type="button"
+    role="tab"
+    [class.tab--active]="selectedId() === null"
+    [attr.aria-selected]="selectedId() === null"
+    (click)="choose(null)">
+    {{ 'restaurant.allCategories' | translate }}
+  </button>
+
+  @for (
+    category of categories();
+    track category.id
+  ) {
+    <button
+      type="button"
+      role="tab"
+      [disabled]="!category.isActive"
+      [class.tab--active]="selectedId() === category.id"
+      [attr.aria-selected]="selectedId() === category.id"
+      (click)="choose(category.id)">
+      {{ category.name }}
+    </button>
+  }
+
+</div>

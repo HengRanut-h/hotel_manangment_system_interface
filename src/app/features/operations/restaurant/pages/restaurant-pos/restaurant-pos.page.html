@@ -1,0 +1,286 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'restaurant.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'restaurant.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'restaurant.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'restaurant.manage'
+      )
+      ||
+      auth.hasPermission(
+        'restaurant.create'
+      )
+    ) {
+      <a
+        class="manage-button"
+        routerLink="/app/operations/restaurant/menu">
+        <svg lucideSettings2></svg>
+
+        <span>
+          {{ 'restaurant.manageMenu' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'restaurant.loadingMenu' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <svg lucideChefHat></svg>
+
+      <strong>
+        {{ 'restaurant.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="loadMenu()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideUtensils></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'restaurant.totalMenuItems' | translate }}
+          </span>
+
+          <strong>
+            {{ menu().items.length }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideChefHat></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'restaurant.availableItems' | translate }}
+          </span>
+
+          <strong>
+            {{ availableItems() }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideListFilter></svg>
+        </span>
+
+        <div>
+          <span>
+            {{ 'restaurant.totalCategories' | translate }}
+          </span>
+
+          <strong>
+            {{ menu().categories.length }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="workspace">
+
+      <div class="menu-panel">
+
+        <div class="menu-toolbar">
+          <div class="search">
+            <svg lucideSearch></svg>
+
+            <input
+              type="search"
+              [value]="search()"
+              [placeholder]="'restaurant.searchMenu' | translate"
+              (input)="setSearch($event)" />
+          </div>
+
+          <app-menu-category-tabs
+            [categories]="visibleCategories()"
+            [selectedId]="selectedCategoryId()"
+            (selected)="setCategory($event)" />
+        </div>
+
+        @if (
+          filteredItems().length === 0
+        ) {
+          <div class="state">
+            <svg lucideUtensils></svg>
+
+            <strong>
+              {{ 'restaurant.noMenuItems' | translate }}
+            </strong>
+
+            <span>
+              {{ 'restaurant.noMenuItemsDescription' | translate }}
+            </span>
+          </div>
+        } @else {
+          <div class="menu-grid">
+            @for (
+              item of filteredItems();
+              track item.id
+            ) {
+              <app-menu-item-card
+                [item]="item"
+                [canOrder]="canCreateOrder()"
+                (add)="addItem($event)" />
+            }
+          </div>
+        }
+
+      </div>
+
+      <aside class="checkout-panel">
+
+        <app-pos-cart
+          [items]="store.cartItems()"
+          [subtotal]="store.subtotal()"
+          [disabled]="store.submitting()"
+          (increment)="store.increment($event)"
+          (decrement)="store.decrement($event)"
+          (remove)="store.remove($event)" />
+
+        @if (canCreateOrder()) {
+          <section class="order-context">
+            <h2>
+              {{ 'restaurant.orderContext' | translate }}
+            </h2>
+
+            <p>
+              {{ 'restaurant.orderContextHelp' | translate }}
+            </p>
+
+            <label>
+              <span>
+                {{ 'restaurant.roomId' | translate }}
+              </span>
+
+              <input
+                type="text"
+                [value]="roomId()"
+                [placeholder]="'restaurant.optionalRoomId' | translate"
+                [disabled]="store.submitting()"
+                (input)="setRoomId($event)" />
+            </label>
+
+            <label>
+              <span>
+                {{ 'restaurant.guestId' | translate }}
+              </span>
+
+              <input
+                type="text"
+                [value]="guestId()"
+                [placeholder]="'restaurant.optionalGuestId' | translate"
+                [disabled]="store.submitting()"
+                (input)="setGuestId($event)" />
+            </label>
+
+            <p class="technical-note">
+              {{ 'restaurant.lookupCompatibilityNote' | translate }}
+            </p>
+          </section>
+
+          @if (
+            store.partialFailure()
+            &&
+            store.createdOrder();
+            as order
+          ) {
+            <section class="partial-warning">
+              <strong>
+                {{ 'restaurant.orderCreatedPartially' | translate }}
+              </strong>
+
+              <span>
+                {{
+                  'restaurant.partialOrderNumber'
+                    | translate:{
+                        number:
+                          order.orderNumber
+                          || order.id
+                      }
+                }}
+              </span>
+            </section>
+          }
+
+          <button
+            type="button"
+            class="create-order"
+            [disabled]="
+              store.submitting()
+              ||
+              store.cartItems().length === 0
+            "
+            (click)="createOrder()">
+
+            @if (
+              store.submitting()
+            ) {
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+            } @else {
+              <svg lucideShoppingCart></svg>
+            }
+
+            <span>
+              {{
+                (
+                  store.submitting()
+                    ? 'restaurant.creatingOrder'
+                    : 'restaurant.createOrder'
+                )
+                | translate
+              }}
+            </span>
+          </button>
+        }
+
+      </aside>
+
+    </section>
+
+  }
+
+</div>

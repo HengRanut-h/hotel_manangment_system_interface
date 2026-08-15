@@ -1,0 +1,52 @@
+<div class="page">
+
+  <header>
+    <span>
+      {{ 'warehouses.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'warehouses.edit' | translate }}
+    </h1>
+
+    <p>
+      {{ 'warehouses.editDescription' | translate }}
+    </p>
+  </header>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'warehouses.loadingWarehouse' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <p>
+        {{ errorMessage() }}
+      </p>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (warehouse(); as item) {
+
+    <app-warehouse-form
+      [initialBranchId]="item.branchId"
+      [initialName]="item.name"
+      [initialCode]="item.code"
+      [initialDescription]="item.description"
+      [initialIsActive]="item.isActive"
+      [showStatus]="true"
+      [submitting]="submitting()"
+      (submitted)="submit($event)"
+      (cancelled)="cancel()" />
+
+  }
+
+</div>

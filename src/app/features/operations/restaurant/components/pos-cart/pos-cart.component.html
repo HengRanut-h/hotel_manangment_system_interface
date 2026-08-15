@@ -1,0 +1,128 @@
+<section class="cart">
+
+  <header>
+    <div>
+      <span class="cart-icon">
+        <svg lucideShoppingBag></svg>
+      </span>
+
+      <div>
+        <h2>
+          {{ 'restaurant.currentOrder' | translate }}
+        </h2>
+
+        <p>
+          {{
+            'restaurant.cartItemCount'
+              | translate:{
+                  count: items().length
+                }
+          }}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  @if (items().length === 0) {
+
+    <div class="empty-cart">
+      <svg lucideShoppingBag></svg>
+
+      <strong>
+        {{ 'restaurant.emptyCart' | translate }}
+      </strong>
+
+      <span>
+        {{ 'restaurant.emptyCartDescription' | translate }}
+      </span>
+    </div>
+
+  } @else {
+
+    <div class="cart-items">
+      @for (
+        item of items();
+        track item.menuItem.id
+      ) {
+        <article class="cart-row">
+
+          <div class="cart-row__name">
+            <strong>
+              {{ item.menuItem.name }}
+            </strong>
+
+            <small>
+              {{
+                item.menuItem.price
+                  | number:'1.2-2'
+              }}
+              ×
+              {{ item.quantity }}
+            </small>
+          </div>
+
+          <div class="quantity">
+            <button
+              type="button"
+              [disabled]="disabled()"
+              [title]="'restaurant.decrease' | translate"
+              [attr.aria-label]="'restaurant.decrease' | translate"
+              (click)="decrease(item.menuItem.id)">
+              <svg lucideMinus></svg>
+            </button>
+
+            <span>
+              {{ item.quantity }}
+            </span>
+
+            <button
+              type="button"
+              [disabled]="disabled()"
+              [title]="'restaurant.increase' | translate"
+              [attr.aria-label]="'restaurant.increase' | translate"
+              (click)="increase(item.menuItem.id)">
+              <svg lucidePlus></svg>
+            </button>
+          </div>
+
+          <strong class="line-total">
+            {{
+              (
+                item.menuItem.price
+                *
+                item.quantity
+              )
+                | number:'1.2-2'
+            }}
+          </strong>
+
+          <button
+            type="button"
+            class="remove"
+            [disabled]="disabled()"
+            [title]="'common.remove' | translate"
+            [attr.aria-label]="'common.remove' | translate"
+            (click)="removeItem(item.menuItem.id)">
+            <svg lucideTrash2></svg>
+          </button>
+
+        </article>
+      }
+    </div>
+
+    <footer>
+      <span>
+        {{ 'restaurant.subtotal' | translate }}
+      </span>
+
+      <strong>
+        {{
+          subtotal()
+            | number:'1.2-2'
+        }}
+      </strong>
+    </footer>
+
+  }
+
+</section>

@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.page {
+  width: min(900px, 100%);
+  display: grid;
+  gap: 18px;
+}
+
+header > span {
+  color: #667085;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+header h1 {
+  margin: 6px 0 0;
+  color: #101828;
+  font-size: 28px;
+}
+
+header p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 12px;
+}
+
+.saving {
+  padding: 10px 12px;
+  border: 1px solid #d1e9ff;
+  border-radius: 10px;
+  background: #eff8ff;
+}

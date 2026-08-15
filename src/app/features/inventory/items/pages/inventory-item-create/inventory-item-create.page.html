@@ -1,0 +1,30 @@
+<div class="page">
+
+  <header>
+    <span>
+      {{ 'inventoryItems.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'inventoryItems.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'inventoryItems.createDescription' | translate }}
+    </p>
+  </header>
+
+  @if (submitting()) {
+    <div class="saving">
+      <app-spin
+        [inline]="true"
+        size="small"
+        [label]="'common.saving' | translate" />
+    </div>
+  }
+
+  <app-inventory-item-form
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+
+</div>

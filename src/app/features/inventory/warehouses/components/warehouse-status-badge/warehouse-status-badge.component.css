@@ -1,0 +1,28 @@
+:host {
+  display: inline-flex;
+}
+
+.badge {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge--active {
+  border-color: #abefc6;
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.badge--inactive {
+  border-color: #d0d5dd;
+  background: #f2f4f7;
+  color: #475467;
+}

@@ -1,0 +1,121 @@
+<form
+  class="supplier-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <header class="form-heading">
+    <span class="form-heading__icon">
+      <svg lucideTruck></svg>
+    </span>
+
+    <div>
+      <h2>
+        {{ 'suppliers.information' | translate }}
+      </h2>
+
+      <p>
+        {{ 'suppliers.informationDescription' | translate }}
+      </p>
+    </div>
+  </header>
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        {{ 'suppliers.name' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="200"
+        autocomplete="off"
+        [value]="name()"
+        [placeholder]="'suppliers.namePlaceholder' | translate"
+        (input)="setName($event)" />
+    </label>
+
+    <label class="field">
+      <span>
+        {{ 'suppliers.code' | translate }}
+        <strong>*</strong>
+      </span>
+
+      <input
+        type="text"
+        maxlength="100"
+        autocomplete="off"
+        [value]="code()"
+        [placeholder]="'suppliers.codePlaceholder' | translate"
+        (input)="setCode($event)" />
+    </label>
+
+    <label class="field field--wide">
+      <span>
+        {{ 'suppliers.descriptionLabel' | translate }}
+      </span>
+
+      <textarea
+        rows="5"
+        maxlength="1000"
+        [value]="description()"
+        [placeholder]="'suppliers.descriptionPlaceholder' | translate"
+        (input)="setDescription($event)"></textarea>
+    </label>
+
+    @if (showStatus()) {
+      <label class="status-field field--wide">
+        <span class="status-copy">
+          <strong>
+            {{ 'suppliers.activeStatus' | translate }}
+          </strong>
+
+          <small>
+            {{ 'suppliers.activeStatusDescription' | translate }}
+          </small>
+        </span>
+
+        <input
+          type="checkbox"
+          [checked]="isActive()"
+          (change)="setStatus($event)" />
+      </label>
+    }
+
+  </div>
+
+  @if (isInvalid()) {
+    <p class="form-error">
+      {{ 'suppliers.formInvalid' | translate }}
+    </p>
+  }
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+      <svg lucideCheck></svg>
+
+      <span>
+        {{
+          (
+            submitting()
+              ? 'common.saving'
+              : 'common.save'
+          )
+            | translate
+        }}
+      </span>
+    </button>
+  </footer>
+
+</form>

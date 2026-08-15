@@ -1,0 +1,60 @@
+<div class="form-page">
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'securityIncidents.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <strong>
+        {{ 'securityIncidents.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as request) {
+
+    <header>
+      <span>
+        {{ 'securityIncidents.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'securityIncidents.edit' | translate }}
+      </h1>
+
+      <p>
+        {{ request.referenceNumber }}
+      </p>
+    </header>
+
+    <app-security-incident-form
+      submitLabel="securityIncidents.saveChanges"
+      [showReferenceNumber]="false"
+      [initialBranchId]="request.branchId"
+      [initialReferenceNumber]="request.referenceNumber"
+      [initialTitle]="request.title"
+      [initialNotes]="request.notes"
+      [initialAmount]="request.amount"
+      [initialEventAtUtc]="request.eventAtUtc"
+      [initialRelatedEntityId]="request.relatedEntityId"
+      [initialRelatedEntityType]="request.relatedEntityType"
+      [submitting]="submitting()"
+      (submitted)="submit($event)"
+      (cancelled)="cancel()" />
+
+  }
+
+</div>

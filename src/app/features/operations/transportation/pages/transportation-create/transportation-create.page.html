@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'transportation.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'transportation.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'transportation.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-transportation-form
+    submitLabel="transportation.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>
