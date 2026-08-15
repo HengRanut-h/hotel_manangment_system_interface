@@ -1,0 +1,165 @@
+<section class="detail-page">
+  <header class="detail-header">
+    <div>
+      <a
+        class="back-link"
+        routerLink="/app/operations/services">
+        <svg lucideArrowLeft></svg>
+        {{ 'guestServices.backToServices' | translate }}
+      </a>
+
+      <p class="eyebrow">
+        {{ 'guestServices.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'guestServices.detailTitle' | translate }}
+      </h1>
+
+      <p>
+        {{ 'guestServices.detailDescription' | translate }}
+      </p>
+    </div>
+
+    <div class="detail-actions">
+      <button
+        type="button"
+        class="button button--secondary"
+        [disabled]="loading()"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'guestServices.refresh' | translate }}
+      </button>
+
+      @if (
+        item()
+        &&
+        auth.hasPermission(
+          'services.update'
+        )
+      ) {
+        <a
+          class="button button--primary"
+          [routerLink]="[
+            '/app/operations/services',
+            item()!.id,
+            'edit'
+          ]">
+          <svg lucidePencil></svg>
+          {{ 'guestServices.edit' | translate }}
+        </a>
+      }
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="state-card">
+      <app-spin
+        size="large"
+        [label]="'guestServices.loadingOne' | translate" />
+    </div>
+
+  } @else if (errorMessage()) {
+    <div
+      class="state-card state-card--error"
+      role="alert">
+      {{ errorMessage() }}
+    </div>
+
+  } @else if (item(); as service) {
+    <section class="hero-card">
+      <div class="service-mark">
+        {{ service.name.slice(0, 1).toUpperCase() }}
+      </div>
+
+      <div class="hero-card__content">
+        <div class="hero-card__title-row">
+          <div>
+            <h2>{{ service.name }}</h2>
+            <span class="code">
+              {{ service.code }}
+            </span>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-badge--active]="service.isActive"
+            [class.status-badge--inactive]="!service.isActive">
+            {{
+              service.isActive
+                ? ('guestServices.active' | translate)
+                : ('guestServices.inactive' | translate)
+            }}
+          </span>
+        </div>
+
+        <p>
+          {{
+            service.description
+            ||
+            ('guestServices.noDescription' | translate)
+          }}
+        </p>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <header class="info-card__header">
+        <p class="eyebrow">
+          {{ 'guestServices.overview' | translate }}
+        </p>
+        <h2>
+          {{ 'guestServices.serviceInformationTitle' | translate }}
+        </h2>
+      </header>
+
+      <dl class="info-grid">
+        <div>
+          <dt>{{ 'guestServices.name' | translate }}</dt>
+          <dd>{{ service.name }}</dd>
+        </div>
+
+        <div>
+          <dt>{{ 'guestServices.code' | translate }}</dt>
+          <dd>{{ service.code }}</dd>
+        </div>
+
+        <div>
+          <dt>{{ 'guestServices.status' | translate }}</dt>
+          <dd>
+            {{
+              service.isActive
+                ? ('guestServices.active' | translate)
+                : ('guestServices.inactive' | translate)
+            }}
+          </dd>
+        </div>
+
+        <div>
+          <dt>{{ 'guestServices.created' | translate }}</dt>
+          <dd>
+            {{ service.createdAtUtc | date:'medium' }}
+          </dd>
+        </div>
+
+        <div>
+          <dt>{{ 'guestServices.branchScope' | translate }}</dt>
+          <dd class="mono">
+            {{
+              service.branchId
+              ||
+              ('guestServices.hotelWide' | translate)
+            }}
+          </dd>
+        </div>
+
+        <div>
+          <dt>{{ 'guestServices.hotelId' | translate }}</dt>
+          <dd class="mono">
+            {{ service.hotelId }}
+          </dd>
+        </div>
+      </dl>
+    </section>
+  }
+</section>

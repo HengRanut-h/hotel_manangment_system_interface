@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'laundry.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'laundry.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'laundry.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-laundry-form
+    submitLabel="laundry.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

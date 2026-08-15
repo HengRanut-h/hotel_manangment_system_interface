@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'lostAndFound.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'lostAndFound.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'lostAndFound.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-lost-and-found-form
+    submitLabel="lost-and-found.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

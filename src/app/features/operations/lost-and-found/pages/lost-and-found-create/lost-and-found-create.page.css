@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+.form-page {
+  width: min(940px, 100%);
+}
+
+.form-page > header {
+  margin-bottom: 20px;
+}
+
+.form-page > header span {
+  color: #667085;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.form-page > header h1 {
+  margin: 6px 0 0;
+  color: #101828;
+  font-size: 28px;
+}
+
+.form-page > header p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+}

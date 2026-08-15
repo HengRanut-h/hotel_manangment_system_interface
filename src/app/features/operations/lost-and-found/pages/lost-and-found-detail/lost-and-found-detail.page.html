@@ -1,0 +1,259 @@
+<div class="detail-page">
+
+  <a
+    class="back-link"
+    routerLink="/app/operations/lost-and-found">
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'lostAndFound.backToList' | translate }}
+    </span>
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'lostAndFound.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'lostAndFound.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as record) {
+
+    <header class="detail-heading">
+      <div>
+        <span>
+          {{ 'lostAndFound.section' | translate }}
+        </span>
+
+        <h1>
+          {{ record.referenceNumber }}
+        </h1>
+
+        <p>
+          {{ record.title }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+        <app-lost-and-found-status-badge
+          [status]="record.status" />
+
+        @if (
+          auth.hasPermission(
+            'lost-and-found.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/operations/lost-and-found',
+              record.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>
+          {{ 'lostAndFound.requestDetails' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'lostAndFound.reference' | translate }}
+            </dt>
+            <dd>
+              {{ record.referenceNumber || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.titleLabel' | translate }}
+            </dt>
+            <dd>
+              {{ record.title || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.status' | translate }}
+            </dt>
+            <dd>
+              <app-lost-and-found-status-badge
+                [status]="record.status" />
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.amount' | translate }}
+            </dt>
+            <dd>
+              {{
+                record.amount === null
+                  ? '—'
+                  : (
+                      record.amount
+                        | number:'1.2-2'
+                    )
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.eventAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                record.eventAtUtc
+                  ? (
+                      record.eventAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.createdAt' | translate }}
+            </dt>
+            <dd>
+              {{
+                record.createdAtUtc
+                  | date:'medium'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>
+          {{ 'lostAndFound.relationship' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'lostAndFound.relatedEntityType' | translate }}
+            </dt>
+            <dd>
+              {{ record.relatedEntityType || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.relatedEntityId' | translate }}
+            </dt>
+            <dd class="break-value">
+              {{ record.relatedEntityId || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'lostAndFound.branchId' | translate }}
+            </dt>
+            <dd class="break-value">
+              {{ record.branchId || '—' }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card detail-card--full">
+        <h2>
+          {{ 'lostAndFound.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{ record.notes || '—' }}
+        </p>
+      </article>
+
+      @if (
+        auth.hasPermission(
+          'lost-and-found.update'
+        )
+      ) {
+        <article class="detail-card detail-card--full">
+          <h2>
+            {{ 'lostAndFound.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{ 'lostAndFound.changeStatusHelp' | translate }}
+          </p>
+
+          <div class="status-editor">
+            <input
+              type="text"
+              [value]="statusDraft()"
+              [placeholder]="'lostAndFound.statusPlaceholder' | translate"
+              (input)="setStatusDraft($event)" />
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+              <svg lucideCheckCircle2></svg>
+
+              <span>
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'lostAndFound.updateStatus'
+                  )
+                  | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      }
+
+    </section>
+
+  }
+
+</div>

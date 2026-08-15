@@ -1,0 +1,488 @@
+<section class="page">
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        {{ 'guestServices.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'guestServices.title' | translate }}
+      </h1>
+
+      <p class="description">
+        {{ 'guestServices.description' | translate }}
+      </p>
+    </div>
+
+    <div class="page-actions">
+      <button
+        type="button"
+        class="top-button top-button--secondary"
+        [disabled]="loading()"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>
+          {{ 'guestServices.refresh' | translate }}
+        </span>
+      </button>
+
+      @if (
+        auth.hasPermission(
+          'services.create'
+        )
+      ) {
+        <a
+          class="top-button top-button--primary"
+          routerLink="/app/operations/services/create">
+          <svg lucideCirclePlus></svg>
+          <span>
+            {{ 'guestServices.addService' | translate }}
+          </span>
+        </a>
+      }
+    </div>
+  </header>
+
+  <div class="summary-grid">
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideCirclePlus></svg>
+      </div>
+
+      <div>
+        <strong>{{ totalItems() }}</strong>
+        <span>
+          {{ 'guestServices.totalServices' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <span>✓</span>
+      </div>
+
+      <div>
+        <strong>{{ activeOnPage() }}</strong>
+        <span>
+          {{ 'guestServices.activeOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--red">
+        <span>—</span>
+      </div>
+
+      <div>
+        <strong>{{ inactiveOnPage() }}</strong>
+        <span>
+          {{ 'guestServices.inactiveOnPage' | translate }}
+        </span>
+      </div>
+    </article>
+  </div>
+
+  <section class="filter-card">
+    <div class="filter-grid">
+
+      <label class="filter-field">
+        <span>
+          {{ 'guestServices.search' | translate }}
+        </span>
+
+        <div class="input-with-icon">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'guestServices.searchPlaceholder' | translate"
+            (input)="setSearch($event)"
+            (keydown)="onSearchKeydown($event)" />
+        </div>
+      </label>
+
+      <label class="filter-field">
+        <span>
+          {{ 'guestServices.status' | translate }}
+        </span>
+
+        <select
+          [value]="
+            isActiveFilter() === true
+              ? 'active'
+              : isActiveFilter() === false
+                ? 'inactive'
+                : 'all'
+          "
+          (change)="setStatus($event)">
+          <option value="all">
+            {{ 'guestServices.allStatuses' | translate }}
+          </option>
+          <option value="active">
+            {{ 'guestServices.active' | translate }}
+          </option>
+          <option value="inactive">
+            {{ 'guestServices.inactive' | translate }}
+          </option>
+        </select>
+      </label>
+
+      <div class="filter-actions">
+        <button
+          type="button"
+          class="filter-button filter-button--secondary"
+          [disabled]="loading()"
+          (click)="clearFilters()">
+          <svg lucideX></svg>
+          <span>
+            {{ 'guestServices.clear' | translate }}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="filter-button filter-button--primary"
+          [disabled]="loading()"
+          (click)="applyFilters()">
+          <svg lucideSearch></svg>
+          <span>
+            {{ 'guestServices.apply' | translate }}
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  @if (
+    errorMessage()
+    &&
+    !loading()
+  ) {
+    <section
+      class="alert alert--error"
+      role="alert">
+      <div>
+        <strong>
+          {{ 'guestServices.loadFailed' | translate }}
+        </strong>
+        <span>
+          {{ errorMessage() }}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'guestServices.retry' | translate }}
+      </button>
+    </section>
+  }
+
+  <section class="table-card">
+    @if (loading()) {
+      <div class="state-panel">
+        <app-spin
+          size="large"
+          [label]="'guestServices.loading' | translate" />
+      </div>
+
+    } @else if (
+      !errorMessage()
+      &&
+      items().length === 0
+    ) {
+      <div class="state-panel state-panel--empty">
+        <div class="empty-icon">
+          <svg lucideSearch></svg>
+        </div>
+
+        <h2>
+          {{
+            hasFilters()
+              ? ('guestServices.noResults' | translate)
+              : ('guestServices.noServicesYet' | translate)
+          }}
+        </h2>
+
+        <p>
+          {{
+            hasFilters()
+              ? ('guestServices.noResultsDescription' | translate)
+              : ('guestServices.noServicesYetDescription' | translate)
+          }}
+        </p>
+
+        <div class="empty-actions">
+          @if (hasFilters()) {
+            <button
+              type="button"
+              class="top-button top-button--secondary"
+              (click)="clearFilters()">
+              <svg lucideX></svg>
+              {{ 'guestServices.clearFilters' | translate }}
+            </button>
+
+          } @else if (
+            auth.hasPermission(
+              'services.create'
+            )
+          ) {
+            <a
+              class="top-button top-button--primary"
+              routerLink="/app/operations/services/create">
+              <svg lucideCirclePlus></svg>
+              {{ 'guestServices.addService' | translate }}
+            </a>
+          }
+        </div>
+      </div>
+
+    } @else if (!errorMessage()) {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ 'guestServices.service' | translate }}
+              </th>
+              <th>
+                {{ 'guestServices.descriptionField' | translate }}
+              </th>
+              <th>
+                {{ 'guestServices.status' | translate }}
+              </th>
+              <th>
+                {{ 'guestServices.created' | translate }}
+              </th>
+              <th class="actions-heading">
+                {{ 'guestServices.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (
+              item of items();
+              track item.id
+            ) {
+              <tr>
+                <td>
+                  <div class="service-cell">
+                    <div class="service-avatar">
+                      {{ item.name.slice(0, 1).toUpperCase() }}
+                    </div>
+
+                    <div>
+                      <strong>
+                        {{ item.name }}
+                      </strong>
+                      <span>
+                        {{ item.code }}
+                      </span>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    class="description-cell"
+                    [title]="item.description ?? ''">
+                    {{
+                      item.description
+                      ||
+                      ('guestServices.notAvailable' | translate)
+                    }}
+                  </span>
+                </td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.status-badge--active]="item.isActive"
+                    [class.status-badge--inactive]="!item.isActive">
+                    {{
+                      item.isActive
+                        ? ('guestServices.active' | translate)
+                        : ('guestServices.inactive' | translate)
+                    }}
+                  </span>
+                </td>
+
+                <td class="muted">
+                  {{
+                    item.createdAtUtc
+                      | date:'mediumDate'
+                  }}
+                </td>
+
+                <td>
+                  <div class="row-actions">
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        '/app/operations/services',
+                        item.id
+                      ]"
+                      [title]="'guestServices.viewAction' | translate"
+                      [attr.aria-label]="'guestServices.viewAction' | translate">
+                      <svg lucideEye></svg>
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'services.update'
+                      )
+                    ) {
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          '/app/operations/services',
+                          item.id,
+                          'edit'
+                        ]"
+                        [title]="'guestServices.editAction' | translate"
+                        [attr.aria-label]="'guestServices.editAction' | translate">
+                        <svg lucidePencil></svg>
+                      </a>
+                    }
+
+                    @if (
+                      auth.hasPermission(
+                        'services.delete'
+                      )
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-action icon-action--delete"
+                        [disabled]="deletingId() !== null"
+                        [title]="'guestServices.deleteAction' | translate"
+                        [attr.aria-label]="'guestServices.deleteAction' | translate"
+                        (click)="requestDelete(item)">
+
+                        @if (
+                          deletingId() === item.id
+                        ) {
+                          <app-spin
+                            [inline]="true"
+                            size="small"
+                            label="" />
+                        } @else {
+                          <svg lucideTrash2></svg>
+                        }
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (totalItems() > 0) {
+        <footer class="pagination">
+          <p>
+            {{ 'guestServices.showing' | translate }}
+            <strong>{{ firstItemNumber() }}</strong>–<strong>{{ lastItemNumber() }}</strong>
+            {{ 'guestServices.of' | translate }}
+            <strong>{{ totalItems() }}</strong>
+          </p>
+
+          <div class="pagination-controls">
+            <button
+              type="button"
+              class="page-button"
+              [disabled]="loading() || !hasPreviousPage()"
+              [title]="'guestServices.previous' | translate"
+              [attr.aria-label]="'guestServices.previous' | translate"
+              (click)="previousPage()">
+              <svg lucideChevronLeft></svg>
+            </button>
+
+            <span>
+              {{ 'guestServices.page' | translate }}
+              <strong>{{ pageNumber() }}</strong>
+              {{ 'guestServices.of' | translate }}
+              <strong>{{ totalPages() }}</strong>
+            </span>
+
+            <button
+              type="button"
+              class="page-button"
+              [disabled]="loading() || !hasNextPage()"
+              [title]="'guestServices.next' | translate"
+              [attr.aria-label]="'guestServices.next' | translate"
+              (click)="nextPage()">
+              <svg lucideChevronRight></svg>
+            </button>
+          </div>
+        </footer>
+      }
+    }
+  </section>
+
+  @if (deleteTarget(); as target) {
+    <div
+      class="modal-backdrop"
+      (click)="cancelDelete()">
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="'guestServices.deleteConfirmTitle' | translate"
+        (click)="$event.stopPropagation()">
+
+        <div class="confirm-dialog__icon">
+          <svg lucideTrash2></svg>
+        </div>
+
+        <div>
+          <h2>
+            {{ 'guestServices.deleteConfirmTitle' | translate }}
+          </h2>
+          <p>
+            {{
+              'guestServices.deleteConfirmMessage'
+                | translate:{ name: target.name }
+            }}
+          </p>
+        </div>
+
+        <div class="confirm-dialog__actions">
+          <button
+            type="button"
+            class="dialog-button dialog-button--secondary"
+            [disabled]="deletingId() !== null"
+            (click)="cancelDelete()">
+            {{ 'guestServices.cancel' | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="dialog-button dialog-button--danger"
+            [disabled]="deletingId() !== null"
+            (click)="confirmDelete()">
+
+            @if (deletingId() !== null) {
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+            } @else {
+              <svg lucideTrash2></svg>
+            }
+
+            {{ 'guestServices.delete' | translate }}
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+
+</section>

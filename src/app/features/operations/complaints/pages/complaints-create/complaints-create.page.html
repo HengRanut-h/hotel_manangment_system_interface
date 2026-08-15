@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'complaints.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'complaints.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'complaints.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-complaint-form
+    submitLabel="complaints.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

@@ -1,0 +1,272 @@
+:host {
+  display: block;
+}
+
+.detail-page {
+  display: grid;
+  gap: 20px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.back-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.eyebrow {
+  margin: 18px 0 5px;
+  color: #7f56d9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.detail-header h1 {
+  margin: 0;
+  color: #101828;
+  font-size: 28px;
+}
+
+.detail-header > div:first-child > p:last-child {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.button--secondary {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  color: #344054;
+}
+
+.button--primary {
+  border: 1px solid #101828;
+  background: #101828;
+  color: #fff;
+}
+
+.hero-card,
+.info-card,
+.state-card {
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.hero-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px;
+}
+
+.service-mark {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #f4ebff;
+  color: #6941c6;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.hero-card__content {
+  flex: 1;
+}
+
+.hero-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hero-card h2 {
+  margin: 0;
+  color: #101828;
+  font-size: 20px;
+}
+
+.code {
+  display: block;
+  margin-top: 4px;
+  color: #667085;
+  font-size: 12px;
+}
+
+.hero-card__content > p {
+  margin: 13px 0 0;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.status-badge {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.status-badge--active {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.status-badge--inactive {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.info-card {
+  overflow: hidden;
+}
+
+.info-card__header {
+  padding: 19px 22px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.info-card__header .eyebrow {
+  margin: 0 0 4px;
+}
+
+.info-card__header h2 {
+  margin: 0;
+  color: #101828;
+  font-size: 17px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.info-grid > div {
+  padding: 18px 22px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.info-grid > div:nth-child(odd) {
+  border-right: 1px solid #eaecf0;
+}
+
+.info-grid > div:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.info-grid dt {
+  color: #667085;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.info-grid dd {
+  margin: 6px 0 0;
+  color: #101828;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px !important;
+}
+
+.state-card {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.state-card--error {
+  min-height: auto;
+  place-items: start;
+  border-color: #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .detail-header {
+    flex-direction: column;
+  }
+
+  .detail-actions {
+    width: 100%;
+  }
+
+  .button {
+    flex: 1;
+  }
+
+  .hero-card__title-row {
+    flex-direction: column;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid > div,
+  .info-grid > div:nth-child(odd),
+  .info-grid > div:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 1px solid #eaecf0;
+  }
+
+  .info-grid > div:last-child {
+    border-bottom: 0;
+  }
+}

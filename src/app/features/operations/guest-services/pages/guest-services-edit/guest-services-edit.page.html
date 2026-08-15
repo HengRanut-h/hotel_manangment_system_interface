@@ -1,0 +1,46 @@
+<section class="form-page">
+  <header class="form-page__header">
+    <a
+      class="back-link"
+      routerLink="/app/operations/services">
+      <svg lucideArrowLeft></svg>
+      {{ 'guestServices.backToServices' | translate }}
+    </a>
+
+    <p class="eyebrow">
+      {{ 'guestServices.section' | translate }}
+    </p>
+
+    <h1>
+      {{ 'guestServices.editTitle' | translate }}
+    </h1>
+
+    <span>
+      {{ 'guestServices.editDescription' | translate }}
+    </span>
+  </header>
+
+  @if (loading()) {
+    <div class="state-card">
+      <app-spin
+        size="large"
+        [label]="'guestServices.loadingOne' | translate" />
+    </div>
+
+  } @else if (errorMessage()) {
+    <div
+      class="state-card state-card--error"
+      role="alert">
+      {{ errorMessage() }}
+    </div>
+
+  } @else if (item(); as service) {
+    <app-guest-service-form
+      [initialValue]="service"
+      [submitting]="submitting()"
+      [showStatus]="true"
+      submitLabel="guestServices.saveChanges"
+      (submitted)="save($event)"
+      (cancelled)="cancel()" />
+  }
+</section>

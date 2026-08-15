@@ -1,0 +1,131 @@
+<form
+  class="service-form"
+  [formGroup]="form"
+  (ngSubmit)="submit()">
+
+  <section class="form-card">
+
+    <header class="form-card__header">
+      <p>
+        {{ 'guestServices.serviceInformation' | translate }}
+      </p>
+
+      <h2>
+        {{ 'guestServices.serviceInformationTitle' | translate }}
+      </h2>
+    </header>
+
+    <div class="form-grid">
+
+      <label class="field">
+        <span>
+          {{ 'guestServices.name' | translate }}
+          <strong>*</strong>
+        </span>
+
+        <input
+          type="text"
+          formControlName="name"
+          autocomplete="off"
+          [placeholder]="'guestServices.namePlaceholder' | translate" />
+
+        @if (
+          form.controls.name.touched
+          &&
+          form.controls.name.hasError('required')
+        ) {
+          <small class="field-error">
+            {{ 'guestServices.nameRequired' | translate }}
+          </small>
+        }
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'guestServices.code' | translate }}
+          <strong>*</strong>
+        </span>
+
+        <input
+          type="text"
+          formControlName="code"
+          autocomplete="off"
+          [placeholder]="'guestServices.codePlaceholder' | translate" />
+
+        @if (
+          form.controls.code.touched
+          &&
+          form.controls.code.hasError('required')
+        ) {
+          <small class="field-error">
+            {{ 'guestServices.codeRequired' | translate }}
+          </small>
+        }
+      </label>
+
+      <label class="field field--full">
+        <span>
+          {{ 'guestServices.descriptionField' | translate }}
+        </span>
+
+        <textarea
+          rows="5"
+          formControlName="description"
+          [placeholder]="'guestServices.descriptionPlaceholder' | translate">
+        </textarea>
+      </label>
+
+      @if (showStatus()) {
+        <label class="status-control field--full">
+          <input
+            type="checkbox"
+            formControlName="isActive" />
+
+          <span class="status-control__text">
+            <strong>
+              {{ 'guestServices.activeService' | translate }}
+            </strong>
+
+            <small>
+              {{ 'guestServices.activeServiceHelp' | translate }}
+            </small>
+          </span>
+        </label>
+      }
+
+    </div>
+  </section>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      <svg lucideX></svg>
+      <span>
+        {{ 'guestServices.cancel' | translate }}
+      </span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+
+      @if (submitting()) {
+        <app-spin
+          [inline]="true"
+          size="small"
+          label="" />
+      } @else {
+        <svg lucideCheck></svg>
+      }
+
+      <span>
+        {{ submitLabel() | translate }}
+      </span>
+    </button>
+  </div>
+
+</form>

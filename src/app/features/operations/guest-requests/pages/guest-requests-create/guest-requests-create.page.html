@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'guestRequests.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'guestRequests.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'guestRequests.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-guest-request-form
+    submitLabel="guestRequests.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>
