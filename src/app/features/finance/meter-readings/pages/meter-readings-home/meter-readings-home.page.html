@@ -1,0 +1,361 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+      <div>
+        <p class="eyebrow">
+          {{ 'meterReadings.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'meterReadings.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'meterReadings.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary"
+        [routerLink]="[
+          '/app/finance/meter-readings/create'
+        ]"
+        [queryParams]="{
+          meterId:
+            meterId() || null
+        }"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'meterReadings.actions.create' | translate }}
+      </a>
+
+
+      @if (
+        meterId().trim()
+      ) {
+        <button
+          type="button"
+          class="secondary"
+          (click)="load()"
+        >
+          <svg lucideRefreshCw
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'meterReadings.actions.refresh' | translate }}
+        </button>
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="lookup-card">
+
+    <h2>
+      {{ 'meterReadings.lookup.title' | translate }}
+    </h2>
+
+    <p>
+      {{
+        'meterReadings.lookup.description' |
+        translate: {
+          endpoint: '/api/v1/meter-readings/meter/{meterId}'
+        }
+      }}
+    </p>
+
+
+    <div class="lookup-row">
+
+      <input
+        type="text"
+        [placeholder]="'meterReadings.lookup.placeholder' | translate"
+        [ngModel]="meterId()"
+        (ngModelChange)="meterId.set($event)"
+        (keyup.enter)="load()"
+      />
+
+
+      <button
+        type="button"
+        class="primary"
+        (click)="load()"
+      >
+        <svg lucideSearch
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'meterReadings.actions.load' | translate }}
+      </button>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      {{ 'meterReadings.errors.load' | translate }}
+    </div>
+  }
+
+
+  @if (
+    loaded() &&
+    !error()
+  ) {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideActivity
+            [size]="22"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <span>
+          {{ 'meterReadings.summary.count' | translate }}
+        </span>
+
+        <strong>
+          {{ items().length }}
+        </strong>
+      </article>
+
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideGauge
+            [size]="22"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <span>
+          {{ 'meterReadings.summary.latest' | translate }}
+        </span>
+
+        <strong>
+          {{ latest()?.currentReading ?? '—' }}
+        </strong>
+      </article>
+
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideDroplets
+            [size]="22"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <span>
+          {{ 'meterReadings.summary.usage' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalUsage() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </article>
+
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideCircleDollarSign
+            [size]="22"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <span>
+          {{ 'meterReadings.summary.amount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </article>
+
+    </div>
+
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        {{ 'meterReadings.states.loading' | translate }}
+      </div>
+
+    } @else if (
+      loaded() &&
+      items().length === 0 &&
+      !error()
+    ) {
+      <div class="state state-empty">
+        <span class="state-icon">
+          <svg lucideFileSearch
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          {{ 'meterReadings.states.empty' | translate }}
+        </strong>
+      </div>
+
+    } @else if (
+      items().length > 0
+    ) {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                {{ 'meterReadings.fields.date' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.meter' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.previous' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.current' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.usage' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.rate' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.amount' | translate }}
+              </th>
+
+              <th>
+                {{ 'meterReadings.fields.notes' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+              <tr>
+
+                <td>
+                  {{
+                    item.readingDateUtc |
+                    date:'medium'
+                  }}
+                </td>
+
+
+                <td>
+                  {{ item.meterNumber || item.meterId }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.previousReading ??
+                    '—'
+                  }}
+                </td>
+
+
+                <td>
+                  {{ item.currentReading }}
+                </td>
+
+
+                <td>
+                  {{ item.usage ?? '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.ratePerUnit ?? '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.amount ?? '—' }}
+                  {{ item.currency || '' }}
+                </td>
+
+
+                <td>
+                  {{ item.notes || '—' }}
+                </td>
+
+              </tr>
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    } @else {
+      <div class="state state-empty">
+        <span class="state-icon">
+          <svg lucideSearch
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          {{ 'meterReadings.states.enterMeter' | translate }}
+        </strong>
+      </div>
+    }
+
+  </div>
+
+</section>

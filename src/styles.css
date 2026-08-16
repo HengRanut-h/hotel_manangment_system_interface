@@ -41,5 +41,13 @@ svg{width:18px;height:18px;stroke-width:1.8}
 .table-wrap{width:100%;overflow:auto}
 .form-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 input,select,textarea{color:var(--text)}
+.state-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.state-empty strong{color:#344054;font-size:15px;font-weight:700}
+.state-empty .state-icon{display:inline-flex;width:52px;height:52px;align-items:center;justify-content:center;border:1px solid #dbeafe;border-radius:14px;background:#eff6ff;color:#2563eb}
+.state-empty .state-icon--green{border-color:#abefc6;background:#ecfdf3;color:#039855}
+.state-empty .state-icon--amber{border-color:#fedf89;background:#fffaeb;color:#b54708}
+.state-empty .state-icon--purple{border-color:#e9d7fe;background:#f4ebff;color:#7f56d9}
+.state-empty .state-icon--red{border-color:#fecdd6;background:#fff1f3;color:#c01048}
+.state-empty .state-icon--gray{border-color:#eaecf0;background:#f9fafb;color:#475467}
 ::selection{background:#dce7ff;color:#173364}
 @media(max-width:620px){.page-header{flex-direction:column}.page-header>.btn,.page-header>div+div{align-self:stretch}.page-header h1{font-size:22px}}

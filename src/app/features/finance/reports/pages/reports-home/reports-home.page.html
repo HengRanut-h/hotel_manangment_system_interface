@@ -1,0 +1,100 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <lucide-chart-no-axes-combined
+          [size]="24"
+          [strokeWidth]="2"
+        />
+      </div>
+
+      <div>
+        <p class="eyebrow">
+          Analytics
+        </p>
+
+        <h1>
+          Reports
+        </h1>
+
+        <p class="subtitle">
+          Revenue and occupancy reports for the current hotel.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="cards">
+
+    <article class="report-card">
+
+      <div class="report-card-icon">
+        <lucide-circle-dollar-sign
+          [size]="22"
+          [strokeWidth]="2"
+        />
+      </div>
+
+      <h2>
+        Revenue
+      </h2>
+
+      <p>
+        Payment totals and payment-method breakdown for a date range.
+      </p>
+
+      <a
+        class="primary"
+        routerLink="/app/analytics/reports/revenue"
+      >
+        Open Revenue
+
+        <lucide-arrow-right
+          [size]="17"
+          [strokeWidth]="2"
+        />
+      </a>
+
+    </article>
+
+
+    <article class="report-card">
+
+      <div class="report-card-icon">
+        <lucide-bed-double
+          [size]="22"
+          [strokeWidth]="2"
+        />
+      </div>
+
+      <h2>
+        Occupancy
+      </h2>
+
+      <p>
+        Total rooms, occupied rooms and occupancy percentage.
+      </p>
+
+      <a
+        class="primary"
+        routerLink="/app/analytics/reports/occupancy"
+      >
+        Open Occupancy
+
+        <lucide-arrow-right
+          [size]="17"
+          [strokeWidth]="2"
+        />
+      </a>
+
+    </article>
+
+  </div>
+
+</section>

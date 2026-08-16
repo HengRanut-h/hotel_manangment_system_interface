@@ -4423,19 +4423,67 @@
     "deleted": "Deleted"
   },
   "meterReadings": {
+    "section": "Finance / Utility Billing",
     "title": "Meter Readings",
+    "subtitle": "Load live reading history by Meter ID.",
     "create": "Record Reading",
     "edit": "Edit Reading",
     "analytics": "Meter Reading Analytics",
+    "actions": {
+      "create": "Create Reading",
+      "refresh": "Refresh",
+      "load": "Load Readings"
+    },
+    "lookup": {
+      "title": "Find Meter Readings",
+      "description": "Enter a Meter ID to call GET {{endpoint}}.",
+      "placeholder": "Meter GUID"
+    },
+    "summary": {
+      "count": "Reading Count",
+      "latest": "Latest Reading",
+      "usage": "Total Usage",
+      "amount": "Total Amount"
+    },
+    "fields": {
+      "date": "Date",
+      "meter": "Meter",
+      "previous": "Previous",
+      "current": "Current",
+      "usage": "Usage",
+      "rate": "Rate",
+      "amount": "Amount",
+      "notes": "Notes"
+    },
+    "states": {
+      "loading": "Loading meter readings...",
+      "empty": "No readings found for this meter.",
+      "enterMeter": "Enter a Meter ID to load live readings."
+    },
+    "errors": {
+      "load": "Unable to load readings for this meter."
+    },
     "recorded": "Recorded",
     "deleted": "Deleted"
   },
   "reports": {
+    "section": "Analytics",
     "title": "Reports",
+    "subtitle": "Live revenue and occupancy reports from the backend.",
     "analytics": "Analytics",
     "run": "Run Report",
     "history": "Run History",
     "download": "Download",
+    "revenue": {
+      "title": "Revenue Report",
+      "description": "Loads live data from GET /api/v1/reports/revenue.",
+      "open": "Open Revenue"
+    },
+    "occupancy": {
+      "title": "Occupancy Report",
+      "description": "Loads live data from GET /api/v1/reports/occupancy.",
+      "open": "Open Occupancy"
+    },
     "completed": "Completed",
     "failed": "Failed"
   },

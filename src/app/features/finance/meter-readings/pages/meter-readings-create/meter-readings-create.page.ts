@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import {
+  ActivatedRoute,
   Router,
   RouterLink
 } from '@angular/router';
@@ -21,11 +22,11 @@ import {
 
 import {
   LucideArrowLeft,
-  LucidePlus
+  LucideGauge
 } from '@lucide/angular';
 
 import {
-  MeterReadingUpsertRequest
+  CreateMeterReadingRequest
 } from '../../models/meter-reading.model';
 
 import {
@@ -47,7 +48,7 @@ import {
     RouterLink,
     MeterReadingFormComponent,
     LucideArrowLeft,
-    LucidePlus
+    LucideGauge
   ],
 
   templateUrl:
@@ -64,11 +65,22 @@ export class MeterReadingsCreatePage {
   private readonly api =
     inject(MeterReadingsApiService);
 
+  private readonly route =
+    inject(ActivatedRoute);
+
   private readonly router =
     inject(Router);
 
   private readonly destroyRef =
     inject(DestroyRef);
+
+  readonly meterId =
+    this.route.snapshot
+      .queryParamMap
+      .get(
+        'meterId'
+      ) ??
+    '';
 
   readonly submitting =
     signal(false);
@@ -78,7 +90,7 @@ export class MeterReadingsCreatePage {
 
   create(
     request:
-      MeterReadingUpsertRequest
+      CreateMeterReadingRequest
   ): void {
 
     this.submitting.set(
@@ -107,12 +119,17 @@ export class MeterReadingsCreatePage {
       )
       .subscribe({
         next:
-          item =>
+          () =>
             this.router.navigate(
               [
-                '/app/finance/meter-readings',
-                item.id
-              ]
+                '/app/finance/meter-readings'
+              ],
+              {
+                queryParams: {
+                  meterId:
+                    request.meterId
+                }
+              }
             ),
 
         error:

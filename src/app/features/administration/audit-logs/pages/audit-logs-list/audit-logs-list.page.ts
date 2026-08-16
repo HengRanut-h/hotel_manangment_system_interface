@@ -72,6 +72,7 @@ import {
     AuditActionBadgeComponent,
     AuditResultBadgeComponent,
     AuditJsonViewerComponent,
+    LucideScrollText,
     LucideSearch,
     LucideRefreshCw,
     LucideDownload,

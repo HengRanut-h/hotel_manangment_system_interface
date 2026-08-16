@@ -1,486 +1,251 @@
 import {
-  DatePipe,
-  DecimalPipe
-} from '@angular/common';
-
-import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   computed,
   inject,
-  OnInit,
   signal
 } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import {
   ActivatedRoute,
   RouterLink
 } from '@angular/router';
-
+import {
+  finalize
+} from 'rxjs';
+import {
+  takeUntilDestroyed
+} from '@angular/core/rxjs-interop';
 import {
   LucideArrowLeft,
-  LucideCheckCircle2,
-  LucideCirclePlus,
-  LucideCircleDollarSign,
-  LucideClipboardList,
+  LucideBookOpen,
   LucideRefreshCw,
-  LucideTriangleAlert,
-  LucideX
+  LucidePlus,
+  LucideLockKeyhole
 } from '@lucide/angular';
-
 import {
-  AuthStore
-} from '../../../../../core/auth/auth.store';
-
+  AddFolioChargeRequest,
+  Folio
+} from '../../models/folio.model';
 import {
-  getSafeApiErrorMessage
-} from '../../../../../core/http/api-error.util';
-
+  FoliosApiService
+} from '../../data-access/folios-api.service';
 import {
-  TranslationPipe
-} from '../../../../../core/i18n/translation.pipe';
-
-import {
-  TranslationService
-} from '../../../../../core/i18n/translation.service';
-
-import {
-  SpinComponent
-} from '../../../../../shared/ui/spin/spin.component';
-
-import {
-  ToastService
-} from '../../../../../shared/ui/toast/toast.service';
-
+  FolioStatusBadgeComponent
+} from '../../components/folio-status-badge/folio-status-badge.component';
 import {
   FolioChargeFormComponent
 } from '../../components/folio-charge-form/folio-charge-form.component';
 
-import {
-  FoliosApiService
-} from '../../data-access/folios-api.service';
-
-import {
-  AddFolioChargeRequest,
-  Folio,
-  ReservationLookup
-} from '../../models/folio.model';
-
 @Component({
-  selector:
-    'app-folios-detail-page',
-
-  standalone:
-    true,
-
+  selector: 'app-folios-detail-page',
+  standalone: true,
   imports: [
-    DatePipe,
-    DecimalPipe,
+    CommonModule,
     RouterLink,
-    TranslationPipe,
-    SpinComponent,
+    FolioStatusBadgeComponent,
     FolioChargeFormComponent,
     LucideArrowLeft,
-    LucideCheckCircle2,
-    LucideCirclePlus,
-    LucideCircleDollarSign,
-    LucideClipboardList,
+    LucideBookOpen,
     LucideRefreshCw,
-    LucideTriangleAlert,
-    LucideX
+    LucidePlus,
+    LucideLockKeyhole
   ],
-
   templateUrl:
     './folios-detail.page.html',
-
   styleUrl:
     './folios-detail.page.css',
-
   changeDetection:
     ChangeDetectionStrategy.OnPush
 })
-export class FoliosDetailPage
-  implements OnInit {
-
-  readonly auth =
-    inject(AuthStore);
+export class FoliosDetailPage {
+  private readonly api =
+    inject(FoliosApiService);
 
   private readonly route =
     inject(ActivatedRoute);
 
-  private readonly api =
-    inject(FoliosApiService);
+  private readonly destroyRef =
+    inject(DestroyRef);
 
-  private readonly toast =
-    inject(ToastService);
-
-  private readonly translation =
-    inject(TranslationService);
-
-  readonly folio =
+  readonly item =
     signal<Folio | null>(null);
 
-  readonly reservations =
-    signal<ReservationLookup[]>([]);
-
   readonly loading =
-    signal(true);
-
-  readonly errorMessage =
-    signal('');
-
-  readonly showChargeModal =
     signal(false);
 
-  readonly showCloseModal =
+  readonly actionLoading =
     signal(false);
 
-  readonly addingCharge =
+  readonly chargeOpen =
     signal(false);
 
-  readonly closing =
+  readonly error =
     signal(false);
 
-  readonly reservation =
-    computed(
-      () => {
-
-        const folio =
-          this.folio();
-
-        if (!folio) {
-          return null;
-        }
-
-        return this.reservations()
-          .find(
-            reservation =>
-              reservation.id
-              ===
-              folio.reservationId
-          )
-        ??
-        null;
-      }
+  readonly id =
+    this.route.snapshot.paramMap.get(
+      'id'
     );
 
-  readonly activeCharges =
+  readonly charges =
     computed(
       () =>
-        this.folio()
-          ?.charges
+        this.item()?.charges ?? []
+    );
+
+  readonly total =
+    computed(
+      () =>
+        this.charges()
           .filter(
             charge =>
               !charge.isVoided
           )
-        ??
-        []
-    );
-
-  readonly voidedChargesCount =
-    computed(
-      () =>
-        this.folio()
-          ?.charges
-          .filter(
-            charge =>
-              charge.isVoided
-          )
-          .length
-        ??
-        0
-    );
-
-  readonly recordedAmount =
-    computed(
-      () =>
-        this.activeCharges()
           .reduce(
-            (
-              total,
-              charge
-            ) =>
-              total
-              +
-              charge.amount,
+            (sum, charge) =>
+              sum +
+              Number(charge.amount || 0),
             0
           )
     );
 
-
-  ngOnInit(): void {
-
-    this.loadReservations();
-    this.load();
+  constructor() {
+    if (this.id) {
+      this.load();
+    } else {
+      this.error.set(true);
+    }
   }
-
-
-  canMutate(): boolean {
-
-    return (
-      this.auth.hasPermission(
-        'folios.update'
-      )
-      ||
-      this.auth.hasPermission(
-        'folios.manage'
-      )
-    );
-  }
-
 
   load(): void {
-
-    const id =
-      this.route
-        .snapshot
-        .paramMap
-        .get('id');
-
-    if (!id) {
-      this.loading.set(false);
-      this.errorMessage.set(
-        this.translation.translate(
-          'folios.missingId'
-        )
-      );
+    if (!this.id) {
       return;
     }
 
     this.loading.set(true);
-    this.errorMessage.set('');
+    this.error.set(false);
 
     this.api
-      .getById(id)
+      .getById(this.id)
+      .pipe(
+        takeUntilDestroyed(
+          this.destroyRef
+        ),
+        finalize(
+          () =>
+            this.loading.set(false)
+        )
+      )
       .subscribe({
-
         next:
-          folio => {
-
-            this.folio.set(
-              folio
-            );
-
-            this.loading.set(false);
-          },
-
+          folio =>
+            this.item.set(folio),
         error:
           error => {
-
-            this.errorMessage.set(
-              getSafeApiErrorMessage(
-                error,
-                this.translation.translate(
-                  'folios.loadOneFailed'
-                )
-              )
+            console.error(
+              'Load folio error',
+              error
             );
-
-            this.loading.set(false);
+            this.error.set(true);
           }
       });
   }
-
-
-  private loadReservations(): void {
-
-    this.api
-      .getReservations()
-      .subscribe({
-
-        next:
-          reservations => {
-
-            this.reservations.set(
-              reservations
-            );
-          },
-
-        error:
-          () => {
-
-            this.reservations.set([]);
-          }
-      });
-  }
-
-
-  openChargeModal(): void {
-
-    const folio =
-      this.folio();
-
-    if (
-      !folio
-      ||
-      folio.isClosed
-      ||
-      !this.canMutate()
-    ) {
-      return;
-    }
-
-    this.showChargeModal.set(true);
-  }
-
-
-  closeChargeModal(): void {
-
-    if (
-      this.addingCharge()
-    ) {
-      return;
-    }
-
-    this.showChargeModal.set(false);
-  }
-
 
   addCharge(
     request: AddFolioChargeRequest
   ): void {
-
     const folio =
-      this.folio();
+      this.item();
 
     if (
-      !folio
-      ||
-      folio.isClosed
-      ||
-      !this.canMutate()
-      ||
-      this.addingCharge()
+      !folio ||
+      folio.isClosed ||
+      this.actionLoading()
     ) {
       return;
     }
 
-    this.addingCharge.set(true);
+    this.actionLoading.set(true);
+    this.error.set(false);
 
     this.api
       .addCharge(
         folio.id,
         request
       )
+      .pipe(
+        takeUntilDestroyed(
+          this.destroyRef
+        ),
+        finalize(
+          () =>
+            this.actionLoading.set(false)
+        )
+      )
       .subscribe({
-
         next:
           () => {
-
-            this.addingCharge.set(false);
-            this.showChargeModal.set(false);
-
-            this.toast.success(
-              this.translation.translate(
-                'folios.addChargeSuccess'
-              )
-            );
-
+            this.chargeOpen.set(false);
             this.load();
           },
-
         error:
           error => {
-
-            this.addingCharge.set(false);
-
-            this.toast.error(
-              getSafeApiErrorMessage(
-                error,
-                this.translation.translate(
-                  'folios.addChargeFailed'
-                )
-              )
+            console.error(
+              'Add charge error',
+              error
             );
+            this.error.set(true);
           }
       });
   }
 
-
-  requestClose(): void {
-
+  closeFolio(): void {
     const folio =
-      this.folio();
+      this.item();
 
     if (
-      !folio
-      ||
-      folio.isClosed
-      ||
-      !this.canMutate()
+      !folio ||
+      folio.isClosed ||
+      this.actionLoading()
     ) {
       return;
     }
 
-    this.showCloseModal.set(true);
-  }
-
-
-  cancelClose(): void {
-
     if (
-      this.closing()
+      !window.confirm(
+        `Close folio "${folio.folioNumber}"?`
+      )
     ) {
       return;
     }
 
-    this.showCloseModal.set(false);
-  }
-
-
-  confirmClose(): void {
-
-    const folio =
-      this.folio();
-
-    if (
-      !folio
-      ||
-      folio.isClosed
-      ||
-      !this.canMutate()
-      ||
-      this.closing()
-    ) {
-      return;
-    }
-
-    this.closing.set(true);
+    this.actionLoading.set(true);
+    this.error.set(false);
 
     this.api
-      .close(
-        folio.id
+      .close(folio.id)
+      .pipe(
+        takeUntilDestroyed(
+          this.destroyRef
+        ),
+        finalize(
+          () =>
+            this.actionLoading.set(false)
+        )
       )
       .subscribe({
-
         next:
-          () => {
-
-            this.closing.set(false);
-            this.showCloseModal.set(false);
-
-            this.toast.success(
-              this.translation.translate(
-                'folios.closeSuccess'
-              )
-            );
-
-            this.load();
-          },
-
+          () =>
+            this.load(),
         error:
           error => {
-
-            this.closing.set(false);
-
-            this.toast.error(
-              getSafeApiErrorMessage(
-                error,
-                this.translation.translate(
-                  'folios.closeFailed'
-                )
-              )
+            console.error(
+              'Close folio error',
+              error
             );
+            this.error.set(true);
           }
       });
   }

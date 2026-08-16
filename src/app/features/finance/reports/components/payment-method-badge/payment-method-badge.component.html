@@ -1,0 +1,45 @@
+<span class="badge">
+
+  @switch (
+    method()?.toLowerCase()
+  ) {
+
+    @case ('cash') {
+      <lucide-banknote
+        [size]="14"
+        [strokeWidth]="2"
+      />
+    }
+
+    @case ('card') {
+      <lucide-credit-card
+        [size]="14"
+        [strokeWidth]="2"
+      />
+    }
+
+    @case ('creditcard') {
+      <lucide-credit-card
+        [size]="14"
+        [strokeWidth]="2"
+      />
+    }
+
+    @case ('banktransfer') {
+      <lucide-landmark
+        [size]="14"
+        [strokeWidth]="2"
+      />
+    }
+
+    @default {
+      <lucide-wallet-cards
+        [size]="14"
+        [strokeWidth]="2"
+      />
+    }
+
+  }
+
+  {{ method() || 'Unknown' }}
+</span>

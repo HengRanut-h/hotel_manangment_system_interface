@@ -11,11 +11,11 @@ export const meterReadingsRoutes:
 
     loadComponent: () =>
       import(
-        './pages/meter-readings-list/meter-readings-list.page'
+        './pages/meter-readings-home/meter-readings-home.page'
       )
         .then(
           module =>
-            module.MeterReadingsListPage
+            module.MeterReadingsHomePage
         )
   },
 
@@ -30,48 +30,6 @@ export const meterReadingsRoutes:
         .then(
           module =>
             module.MeterReadingsCreatePage
-        )
-  },
-
-  {
-    path:
-      'analytics',
-
-    loadComponent: () =>
-      import(
-        './pages/meter-readings-analytics/meter-readings-analytics.page'
-      )
-        .then(
-          module =>
-            module.MeterReadingsAnalyticsPage
-        )
-  },
-
-  {
-    path:
-      ':id/edit',
-
-    loadComponent: () =>
-      import(
-        './pages/meter-readings-edit/meter-readings-edit.page'
-      )
-        .then(
-          module =>
-            module.MeterReadingsEditPage
-        )
-  },
-
-  {
-    path:
-      ':id',
-
-    loadComponent: () =>
-      import(
-        './pages/meter-readings-detail/meter-readings-detail.page'
-      )
-        .then(
-          module =>
-            module.MeterReadingsDetailPage
         )
   }
 ];

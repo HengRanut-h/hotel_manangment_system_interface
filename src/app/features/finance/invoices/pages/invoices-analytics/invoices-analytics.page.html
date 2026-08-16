@@ -151,8 +151,17 @@
         </header>
 
         @if (statusRows().length === 0) {
-          <div class="empty-inline">
-            {{ 'invoices.noResults' | translate }}
+          <div class="empty-inline state-empty">
+            <span class="state-icon state-icon--purple">
+              <svg lucideClipboardList
+                [size]="24"
+                [strokeWidth]="2"
+              ></svg>
+            </span>
+
+            <strong>
+              {{ 'invoices.noResults' | translate }}
+            </strong>
           </div>
 
         } @else {

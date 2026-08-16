@@ -1,0 +1,333 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/analytics/reports"
+  >
+    <lucide-arrow-left
+      [size]="17"
+      [strokeWidth]="2"
+    />
+
+    Back to Reports
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <lucide-circle-dollar-sign
+          [size]="24"
+          [strokeWidth]="2"
+        />
+      </div>
+
+      <div>
+        <p class="eyebrow">
+          Analytics / Reports
+        </p>
+
+        <h1>
+          Revenue Report
+        </h1>
+
+        <p class="subtitle">
+          Revenue calculated from non-deleted payments in the selected date range.
+        </p>
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="loading()"
+      (click)="load()"
+    >
+      <lucide-refresh-cw
+        [size]="17"
+        [strokeWidth]="2"
+      />
+
+      Refresh
+    </button>
+
+  </div>
+
+
+  <div class="filters">
+
+    <label class="field">
+      <span>
+        From *
+      </span>
+
+      <input
+        type="date"
+        [ngModel]="from()"
+        (ngModelChange)="from.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        To *
+      </span>
+
+      <input
+        type="date"
+        [ngModel]="to()"
+        (ngModelChange)="to.set($event)"
+      />
+    </label>
+
+
+    <button
+      type="button"
+      class="primary"
+      [disabled]="loading()"
+      (click)="load()"
+    >
+      <lucide-search
+        [size]="17"
+        [strokeWidth]="2"
+      />
+
+      Run Report
+    </button>
+
+  </div>
+
+
+  @if (
+    validationError()
+  ) {
+    <div class="error">
+      {{ validationError() }}
+    </div>
+  }
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load revenue report.
+    </div>
+
+  } @else if (
+    loading()
+  ) {
+    <div class="state">
+      Loading live revenue report...
+    </div>
+
+  } @else if (
+    data();
+    as report
+  ) {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-circle-dollar-sign
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Total Revenue
+          </span>
+
+          <strong>
+            {{
+              report.total |
+              number:'1.2-2'
+            }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-receipt-text
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Payment Count
+          </span>
+
+          <strong>
+            {{ report.count }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-wallet-cards
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Payment Methods
+          </span>
+
+          <strong>
+            {{ report.byMethod.length }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-calendar-days
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Range
+          </span>
+
+          <strong style="font-size: 14px;">
+            {{ report.from }} → {{ report.to }}
+          </strong>
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <div class="table-card">
+
+      <div class="table-title">
+        <h2>
+          Revenue by Payment Method
+        </h2>
+      </div>
+
+
+      @if (
+        report.byMethod.length === 0
+      ) {
+        <div class="state">
+          No payment data found for this date range.
+        </div>
+
+      } @else {
+
+        <div class="table-scroll">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>
+                  Method
+                </th>
+
+                <th>
+                  Amount
+                </th>
+
+                <th>
+                  Payments
+                </th>
+
+                <th>
+                  Share
+                </th>
+              </tr>
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                item of report.byMethod;
+                track item.method
+              ) {
+                <tr>
+
+                  <td>
+                    <app-payment-method-badge
+                      [method]="item.method"
+                    />
+                  </td>
+
+
+                  <td>
+                    {{
+                      item.amount |
+                      number:'1.2-2'
+                    }}
+                  </td>
+
+
+                  <td>
+                    {{ item.count }}
+                  </td>
+
+
+                  <td>
+                    {{
+                      report.total > 0
+                        ? (
+                            item.amount *
+                            100 /
+                            report.total |
+                            number:'1.1-1'
+                          )
+                        : 0
+                    }}%
+                  </td>
+
+                </tr>
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <div class="api-note">
+      GET /api/v1/reports/revenue?from={{ from() }}&to={{ to() }}
+    </div>
+
+  }
+
+</section>

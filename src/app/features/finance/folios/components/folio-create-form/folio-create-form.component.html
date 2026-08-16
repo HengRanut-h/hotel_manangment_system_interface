@@ -1,0 +1,62 @@
+<form class="form-card" (ngSubmit)="submit()">
+  <div class="form-header">
+    <svg lucideFilePlus2 [size]="24" ></svg>
+    <div>
+      <h2>Create Folio</h2>
+      <p>Open a folio for a reservation and guest.</p>
+    </div>
+  </div>
+
+  @if (
+    touched() &&
+    (
+      !reservationId().trim() ||
+      !guestId().trim()
+    )
+  ) {
+    <div class="validation">
+      Reservation ID and Guest ID are required.
+    </div>
+  }
+
+  <div class="grid">
+    <label>
+      <span>Reservation ID *</span>
+      <input
+        name="reservationId"
+        [ngModel]="reservationId()"
+        (ngModelChange)="reservationId.set($event)"
+      />
+    </label>
+
+    <label>
+      <span>Guest ID *</span>
+      <input
+        name="guestId"
+        [ngModel]="guestId()"
+        (ngModelChange)="guestId.set($event)"
+      />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancelled.emit()"
+    >
+      <svg lucideX [size]="17" ></svg>
+      Cancel
+    </button>
+
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave [size]="17" ></svg>
+      {{ submitting() ? 'Creating...' : 'Create Folio' }}
+    </button>
+  </div>
+</form>

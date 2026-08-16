@@ -1,0 +1,256 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/analytics/reports"
+  >
+    <lucide-arrow-left
+      [size]="17"
+      [strokeWidth]="2"
+    />
+
+    Back to Reports
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <lucide-bed-double
+          [size]="24"
+          [strokeWidth]="2"
+        />
+      </div>
+
+      <div>
+        <p class="eyebrow">
+          Analytics / Reports
+        </p>
+
+        <h1>
+          Occupancy Report
+        </h1>
+
+        <p class="subtitle">
+          Total rooms, currently occupied rooms and occupancy percentage.
+        </p>
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="loading()"
+      (click)="load()"
+    >
+      <lucide-refresh-cw
+        [size]="17"
+        [strokeWidth]="2"
+      />
+
+      Refresh
+    </button>
+
+  </div>
+
+
+  <div class="filters">
+
+    <label class="field">
+      <span>
+        Date *
+      </span>
+
+      <input
+        type="date"
+        [ngModel]="date()"
+        (ngModelChange)="date.set($event)"
+      />
+    </label>
+
+
+    <button
+      type="button"
+      class="primary"
+      [disabled]="loading() || !date()"
+      (click)="load()"
+    >
+      <lucide-search
+        [size]="17"
+        [strokeWidth]="2"
+      />
+
+      Run Report
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load occupancy report.
+    </div>
+
+  } @else if (
+    loading()
+  ) {
+    <div class="state">
+      Loading live occupancy report...
+    </div>
+
+  } @else if (
+    data();
+    as report
+  ) {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-hotel
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Total Rooms
+          </span>
+
+          <strong>
+            {{ report.totalRooms }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-bed-single
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Occupied Rooms
+          </span>
+
+          <strong>
+            {{ report.occupiedRooms }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-percent
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Occupancy Rate
+          </span>
+
+          <strong>
+            {{
+              report.occupancyRate |
+              number:'1.0-2'
+            }}%
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon">
+          <lucide-calendar-days
+            [size]="20"
+            [strokeWidth]="2"
+          />
+        </div>
+
+        <div>
+          <span>
+            Requested Date
+          </span>
+
+          <strong style="font-size: 15px;">
+            {{ report.date }}
+          </strong>
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <div class="occupancy-card">
+
+      <div class="occupancy-card-header">
+        <h2>
+          Occupancy
+        </h2>
+      </div>
+
+
+      <div class="occupancy-body">
+
+        <div class="rate-row">
+          <span>
+            {{ report.occupiedRooms }} of {{ report.totalRooms }} rooms occupied
+          </span>
+
+          <span class="rate-value">
+            {{
+              report.occupancyRate |
+              number:'1.0-2'
+            }}%
+          </span>
+        </div>
+
+
+        <div class="progress">
+          <div
+            class="progress-fill"
+            [style.width.%]="
+              report.occupancyRate > 100
+                ? 100
+                : report.occupancyRate < 0
+                  ? 0
+                  : report.occupancyRate
+            "
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="api-note">
+      GET /api/v1/reports/occupancy?date={{ date() }}
+    </div>
+
+  }
+
+</section>

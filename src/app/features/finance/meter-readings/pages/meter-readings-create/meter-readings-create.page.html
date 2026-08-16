@@ -18,7 +18,7 @@
     <div class="heading">
 
       <div class="heading-icon">
-        <svg lucidePlus
+        <svg lucideGauge
           [size]="24"
           [strokeWidth]="2"
         ></svg>
@@ -26,11 +26,11 @@
 
       <div>
         <h1>
-          Record Meter Reading
+          Create Meter Reading
         </h1>
 
         <p class="subtitle">
-          Add the latest reading for a utility meter.
+          POST /api/v1/meter-readings
         </p>
       </div>
 
@@ -49,8 +49,8 @@
 
 
   <app-meter-reading-form
+    [initialMeterId]="meterId"
     [submitting]="submitting()"
-    submitLabel="Record Reading"
     (submitted)="create($event)"
     (cancelled)="cancel()"
   />

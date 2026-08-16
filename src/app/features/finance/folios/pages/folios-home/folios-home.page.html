@@ -1,0 +1,59 @@
+<section class="page">
+  <div class="page-header">
+    <div class="heading">
+      <div class="heading-icon">
+        <svg lucideBookOpen
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <p class="eyebrow">
+          {{ 'folios.section' | translate }}
+        </p>
+        <h1>
+          {{ 'folios.title' | translate }}
+        </h1>
+        <p class="subtitle">
+          {{ 'folios.description' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <a
+      class="primary"
+      routerLink="/app/finance/folios/create"
+    >
+      <svg lucidePlus [size]="17" ></svg>
+      {{ 'folios.create' | translate }}
+    </a>
+  </div>
+
+  <div class="lookup-card">
+    <h2>
+      {{ 'folios.openExisting' | translate }}
+    </h2>
+    <p>
+      {{ 'folios.openExistingDescription' | translate }}
+    </p>
+
+    <div class="lookup-row">
+      <input
+        [placeholder]="'folios.folioIdPlaceholder' | translate"
+        [ngModel]="id()"
+        (ngModelChange)="id.set($event)"
+        (keyup.enter)="open()"
+      />
+
+      <button
+        type="button"
+        class="primary"
+        (click)="open()"
+      >
+        <svg lucideSearch [size]="17" ></svg>
+        {{ 'folios.openFolio' | translate }}
+      </button>
+    </div>
+  </div>
+</section>

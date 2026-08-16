@@ -191,7 +191,7 @@ export class ReportsRunPage {
           run =>
             this.router.navigate(
               [
-                '/app/analytics/reports/history',
+                '/app/admin/reports/history',
                 run.id
               ]
             ),
@@ -216,11 +216,11 @@ export class ReportsRunPage {
     this.router.navigate(
       this.id
         ? [
-            '/app/analytics/reports',
+            '/app/admin/reports',
             this.id
           ]
         : [
-            '/app/analytics/reports'
+            '/app/admin/reports'
           ]
     );
   }

@@ -1,46 +1,39 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  input,
   output,
   signal
 } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import {
-  LucideCheckCircle2,
+  LucideReceiptText,
+  LucidePlus,
   LucideX
 } from '@lucide/angular';
-
-import {
-  TranslationPipe
-} from '../../../../../core/i18n/translation.pipe';
-
 import {
   AddFolioChargeRequest
 } from '../../models/folio.model';
 
 @Component({
-  selector:
-    'app-folio-charge-form',
-
-  standalone:
-    true,
-
+  selector: 'app-folio-charge-form',
+  standalone: true,
   imports: [
-    TranslationPipe,
-    LucideCheckCircle2,
+    FormsModule,
+    LucideReceiptText,
+    LucidePlus,
     LucideX
   ],
-
   templateUrl:
     './folio-charge-form.component.html',
-
   styleUrl:
     './folio-charge-form.component.css',
-
   changeDetection:
     ChangeDetectionStrategy.OnPush
 })
 export class FolioChargeFormComponent {
+  readonly submitting =
+    input(false);
 
   readonly submitted =
     output<AddFolioChargeRequest>();
@@ -54,124 +47,39 @@ export class FolioChargeFormComponent {
   readonly description =
     signal('');
 
-  readonly amountText =
-    signal('');
+  readonly amount =
+    signal<number | null>(null);
 
   readonly touched =
     signal(false);
 
-
-  setCategory(
-    event: Event
-  ): void {
-
-    const target =
-      event.target;
-
-    if (
-      target instanceof HTMLInputElement
-    ) {
-      this.category.set(
-        target.value
-      );
-    }
-  }
-
-
-  setDescription(
-    event: Event
-  ): void {
-
-    const target =
-      event.target;
-
-    if (
-      target instanceof HTMLInputElement
-    ) {
-      this.description.set(
-        target.value
-      );
-    }
-  }
-
-
-  setAmount(
-    event: Event
-  ): void {
-
-    const target =
-      event.target;
-
-    if (
-      target instanceof HTMLInputElement
-    ) {
-      this.amountText.set(
-        target.value
-      );
-    }
-  }
-
-
-  valid(): boolean {
-
-    const amount =
-      Number(
-        this.amountText()
-      );
-
-    return (
-      this.category()
-        .trim()
-        .length
-      >
-      0
-
-      &&
-
-      this.description()
-        .trim()
-        .length
-      >
-      0
-
-      &&
-
-      Number.isFinite(amount)
-
-      &&
-
-      amount > 0
-    );
-  }
-
-
   submit(): void {
-
     this.touched.set(true);
 
-    if (!this.valid()) {
+    const category =
+      this.category().trim();
+
+    const description =
+      this.description().trim();
+
+    const amount =
+      Number(this.amount());
+
+    if (
+      !category ||
+      !description ||
+      this.amount() === null ||
+      !Number.isFinite(amount) ||
+      amount <= 0 ||
+      this.submitting()
+    ) {
       return;
     }
 
     this.submitted.emit({
-      category:
-        this.category()
-          .trim(),
-
-      description:
-        this.description()
-          .trim(),
-
-      amount:
-        Number(
-          this.amountText()
-        )
+      category,
+      description,
+      amount
     });
-  }
-
-
-  cancel(): void {
-
-    this.cancelled.emit();
   }
 }

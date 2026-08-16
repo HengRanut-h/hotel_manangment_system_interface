@@ -266,8 +266,17 @@
       items().length ===
       0
     ) {
-      <div class="state">
-        {{ 'utilityRates.states.empty' | translate }}
+      <div class="state state-empty">
+        <span class="state-icon state-icon--amber">
+          <svg lucideBadgeDollarSign
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          {{ 'utilityRates.states.empty' | translate }}
+        </strong>
       </div>
 
     } @else {

@@ -278,8 +278,17 @@
     } @else if (
       items().length === 0
     ) {
-      <div class="state">
-        No feature flags found.
+      <div class="state state-empty">
+        <span class="state-icon state-icon--green">
+          <svg lucideFlag
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          No feature flags found.
+        </strong>
       </div>
 
     } @else {

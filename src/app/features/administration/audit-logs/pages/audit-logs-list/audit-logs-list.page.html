@@ -260,8 +260,17 @@
       items().length ===
       0
     ) {
-      <div class="state">
-        No audit logs found.
+      <div class="state state-empty">
+        <span class="state-icon state-icon--amber">
+          <svg lucideScrollText
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          No audit logs found.
+        </strong>
       </div>
 
     } @else {

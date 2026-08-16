@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnChanges,
-  SimpleChanges,
   input,
   output,
   signal
@@ -13,14 +11,13 @@ import {
 } from '@angular/forms';
 
 import {
-  LucideActivity,
+  LucideGauge,
   LucideSave,
   LucideX
 } from '@lucide/angular';
 
 import {
-  MeterReading,
-  MeterReadingUpsertRequest
+  CreateMeterReadingRequest
 } from '../../models/meter-reading.model';
 
 @Component({
@@ -32,7 +29,7 @@ import {
 
   imports: [
     FormsModule,
-    LucideActivity,
+    LucideGauge,
     LucideSave,
     LucideX
   ],
@@ -46,28 +43,19 @@ import {
   changeDetection:
     ChangeDetectionStrategy.OnPush
 })
-export class MeterReadingFormComponent
-  implements OnChanges {
+export class MeterReadingFormComponent {
 
-  readonly initialValue =
-    input<MeterReading | null>(
-      null
-    );
+  readonly initialMeterId =
+    input('');
 
   readonly submitting =
     input(false);
 
-  readonly submitLabel =
-    input('Save Reading');
-
   readonly submitted =
-    output<MeterReadingUpsertRequest>();
+    output<CreateMeterReadingRequest>();
 
   readonly cancelled =
     output<void>();
-
-  readonly touched =
-    signal(false);
 
   readonly meterId =
     signal('');
@@ -78,39 +66,22 @@ export class MeterReadingFormComponent
     );
 
   readonly readingDate =
-    signal('');
+    signal(
+      this.toLocalDateTime(
+        new Date()
+      )
+    );
 
   readonly notes =
     signal('');
 
-  ngOnChanges(
-    changes: SimpleChanges
-  ): void {
+  readonly touched =
+    signal(false);
 
-    if (
-      changes['initialValue']
-    ) {
-      this.loadInitialValue();
-    }
-  }
+  ngOnInit(): void {
 
-  isInvalid(): boolean {
-
-    const reading =
-      this.currentReading();
-
-    return (
-      !this.meterId().trim() ||
-      reading === null ||
-      !Number.isFinite(
-        Number(
-          reading
-        )
-      ) ||
-      Number(
-        reading
-      ) < 0 ||
-      !this.readingDate()
+    this.meterId.set(
+      this.initialMeterId()
     );
   }
 
@@ -120,22 +91,33 @@ export class MeterReadingFormComponent
       true
     );
 
+    const meterId =
+      this.meterId()
+        .trim();
+
+    const reading =
+      Number(
+        this.currentReading()
+      );
+
     if (
-      this.isInvalid() ||
+      !meterId ||
+      this.currentReading() === null ||
+      !Number.isFinite(
+        reading
+      ) ||
+      reading < 0 ||
+      !this.readingDate() ||
       this.submitting()
     ) {
       return;
     }
 
     this.submitted.emit({
-      meterId:
-        this.meterId()
-          .trim(),
+      meterId,
 
       currentReading:
-        Number(
-          this.currentReading()
-        ),
+        reading,
 
       readingDateUtc:
         new Date(
@@ -149,70 +131,9 @@ export class MeterReadingFormComponent
     });
   }
 
-  cancel(): void {
-
-    if (
-      !this.submitting()
-    ) {
-      this.cancelled.emit();
-    }
-  }
-
-  private loadInitialValue(): void {
-
-    const item =
-      this.initialValue();
-
-    if (
-      !item
-    ) {
-      return;
-    }
-
-    this.meterId.set(
-      item.meterId ??
-      ''
-    );
-
-    this.currentReading.set(
-      item.currentReading ??
-      null
-    );
-
-    this.readingDate.set(
-      this.toLocalInput(
-        item.readingDateUtc
-      )
-    );
-
-    this.notes.set(
-      item.notes ??
-      ''
-    );
-  }
-
-  private toLocalInput(
-    value?: string | null
+  private toLocalDateTime(
+    date: Date
   ): string {
-
-    if (
-      !value
-    ) {
-      return '';
-    }
-
-    const date =
-      new Date(
-        value
-      );
-
-    if (
-      Number.isNaN(
-        date.getTime()
-      )
-    ) {
-      return '';
-    }
 
     const local =
       new Date(

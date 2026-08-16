@@ -1,0 +1,11 @@
+@if (closed()) {
+  <span class="badge closed">
+    <svg lucideCircleCheck [size]="14" ></svg>
+    Closed
+  </span>
+} @else {
+  <span class="badge open">
+    <svg lucideBookOpen [size]="14" ></svg>
+    Open
+  </span>
+}

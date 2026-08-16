@@ -1,99 +1,77 @@
-<form
-  class="charge-form"
-  (submit)="$event.preventDefault(); submit()">
-
-  <div class="field">
-    <label for="folio-charge-category">
-      {{ 'folios.chargeCategory' | translate }}
-    </label>
-
-    <input
-      id="folio-charge-category"
-      type="text"
-      autocomplete="off"
-      [value]="category()"
-      [placeholder]="'folios.chargeCategoryPlaceholder' | translate"
-      (input)="setCategory($event)" />
-
-    @if (
-      touched()
-      &&
-      !category().trim()
-    ) {
-      <small class="field-error">
-        {{ 'folios.chargeCategoryRequired' | translate }}
-      </small>
-    }
+<form class="form-card" (ngSubmit)="submit()">
+  <div class="form-header">
+    <svg lucideReceiptText [size]="24" ></svg>
+    <div>
+      <h2>Add Charge</h2>
+      <p>Post a charge to this open folio.</p>
+    </div>
   </div>
 
-  <div class="field">
-    <label for="folio-charge-description">
-      {{ 'folios.chargeDescription' | translate }}
+  @if (
+    touched() &&
+    (
+      !category().trim() ||
+      !description().trim() ||
+      amount() === null ||
+      amount()! <= 0
+    )
+  ) {
+    <div class="validation">
+      Category, description and positive amount are required.
+    </div>
+  }
+
+  <div class="grid">
+    <label>
+      <span>Category *</span>
+      <input
+        name="category"
+        [ngModel]="category()"
+        (ngModelChange)="category.set($event)"
+      />
     </label>
 
-    <input
-      id="folio-charge-description"
-      type="text"
-      autocomplete="off"
-      [value]="description()"
-      [placeholder]="'folios.chargeDescriptionPlaceholder' | translate"
-      (input)="setDescription($event)" />
-
-    @if (
-      touched()
-      &&
-      !description().trim()
-    ) {
-      <small class="field-error">
-        {{ 'folios.chargeDescriptionRequired' | translate }}
-      </small>
-    }
-  </div>
-
-  <div class="field">
-    <label for="folio-charge-amount">
-      {{ 'folios.chargeAmount' | translate }}
+    <label>
+      <span>Amount *</span>
+      <input
+        type="number"
+        min="0.01"
+        step="0.01"
+        name="amount"
+        [ngModel]="amount()"
+        (ngModelChange)="amount.set($event)"
+      />
     </label>
 
-    <input
-      id="folio-charge-amount"
-      type="number"
-      min="0.01"
-      step="0.01"
-      inputmode="decimal"
-      [value]="amountText()"
-      [placeholder]="'folios.chargeAmountPlaceholder' | translate"
-      (input)="setAmount($event)" />
-
-    @if (
-      touched()
-      &&
-      (
-        !amountText().trim()
-        ||
-        +amountText() <= 0
-      )
-    ) {
-      <small class="field-error">
-        {{ 'folios.chargeAmountRequired' | translate }}
-      </small>
-    }
+    <label class="full">
+      <span>Description *</span>
+      <textarea
+        rows="4"
+        name="description"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+      ></textarea>
+    </label>
   </div>
 
-  <div class="form-actions">
+  <div class="actions">
     <button
       type="button"
-      class="secondary-button"
-      (click)="cancel()">
-      <svg lucideX></svg>
-      <span>{{ 'common.cancel' | translate }}</span>
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancelled.emit()"
+    >
+      <svg lucideX [size]="17" ></svg>
+      Cancel
     </button>
 
     <button
       type="submit"
-      class="primary-button">
-      <svg lucideCheckCircle2></svg>
-      <span>{{ 'folios.addCharge' | translate }}</span>
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucidePlus [size]="17" ></svg>
+      {{ submitting() ? 'Posting...' : 'Add Charge' }}
     </button>
   </div>
 </form>

@@ -121,8 +121,17 @@
       items().length ===
       0
     ) {
-      <div class="state">
-        {{ 'utilityBilling.states.empty' | translate }}
+      <div class="state state-empty">
+        <span class="state-icon state-icon--purple">
+          <svg lucideActivity
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          {{ 'utilityBilling.states.empty' | translate }}
+        </strong>
       </div>
 
     } @else {

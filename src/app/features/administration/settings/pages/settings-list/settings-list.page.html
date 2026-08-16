@@ -303,8 +303,17 @@
     } @else if (
       items().length === 0
     ) {
-      <div class="state">
-        No settings found.
+      <div class="state state-empty">
+        <span class="state-icon state-icon--gray">
+          <svg lucideSettings
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          No settings found.
+        </strong>
       </div>
 
     } @else {

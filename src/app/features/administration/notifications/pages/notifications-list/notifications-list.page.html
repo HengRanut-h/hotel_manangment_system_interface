@@ -304,8 +304,17 @@
     } @else if (
       items().length === 0
     ) {
-      <div class="state">
-        No notifications found.
+      <div class="state state-empty">
+        <span class="state-icon state-icon--purple">
+          <svg lucideBell
+            [size]="28"
+            [strokeWidth]="2"
+          ></svg>
+        </span>
+
+        <strong>
+          No notifications found.
+        </strong>
       </div>
 
     } @else {

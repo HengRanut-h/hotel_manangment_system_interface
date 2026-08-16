@@ -1,6 +1,5 @@
 import {
-  HttpClient,
-  HttpParams
+  HttpClient
 } from '@angular/common/http';
 
 import {
@@ -14,10 +13,8 @@ import {
 } from 'rxjs';
 
 import {
-  MeterReading,
-  MeterReadingPagedResult,
-  MeterReadingQuery,
-  MeterReadingUpsertRequest
+  CreateMeterReadingRequest,
+  MeterReading
 } from '../models/meter-reading.model';
 
 interface ApiEnvelope<T> {
@@ -28,11 +25,11 @@ interface ApiEnvelope<T> {
   data: T;
 }
 
-type ListResponse =
-  | MeterReadingPagedResult
-  | ApiEnvelope<MeterReadingPagedResult>;
+type MeterReadingsResponse =
+  | MeterReading[]
+  | ApiEnvelope<MeterReading[]>;
 
-type DetailResponse =
+type CreateResponse =
   | MeterReading
   | ApiEnvelope<MeterReading>;
 
@@ -47,114 +44,13 @@ export class MeterReadingsApiService {
   private readonly baseUrl =
     '/api/v1/meter-readings';
 
-  getAll(
-    query: MeterReadingQuery = {}
-  ): Observable<MeterReadingPagedResult> {
-
-    let params =
-      new HttpParams();
-
-    if (query.pageNumber !== undefined) {
-      params = params.set(
-        'pageNumber',
-        query.pageNumber
-      );
-    }
-
-    if (query.pageSize !== undefined) {
-      params = params.set(
-        'pageSize',
-        query.pageSize
-      );
-    }
-
-    if (query.search?.trim()) {
-      params = params.set(
-        'search',
-        query.search.trim()
-      );
-    }
-
-    if (query.meterId) {
-      params = params.set(
-        'meterId',
-        query.meterId
-      );
-    }
-
-    if (query.utilityId) {
-      params = params.set(
-        'utilityId',
-        query.utilityId
-      );
-    }
-
-    if (query.utilityType) {
-      params = params.set(
-        'utilityType',
-        query.utilityType
-      );
-    }
-
-    if (query.roomId) {
-      params = params.set(
-        'roomId',
-        query.roomId
-      );
-    }
-
-    if (query.fromUtc) {
-      params = params.set(
-        'fromUtc',
-        query.fromUtc
-      );
-    }
-
-    if (query.toUtc) {
-      params = params.set(
-        'toUtc',
-        query.toUtc
-      );
-    }
-
-    if (query.sortBy) {
-      params = params.set(
-        'sortBy',
-        query.sortBy
-      );
-    }
-
-    if (query.sortDirection) {
-      params = params.set(
-        'sortDirection',
-        query.sortDirection
-      );
-    }
+  getByMeterId(
+    meterId: string
+  ): Observable<MeterReading[]> {
 
     return this.http
-      .get<ListResponse>(
-        this.baseUrl,
-        {
-          params
-        }
-      )
-      .pipe(
-        map(
-          response =>
-            this.unwrap(
-              response
-            )
-        )
-      );
-  }
-
-  getById(
-    id: string
-  ): Observable<MeterReading> {
-
-    return this.http
-      .get<DetailResponse>(
-        `${this.baseUrl}/${id}`
+      .get<MeterReadingsResponse>(
+        `${this.baseUrl}/meter/${meterId}`
       )
       .pipe(
         map(
@@ -167,11 +63,12 @@ export class MeterReadingsApiService {
   }
 
   create(
-    request: MeterReadingUpsertRequest
+    request:
+      CreateMeterReadingRequest
   ): Observable<MeterReading> {
 
     return this.http
-      .post<DetailResponse>(
+      .post<CreateResponse>(
         this.baseUrl,
         request
       )
@@ -183,36 +80,6 @@ export class MeterReadingsApiService {
             )
         )
       );
-  }
-
-  update(
-    id: string,
-    request: MeterReadingUpsertRequest
-  ): Observable<unknown> {
-
-    return this.http.put(
-      `${this.baseUrl}/${id}`,
-      request
-    );
-  }
-
-  delete(
-    id: string
-  ): Observable<void> {
-
-    return this.http.delete<void>(
-      `${this.baseUrl}/${id}`
-    );
-  }
-
-  restore(
-    id: string
-  ): Observable<unknown> {
-
-    return this.http.post(
-      `${this.baseUrl}/${id}/restore`,
-      {}
-    );
   }
 
   private unwrap<T>(

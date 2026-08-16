@@ -1,192 +1,35 @@
-<div class="page">
-
+<section class="page">
   <a
     class="back-link"
-    routerLink="/app/front-office/folios">
-    <svg lucideArrowLeft></svg>
-    <span>{{ 'folios.backToWorkspace' | translate }}</span>
+    routerLink="/app/finance/folios"
+  >
+    <svg lucideArrowLeft [size]="17" ></svg>
+    Back to Folios
   </a>
 
-  <header class="page-heading">
-    <span class="eyebrow">
-      {{ 'folios.section' | translate }}
-    </span>
-
-    <h1>{{ 'folios.create' | translate }}</h1>
-
-    <p>{{ 'folios.createDescription' | translate }}</p>
-  </header>
-
-  @if (loading()) {
-
-    <app-spin
-      size="large"
-      [label]="'folios.loadingReservations' | translate" />
-
-  } @else if (errorMessage()) {
-
-    <section class="state state--error">
-      <svg lucideClipboardList></svg>
-
-      <strong>
-        {{ 'folios.reservationsLoadFailed' | translate }}
-      </strong>
-
-      <span>{{ errorMessage() }}</span>
-
-      <button
-        type="button"
-        (click)="loadReservations()">
-        <svg lucideRefreshCw></svg>
-        <span>{{ 'common.tryAgain' | translate }}</span>
-      </button>
-    </section>
-
-  } @else {
-
-    <section class="form-card">
-
-      <div class="field">
-        <label for="folio-reservation">
-          {{ 'folios.reservation' | translate }}
-        </label>
-
-        <select
-          id="folio-reservation"
-          [value]="selectedReservationId()"
-          (change)="setReservation($event)">
-
-          <option value="">
-            {{ 'folios.selectReservation' | translate }}
-          </option>
-
-          @for (
-            reservation of reservations();
-            track reservation.id
-          ) {
-            <option [value]="reservation.id">
-              {{
-                reservation.reservationNumber
-                || reservation.id
-              }}
-              —
-              {{
-                reservation.guestName
-                || '—'
-              }}
-            </option>
-          }
-
-        </select>
+  <div class="page-header">
+    <div class="heading">
+      <div class="heading-icon">
+        <svg lucideFilePlus2 [size]="24" ></svg>
       </div>
-
-      @if (
-        selectedReservation();
-        as reservation
-      ) {
-
-        <section class="reservation-context">
-          <h2>{{ 'folios.reservationContext' | translate }}</h2>
-
-          <dl>
-            <div>
-              <dt>{{ 'folios.reservationNumber' | translate }}</dt>
-              <dd>{{ reservation.reservationNumber || '—' }}</dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.guest' | translate }}</dt>
-              <dd>{{ reservation.guestName || '—' }}</dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.room' | translate }}</dt>
-              <dd>{{ reservation.roomNumber || '—' }}</dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.roomType' | translate }}</dt>
-              <dd>{{ reservation.roomTypeName || '—' }}</dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.checkInDate' | translate }}</dt>
-              <dd>
-                {{
-                  reservation.checkInDate
-                    ? (
-                        reservation.checkInDate
-                          | date:'mediumDate'
-                      )
-                    : '—'
-                }}
-              </dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.checkOutDate' | translate }}</dt>
-              <dd>
-                {{
-                  reservation.checkOutDate
-                    ? (
-                        reservation.checkOutDate
-                          | date:'mediumDate'
-                      )
-                    : '—'
-                }}
-              </dd>
-            </div>
-
-            <div>
-              <dt>{{ 'folios.reservationStatus' | translate }}</dt>
-              <dd>{{ reservation.status || '—' }}</dd>
-            </div>
-          </dl>
-        </section>
-
-      }
-
-      <div class="form-actions">
-        <a
-          class="secondary-button"
-          routerLink="/app/front-office/folios">
-          {{ 'common.cancel' | translate }}
-        </a>
-
-        <button
-          type="button"
-          class="primary-button"
-          [disabled]="
-            !selectedReservation()
-            ||
-            saving()
-          "
-          (click)="submit()">
-
-          @if (saving()) {
-            <app-spin
-              [inline]="true"
-              size="small"
-              label="" />
-          } @else {
-            <svg lucideCheckCircle2></svg>
-          }
-
-          <span>
-            {{
-              (
-                saving()
-                  ? 'common.saving'
-                  : 'folios.create'
-              )
-                | translate
-            }}
-          </span>
-        </button>
+      <div>
+        <h1>Create Folio</h1>
+        <p class="subtitle">
+          Reservation ID + Guest ID
+        </p>
       </div>
+    </div>
+  </div>
 
-    </section>
-
+  @if (error()) {
+    <div class="error">
+      Unable to create folio.
+    </div>
   }
 
-</div>
+  <app-folio-create-form
+    [submitting]="submitting()"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+</section>
