@@ -3,8 +3,8 @@ export const environment = { production: false,
   //  hubBaseUrl: '/hubs' 
 
      apiBaseUrl:
-    'https://hotel-management-system-j4ml.onrender.com/api/v1',
+    'https://hotel-management-systems-api.setec-sw11.com/api/v1',
 
   hubBaseUrl:
-    'https://hotel-management-system-j4ml.onrender.com/hubs'
+    'https://hotel-management-systems-api.setec-sw11.com/hubs'
   };
