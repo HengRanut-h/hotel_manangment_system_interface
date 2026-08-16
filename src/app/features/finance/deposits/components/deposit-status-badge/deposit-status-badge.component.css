@@ -1,0 +1,55 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-height: 30px;
+
+  padding:
+    5px 10px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+.received,
+.applied {
+  background:
+    #ecfdf3;
+
+  color:
+    #027a48;
+}
+
+.pending,
+.partial {
+  background:
+    #fffaeb;
+
+  color:
+    #b54708;
+}
+
+.refunded,
+.partial-refund {
+  background:
+    #f4f3ff;
+
+  color:
+    #5925dc;
+}
+
+.cancelled,
+.neutral {
+  background:
+    #f2f4f7;
+
+  color:
+    #475467;
+}

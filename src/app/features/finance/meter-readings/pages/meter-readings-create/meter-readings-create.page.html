@@ -1,0 +1,58 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/meter-readings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Meter Readings
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePlus
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Record Meter Reading
+        </h1>
+
+        <p class="subtitle">
+          Add the latest reading for a utility meter.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to create meter reading.
+    </div>
+  }
+
+
+  <app-meter-reading-form
+    [submitting]="submitting()"
+    submitLabel="Record Reading"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+
+</section>

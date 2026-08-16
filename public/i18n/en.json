@@ -1,3006 +1,1582 @@
 {
   "common": {
     "back": "Back",
-
     "save": "Save",
-
     "saving": "Saving...",
-
     "cancel": "Cancel",
-
     "create": "Create",
-
     "edit": "Edit",
-
     "update": "Update",
-
     "delete": "Delete",
-
     "details": "Details",
-
     "search": "Search",
-
     "clear": "Clear",
-
     "refresh": "Refresh",
-
     "loading": "Loading...",
-
-    "more": "more"
+    "more": "more",
+    "actions": "Actions",
+    "next": "Next",
+    "previous": "Previous",
+    "tryAgain": "Try again",
+    "view": "View",
+    "close": "Close",
+    "of": "of",
+    "page": "Page",
+    "rows": "Rows",
+    "showing": "Showing"
   },
-
   "roles": {
     "section": "Administration",
-
     "title": "Roles & Access",
-
     "subtitle": "Create roles and control access to hotel operations.",
-
     "roles": "roles",
-
     "user": "user",
-
     "users": "users",
-
     "totalRoles": "Total roles",
-
     "assignedUsers": "Assigned users",
-
     "permissions": "Permissions",
-
     "searchPlaceholder": "Search roles or permissions...",
-
     "add": "Add role",
-
     "loading": "Loading roles...",
-
     "loadFailed": "Unable to load roles.",
-
     "noRoles": "No roles found",
-
     "noPermissions": "No permissions assigned",
-
     "create": "Create Role",
-
     "creating": "Creating...",
-
     "createDescription": "Create a new role for hotel staff access control.",
-
     "createPermissionsHint": "Create the role first. Permissions can be assigned afterward.",
-
     "edit": "Edit Role",
-
     "editDescription": "Update the role name and information.",
-
     "detail": "Role Details",
-
     "name": "Role name",
-
     "namePlaceholder": "Example: Front Desk Manager",
-
     "nameHelp": "Use a clear name that describes the staff responsibility.",
-
     "update": "Update role",
-
     "managePermissions": "Manage permissions",
-
     "savePermissions": "Save permissions",
-
     "createSuccess": "Role created successfully.",
-
     "createFailed": "Unable to create role.",
-
     "updateSuccess": "Role updated successfully.",
-
     "updateFailed": "Unable to update role.",
-
     "deleteSuccess": "Role deleted successfully.",
-
     "deleteFailed": "Unable to delete role.",
-
     "deleteAssignedError": "This role is assigned to users and cannot be deleted.",
-
-    "deleteConfirm": "Delete role \"{{name}}\"?"
+    "deleteConfirm": "Delete role \"{{name}}\"?",
+    "assignedPermissions": "Assigned permissions",
+    "assignedPermissionsDescription": "Choose which permissions this role should include.",
+    "clearAll": "Clear all",
+    "clearGroup": "Clear group",
+    "deleteAssignedHint": "Users currently assigned to this role may be affected.",
+    "description": "Description",
+    "detailDescription": "Review role details and assigned permissions.",
+    "missingId": "Missing role id.",
+    "noResults": "No roles found.",
+    "noResultsDescription": "Create a role to start assigning permissions.",
+    "permissionAssignments": "Permission assignments",
+    "permissionDefaultDescription": "Permission available for role access control.",
+    "permissionsDescription": "Manage the permissions attached to this role.",
+    "permissionsLoadFailed": "Could not load role permissions.",
+    "permissionsLoading": "Loading role permissions...",
+    "permissionsSaveFailed": "Could not save role permissions.",
+    "permissionsSaveSuccess": "Role permissions saved successfully.",
+    "selectAll": "Select all",
+    "selectGroup": "Select group",
+    "selectedPermissions": "Selected permissions"
   },
-
   "users": {
     "section": "Administration",
-
     "title": "Users",
-
     "description": "Manage hotel users, access roles and account status.",
-
     "loading": "Loading users...",
-
     "loadingOne": "Loading user...",
-
     "loadingRoles": "Loading roles...",
-
     "loadFailed": "Unable to load users.",
-
     "loadOneFailed": "Unable to load user.",
-
     "missingId": "User id is missing.",
-
     "totalUsers": "Total Users",
-
     "activeUsers": "Active Users",
-
     "inactiveUsers": "Inactive Users",
-
     "searchPlaceholder": "Search users by name, email or role...",
-
     "noResults": "No users found",
-
     "noResultsDescription": "Try another search term.",
-
     "create": "Create user",
-
     "createDescription": "Create a hotel user and assign one or more roles.",
-
     "createSuccess": "User created successfully.",
-
     "createFailed": "Unable to create user.",
-
     "edit": "Edit user",
-
     "editDescription": "Update user information, account status and assigned roles.",
-
     "update": "Update user",
-
     "updateSuccess": "User updated successfully.",
-
     "updateFailed": "Unable to update user.",
-
     "detail": "User details",
-
     "fullName": "Full name",
-
     "fullNamePlaceholder": "Enter full name",
-
     "email": "Email",
-
     "emailPlaceholder": "Enter email address",
-
     "branchId": "Branch ID",
-
     "branchIdPlaceholder": "Optional branch GUID",
-
     "branchIdHelp": "Leave blank to use the default branch during creation.",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "roles": "Roles",
-
     "rolesHelp": "Choose the roles this user should receive.",
-
     "rolesDescription": "Roles currently assigned to this user.",
-
     "noAvailableRoles": "No roles are currently available.",
-
     "noRolesAssigned": "No roles are assigned to this user.",
-
     "manageRoles": "Manage roles",
-
     "manageRolesDescription": "Choose which roles should be assigned to this user.",
-
     "selectedRoles": "Selected roles",
-
     "searchRoles": "Search roles...",
-
     "selectAllRoles": "Select all",
-
     "clearRoles": "Clear all",
-
     "saveRoles": "Save roles",
-
     "rolesLoadFailed": "Unable to load user roles.",
-
     "rolesSaveSuccess": "User roles updated successfully.",
-
     "rolesSaveFailed": "Unable to update user roles.",
-
     "enable": "Enable user",
-
     "disable": "Disable user",
-
     "enableSuccess": "User enabled successfully.",
-
     "enableFailed": "Unable to enable user.",
-
     "disableSuccess": "User disabled successfully.",
-
     "disableFailed": "Unable to disable user.",
-
     "password": "Password",
-
     "passwordHelp": "Password must contain at least 8 characters.",
-
     "togglePassword": "Show or hide password",
-
     "resetPassword": "Reset password",
-
     "resetPasswordDescription": "Set a new password for this user account.",
-
     "resetPasswordHelp": "Enter a new password with at least 8 characters.",
-
     "newPassword": "New password",
-
     "confirmPassword": "Confirm password",
-
     "passwordMismatch": "Passwords do not match.",
-
     "resetPasswordSuccess": "Password reset successfully.",
-
     "resetPasswordFailed": "Unable to reset password.",
-
     "deleteConfirm": "Delete user {{name}}?",
-
     "deleteSuccess": "User deleted successfully.",
-
-    "deleteFailed": "Unable to delete user."
+    "deleteFailed": "Unable to delete user.",
+    "addUser": "Add user",
+    "addUserDescription": "Create a staff account and assign access.",
+    "assignRoles": "Assign roles",
+    "automaticScopeDescription": "Hotel access is applied from the selected role and account context.",
+    "automaticScopeTitle": "Automatic access scope",
+    "emailInvalid": "Enter a valid email address.",
+    "fullNameRequired": "Full name is required.",
+    "passwordPlaceholder": "Enter temporary password",
+    "roleRequired": "Select at least one role.",
+    "saveUser": "Save user",
+    "temporaryPassword": "Temporary password"
   },
-
   "departments": {
     "section": "Human Resources",
-
     "title": "Departments",
-
     "department": "Department",
-
     "description": "Manage HR departments, branch scope, catalog status, and department codes.",
-
     "create": "Add department",
-
     "createTitle": "Create department",
-
     "createDescription": "Create a department for the current hotel context and optionally assign it to a branch.",
-
     "edit": "Edit department",
-
     "editTitle": "Edit department",
-
     "editDescription": "Update department identity, description, and active status.",
-
     "detail": "Department details",
-
     "overview": "Overview",
-
     "departmentInformation": "Department information",
-
     "departmentInformationDescription": "Basic department identity, branch scope, and catalog status.",
-
     "name": "Department name",
-
     "code": "Department code",
-
     "departmentId": "Department ID",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Default branch",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View department",
-
     "editAction": "Edit department",
-
     "activateAction": "Activate department",
-
     "deactivateAction": "Deactivate department",
-
     "deleteAction": "Delete department",
-
     "loading": "Loading departments...",
-
     "loadingOne": "Loading department...",
-
     "loadFailed": "Unable to load departments.",
-
     "loadOneFailed": "Unable to load department.",
-
     "missingId": "Department ID is missing.",
-
     "noResults": "No departments found",
-
     "noResultsDescription": "Change the filters or create a department.",
-
     "tryAgain": "Try again",
-
     "totalDepartments": "total departments",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Department created successfully.",
-
     "createFailed": "Unable to create department.",
-
     "updateSuccess": "Department updated successfully.",
-
     "updateFailed": "Unable to update department.",
-
     "activateSuccess": "Department activated successfully.",
-
     "activateFailed": "Unable to activate department.",
-
     "deactivateSuccess": "Department deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate department.",
-
     "deleteConfirm": "Delete department \"{{name}}\"?",
-
     "deleteSuccess": "Department deleted successfully.",
-
     "deleteFailed": "Unable to delete department.",
-
     "form": {
       "identity": "Department identity",
-
       "identityDescription": "Enter the basic information used to identify this department.",
-
       "name": "Department name",
-
       "namePlaceholder": "Example: Front Office",
-
       "nameRequired": "Department name is required.",
-
       "code": "Department code",
-
       "codePlaceholder": "Example: FO",
-
       "codeHelp": "Use a short unique code for the department.",
-
       "codeRequired": "Department code is required.",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "branchIdHelp": "Leave blank to use your current branch context when available.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this department.",
-
       "status": "Department status",
-
       "statusDescription": "Inactive departments remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "positions": {
     "section": "Human Resources",
-
     "title": "Positions",
-
     "position": "Position",
-
     "description": "Manage HR job positions, branch scope, catalog status, and position codes.",
-
     "create": "Add position",
-
     "createTitle": "Create position",
-
     "createDescription": "Create a job position for the current hotel context and optionally assign it to a branch.",
-
     "edit": "Edit position",
-
     "editTitle": "Edit position",
-
     "editDescription": "Update position identity, description, and active status.",
-
     "detail": "Position details",
-
     "overview": "Overview",
-
     "positionInformation": "Position information",
-
     "positionInformationDescription": "Basic position identity, branch scope, and catalog status.",
-
     "name": "Position name",
-
     "code": "Position code",
-
     "positionId": "Position ID",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Default branch",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View position",
-
     "editAction": "Edit position",
-
     "activateAction": "Activate position",
-
     "deactivateAction": "Deactivate position",
-
     "deleteAction": "Delete position",
-
     "loading": "Loading positions...",
-
     "loadingOne": "Loading position...",
-
     "loadFailed": "Unable to load positions.",
-
     "loadOneFailed": "Unable to load position.",
-
     "missingId": "Position ID is missing.",
-
     "noResults": "No positions found",
-
     "noResultsDescription": "Change the filters or create a position.",
-
     "tryAgain": "Try again",
-
     "totalPositions": "total positions",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Position created successfully.",
-
     "createFailed": "Unable to create position.",
-
     "updateSuccess": "Position updated successfully.",
-
     "updateFailed": "Unable to update position.",
-
     "activateSuccess": "Position activated successfully.",
-
     "activateFailed": "Unable to activate position.",
-
     "deactivateSuccess": "Position deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate position.",
-
     "deleteConfirm": "Delete position \"{{name}}\"?",
-
     "deleteSuccess": "Position deleted successfully.",
-
     "deleteFailed": "Unable to delete position.",
-
     "form": {
       "identity": "Position identity",
-
       "identityDescription": "Enter the basic information used to identify this job position.",
-
       "name": "Position name",
-
       "namePlaceholder": "Example: Front Office Manager",
-
       "nameRequired": "Position name is required.",
-
       "code": "Position code",
-
       "codePlaceholder": "Example: FOM",
-
       "codeHelp": "Use a short unique code for the position.",
-
       "codeRequired": "Position code is required.",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "branchIdHelp": "Leave blank to use your current branch context when available.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this position.",
-
       "status": "Position status",
-
       "statusDescription": "Inactive positions remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "employees": {
     "section": "Human Resources",
-
     "title": "Employees",
-
     "employee": "Employee",
-
     "description": "Manage personnel records, work assignments, and employee status.",
-
     "create": "Add employee",
-
     "createTitle": "Create employee",
-
     "createDescription": "Create an HR employee record using the backend-supported personnel fields.",
-
     "edit": "Edit employee",
-
     "editTitle": "Edit employee",
-
     "editDescription": "Update employee contact and work assignment details.",
-
     "detail": "Employee details",
-
     "overview": "Overview",
-
     "employeeInformation": "Employee information",
-
     "employeeInformationDescription": "Basic personnel identity and current status.",
-
     "workInformation": "Work information",
-
     "workInformationDescription": "Department, position, and branch assignment stored on the employee record.",
-
     "employeeNumber": "Employee number",
-
     "fullName": "Full name",
-
     "email": "Email",
-
     "noEmail": "No email",
-
     "department": "Department",
-
     "position": "Position",
-
     "branchId": "Branch ID",
-
     "hotelId": "Hotel ID",
-
     "defaultBranch": "Default branch",
-
     "unassigned": "Unassigned",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "employeeId": "Employee ID",
-
     "search": "Search",
-
     "searchPlaceholder": "Employee number, name, or email",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortFullName": "Full name",
-
     "sortEmployeeNumber": "Employee number",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View employee",
-
     "editAction": "Edit employee",
-
     "deleteAction": "Delete employee",
-
     "loading": "Loading employees...",
-
     "loadingOne": "Loading employee...",
-
     "loadingReferences": "Loading departments and positions...",
-
     "loadFailed": "Unable to load employees.",
-
     "loadOneFailed": "Unable to load employee.",
-
     "loadReferencesFailed": "Unable to load departments and positions.",
-
     "missingId": "Employee ID is missing.",
-
     "noResults": "No employees found",
-
     "noResultsDescription": "Change the filters or create an employee.",
-
     "tryAgain": "Try again",
-
     "totalEmployees": "total employees",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Employee created successfully.",
-
     "createFailed": "Unable to create employee.",
-
     "updateSuccess": "Employee updated successfully.",
-
     "updateFailed": "Unable to update employee.",
-
     "deleteConfirm": "Delete employee \"{{name}}\"?",
-
     "deleteSuccess": "Employee deleted successfully.",
-
     "deleteFailed": "Unable to delete employee.",
-
     "form": {
       "basic": "Basic information",
-
       "basicDescription": "Enter the backend-supported employee identity and contact fields.",
-
       "work": "Work information",
-
       "workDescription": "Assign an optional department, position, and branch ID.",
-
       "employeeNumber": "Employee number",
-
       "employeeNumberPlaceholder": "Example: EMP-001",
-
       "employeeNumberHelp": "Use the unique employee number expected by HR.",
-
       "employeeNumberReadonlyHelp": "Employee number is kept unchanged because the backend update only changes profile and assignment fields.",
-
       "employeeNumberRequired": "Employee number is required.",
-
       "fullName": "Full name",
-
       "fullNamePlaceholder": "Example: Sok Dara",
-
       "fullNameRequired": "Full name is required.",
-
       "email": "Email",
-
       "emailPlaceholder": "Example: dara@hotel.com",
-
       "department": "Department",
-
       "noDepartment": "No department",
-
       "position": "Position",
-
       "noPosition": "No position",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "branchIdHelp": "Leave blank to use the backend's current branch context when available."
     }
   },
-
   "shifts": {
     "section": "Human Resources",
-
     "title": "Shifts",
-
     "shift": "Shift",
-
     "description": "Manage shift catalog records, branch scope, active status, and shift codes.",
-
     "create": "Add shift",
-
     "createTitle": "Create shift",
-
     "createDescription": "Create a shift definition for the current hotel context and optionally assign it to a branch.",
-
     "edit": "Edit shift",
-
     "editTitle": "Edit shift",
-
     "editDescription": "Update shift identity, description, and active status.",
-
     "detail": "Shift details",
-
     "overview": "Overview",
-
     "shiftInformation": "Shift information",
-
     "shiftInformationDescription": "Basic shift identity, branch scope, and catalog status.",
-
     "name": "Shift name",
-
     "code": "Shift code",
-
     "shiftId": "Shift ID",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Default branch",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View shift",
-
     "editAction": "Edit shift",
-
     "activateAction": "Activate shift",
-
     "deactivateAction": "Deactivate shift",
-
     "deleteAction": "Delete shift",
-
     "loading": "Loading shifts...",
-
     "loadingOne": "Loading shift...",
-
     "loadFailed": "Unable to load shifts.",
-
     "loadOneFailed": "Unable to load shift.",
-
     "missingId": "Shift ID is missing.",
-
     "noResults": "No shifts found",
-
     "noResultsDescription": "Change the filters or create a shift.",
-
     "tryAgain": "Try again",
-
     "totalShifts": "total shifts",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Shift created successfully.",
-
     "createFailed": "Unable to create shift.",
-
     "updateSuccess": "Shift updated successfully.",
-
     "updateFailed": "Unable to update shift.",
-
     "activateSuccess": "Shift activated successfully.",
-
     "activateFailed": "Unable to activate shift.",
-
     "deactivateSuccess": "Shift deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate shift.",
-
     "deleteConfirm": "Delete shift \"{{name}}\"?",
-
     "deleteSuccess": "Shift deleted successfully.",
-
     "deleteFailed": "Unable to delete shift.",
-
     "form": {
       "identity": "Shift identity",
-
       "identityDescription": "Enter the basic information used to identify this shift catalog record.",
-
       "name": "Shift name",
-
       "namePlaceholder": "Example: Morning Shift",
-
       "nameRequired": "Shift name is required.",
-
       "code": "Shift code",
-
       "codePlaceholder": "Example: MORNING",
-
       "codeHelp": "Use a short unique code for the shift.",
-
       "codeRequired": "Shift code is required.",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "branchIdHelp": "Leave blank to use your current branch context when available.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this shift.",
-
       "status": "Shift status",
-
       "statusDescription": "Inactive shifts remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "attendance": {
     "section": "Human Resources",
-
     "title": "Attendance",
-
     "record": "Attendance record",
-
     "description": "Manage operational attendance records using the backend-supported record workflow.",
-
     "create": "Add attendance",
-
     "createTitle": "Create attendance record",
-
     "createDescription": "Create an operational attendance record with a title, event time, status, and notes.",
-
     "edit": "Edit attendance",
-
     "editTitle": "Edit attendance record",
-
     "editDescription": "Update the operational record details while preserving the generated reference number.",
-
     "detail": "Attendance details",
-
     "overview": "Overview",
-
     "recordInformation": "Record information",
-
     "recordInformationDescription": "Reference, status, event time, context, and notes for this attendance record.",
-
     "reference": "Reference",
-
     "titleLabel": "Title",
-
     "status": "Status",
-
     "statusPlaceholder": "Exact status",
-
     "amount": "Amount",
-
     "eventAt": "Event time",
-
     "created": "Created",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Default branch",
-
     "relatedEntity": "Related entity",
-
     "noRelatedEntity": "No related entity",
-
     "notes": "Notes",
-
     "noNotes": "No notes",
-
     "search": "Search",
-
     "searchPlaceholder": "Reference or title",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortCreated": "Created",
-
     "sortEventAt": "Event time",
-
     "sortReference": "Reference",
-
     "sortTitle": "Title",
-
     "sortStatus": "Status",
-
     "sortAmount": "Amount",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View attendance",
-
     "editAction": "Edit attendance",
-
     "deleteAction": "Delete attendance",
-
     "loading": "Loading attendance...",
-
     "loadingOne": "Loading attendance record...",
-
     "loadFailed": "Unable to load attendance.",
-
     "loadOneFailed": "Unable to load attendance record.",
-
     "missingId": "Attendance ID is missing.",
-
     "noResults": "No attendance records found",
-
     "noResultsDescription": "Change the filters or create an attendance record.",
-
     "tryAgain": "Try again",
-
     "totalRecords": "total records",
-
     "completedOnPage": "completed on this page",
-
     "openOnPage": "open on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Attendance record created successfully.",
-
     "createFailed": "Unable to create attendance record.",
-
     "updateSuccess": "Attendance record updated successfully.",
-
     "updateFailed": "Unable to update attendance record.",
-
     "statusChangeSuccess": "Attendance status updated successfully.",
-
     "statusChangeFailed": "Unable to update attendance status.",
-
     "deleteConfirm": "Delete attendance record \"{{reference}}\"?",
-
     "deleteSuccess": "Attendance record deleted successfully.",
-
     "deleteFailed": "Unable to delete attendance record.",
-
     "form": {
       "record": "Attendance record",
-
       "recordDescription": "Enter the backend-supported operational attendance fields.",
-
       "context": "Record context",
-
       "contextDescription": "Optional branch and related-entity references stored with the record.",
-
       "title": "Title",
-
       "titlePlaceholder": "Example: Manual attendance adjustment",
-
       "titleRequired": "Title is required.",
-
       "eventAt": "Event time",
-
       "eventAtRequired": "Event time is required.",
-
       "amount": "Amount",
-
       "status": "Status",
-
       "statusPlaceholder": "Open",
-
       "notes": "Notes",
-
       "notesPlaceholder": "Optional notes about this attendance record.",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "relatedEntityId": "Related entity ID",
-
       "relatedEntityIdPlaceholder": "Optional related entity GUID",
-
       "relatedEntityType": "Related entity type",
-
       "relatedEntityTypePlaceholder": "Optional type, such as Employee"
     }
   },
-
   "hotels": {
     "section": "Property management",
-
     "title": "Hotels",
-
     "hotel": "Hotel",
-
     "description": "Manage hotel organizations, currencies, status, and property structure.",
-
     "create": "Add hotel",
-
     "createTitle": "Create hotel",
-
     "createDescription": "Create a new hotel and configure its default currency and status.",
-
     "edit": "Edit hotel",
-
     "editTitle": "Edit hotel",
-
     "editDescription": "Update hotel identity, default currency, and active status.",
-
     "detail": "Hotel details",
-
     "overview": "Overview",
-
     "hotelInformation": "Hotel information",
-
     "hotelInformationDescription": "Basic hotel identity and configuration.",
-
     "name": "Hotel name",
-
     "namePlaceholder": "Enter hotel name",
-
     "code": "Hotel code",
-
     "codePlaceholder": "Example: AGH01",
-
     "currency": "Currency",
-
     "defaultCurrency": "Default currency",
-
     "currencyPlaceholder": "USD",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "hotelId": "Hotel ID",
-
     "search": "Search",
-
     "searchPlaceholder": "Name, code, currency or ID",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCurrency": "Currency",
-
     "sortStatus": "Status",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View hotel",
-
     "editAction": "Edit hotel",
-
     "activateAction": "Activate hotel",
-
     "deactivateAction": "Deactivate hotel",
-
     "deleteAction": "Delete hotel",
-
     "loading": "Loading hotels...",
-
     "loadingOne": "Loading hotel...",
-
     "loadFailed": "Unable to load hotels.",
-
     "loadOneFailed": "Unable to load hotel.",
-
     "missingId": "Hotel ID is missing.",
-
     "noResults": "No hotels found",
-
     "noResultsDescription": "Change the filters or create a hotel.",
-
     "tryAgain": "Try again",
-
     "totalHotels": "total hotels",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "save": "Save hotel",
-
     "saveChanges": "Save changes",
-
     "saving": "Saving...",
-
     "cancel": "Cancel",
-
     "createSuccess": "Hotel created successfully.",
-
     "createFailed": "Unable to create hotel.",
-
     "updateSuccess": "Hotel updated successfully.",
-
     "updateFailed": "Unable to update hotel.",
-
     "activateSuccess": "Hotel activated successfully.",
-
     "activateFailed": "Unable to activate hotel.",
-
     "deactivateSuccess": "Hotel deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate hotel.",
-
     "deleteConfirm": "Delete hotel \"{{name}}\"?",
-
     "deleteSuccess": "Hotel deleted successfully.",
-
     "deleteFailed": "Unable to delete hotel.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing branches, buildings, floors and rooms.",
-
     "branches": "Branches",
-
     "buildings": "Buildings",
-
     "floors": "Floors",
-
     "roomTypes": "Room Types",
-
     "rooms": "Rooms",
-
     "amenities": "Amenities",
-
     "rates": "Rates",
-
     "form": {
       "identity": "Hotel identity",
-
       "identityDescription": "Enter the basic information used to identify this hotel.",
-
       "name": "Hotel name",
-
       "namePlaceholder": "Example: Aurora Grand Hotel",
-
       "nameRequired": "Hotel name is required.",
-
       "code": "Hotel code",
-
       "codePlaceholder": "Example: AGH01",
-
       "codeHelp": "Use a short unique code for the hotel.",
-
       "codeRequired": "Hotel code is required.",
-
       "currency": "Default currency",
-
       "currencyPlaceholder": "USD",
-
       "currencyHelp": "Use a 3-letter currency code such as USD, KHR or EUR.",
-
       "currencyRequired": "Currency is required.",
-
       "status": "Hotel status",
-
       "statusDescription": "Inactive hotels remain in the system but cannot be used for normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "branches": {
     "section": "Property management",
-
     "title": "Branches",
-
     "branch": "Branch",
-
     "description": "Manage hotel branches, catalog status, and branch identifiers.",
-
     "create": "Add branch",
-
     "createTitle": "Create branch",
-
     "createDescription": "Create a new branch for the current hotel context.",
-
     "edit": "Edit branch",
-
     "editTitle": "Edit branch",
-
     "editDescription": "Update branch identity, description, and active status.",
-
     "detail": "Branch details",
-
     "overview": "Overview",
-
     "branchInformation": "Branch information",
-
     "branchInformationDescription": "Basic branch identity and hotel relationship.",
-
     "name": "Branch name",
-
     "code": "Branch code",
-
     "branchId": "Branch ID",
-
     "hotelId": "Hotel ID",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View branch",
-
     "editAction": "Edit branch",
-
     "activateAction": "Activate branch",
-
     "deactivateAction": "Deactivate branch",
-
     "deleteAction": "Delete branch",
-
     "loading": "Loading branches...",
-
     "loadingOne": "Loading branch...",
-
     "loadFailed": "Unable to load branches.",
-
     "loadOneFailed": "Unable to load branch.",
-
     "missingId": "Branch ID is missing.",
-
     "noResults": "No branches found",
-
     "noResultsDescription": "Change the filters or create a branch.",
-
     "tryAgain": "Try again",
-
     "totalBranches": "total branches",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Branch created successfully.",
-
     "createFailed": "Unable to create branch.",
-
     "updateSuccess": "Branch updated successfully.",
-
     "updateFailed": "Unable to update branch.",
-
     "activateSuccess": "Branch activated successfully.",
-
     "activateFailed": "Unable to activate branch.",
-
     "deactivateSuccess": "Branch deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate branch.",
-
     "deleteConfirm": "Delete branch \"{{name}}\"?",
-
     "deleteSuccess": "Branch deleted successfully.",
-
     "deleteFailed": "Unable to delete branch.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing buildings, floors and rooms for this branch.",
-
     "buildings": "Buildings",
-
     "floors": "Floors",
-
     "rooms": "Rooms",
-
     "form": {
       "identity": "Branch identity",
-
       "identityDescription": "Enter the basic information used to identify this branch.",
-
       "name": "Branch name",
-
       "namePlaceholder": "Example: Main Branch",
-
       "nameRequired": "Branch name is required.",
-
       "code": "Branch code",
-
       "codePlaceholder": "Example: MAIN",
-
       "codeHelp": "Use a short unique code for the branch.",
-
       "codeRequired": "Branch code is required.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this branch.",
-
       "status": "Branch status",
-
       "statusDescription": "Inactive branches remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "buildings": {
     "section": "Property management",
-
     "title": "Buildings",
-
     "building": "Building",
-
     "description": "Manage physical buildings, branch assignment, status, and catalog details.",
-
     "create": "Add building",
-
     "createTitle": "Create building",
-
     "createDescription": "Create a new building and optionally assign it to a branch.",
-
     "edit": "Edit building",
-
     "editTitle": "Edit building",
-
     "editDescription": "Update building identity, description, and active status.",
-
     "detail": "Building details",
-
     "overview": "Overview",
-
     "buildingInformation": "Building information",
-
     "buildingInformationDescription": "Basic building identity and property relationship.",
-
     "name": "Building name",
-
     "code": "Building code",
-
     "branchId": "Branch ID",
-
     "hotelId": "Hotel ID",
-
     "buildingId": "Building ID",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "defaultBranch": "Default branch",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View building",
-
     "editAction": "Edit building",
-
     "activateAction": "Activate building",
-
     "deactivateAction": "Deactivate building",
-
     "deleteAction": "Delete building",
-
     "loading": "Loading buildings...",
-
     "loadingOne": "Loading building...",
-
     "loadFailed": "Unable to load buildings.",
-
     "loadOneFailed": "Unable to load building.",
-
     "loadBranchesFailed": "Unable to load branches.",
-
     "missingId": "Building ID is missing.",
-
     "noResults": "No buildings found",
-
     "noResultsDescription": "Change the filters or create a building.",
-
     "tryAgain": "Try again",
-
     "totalBuildings": "total buildings",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Building created successfully.",
-
     "createFailed": "Unable to create building.",
-
     "updateSuccess": "Building updated successfully.",
-
     "updateFailed": "Unable to update building.",
-
     "activateSuccess": "Building activated successfully.",
-
     "activateFailed": "Unable to activate building.",
-
     "deactivateSuccess": "Building deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate building.",
-
     "deleteConfirm": "Delete building \"{{name}}\"?",
-
     "deleteSuccess": "Building deleted successfully.",
-
     "deleteFailed": "Unable to delete building.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing branches, floors and rooms for this property.",
-
     "branches": "Branches",
-
     "floors": "Floors",
-
     "rooms": "Rooms",
-
     "form": {
       "identity": "Building identity",
-
       "identityDescription": "Enter the basic information used to identify this building.",
-
       "name": "Building name",
-
       "namePlaceholder": "Example: Tower A",
-
       "nameRequired": "Building name is required.",
-
       "code": "Building code",
-
       "codePlaceholder": "Example: BLD-A",
-
       "codeHelp": "Use a short unique code for the building.",
-
       "codeRequired": "Building code is required.",
-
       "branch": "Branch",
-
       "defaultBranch": "Use current branch context",
-
       "loadingBranches": "Loading branches...",
-
       "branchHelp": "Leave blank to use the current branch context.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this building.",
-
       "status": "Building status",
-
       "statusDescription": "Inactive buildings remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "floors": {
     "section": "Property management",
-
     "title": "Floors",
-
     "floor": "Floor",
-
     "description": "Manage property floors, branch context, status, and catalog details.",
-
     "create": "Add floor",
-
     "createTitle": "Create floor",
-
     "createDescription": "Create a new floor for the current hotel or branch context.",
-
     "edit": "Edit floor",
-
     "editTitle": "Edit floor",
-
     "editDescription": "Update floor identity, description, and active status.",
-
     "detail": "Floor details",
-
     "overview": "Overview",
-
     "floorInformation": "Floor information",
-
     "floorInformationDescription": "Basic floor identity and property relationship.",
-
     "name": "Floor name",
-
     "code": "Floor code",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Hotel default",
-
     "hotelId": "Hotel ID",
-
     "floorId": "Floor ID",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View floor",
-
     "editAction": "Edit floor",
-
     "activateAction": "Activate floor",
-
     "deactivateAction": "Deactivate floor",
-
     "deleteAction": "Delete floor",
-
     "loading": "Loading floors...",
-
     "loadingOne": "Loading floor...",
-
     "loadFailed": "Unable to load floors.",
-
     "loadOneFailed": "Unable to load floor.",
-
     "missingId": "Floor ID is missing.",
-
     "noResults": "No floors found",
-
     "noResultsDescription": "Change the filters or create a floor.",
-
     "tryAgain": "Try again",
-
     "totalFloors": "total floors",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Floor created successfully.",
-
     "createFailed": "Unable to create floor.",
-
     "updateSuccess": "Floor updated successfully.",
-
     "updateFailed": "Unable to update floor.",
-
     "activateSuccess": "Floor activated successfully.",
-
     "activateFailed": "Unable to activate floor.",
-
     "deactivateSuccess": "Floor deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate floor.",
-
     "deleteConfirm": "Delete floor \"{{name}}\"?",
-
     "deleteSuccess": "Floor deleted successfully.",
-
     "deleteFailed": "Unable to delete floor.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing buildings, rooms and room types for this property.",
-
     "buildings": "Buildings",
-
     "roomTypes": "Room Types",
-
     "rooms": "Rooms",
-
     "form": {
       "identity": "Floor identity",
-
       "identityDescription": "Enter the basic information used to identify this floor.",
-
       "name": "Floor name",
-
       "namePlaceholder": "Example: Level 2",
-
       "nameRequired": "Floor name is required.",
-
       "code": "Floor code",
-
       "codePlaceholder": "Example: L02",
-
       "codeHelp": "Use a short unique code for the floor.",
-
       "codeRequired": "Floor code is required.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this floor.",
-
       "status": "Floor status",
-
       "statusDescription": "Inactive floors remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "roomTypes": {
     "section": "Property management",
-
     "title": "Room Types",
-
     "roomType": "Room type",
-
     "description": "Manage sellable room categories, base rates, capacity, and active status.",
-
     "create": "Add room type",
-
     "createTitle": "Create room type",
-
     "createDescription": "Create a room category with pricing and guest capacity.",
-
     "edit": "Edit room type",
-
     "editTitle": "Edit room type",
-
     "editDescription": "Update room type identity, pricing, capacity, description, and active status.",
-
     "detail": "Room type details",
-
     "overview": "Overview",
-
     "roomTypeInformation": "Room type information",
-
     "roomTypeInformationDescription": "Basic room type identity, pricing, and occupancy limits.",
-
     "name": "Room type name",
-
     "code": "Room type code",
-
     "roomTypeId": "Room type ID",
-
     "baseRate": "Base rate",
-
     "maxAdults": "Max adults",
-
     "maxChildren": "Max children",
-
     "capacity": "Capacity",
-
     "capacityValue": "{{adults}} adults / {{children}} children",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "clear": "Clear",
-
     "apply": "Search",
-
     "actions": "Actions",
-
     "viewAction": "View room type",
-
     "editAction": "Edit room type",
-
     "activateAction": "Activate room type",
-
     "deactivateAction": "Deactivate room type",
-
     "deleteAction": "Delete room type",
-
     "loading": "Loading room types...",
-
     "loadingOne": "Loading room type...",
-
     "loadFailed": "Unable to load room types.",
-
     "loadOneFailed": "Unable to load room type.",
-
     "missingId": "Room type ID is missing.",
-
     "noResults": "No room types found",
-
     "noResultsDescription": "Change the search term or create a room type.",
-
     "tryAgain": "Try again",
-
     "totalRoomTypes": "total room types",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Room type created successfully.",
-
     "createFailed": "Unable to create room type.",
-
     "updateSuccess": "Room type updated successfully.",
-
     "updateFailed": "Unable to update room type.",
-
     "activateSuccess": "Room type activated successfully.",
-
     "activateFailed": "Unable to activate room type.",
-
     "deactivateSuccess": "Room type deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate room type.",
-
     "deleteConfirm": "Delete room type \"{{name}}\"?",
-
     "deleteSuccess": "Room type deleted successfully.",
-
     "deleteFailed": "Unable to delete room type.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing rooms, amenities, and rates for this property.",
-
     "rooms": "Rooms",
-
     "amenities": "Amenities",
-
     "rates": "Rates",
-
     "form": {
       "identity": "Room type identity",
-
       "identityDescription": "Enter the details used to sell and assign this room category.",
-
       "name": "Room type name",
-
       "namePlaceholder": "Example: Deluxe King",
-
       "nameRequired": "Room type name is required.",
-
       "code": "Room type code",
-
       "codePlaceholder": "Example: DLX-K",
-
       "codeHelp": "Use a short unique code for the room type.",
-
       "codeRequired": "Room type code is required.",
-
       "baseRate": "Base rate",
-
       "baseRateInvalid": "Base rate cannot be negative.",
-
       "maxAdults": "Max adults",
-
       "maxAdultsInvalid": "Maximum adults must be at least 1.",
-
       "maxChildren": "Max children",
-
       "maxChildrenInvalid": "Maximum children cannot be negative.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this room type.",
-
       "status": "Room type status",
-
       "statusDescription": "Inactive room types remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "rooms": {
     "section": "Property management",
-
     "title": "Rooms",
-
     "room": "Room",
-
     "description": "Manage room inventory, room type assignment, floor number, branch context, and operational status.",
-
     "create": "Add room",
-
     "createTitle": "Create room",
-
     "createDescription": "Create a room in the current branch context or assign it to a specific branch.",
-
     "edit": "Edit room",
-
     "editTitle": "Edit room",
-
     "editDescription": "Update room number, room type, and floor number.",
-
     "detail": "Room details",
-
     "overview": "Overview",
-
     "roomInformation": "Room information",
-
     "roomInformationDescription": "Basic room identity, location identifiers, room type, and operational status.",
-
     "roomNumber": "Room number",
-
     "roomType": "Room type",
-
     "roomTypes": "Room Types",
-
     "roomTypeId": "Room type ID",
-
     "floor": "Floor",
-
     "floorValue": "Floor {{floor}}",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "roomId": "Room ID",
-
     "status": "Status",
-
     "changeStatus": "Change status",
-
     "search": "Search",
-
     "searchPlaceholder": "Room number or room type",
-
     "clear": "Clear",
-
     "apply": "Search",
-
     "actions": "Actions",
-
     "viewAction": "View room",
-
     "editAction": "Edit room",
-
     "deleteAction": "Delete room",
-
     "loading": "Loading rooms...",
-
     "loadingOne": "Loading room...",
-
     "loadFailed": "Unable to load rooms.",
-
     "loadOneFailed": "Unable to load room.",
-
     "loadRoomTypesFailed": "Unable to load room types.",
-
     "missingId": "Room ID is missing.",
-
     "noResults": "No rooms found",
-
     "noResultsDescription": "Change the search term or create a room.",
-
     "tryAgain": "Try again",
-
     "totalRooms": "total rooms",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Room created successfully.",
-
     "createFailed": "Unable to create room.",
-
     "updateSuccess": "Room updated successfully.",
-
     "updateFailed": "Unable to update room.",
-
     "statusUpdateSuccess": "Room status updated successfully.",
-
     "statusUpdateFailed": "Unable to update room status.",
-
     "deleteConfirm": "Delete room \"{{number}}\"?",
-
     "deleteSuccess": "Room deleted successfully.",
-
     "deleteFailed": "Unable to delete room.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing room types, amenities, and rates for this property.",
-
     "amenities": "Amenities",
-
     "rates": "Rates",
-
     "statuses": {
       "Available": "Available",
-
       "Reserved": "Reserved",
-
       "Occupied": "Occupied",
-
       "Dirty": "Dirty",
-
       "Cleaning": "Cleaning",
-
       "Inspected": "Inspected",
-
       "Maintenance": "Maintenance",
-
       "OutOfOrder": "Out of order",
-
       "Blocked": "Blocked"
     },
-
     "form": {
       "identity": "Room identity",
-
       "identityDescription": "Enter the room number, room type, branch context, and floor number.",
-
       "roomNumber": "Room number",
-
       "roomNumberPlaceholder": "Example: 304",
-
       "roomNumberRequired": "Room number is required.",
-
       "roomType": "Room type",
-
       "selectRoomType": "Select room type",
-
       "roomTypeRequired": "Room type is required.",
-
       "branch": "Branch",
-
       "defaultBranch": "Use current branch context",
-
       "branchHelp": "Leave blank to use the current branch from your session.",
-
       "floor": "Floor",
-
       "floorInvalid": "Floor must be between 0 and 1000."
     }
   },
-
   "amenities": {
     "section": "Property management",
-
     "title": "Amenities",
-
     "amenity": "Amenity",
-
     "description": "Manage hotel amenities, catalog status, and amenity identifiers.",
-
     "create": "Add amenity",
-
     "createTitle": "Create amenity",
-
     "createDescription": "Create a new amenity for the current hotel or branch context.",
-
     "edit": "Edit amenity",
-
     "editTitle": "Edit amenity",
-
     "editDescription": "Update amenity identity, description, and active status.",
-
     "detail": "Amenity details",
-
     "overview": "Overview",
-
     "amenityInformation": "Amenity information",
-
     "amenityInformationDescription": "Basic amenity identity and property relationship.",
-
     "name": "Amenity name",
-
     "code": "Amenity code",
-
     "amenityId": "Amenity ID",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Hotel default",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View amenity",
-
     "editAction": "Edit amenity",
-
     "activateAction": "Activate amenity",
-
     "deactivateAction": "Deactivate amenity",
-
     "deleteAction": "Delete amenity",
-
     "loading": "Loading amenities...",
-
     "loadingOne": "Loading amenity...",
-
     "loadFailed": "Unable to load amenities.",
-
     "loadOneFailed": "Unable to load amenity.",
-
     "missingId": "Amenity ID is missing.",
-
     "noResults": "No amenities found",
-
     "noResultsDescription": "Change the filters or create an amenity.",
-
     "tryAgain": "Try again",
-
     "totalAmenities": "total amenities",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Amenity created successfully.",
-
     "createFailed": "Unable to create amenity.",
-
     "updateSuccess": "Amenity updated successfully.",
-
     "updateFailed": "Unable to update amenity.",
-
     "activateSuccess": "Amenity activated successfully.",
-
     "activateFailed": "Unable to activate amenity.",
-
     "deactivateSuccess": "Amenity deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate amenity.",
-
     "deleteConfirm": "Delete amenity \"{{name}}\"?",
-
     "deleteSuccess": "Amenity deleted successfully.",
-
     "deleteFailed": "Unable to delete amenity.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing room types, rooms, and rates for this property.",
-
     "roomTypes": "Room Types",
-
     "rooms": "Rooms",
-
     "rates": "Rates",
-
     "form": {
       "identity": "Amenity identity",
-
       "identityDescription": "Enter the basic information used to identify this amenity.",
-
       "name": "Amenity name",
-
       "namePlaceholder": "Example: Free Wi-Fi",
-
       "nameRequired": "Amenity name is required.",
-
       "code": "Amenity code",
-
       "codePlaceholder": "Example: WIFI",
-
       "codeHelp": "Use a short unique code for the amenity.",
-
       "codeRequired": "Amenity code is required.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this amenity.",
-
       "status": "Amenity status",
-
       "statusDescription": "Inactive amenities remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "rates": {
     "section": "Property management",
-
     "title": "Rates",
-
     "rate": "Rate",
-
     "description": "Manage rate plans, catalog status, and rate identifiers.",
-
     "create": "Add rate",
-
     "createTitle": "Create rate",
-
     "createDescription": "Create a new rate plan for the current hotel or branch context.",
-
     "edit": "Edit rate",
-
     "editTitle": "Edit rate",
-
     "editDescription": "Update rate plan identity, description, and active status.",
-
     "detail": "Rate details",
-
     "overview": "Overview",
-
     "rateInformation": "Rate information",
-
     "rateInformationDescription": "Basic rate plan identity and property relationship.",
-
     "name": "Rate name",
-
     "code": "Rate code",
-
     "rateId": "Rate ID",
-
     "hotelId": "Hotel ID",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Hotel default",
-
     "descriptionLabel": "Description",
-
     "noDescription": "No description",
-
     "status": "Status",
-
     "active": "Active",
-
     "inactive": "Inactive",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Name or code",
-
     "all": "All",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortName": "Name",
-
     "sortCode": "Code",
-
     "sortCreated": "Created",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View rate",
-
     "editAction": "Edit rate",
-
     "activateAction": "Activate rate",
-
     "deactivateAction": "Deactivate rate",
-
     "deleteAction": "Delete rate",
-
     "loading": "Loading rates...",
-
     "loadingOne": "Loading rate...",
-
     "loadFailed": "Unable to load rates.",
-
     "loadOneFailed": "Unable to load rate.",
-
     "missingId": "Rate ID is missing.",
-
     "noResults": "No rates found",
-
     "noResultsDescription": "Change the filters or create a rate.",
-
     "tryAgain": "Try again",
-
     "totalRates": "total rates",
-
     "activeOnPage": "active on this page",
-
     "inactiveOnPage": "inactive on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Rate created successfully.",
-
     "createFailed": "Unable to create rate.",
-
     "updateSuccess": "Rate updated successfully.",
-
     "updateFailed": "Unable to update rate.",
-
     "activateSuccess": "Rate activated successfully.",
-
     "activateFailed": "Unable to activate rate.",
-
     "deactivateSuccess": "Rate deactivated successfully.",
-
     "deactivateFailed": "Unable to deactivate rate.",
-
     "deleteConfirm": "Delete rate \"{{name}}\"?",
-
     "deleteSuccess": "Rate deleted successfully.",
-
     "deleteFailed": "Unable to delete rate.",
-
     "propertyStructure": "Property structure",
-
     "propertyStructureDescription": "Continue managing room types, rooms, and amenities for this property.",
-
     "roomTypes": "Room Types",
-
     "rooms": "Rooms",
-
     "amenities": "Amenities",
-
     "form": {
       "identity": "Rate identity",
-
       "identityDescription": "Enter the basic information used to identify this rate plan.",
-
       "name": "Rate name",
-
       "namePlaceholder": "Example: Best Available Rate",
-
       "nameRequired": "Rate name is required.",
-
       "code": "Rate code",
-
       "codePlaceholder": "Example: BAR",
-
       "codeHelp": "Use a short unique code for the rate.",
-
       "codeRequired": "Rate code is required.",
-
       "description": "Description",
-
       "descriptionPlaceholder": "Optional notes about this rate.",
-
       "status": "Rate status",
-
       "statusDescription": "Inactive rates remain in the system but are hidden from normal operations.",
-
       "active": "Active",
-
       "inactive": "Inactive"
     }
   },
-
   "leaveRequests": {
     "section": "Human Resources",
-
     "title": "Leave Requests",
-
     "record": "Leave request",
-
     "description": "Manage leave request records using the backend-supported leave workflow fields.",
-
     "create": "Request leave",
-
     "createTitle": "Create leave request",
-
     "createDescription": "Create a backend-supported leave request record with a title, event time, status, and notes.",
-
     "edit": "Edit leave request",
-
     "editTitle": "Edit leave request",
-
     "editDescription": "Update the leave request record details while preserving the generated reference number.",
-
     "detail": "Leave request details",
-
     "overview": "Overview",
-
     "recordInformation": "Request information",
-
     "recordInformationDescription": "Reference, status, event time, context, and notes for this leave request.",
-
     "reference": "Reference",
-
     "titleLabel": "Title",
-
     "status": "Status",
-
     "statusPlaceholder": "Exact status",
-
     "allStatuses": "All statuses",
-
     "amount": "Amount",
-
     "eventAt": "Event time",
-
     "created": "Created",
-
     "branchId": "Branch ID",
-
     "defaultBranch": "Default branch",
-
     "relatedEntity": "Related entity",
-
     "noRelatedEntity": "No related entity",
-
     "notes": "Notes",
-
     "noNotes": "No notes",
-
     "search": "Search",
-
     "searchPlaceholder": "Reference or title",
-
     "sortBy": "Sort by",
-
     "direction": "Direction",
-
     "sortCreated": "Created",
-
     "sortEventAt": "Event time",
-
     "sortReference": "Reference",
-
     "sortTitle": "Title",
-
     "sortStatus": "Status",
-
     "sortAmount": "Amount",
-
     "ascending": "Ascending",
-
     "descending": "Descending",
-
     "clear": "Clear",
-
     "apply": "Apply",
-
     "actions": "Actions",
-
     "viewAction": "View leave request",
-
     "editAction": "Edit leave request",
-
     "deleteAction": "Delete leave request",
-
     "loading": "Loading leave requests...",
-
     "loadingOne": "Loading leave request...",
-
     "loadFailed": "Unable to load leave requests.",
-
     "loadOneFailed": "Unable to load leave request.",
-
     "missingId": "Leave request ID is missing.",
-
     "noResults": "No leave requests found",
-
     "noResultsDescription": "Change the filters or create a leave request.",
-
     "tryAgain": "Try again",
-
     "totalRecords": "total requests",
-
     "pendingOnPage": "pending on this page",
-
     "approvedOnPage": "approved on this page",
-
     "page": "Page",
-
     "of": "of",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "saveChanges": "Save changes",
-
     "createSuccess": "Leave request created successfully.",
-
     "createFailed": "Unable to create leave request.",
-
     "updateSuccess": "Leave request updated successfully.",
-
     "updateFailed": "Unable to update leave request.",
-
     "statusChangeSuccess": "Leave request status updated successfully.",
-
     "statusChangeFailed": "Unable to update leave request status.",
-
     "deleteConfirm": "Delete leave request \"{{reference}}\"?",
-
     "deleteSuccess": "Leave request deleted successfully.",
-
     "deleteFailed": "Unable to delete leave request.",
-
     "statuses": {
       "pending": "Pending",
-
       "approved": "Approved",
-
       "rejected": "Rejected",
-
       "cancelled": "Cancelled"
     },
-
     "form": {
       "record": "Leave request",
-
       "recordDescription": "Enter the backend-supported operational leave request fields.",
-
       "context": "Request context",
-
       "contextDescription": "Optional branch and related-entity references stored with the request.",
-
       "title": "Title",
-
       "titlePlaceholder": "Example: Annual leave request",
-
       "titleRequired": "Title is required.",
-
       "eventAt": "Event time",
-
       "eventAtRequired": "Event time is required.",
-
       "amount": "Amount",
-
       "status": "Status",
-
       "statusPlaceholder": "Pending",
-
       "notes": "Notes",
-
       "notesPlaceholder": "Optional notes about this leave request.",
-
       "branchId": "Branch ID",
-
       "branchIdPlaceholder": "Optional branch GUID",
-
       "relatedEntityId": "Related entity ID",
-
       "relatedEntityIdPlaceholder": "Optional related entity GUID",
-
       "relatedEntityType": "Related entity type",
-
       "relatedEntityTypePlaceholder": "Optional type, such as Employee"
     }
   },
-
   "housekeeping": {
     "section": "Operations",
-
     "title": "Housekeeping",
-
     "description": "Coordinate room cleaning tasks, priorities, completion, and room turnover work.",
-
     "create": "New task",
-
     "createTitle": "Create housekeeping task",
-
     "detail": "Housekeeping details",
-
     "totalTasks": "Total tasks",
-
     "inProgressOnPage": "in progress on this page",
-
     "openOnPage": "Open on this page",
-
     "completedOnPage": "Completed on this page",
-
     "unassignedOnPage": "Unassigned on this page",
-
     "room": "Room",
-
     "roomPrefix": "Room",
-
     "selectRoom": "Select room",
-
     "taskType": "Task type",
-
     "defaultTaskType": "Checkout Cleaning",
-
     "priority": "Priority",
-
     "status": "Status",
-
     "assignee": "Assignee",
-
     "unassigned": "Unassigned",
-
     "created": "Created",
-
     "search": "Search",
-
     "searchPlaceholder": "Room number or task type",
-
     "allStatuses": "All statuses",
-
     "allPriorities": "All priorities",
-
     "clear": "Clear",
-
     "actions": "Actions",
-
     "view": "View",
-
     "complete": "Complete",
-
     "viewMode": "Housekeeping view mode",
-
     "boardView": "Board",
-
     "listView": "List",
-
     "viewAction": "View housekeeping task",
-
     "completeAction": "Mark completed",
-
     "loading": "Loading housekeeping tasks...",
-
     "loadingOne": "Loading housekeeping task...",
-
     "loadingRooms": "Loading rooms...",
-
     "loadFailed": "Unable to load housekeeping tasks.",
-
     "tryAgain": "Please try again.",
-
     "retry": "Retry",
-
     "loadOneFailed": "Unable to load housekeeping task.",
-
     "roomsLoadFailed": "Unable to load rooms.",
-
     "noResults": "No housekeeping tasks found",
-
     "noResultsDescription": "Change the filters or create a housekeeping task.",
-
     "noTasksFiltered": "No housekeeping tasks found",
-
     "noTasksFilteredDescription": "Try changing or clearing the current filters.",
-
     "noTasksYet": "No housekeeping tasks yet",
-
     "noTasksYetDescription": "Create a new housekeeping task to get started.",
-
     "clearFilters": "Clear filters",
-
     "showing": "Showing",
-
     "previous": "Previous",
-
     "next": "Next",
-
     "page": "Page",
-
     "of": "of",
-
     "createSuccess": "Housekeeping task created successfully.",
-
     "createFailed": "Unable to create housekeeping task.",
-
     "completeSuccess": "Housekeeping task completed successfully.",
-
     "completeFailed": "Unable to complete housekeeping task.",
-
     "statuses": {
       "pending": "Pending",
-
       "assigned": "Assigned",
-
       "inprogress": "In progress",
-
       "completed": "Completed",
-
       "cancelled": "Cancelled"
     },
-
     "priorities": {
       "low": "Low",
-
       "normal": "Normal",
-
       "high": "High",
-
       "urgent": "Urgent"
     }
   },
-
   "roomInspections": {
     "section": "Operations",
     "title": "Room Inspections",
@@ -3067,7 +1643,6 @@
       "cancelled": "Cancelled"
     }
   },
-
   "maintenance": {
     "section": "Operations",
     "title": "Maintenance",
@@ -3126,7 +1701,7 @@
       "cancelled": "Cancelled"
     }
   },
-   "guestServices": {
+  "guestServices": {
     "section": "Operations",
     "title": "Guest Services",
     "description": "Manage services available to hotel guests.",
@@ -3268,7 +1843,7 @@
     "requestInformation": "Request information",
     "requestInformationDescription": "Enter the operational details accepted by the current Guest Requests API."
   },
-   "complaints": {
+  "complaints": {
     "section": "Operations",
     "title": "Complaints",
     "description": "Track guest concerns, follow-up and resolution.",
@@ -3331,7 +1906,7 @@
     "requestInformation": "Complaint information",
     "requestInformationDescription": "Enter the operational complaint details accepted by the current Complaints API."
   },
-   "lostAndFound": {
+  "lostAndFound": {
     "section": "Operations",
     "title": "Lost & Found",
     "description": "Record, track and manage lost or found property.",
@@ -3580,7 +2155,7 @@
     "requestInformation": "Transportation information",
     "requestInformationDescription": "Enter the operational details accepted by the current Transportation API."
   },
-   "securityIncidents": {
+  "securityIncidents": {
     "section": "Operations",
     "title": "Security Incidents",
     "description": "Record, review and track security incident reports and follow-up.",
@@ -3682,7 +2257,7 @@
     "createSuccess": "Inventory item created successfully.",
     "createFailed": "Unable to create inventory item."
   },
-   "warehouses": {
+  "warehouses": {
     "section": "Inventory & Purchasing",
     "title": "Warehouses",
     "description": "Manage hotel warehouse master records used by inventory and purchasing operations.",
@@ -3805,7 +2380,7 @@
     "branchScope": "Branch",
     "hotelScope": "Hotel"
   },
-   "suppliers": {
+  "suppliers": {
     "section": "Inventory & Purchasing",
     "title": "Suppliers",
     "description": "Manage supplier master records used by purchasing and goods-receipt workflows.",
@@ -3857,7 +2432,7 @@
     "hotelScope": "Hotel",
     "formInvalid": "Supplier name and code are required."
   },
-   "purchaseRequests": {
+  "purchaseRequests": {
     "section": "Inventory & Purchasing",
     "title": "Purchase Requests",
     "description": "Create, review and track internal purchase requests before purchase-order processing.",
@@ -3999,7 +2574,7 @@
     "branchScope": "Branch",
     "hotelScope": "Hotel"
   },
-   "goodsReceipts": {
+  "goodsReceipts": {
     "section": "Inventory & Purchasing",
     "title": "Goods Receipts",
     "description": "Record and track goods received against purchase orders.",
@@ -4069,5 +2644,1845 @@
     "scope": "Scope",
     "branchScope": "Branch",
     "hotelScope": "Hotel"
+  },
+  "frontOffice": {
+    "title": "Front Office",
+    "checkIns": "Check-ins",
+    "availability": "Availability",
+    "checkOuts": "Check-outs",
+    "guests": "Guests",
+    "roomAssignments": "Room Assignments",
+    "stayExtensions": "Stay Extensions"
+  },
+  "availability": {
+    "section": "Front Office",
+    "title": "Room Availability",
+    "description": "Search available rooms for a selected stay period.",
+    "loading": "Checking room availability...",
+    "loadFailed": "Unable to load room availability.",
+    "search": "Search availability",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "room": "Room",
+    "roomNumber": "Room number",
+    "roomType": "Room type",
+    "baseRate": "Base rate",
+    "status": "Status",
+    "availableRooms": "Available rooms",
+    "loadedRooms": "Loaded rooms",
+    "availableOnPage": "Available",
+    "roomTypesOnPage": "Room types",
+    "noResults": "No available rooms found",
+    "noResultsDescription": "Try changing the check-in or check-out date.",
+    "invalidDates": "Check-out date must be after check-in date.",
+    "searchPlaceholder": "Search room number or room type...",
+    "refresh": "Refresh",
+    "allRoomTypes": "All room types",
+    "allStatuses": "All statuses",
+    "averageBaseRate": "Average base rate",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "checkOutAfterCheckIn": "Check-out must be after check-in.",
+    "datesRequired": "Check-in and check-out dates are required.",
+    "filterSearchPlaceholder": "Search room number or room type...",
+    "lowestBaseRate": "Lowest base rate",
+    "nights": "{{count}} nights",
+    "noFilteredResults": "No rooms match these filters",
+    "noFilteredResultsDescription": "Try another search, room type or status filter.",
+    "resultsDescription": "Available rooms returned by the current search.",
+    "resultsTitle": "Available rooms",
+    "roomNumberValue": "Room {{roomNumber}}",
+    "roomTypes": "Room types",
+    "roomsFound": "Rooms found",
+    "searchDescription": "Choose stay dates to check available rooms.",
+    "searchFirst": "Search availability first",
+    "searchFirstDescription": "Enter check-in and check-out dates to see matching rooms.",
+    "searchPeriod": "Search period",
+    "searchTitle": "Search availability",
+    "searching": "Searching...",
+    "showing": "Showing {{shown}} of {{total}} rooms",
+    "unknownStatus": "Unknown status"
+  },
+  "checkIns": {
+    "section": "Front Office",
+    "title": "Check-ins",
+    "description": "Manage guest arrivals and complete reservation check-ins.",
+    "loading": "Loading reservations...",
+    "loadFailed": "Unable to load reservations.",
+    "noResults": "No reservations found",
+    "noResultsDescription": "No reservation matches the current filters.",
+    "searchPlaceholder": "Search reservation, guest or room...",
+    "reservation": "Reservation",
+    "guest": "Guest",
+    "room": "Room",
+    "roomType": "Room type",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "status": "Status",
+    "arrival": "Arrival",
+    "checkIn": "Check in",
+    "checkingIn": "Checking in...",
+    "checkInTitle": "Confirm check-in",
+    "checkInDescription": "Check in reservation {{reservation}}?",
+    "checkInSuccess": "Guest checked in successfully.",
+    "checkInFailed": "Unable to check in the reservation.",
+    "loadedReservations": "Loaded reservations",
+    "confirmedOnPage": "Confirmed",
+    "checkedInOnPage": "Checked in",
+    "arrivalsToday": "Arrivals today",
+    "refresh": "Refresh",
+    "allStatuses": "All statuses",
+    "arrivalsTodayLoaded": "Arrivals today",
+    "backendAuthority": "Backend remains the authority for check-in rules.",
+    "cannotLoadReservations": "Reservation access is required",
+    "checkedInLoaded": "Checked in",
+    "clearFilters": "Clear filters",
+    "confirmCheckIn": "Check in this reservation?",
+    "confirmedLoaded": "Confirmed",
+    "emptyDescription": "The reservations API did not return any records for this workspace.",
+    "emptyTitle": "No reservations returned",
+    "loadedCount": "{{count}} reservations loaded",
+    "loadedOfTotal": "Loaded {{loaded}} of {{total}} reservations",
+    "noMatches": "No reservations match these filters",
+    "noMatchesDescription": "Try another search or status filter.",
+    "occupancy": "Occupancy",
+    "occupancyBreakdown": "{{adults}} adults, {{children}} children",
+    "readOnly": "Read only",
+    "reservationViewPermissionRequired": "This check-in workspace loads candidates from GET /api/v1/reservations, so reservations.view permission is also required.",
+    "reservationWorkspace": "Reservation workspace",
+    "showingLoaded": "Showing {{shown}} of {{loaded}} loaded reservations",
+    "staySummary": "{{nights}} nights • {{amount}}",
+    "tryAgain": "Try again",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown guest",
+    "workflowNote": "Check-in actions use backend reservation workflow endpoints."
+  },
+  "checkOuts": {
+    "section": "Front Office",
+    "title": "Check-outs",
+    "description": "Manage guest departures and complete reservation check-outs.",
+    "loading": "Loading reservations...",
+    "loadFailed": "Unable to load reservations.",
+    "noResults": "No reservations found",
+    "noResultsDescription": "No reservation matches the current filters.",
+    "searchPlaceholder": "Search reservation, guest or room...",
+    "reservation": "Reservation",
+    "guest": "Guest",
+    "room": "Room",
+    "roomType": "Room type",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "status": "Status",
+    "departure": "Departure",
+    "checkOut": "Check out",
+    "checkingOut": "Checking out...",
+    "checkOutTitle": "Confirm check-out",
+    "checkOutDescription": "Check out reservation {{reservation}}?",
+    "checkOutSuccess": "Guest checked out successfully.",
+    "checkOutFailed": "Unable to check out the reservation.",
+    "loadedReservations": "Loaded reservations",
+    "checkedInOnPage": "Checked in",
+    "checkedOutOnPage": "Checked out",
+    "departuresToday": "Departures today",
+    "refresh": "Refresh",
+    "allStatuses": "All statuses",
+    "backendAuthority": "Backend remains the authority for check-out rules.",
+    "cannotLoadReservations": "Reservation access is required",
+    "checkedInLoaded": "Checked in",
+    "checkedOutLoaded": "Checked out",
+    "clearFilters": "Clear filters",
+    "confirmCheckOut": "Check out this reservation?",
+    "departuresTodayLoaded": "Departures today",
+    "emptyDescription": "The reservations API did not return any records for this workspace.",
+    "emptyTitle": "No reservations returned",
+    "loadedCount": "{{count}} reservations loaded",
+    "loadedOfTotal": "Loaded {{loaded}} of {{total}} reservations",
+    "noMatches": "No reservations match these filters",
+    "noMatchesDescription": "Try another search or status filter.",
+    "occupancy": "Occupancy",
+    "occupancyBreakdown": "{{adults}} adults, {{children}} children",
+    "readOnly": "Read only",
+    "reservationViewPermissionRequired": "This check-out workspace loads candidates from GET /api/v1/reservations, so reservations.view permission is also required.",
+    "reservationWorkspace": "Reservation workspace",
+    "showingLoaded": "Showing {{shown}} of {{loaded}} loaded reservations",
+    "staySummary": "{{nights}} nights • {{amount}}",
+    "tryAgain": "Try again",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown guest",
+    "workflowNote": "Check-out actions use backend reservation workflow endpoints."
+  },
+  "guests": {
+    "section": "Front Office",
+    "title": "Guests",
+    "description": "Manage hotel guest profiles and contact information.",
+    "create": "Create guest",
+    "edit": "Edit guest",
+    "details": "Guest details",
+    "loading": "Loading guests...",
+    "loadingOne": "Loading guest...",
+    "loadFailed": "Unable to load guests.",
+    "loadOneFailed": "Unable to load the guest.",
+    "createSuccess": "Guest created successfully.",
+    "createFailed": "Unable to create the guest.",
+    "updateSuccess": "Guest updated successfully.",
+    "updateFailed": "Unable to update the guest.",
+    "backToList": "Back to guests",
+    "searchPlaceholder": "Search guest name, phone or email...",
+    "allGuests": "All guests",
+    "vipOnly": "VIP guests",
+    "regularOnly": "Regular guests",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "fullName": "Full name",
+    "phone": "Phone",
+    "email": "Email",
+    "vip": "VIP",
+    "isVip": "VIP guest",
+    "portalAccount": "Portal account",
+    "createdAt": "Created at",
+    "loadedGuests": "Loaded guests",
+    "vipGuests": "VIP guests",
+    "regularGuests": "Regular guests",
+    "portalLinkedGuests": "Portal-linked guests",
+    "noResults": "No guests found",
+    "noResultsDescription": "No guest matches the current filters.",
+    "saveGuest": "Save guest",
+    "savingGuest": "Saving guest...",
+    "accountInformation": "Account Information",
+    "accountInformationHelp": "Account Information Help",
+    "accountLink": "Account Link",
+    "actions": "Actions",
+    "allGuestTypes": "All Guest Types",
+    "backToGuest": "Back To Guest",
+    "backToGuests": "Back To Guests",
+    "clearFilters": "Clear Filters",
+    "contactInformation": "Contact Information",
+    "contactInformationHelp": "Contact Information Help",
+    "createDescription": "Create Description",
+    "createTitle": "Create Title",
+    "detailDescription": "Detail Description",
+    "detailLoadFailed": "Detail Load Failed",
+    "detailTitle": "Detail Title",
+    "editDescription": "Edit Description",
+    "editGuest": "Edit Guest",
+    "editTitle": "Edit Title",
+    "emptyDescription": "Empty Description",
+    "emptyTitle": "Empty Title",
+    "guest": "Guest",
+    "guestDirectory": "Guest Directory",
+    "guestProfile": "Guest Profile",
+    "guestType": "Guest Type",
+    "invalidEmail": "Invalid Email",
+    "invalidGuestId": "Invalid Guest Id",
+    "linkedAccountsLoaded": "Linked Accounts Loaded",
+    "loadedCount": "Loaded Count",
+    "loadedOfTotal": "Loaded Of Total",
+    "loadingGuest": "Loading Guest",
+    "nameRequired": "Name Required",
+    "newGuest": "New Guest",
+    "noMatches": "No Matches",
+    "noMatchesDescription": "No Matches Description",
+    "personalInformation": "Personal Information",
+    "personalInformationHelp": "Personal Information Help",
+    "profileDetails": "Profile Details",
+    "profileDetailsHelp": "Profile Details Help",
+    "profileType": "Profile Type",
+    "refresh": "Refresh",
+    "regular": "Regular",
+    "regularLoaded": "Regular Loaded",
+    "showingLoaded": "Showing Loaded",
+    "tryAgain": "Try Again",
+    "type": "Type",
+    "view": "View",
+    "vipGuest": "Vip Guest",
+    "vipGuestHelp": "Vip Guest Help",
+    "vipLoaded": "Vip Loaded"
+  },
+  "roomAssignments": {
+    "section": "Front Office",
+    "title": "Room Assignments",
+    "description": "Manage reservation room-assignment records and assignment status.",
+    "create": "Create room assignment",
+    "edit": "Edit room assignment",
+    "details": "Room assignment details",
+    "loading": "Loading room assignments...",
+    "loadingOne": "Loading room assignment...",
+    "loadFailed": "Unable to load room assignments.",
+    "loadOneFailed": "Unable to load the room assignment.",
+    "createSuccess": "Room assignment created successfully.",
+    "createFailed": "Unable to create the room assignment.",
+    "updateSuccess": "Room assignment updated successfully.",
+    "updateFailed": "Unable to update the room assignment.",
+    "deleteSuccess": "Room assignment deleted successfully.",
+    "deleteFailed": "Unable to delete the room assignment.",
+    "deleteTitle": "Delete room assignment",
+    "deleteDescription": "Delete room assignment {{name}}?",
+    "backToList": "Back to room assignments",
+    "searchPlaceholder": "Search reference, title or reservation...",
+    "statusFilterPlaceholder": "Filter by status...",
+    "reference": "Reference",
+    "titleLabel": "Title",
+    "status": "Status",
+    "reservation": "Reservation",
+    "reservationContext": "Reservation context",
+    "reservationNumber": "Reservation number",
+    "guest": "Guest",
+    "room": "Current reservation room",
+    "roomType": "Room type",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "notes": "Notes",
+    "amount": "Amount",
+    "eventAt": "Event date",
+    "createdAt": "Created at",
+    "relationship": "Relationship",
+    "relatedEntityType": "Related entity type",
+    "scope": "Scope",
+    "hotelScope": "Hotel",
+    "branchScope": "Branch",
+    "changeStatus": "Change status",
+    "changeStatusHelp": "Enter the status supported by the backend.",
+    "statusPlaceholder": "Enter status...",
+    "updateStatus": "Update status",
+    "statusUpdated": "Status updated successfully.",
+    "statusUpdateFailed": "Unable to update the status.",
+    "loadedAssignments": "Loaded assignments",
+    "completedOnPage": "Completed",
+    "reservationLinkedOnPage": "Reservation linked",
+    "noResults": "No room assignments found",
+    "noResultsDescription": "No room assignment matches the current filters.",
+    "showing": "Showing",
+    "amountHelp": "Amount Help",
+    "amountPlaceholder": "Amount Placeholder",
+    "assignmentDetails": "Assignment Details",
+    "assignmentInformation": "Assignment Information",
+    "assignmentInformationDescription": "Assignment Information Description",
+    "createDescription": "Create Description",
+    "currentReservationRoom": "Current Reservation Room",
+    "deleteMessage": "Delete Message",
+    "linkedReservationsOnPage": "Linked Reservations On Page",
+    "missingId": "Missing Id",
+    "notesPlaceholder": "Notes Placeholder",
+    "of": "Of",
+    "page": "Page",
+    "recordedAmountOnPage": "Recorded Amount On Page",
+    "referenceNumber": "Reference Number",
+    "referencePlaceholder": "Reference Placeholder",
+    "referenceRequired": "Reference Required",
+    "relatedTo": "Related To",
+    "reservationContextHelp": "Reservation Context Help",
+    "reservationHelp": "Reservation Help",
+    "reservationStatus": "Reservation Status",
+    "roomShort": "Room Short",
+    "roomTargetContractNote": "Room Target Contract Note",
+    "stayDates": "Stay Dates",
+    "titlePlaceholder": "Title Placeholder",
+    "titleRequired": "Title Required",
+    "totalAssignments": "Total Assignments",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown Guest"
+  },
+  "stayExtensions": {
+    "section": "Front Office",
+    "title": "Stay Extensions",
+    "description": "Manage guest stay-extension records and extension status.",
+    "create": "Create stay extension",
+    "edit": "Edit stay extension",
+    "details": "Stay extension details",
+    "loading": "Loading stay extensions...",
+    "loadingOne": "Loading stay extension...",
+    "loadFailed": "Unable to load stay extensions.",
+    "loadOneFailed": "Unable to load the stay extension.",
+    "createSuccess": "Stay extension created successfully.",
+    "createFailed": "Unable to create the stay extension.",
+    "updateSuccess": "Stay extension updated successfully.",
+    "updateFailed": "Unable to update the stay extension.",
+    "deleteSuccess": "Stay extension deleted successfully.",
+    "deleteFailed": "Unable to delete the stay extension.",
+    "deleteTitle": "Delete stay extension",
+    "deleteDescription": "Delete stay extension {{name}}?",
+    "backToList": "Back to stay extensions",
+    "searchPlaceholder": "Search reference, title or reservation...",
+    "statusFilterPlaceholder": "Filter by status...",
+    "reference": "Reference",
+    "titleLabel": "Title",
+    "status": "Status",
+    "reservation": "Reservation",
+    "reservationContext": "Reservation context",
+    "reservationNumber": "Reservation number",
+    "guest": "Guest",
+    "room": "Room",
+    "roomType": "Room type",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Current check-out date",
+    "notes": "Notes",
+    "amount": "Amount",
+    "eventAt": "Event date",
+    "createdAt": "Created at",
+    "relationship": "Relationship",
+    "relatedEntityType": "Related entity type",
+    "scope": "Scope",
+    "hotelScope": "Hotel",
+    "branchScope": "Branch",
+    "changeStatus": "Change status",
+    "changeStatusHelp": "Enter the status supported by the backend.",
+    "statusPlaceholder": "Enter status...",
+    "updateStatus": "Update status",
+    "statusUpdated": "Status updated successfully.",
+    "statusUpdateFailed": "Unable to update the status.",
+    "loadedExtensions": "Loaded extensions",
+    "completedOnPage": "Completed",
+    "reservationLinkedOnPage": "Reservation linked",
+    "noResults": "No stay extensions found",
+    "noResultsDescription": "No stay extension matches the current filters.",
+    "showing": "Showing",
+    "amountHelp": "Amount Help",
+    "amountPlaceholder": "Amount Placeholder",
+    "approvedOnPage": "Approved On Page",
+    "createDescription": "Create Description",
+    "currentCheckoutDate": "Current Checkout Date",
+    "currentReservationRoom": "Current Reservation Room",
+    "currentStayDates": "Current Stay Dates",
+    "deleteMessage": "Delete Message",
+    "eventAtHelp": "Event At Help",
+    "extensionDetails": "Extension Details",
+    "extensionInformation": "Extension Information",
+    "extensionInformationDescription": "Extension Information Description",
+    "linkedReservationsOnPage": "Linked Reservations On Page",
+    "missingId": "Missing Id",
+    "newCheckoutContractNote": "New Checkout Contract Note",
+    "notesPlaceholder": "Notes Placeholder",
+    "of": "Of",
+    "page": "Page",
+    "recordedAmountOnPage": "Recorded Amount On Page",
+    "referenceNumber": "Reference Number",
+    "referencePlaceholder": "Reference Placeholder",
+    "referenceRequired": "Reference Required",
+    "relatedTo": "Related To",
+    "reservationContextHelp": "Reservation Context Help",
+    "reservationHelp": "Reservation Help",
+    "reservationStatus": "Reservation Status",
+    "roomShort": "Room Short",
+    "titlePlaceholder": "Title Placeholder",
+    "titleRequired": "Title Required",
+    "totalExtensions": "Total Extensions",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown Guest"
+  },
+  "reservations": {
+    "title": "Reservations",
+    "section": "Front Office",
+    "subtitle": "Manage hotel reservations, guests, stays and booking statuses.",
+    "newReservation": "New Reservation",
+    "createDescription": "Create a new hotel reservation.",
+    "editReservation": "Edit Reservation",
+    "updateDescription": "Update reservation information.",
+    "reservationDetails": "Reservation Details",
+    "backToReservations": "Back to Reservations",
+    "createReservation": "Create Reservation",
+    "updateReservation": "Update Reservation",
+    "saveReservation": "Save Reservation",
+    "deleteReservation": "Delete Reservation",
+    "deleteConfirm": "Are you sure you want to delete this reservation?",
+    "deleteConfirmWithLabel": "Delete reservation \"{{label}}\"?",
+    "searchPlaceholder": "Search reservation, guest, room...",
+    "search": "Search",
+    "clear": "Clear",
+    "retry": "Retry",
+    "loading": "Loading reservations...",
+    "loadingDetails": "Loading reservation...",
+    "emptyTitle": "No reservations found",
+    "emptyDescription": "Try changing your search or filters.",
+    "errorTitle": "Could not process reservations",
+    "missingId": "Reservation id was not provided.",
+    "unableToLoad": "Unable to load reservations.",
+    "unableToLoadDetails": "Unable to load reservation.",
+    "unableToCreate": "Unable to create reservation.",
+    "unableToUpdate": "Unable to update reservation.",
+    "unableToDelete": "Unable to delete reservation.",
+    "description": "Manage hotel reservations, guests, stays and booking statuses.",
+    "refresh": "Refresh",
+    "create": "Create reservation",
+    "createTitle": "New Reservation",
+    "creating": "Creating...",
+    "createSuccess": "Reservation created successfully.",
+    "createFailed": "Unable to create reservation.",
+    "loadingBookingOptions": "Loading booking options...",
+    "lookupLoadFailed": "Unable to load booking options.",
+    "tryAgain": "Try again",
+    "loadFailed": "Unable to load reservations.",
+    "loadingDetail": "Loading reservation...",
+    "detailLoadFailed": "Unable to load reservation.",
+    "invalidReservationId": "Reservation id is invalid.",
+    "detailTitle": "Reservation Details",
+    "detailDescription": "Review stay, guest, room, rate and workflow information.",
+    "loadedReservations": "Loaded reservations",
+    "confirmedLoaded": "Confirmed loaded",
+    "checkedInLoaded": "Checked in loaded",
+    "loadedValue": "Loaded value",
+    "reservationList": "Reservation list",
+    "loadedOfTotal": "Loaded {{loaded}} of {{total}} reservations",
+    "loadedCount": "{{count}} reservations loaded",
+    "allStatuses": "All statuses",
+    "clearFilters": "Clear filters",
+    "noMatches": "No reservations match these filters",
+    "noMatchesDescription": "Try another search or status filter.",
+    "reservationNumber": "Reservation number",
+    "guest": "Guest",
+    "stay": "Stay",
+    "room": "Room",
+    "guests": "Guests",
+    "totalAmount": "Total amount",
+    "actions": "Actions",
+    "nightsValue": "{{count}} nights",
+    "unassigned": "Unassigned",
+    "view": "View",
+    "showingLoaded": "Showing {{shown}} of {{loaded}} loaded reservations",
+    "bookingDetails": "Booking details",
+    "bookingDetailsHelp": "Choose the guest, dates, room type and rate for the reservation.",
+    "selectGuest": "Select guest",
+    "roomType": "Room type",
+    "selectRoomType": "Select room type",
+    "roomOptional": "Room optional",
+    "assignLater": "Assign later",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "adults": "Adults",
+    "children": "Children",
+    "nightlyRate": "Nightly rate",
+    "nights": "Nights",
+    "estimatedTotal": "Estimated total",
+    "estimateHelp": "The backend remains the source of truth for final totals.",
+    "requiredFields": "Please complete the required reservation fields.",
+    "invalidStayDates": "Check-out must be after check-in.",
+    "adultsRequired": "At least one adult is required.",
+    "invalidRate": "Nightly rate must be zero or greater.",
+    "stayDetails": "Stay details",
+    "stayDetailsHelp": "Arrival, departure and reservation timing.",
+    "createdAt": "Created",
+    "guestDetails": "Guest details",
+    "guestDetailsHelp": "Guest and occupancy information.",
+    "roomDetails": "Room details",
+    "roomDetailsHelp": "Selected room type and assigned room.",
+    "roomNumber": "Room number",
+    "rateDetails": "Rate details",
+    "rateDetailsHelp": "Nightly rate and total reservation value.",
+    "workflowActions": "Workflow actions",
+    "workflowHelp": "Use backend-supported reservation workflow actions.",
+    "processing": "Processing...",
+    "checkIn": "Check in",
+    "checkOut": "Check out",
+    "cancel": "Cancel",
+    "check-in": "Check in",
+    "check-out": "Check out",
+    "confirmCheckIn": "Check in this reservation?",
+    "confirmCheckOut": "Check out this reservation?",
+    "confirmCancel": "Cancel this reservation?",
+    "checkInSuccess": "Reservation checked in successfully.",
+    "checkInFailed": "Unable to check in reservation.",
+    "checkOutSuccess": "Reservation checked out successfully.",
+    "checkOutFailed": "Unable to check out reservation.",
+    "cancelSuccess": "Reservation cancelled successfully.",
+    "cancelFailed": "Unable to cancel reservation.",
+    "summary": {
+      "total": "Total",
+      "confirmed": "Confirmed",
+      "confirmedOnPage": "Confirmed on page",
+      "checkedIn": "Checked In",
+      "checkedInOnPage": "Checked in on page",
+      "pending": "Pending",
+      "pendingOnPage": "Pending on page"
+    },
+    "filters": {
+      "allStatuses": "All Statuses"
+    },
+    "placeholders": {
+      "guestId": "Guest UUID",
+      "roomTypeId": "Room type UUID",
+      "roomId": "Optional room UUID",
+      "specialRequests": "Guest special requests...",
+      "notes": "Internal notes..."
+    },
+    "detail": {
+      "stay": "Stay",
+      "booking": "Booking",
+      "audit": "Audit"
+    },
+    "fields": {
+      "reservation": "Reservation",
+      "reservationNumber": "Reservation Number",
+      "guest": "Guest",
+      "guestId": "Guest ID",
+      "room": "Room",
+      "roomId": "Room ID",
+      "roomType": "Room Type",
+      "roomTypeId": "Room Type ID",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "checkInDate": "Check-in Date",
+      "checkOutDate": "Check-out Date",
+      "adults": "Adults",
+      "children": "Children",
+      "guests": "Guests",
+      "status": "Status",
+      "source": "Source",
+      "total": "Total",
+      "specialRequests": "Special Requests",
+      "notes": "Notes",
+      "created": "Created",
+      "updated": "Updated",
+      "actions": "Actions"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "checkedIn": "Checked In",
+      "checkedOut": "Checked Out",
+      "cancelled": "Cancelled",
+      "noShow": "No Show",
+      "unknown": "Unknown"
+    },
+    "source": {
+      "walkIn": "Walk In",
+      "phone": "Phone",
+      "website": "Website",
+      "bookingCom": "Booking.com",
+      "agoda": "Agoda",
+      "expedia": "Expedia",
+      "other": "Other"
+    },
+    "validation": {
+      "guestRequired": "Guest is required.",
+      "roomTypeRequired": "Room type is required.",
+      "checkInRequired": "Check-in date is required.",
+      "checkOutRequired": "Check-out date is required.",
+      "invalidDateRange": "Check-out must be after check-in.",
+      "adultsMinimum": "At least one adult is required.",
+      "childrenMinimum": "Children cannot be less than zero."
+    },
+    "common": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "deleting": "Deleting...",
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next",
+      "unknownGuest": "Unknown guest",
+      "unassigned": "Unassigned",
+      "noNotes": "No notes.",
+      "noSpecialRequests": "No special requests."
+    }
+  },
+  "roomChanges": {
+    "title": "Room Changes",
+    "section": "Front Office",
+    "subtitle": "Review guest room change requests and completed room transfers.",
+    "analytics": "Analytics",
+    "details": "Room Change Details",
+    "backToRoomChanges": "Back to Room Changes",
+    "searchPlaceholder": "Search guest, reservation, room...",
+    "clear": "Clear",
+    "retry": "Retry",
+    "loading": "Loading room changes...",
+    "loadingDetails": "Loading room change...",
+    "loadingAnalytics": "Loading analytics...",
+    "emptyTitle": "No room changes found",
+    "emptyDescription": "Try changing your search or filters.",
+    "errorTitle": "Could not load room changes",
+    "unableToLoad": "Unable to load room changes.",
+    "unableToLoadDetails": "Unable to load room change.",
+    "unableToLoadAnalytics": "Unable to load room change analytics.",
+    "actions": {
+      "analytics": "Analytics",
+      "search": "Search",
+      "clear": "Clear",
+      "retry": "Retry",
+      "view": "View",
+      "back": "Back to Room Changes"
+    },
+    "search": {
+      "placeholder": "Search guest, reservation, room..."
+    },
+    "errors": {
+      "title": "Could not load room changes",
+      "loadList": "Unable to load room changes.",
+      "loadDetail": "Unable to load room change.",
+      "loadAnalytics": "Unable to load room change analytics.",
+      "missingId": "Room change id was not provided."
+    },
+    "states": {
+      "loading": "Loading room changes...",
+      "loadingDetail": "Loading room change...",
+      "loadingAnalytics": "Loading analytics...",
+      "emptyTitle": "No room changes found",
+      "emptyDescription": "Try changing your search or filters."
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "detail": {
+      "title": "Room Change Details",
+      "subtitle": "Review the room transfer, guest, reservation and audit information.",
+      "roomTransfer": "Room Transfer",
+      "guestReservation": "Guest and Reservation",
+      "originalRoom": "Original Room",
+      "newRoom": "New Room",
+      "timeline": "Timeline",
+      "audit": "Audit"
+    },
+    "summary": {
+      "total": "Total Records",
+      "completed": "Completed",
+      "approved": "Approved",
+      "pending": "Pending"
+    },
+    "filters": {
+      "allStatuses": "All Statuses"
+    },
+    "fields": {
+      "requested": "Requested",
+      "changed": "Changed",
+      "reservation": "Reservation",
+      "guest": "Guest",
+      "fromRoom": "From Room",
+      "toRoom": "To Room",
+      "roomNumber": "Room Number",
+      "roomType": "Room Type",
+      "reason": "Reason",
+      "notes": "Notes",
+      "status": "Status",
+      "created": "Created",
+      "updated": "Updated",
+      "roomChangeId": "Room Change ID",
+      "actions": "Actions"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "completed": "Completed",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "analyticsPage": {
+      "title": "Room Change Analytics",
+      "subtitle": "Overview calculated from room change records returned by the API.",
+      "totalChanges": "Total Room Changes",
+      "completed": "Completed",
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "completionRate": "Completion Rate",
+      "statusBreakdown": "Status Breakdown"
+    },
+    "common": {
+      "view": "View",
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next",
+      "unknownGuest": "Unknown guest",
+      "noReason": "No reason was recorded.",
+      "noNotes": "No notes were recorded."
+    }
+  },
+  "folios": {
+    "section": "Front Office",
+    "title": "Folios",
+    "description": "Create guest folios, review posted charges, add charges, and close a folio through the verified workflow endpoints.",
+    "create": "Create folio",
+    "createDescription": "Select an existing reservation to start a new guest folio.",
+    "backToWorkspace": "Back to folios",
+    "openExisting": "Open an existing folio",
+    "openExistingDescription": "The backend does not expose a folio list endpoint. Enter a known folio ID to open its detail workspace.",
+    "folioIdPlaceholder": "Enter folio ID",
+    "openFolio": "Open folio",
+    "workflowTitle": "Folio workflow",
+    "workflowDescription": "The verified backend supports create, get-by-id, add-charge, and close operations.",
+    "workflowCreate": "Create a folio from a reservation",
+    "workflowCharges": "Post charges to the open folio",
+    "workflowClose": "Close the folio when the backend accepts the request",
+    "noListTitle": "No folio list API is currently verified",
+    "noListDescription": "This frontend intentionally does not invent GET /api/v1/folios. Use Create Folio or open an existing folio by its ID.",
+    "loadingReservations": "Loading reservations...",
+    "reservationsLoadFailed": "Unable to load reservations.",
+    "reservation": "Reservation",
+    "selectReservation": "Select a reservation",
+    "reservationContext": "Reservation context",
+    "reservationNumber": "Reservation number",
+    "reservationId": "Reservation ID",
+    "guest": "Guest",
+    "guestId": "Guest ID",
+    "room": "Room",
+    "roomType": "Room type",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "reservationStatus": "Reservation status",
+    "createSuccess": "Folio created successfully.",
+    "createFailed": "Unable to create the folio.",
+    "loadingOne": "Loading folio...",
+    "loadOneFailed": "Unable to load the folio.",
+    "missingId": "Folio ID is missing.",
+    "open": "Open",
+    "closed": "Closed",
+    "openDescription": "This folio is open for backend-approved charge and close operations.",
+    "closedDescription": "This folio is closed.",
+    "totalCharges": "Total charges",
+    "activeCharges": "Active charges",
+    "voidedCharges": "Voided charges",
+    "recordedAmount": "Recorded active-charge amount",
+    "folioDetails": "Folio details",
+    "folioNumber": "Folio number",
+    "status": "Status",
+    "createdAt": "Created at",
+    "scope": "Scope",
+    "branchScope": "Branch",
+    "hotelScope": "Hotel",
+    "charges": "Charges",
+    "chargesDescription": "Charges returned by the folio detail response.",
+    "noCharges": "No charges found",
+    "noChargesDescription": "This folio detail response does not currently contain any charge rows.",
+    "chargeCategory": "Category",
+    "chargeDescription": "Description",
+    "chargeAmount": "Amount",
+    "chargeCategoryPlaceholder": "Example: Room",
+    "chargeDescriptionPlaceholder": "Describe the charge",
+    "chargeAmountPlaceholder": "0.00",
+    "chargeCategoryRequired": "Category is required.",
+    "chargeDescriptionRequired": "Description is required.",
+    "chargeAmountRequired": "Enter an amount greater than zero.",
+    "addCharge": "Add charge",
+    "addChargeDescription": "Post a category, description, and amount to this folio.",
+    "addingCharge": "Adding charge...",
+    "addChargeSuccess": "Charge added successfully.",
+    "addChargeFailed": "Unable to add the folio charge.",
+    "active": "Active",
+    "voided": "Voided",
+    "closeFolio": "Close folio",
+    "closeTitle": "Close this folio?",
+    "closeDescription": "This sends the verified close workflow request. The backend remains authoritative for whether the folio can be closed.",
+    "closeSuccess": "Folio closed successfully.",
+    "closeFailed": "Unable to close the folio."
+  },
+  "invoices": {
+    "section": "Front Office",
+    "title": "Invoices",
+    "description": "Live invoice workspace for billing, balances, due-state monitoring, payments, PDF output, and loaded-data analytics.",
+    "liveData": "Live data",
+    "refresh": "Refresh",
+    "loading": "Loading invoices...",
+    "loadFailed": "Unable to load invoices.",
+    "loadingOne": "Loading invoice...",
+    "loadOneFailed": "Unable to load the invoice.",
+    "missingId": "Invoice ID is missing.",
+    "backToList": "Back to invoices",
+    "create": "Create invoice",
+    "createDescription": "Create an invoice for an existing reservation and add invoice line items.",
+    "createSuccess": "Invoice created successfully.",
+    "createFailed": "Unable to create the invoice.",
+    "loadedInvoices": "Loaded invoices",
+    "backendTotal": "Backend total: {{total}}",
+    "billedLoaded": "Billed (loaded)",
+    "paidLoaded": "Collected (loaded)",
+    "outstandingLoaded": "Outstanding (loaded)",
+    "paidCount": "{{count}} settled",
+    "overdueCount": "{{count}} overdue",
+    "outstandingCount": "{{count}} outstanding",
+    "outstandingCenter": "Outstanding center",
+    "analytics": "Analytics",
+    "searchPlaceholder": "Search invoice, guest, reservation or status...",
+    "allStatuses": "All statuses",
+    "allDueStates": "All due states",
+    "from": "From",
+    "to": "To",
+    "noResults": "No invoices found",
+    "noResultsDescription": "No loaded invoice matches the current filters.",
+    "invoiceNumber": "Invoice",
+    "guest": "Guest",
+    "invoiceDate": "Invoice date",
+    "dueDate": "Due date",
+    "totalAmount": "Total",
+    "paidAmount": "Paid amount",
+    "balanceAmount": "Balance",
+    "status": "Status",
+    "dueState": "Due state",
+    "outstanding": "Outstanding",
+    "overdue": "Overdue",
+    "dueSoon": "Due soon",
+    "settled": "Settled",
+    "showingLoaded": "Showing {{count}} of {{total}} filtered loaded invoices",
+    "loadingReservations": "Loading reservations...",
+    "reservationsLoadFailed": "Unable to load reservations.",
+    "invoiceContext": "Invoice context",
+    "reservation": "Reservation",
+    "selectReservation": "Select a reservation",
+    "discountAmount": "Discount",
+    "taxAmount": "Tax",
+    "reservationContext": "Reservation context",
+    "reservationNumber": "Reservation number",
+    "reservationId": "Reservation ID",
+    "room": "Room",
+    "roomType": "Room type",
+    "reservationStatus": "Reservation status",
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
+    "invoiceItems": "Invoice items",
+    "invoiceItemsHelp": "Add the lines that the invoice create request should send.",
+    "invoiceItemsDetailHelp": "Invoice items returned by the invoice detail API.",
+    "addItem": "Add item",
+    "removeItem": "Remove item",
+    "itemDescription": "Description",
+    "itemDescriptionPlaceholder": "Example: Standard King - 3 nights",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unitPlaceholder": "night",
+    "unitPrice": "Unit price",
+    "lineTotal": "Line total",
+    "previewTotals": "Totals preview",
+    "subtotal": "Subtotal",
+    "createCompatibilityNote": "Create request fields are isolated because the exact backend InvoiceRequest body was not available in the retrieved source. If the API returns 400/422, align the model/service with that DTO.",
+    "invoiceDetails": "Invoice details",
+    "createdAt": "Created at",
+    "financialSummary": "Financial summary",
+    "paymentProgress": "Payment progress",
+    "itemsCount": "Items",
+    "itemSubtotal": "Item subtotal: {{amount}}",
+    "noItems": "No invoice items returned",
+    "noItemsDescription": "The invoice detail response does not currently include item rows.",
+    "previewPdf": "Preview PDF",
+    "downloadPdf": "Download PDF",
+    "pdfFailed": "Unable to load the invoice PDF.",
+    "recordPayment": "Record payment",
+    "paymentModalDescription": "Record a payment for {{invoice}}. The backend remains authoritative for validation.",
+    "paymentAmount": "Amount",
+    "paymentAmountPlaceholder": "0.00",
+    "paymentAmountRequired": "Enter an amount greater than zero.",
+    "paymentMethod": "Payment method",
+    "paymentMethodPlaceholder": "Example: Cash or Khqr",
+    "paymentMethodHelp": "Cash and Khqr are verified seed examples, not a claimed complete payment-method enum.",
+    "paymentMethodRequired": "Payment method is required.",
+    "paymentReference": "Reference number",
+    "paymentReferencePlaceholder": "Optional payment reference",
+    "recordingPayment": "Recording payment...",
+    "paymentSuccess": "Payment recorded successfully.",
+    "paymentFailed": "Unable to record the payment.",
+    "paymentExceedsBalance": "Payment amount cannot exceed the currently loaded balance.",
+    "paid": "paid",
+    "remaining": "remaining",
+    "outstandingDescription": "Live loaded-data view of invoices with a remaining balance, including frontend-derived overdue and due-soon states.",
+    "outstandingInvoices": "Outstanding invoices",
+    "outstandingAmount": "Outstanding amount",
+    "overdueInvoices": "Overdue invoices",
+    "overdueAmount": "Overdue amount",
+    "dueSoonCount": "{{count}} due within 3 days",
+    "noOutstanding": "No outstanding invoices",
+    "noOutstandingDescription": "No loaded invoice currently has a remaining balance.",
+    "daysOverdue": "{{days}} days overdue",
+    "dueInDays": "Due in {{days}} days",
+    "analyticsDescription": "Loaded invoice totals, collection rate, status mix, and outstanding indicators calculated from live API data.",
+    "totalBilled": "Total billed",
+    "totalCollected": "Total collected",
+    "totalOutstanding": "Total outstanding",
+    "averageInvoice": "Average invoice",
+    "collectionRate": "Collection rate",
+    "collectionRateDescription": "Paid amount divided by billed amount for the currently loaded invoices.",
+    "statusBreakdown": "Status breakdown",
+    "statusBreakdownDescription": "Dynamic status groups returned by the API.",
+    "analyticsLoadedNote": "These analytics are calculated from invoices returned by the current GET /api/v1/invoices response. If the backend returns only one server page, the metrics describe that loaded page."
+  },
+  "payments": {
+    "section": "Finance",
+    "title": "Payments",
+    "subtitle": "Live payment data from the Hotel Management API.",
+    "actions": {
+      "search": "Search",
+      "clear": "Clear",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "analytics": "Analytics",
+      "view": "View payment",
+      "back": "Back to Payments"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "pageAmount": "Page Amount",
+      "completed": "Completed on Page",
+      "pending": "Pending on Page"
+    },
+    "search": {
+      "placeholder": "Search payment, reference, invoice, guest..."
+    },
+    "filters": {
+      "allStatuses": "All Statuses",
+      "allMethods": "All Methods"
+    },
+    "status": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded",
+      "unknown": "Unknown"
+    },
+    "methods": {
+      "cash": "Cash",
+      "card": "Card",
+      "bankTransfer": "Bank Transfer",
+      "mobilePayment": "Mobile Payment",
+      "cheque": "Cheque",
+      "online": "Online",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "fields": {
+      "payment": "Payment",
+      "guestInvoice": "Guest / Invoice",
+      "amount": "Amount",
+      "method": "Method",
+      "reference": "Reference",
+      "status": "Status",
+      "paidAt": "Paid At",
+      "actions": "Actions",
+      "transaction": "Transaction",
+      "invoice": "Invoice",
+      "reservation": "Reservation",
+      "guestName": "Guest Name",
+      "guestId": "Guest ID",
+      "created": "Created",
+      "updated": "Updated",
+      "notes": "Notes"
+    },
+    "states": {
+      "loading": "Loading live payments...",
+      "loadingDetail": "Loading live payment...",
+      "loadingAnalytics": "Loading live analytics...",
+      "emptyTitle": "No Payments Found",
+      "emptyDescription": "No live payment records matched the current filters."
+    },
+    "errors": {
+      "title": "Could Not Load Payments",
+      "loadList": "Unable to load payments from the API.",
+      "loadDetail": "Unable to load payment details.",
+      "loadAnalytics": "Unable to load payment analytics.",
+      "missingId": "Payment ID is missing."
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "unknownGuest": "Unknown Guest",
+      "noNotes": "No notes."
+    },
+    "detail": {
+      "section": "Finance / Payments",
+      "payment": "Payment",
+      "paymentInfo": "Payment Information",
+      "references": "References",
+      "guest": "Guest",
+      "audit": "Audit"
+    },
+    "analytics": {
+      "title": "Payment Analytics",
+      "subtitle": "Calculated from live payment records returned by the API.",
+      "recordsLoaded": "Records Loaded",
+      "totalAmount": "Total Amount",
+      "amountByMethod": "Amount by Payment Method"
+    }
+  },
+  "deposits": {
+    "section": "Finance",
+    "title": "Deposits",
+    "subtitle": "Live deposit data from the Hotel Management API.",
+    "actions": {
+      "search": "Search",
+      "clear": "Clear",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "analytics": "Analytics",
+      "view": "View deposit",
+      "back": "Back to Deposits"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "pageAmount": "Page Amount",
+      "received": "Received on Page",
+      "pending": "Pending on Page"
+    },
+    "search": {
+      "placeholder": "Search deposit, guest, reservation, reference..."
+    },
+    "filters": {
+      "allStatuses": "All Statuses",
+      "allTypes": "All Deposit Types"
+    },
+    "status": {
+      "pending": "Pending",
+      "received": "Received",
+      "applied": "Applied",
+      "partiallyApplied": "Partially Applied",
+      "refunded": "Refunded",
+      "partiallyRefunded": "Partially Refunded",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "types": {
+      "reservation": "Reservation Deposit",
+      "security": "Security Deposit",
+      "advance": "Advance Deposit",
+      "damage": "Damage Deposit",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "methods": {
+      "cash": "Cash",
+      "card": "Card",
+      "bankTransfer": "Bank Transfer",
+      "mobilePayment": "Mobile Payment",
+      "cheque": "Cheque",
+      "online": "Online",
+      "other": "Other"
+    },
+    "fields": {
+      "deposit": "Deposit",
+      "guestReservation": "Guest / Reservation",
+      "amount": "Amount",
+      "type": "Type",
+      "paymentMethod": "Payment Method",
+      "reference": "Reference",
+      "status": "Status",
+      "receivedAt": "Received At",
+      "appliedAt": "Applied At",
+      "refundedAt": "Refunded At",
+      "actions": "Actions",
+      "transaction": "Transaction",
+      "reservation": "Reservation",
+      "guestName": "Guest Name",
+      "guestId": "Guest ID",
+      "created": "Created",
+      "updated": "Updated",
+      "notes": "Notes"
+    },
+    "states": {
+      "loading": "Loading live deposits...",
+      "loadingDetail": "Loading live deposit...",
+      "loadingAnalytics": "Loading live analytics...",
+      "emptyTitle": "No Deposits Found",
+      "emptyDescription": "No live deposit records matched the current filters."
+    },
+    "errors": {
+      "title": "Could Not Load Deposits",
+      "loadList": "Unable to load deposits from the API.",
+      "loadDetail": "Unable to load deposit details.",
+      "loadAnalytics": "Unable to load deposit analytics.",
+      "missingId": "Deposit ID is missing."
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "unknownGuest": "Unknown Guest",
+      "noNotes": "No notes."
+    },
+    "detail": {
+      "section": "Finance / Deposits",
+      "deposit": "Deposit",
+      "depositInfo": "Deposit Information",
+      "references": "References",
+      "guest": "Guest",
+      "timeline": "Timeline",
+      "audit": "Audit"
+    },
+    "analytics": {
+      "title": "Deposit Analytics",
+      "subtitle": "Calculated from live deposit records returned by the API.",
+      "recordsLoaded": "Records Loaded",
+      "totalAmount": "Total Amount",
+      "amountByType": "Amount by Deposit Type"
+    }
+  },
+  "refunds": {
+    "section": "Finance",
+    "title": "Refunds",
+    "subtitle": "Live refund data from the Hotel Management API.",
+    "actions": {
+      "search": "Search",
+      "clear": "Clear",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "analytics": "Analytics",
+      "view": "View refund",
+      "back": "Back to Refunds"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "pageAmount": "Page Amount",
+      "completed": "Completed on Page",
+      "pending": "Pending on Page"
+    },
+    "search": {
+      "placeholder": "Search refund, guest, payment, reference..."
+    },
+    "filters": {
+      "allStatuses": "All Statuses",
+      "allReasons": "All Reasons"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "processing": "Processing",
+      "completed": "Completed",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "reasons": {
+      "cancellation": "Cancellation",
+      "overpayment": "Overpayment",
+      "serviceIssue": "Service Issue",
+      "duplicatePayment": "Duplicate Payment",
+      "depositReturn": "Deposit Return",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "fields": {
+      "refund": "Refund",
+      "guestPayment": "Guest / Payment",
+      "amount": "Amount",
+      "reason": "Reason",
+      "method": "Method",
+      "reference": "Reference",
+      "status": "Status",
+      "requestedAt": "Requested At",
+      "processedAt": "Processed At",
+      "actions": "Actions",
+      "transaction": "Transaction",
+      "payment": "Payment",
+      "invoice": "Invoice",
+      "reservation": "Reservation",
+      "guestName": "Guest Name",
+      "guestId": "Guest ID",
+      "created": "Created",
+      "updated": "Updated",
+      "notes": "Notes"
+    },
+    "states": {
+      "loading": "Loading live refunds...",
+      "loadingDetail": "Loading live refund...",
+      "loadingAnalytics": "Loading live analytics...",
+      "emptyTitle": "No Refunds Found",
+      "emptyDescription": "No live refund records matched the current filters."
+    },
+    "errors": {
+      "title": "Could Not Load Refunds",
+      "loadList": "Unable to load refunds from the API.",
+      "loadDetail": "Unable to load refund details.",
+      "loadAnalytics": "Unable to load refund analytics.",
+      "missingId": "Refund ID is missing."
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "unknownGuest": "Unknown Guest",
+      "noNotes": "No notes."
+    },
+    "detail": {
+      "section": "Finance / Refunds",
+      "refund": "Refund",
+      "refundInfo": "Refund Information",
+      "references": "References",
+      "guest": "Guest",
+      "timeline": "Timeline",
+      "audit": "Audit"
+    },
+    "analytics": {
+      "title": "Refund Analytics",
+      "subtitle": "Calculated from live refund records returned by the API.",
+      "recordsLoaded": "Records Loaded",
+      "totalAmount": "Total Amount",
+      "amountByReason": "Amount by Refund Reason"
+    }
+  },
+  "taxes": {
+    "section": "Finance",
+    "title": "Taxes",
+    "subtitle": "Manage live tax configuration from the Hotel Management API.",
+    "actions": {
+      "create": "Create Tax",
+      "save": "Save",
+      "saving": "Saving...",
+      "update": "Update Tax",
+      "cancel": "Cancel",
+      "search": "Search",
+      "clear": "Clear",
+      "refresh": "Refresh",
+      "analytics": "Analytics",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "restore": "Restore",
+      "back": "Back to Taxes"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "averageRate": "Average Rate",
+      "active": "Active on Page",
+      "inactive": "Inactive on Page"
+    },
+    "search": {
+      "placeholder": "Search tax name, code, type..."
+    },
+    "filters": {
+      "allTypes": "All Tax Types",
+      "allStatuses": "All Statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleted": "Deleted"
+    },
+    "types": {
+      "vat": "VAT",
+      "gst": "GST",
+      "serviceTax": "Service Tax",
+      "cityTax": "City Tax",
+      "tourismTax": "Tourism Tax",
+      "occupancyTax": "Occupancy Tax",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "appliesTo": {
+      "all": "All",
+      "room": "Room",
+      "restaurant": "Restaurant",
+      "service": "Service",
+      "laundry": "Laundry",
+      "transportation": "Transportation",
+      "invoice": "Invoice"
+    },
+    "fields": {
+      "tax": "Tax",
+      "name": "Name",
+      "code": "Code",
+      "type": "Type",
+      "rate": "Rate",
+      "percentage": "Percentage",
+      "inclusive": "Inclusive",
+      "active": "Active",
+      "appliesTo": "Applies To",
+      "status": "Status",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "actions": "Actions",
+      "description": "Description"
+    },
+    "form": {
+      "title": "Tax Form",
+      "subtitle": "Enter the tax rules and effective period."
+    },
+    "create": {
+      "title": "Create Tax",
+      "subtitle": "Create a new tax configuration."
+    },
+    "edit": {
+      "title": "Edit Tax",
+      "subtitle": "Update the selected tax configuration."
+    },
+    "detail": {
+      "section": "Finance / Taxes",
+      "taxInfo": "Tax Information",
+      "effectivePeriod": "Effective Period"
+    },
+    "analytics": {
+      "title": "Tax Analytics",
+      "subtitle": "Summary calculated from live tax records.",
+      "recordsLoaded": "Records Loaded",
+      "averageRate": "Average Rate"
+    },
+    "states": {
+      "loading": "Loading live taxes...",
+      "loadingDetail": "Loading tax...",
+      "loadingAnalytics": "Loading analytics...",
+      "emptyTitle": "No Taxes Found",
+      "emptyDescription": "No tax records matched the current filters."
+    },
+    "errors": {
+      "title": "Tax Error",
+      "loadList": "Unable to load taxes.",
+      "loadDetail": "Unable to load tax details.",
+      "loadAnalytics": "Unable to load analytics.",
+      "create": "Unable to create the tax.",
+      "update": "Unable to update the tax.",
+      "delete": "Unable to delete the tax.",
+      "toggleActive": "Unable to change active status.",
+      "restore": "Unable to restore the tax.",
+      "missingId": "Tax ID is missing."
+    },
+    "validation": {
+      "reviewFields": "Please review the required fields.",
+      "rate": "Rate must be 0 or greater. Percentage tax cannot exceed 100.",
+      "dateRange": "Effective To must be after Effective From."
+    },
+    "delete": {
+      "confirm": "Delete tax \"{{name}}\"?"
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "yes": "Yes",
+      "no": "No",
+      "noDescription": "No description."
+    }
+  },
+  "discounts": {
+    "section": "Finance",
+    "title": "Discounts",
+    "subtitle": "Manage live discount configuration from the Hotel Management API.",
+    "actions": {
+      "create": "Create Discount",
+      "save": "Save",
+      "saving": "Saving...",
+      "update": "Update Discount",
+      "cancel": "Cancel",
+      "search": "Search",
+      "clear": "Clear",
+      "refresh": "Refresh",
+      "analytics": "Analytics",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "restore": "Restore",
+      "back": "Back to Discounts"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "averageValue": "Average Value",
+      "active": "Active on Page",
+      "inactive": "Inactive on Page"
+    },
+    "search": {
+      "placeholder": "Search discount name, code, type..."
+    },
+    "filters": {
+      "allTypes": "All Discount Types",
+      "allStatuses": "All Statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleted": "Deleted"
+    },
+    "types": {
+      "percentage": "Percentage",
+      "fixedAmount": "Fixed Amount",
+      "promoCode": "Promo Code",
+      "seasonal": "Seasonal",
+      "loyalty": "Loyalty",
+      "corporate": "Corporate",
+      "manual": "Manual",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "appliesTo": {
+      "all": "All",
+      "room": "Room",
+      "restaurant": "Restaurant",
+      "service": "Service",
+      "laundry": "Laundry",
+      "transportation": "Transportation",
+      "invoice": "Invoice"
+    },
+    "fields": {
+      "discount": "Discount",
+      "name": "Name",
+      "code": "Code",
+      "type": "Type",
+      "value": "Value",
+      "percentage": "Percentage",
+      "active": "Active",
+      "appliesTo": "Applies To",
+      "usage": "Usage",
+      "usageLimit": "Usage Limit",
+      "usedCount": "Used Count",
+      "minimumAmount": "Minimum Amount",
+      "maximumDiscountAmount": "Maximum Discount Amount",
+      "status": "Status",
+      "validFrom": "Valid From",
+      "validTo": "Valid To",
+      "actions": "Actions",
+      "description": "Description"
+    },
+    "form": {
+      "title": "Discount Form",
+      "subtitle": "Enter the discount rules and validity."
+    },
+    "create": {
+      "title": "Create Discount",
+      "subtitle": "Create a new discount configuration."
+    },
+    "edit": {
+      "title": "Edit Discount",
+      "subtitle": "Update the selected discount configuration."
+    },
+    "detail": {
+      "section": "Finance / Discounts",
+      "discountInfo": "Discount Information",
+      "rules": "Discount Rules",
+      "validity": "Validity",
+      "usage": "Usage"
+    },
+    "analytics": {
+      "title": "Discount Analytics",
+      "subtitle": "Summary calculated from live discount records.",
+      "recordsLoaded": "Records Loaded"
+    },
+    "states": {
+      "loading": "Loading live discounts...",
+      "loadingDetail": "Loading discount...",
+      "loadingAnalytics": "Loading analytics...",
+      "emptyTitle": "No Discounts Found",
+      "emptyDescription": "No discount records matched the current filters."
+    },
+    "errors": {
+      "title": "Discount Error",
+      "loadList": "Unable to load discounts.",
+      "loadDetail": "Unable to load discount details.",
+      "loadAnalytics": "Unable to load analytics.",
+      "create": "Unable to create the discount.",
+      "update": "Unable to update the discount.",
+      "delete": "Unable to delete the discount.",
+      "toggleActive": "Unable to change active status.",
+      "restore": "Unable to restore the discount.",
+      "missingId": "Discount ID is missing."
+    },
+    "validation": {
+      "reviewFields": "Please review the required fields.",
+      "value": "Value must be greater than 0. Percentage discounts cannot exceed 100.",
+      "dateRange": "Valid To must be after Valid From."
+    },
+    "delete": {
+      "confirm": "Delete discount \"{{name}}\"?"
+    },
+    "pagination": {
+      "rows": "Rows",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "noDescription": "No description."
+    }
+  },
+  "utilityBilling": {
+    "section": "Finance",
+    "dashboard": {
+      "title": "Utility Billing",
+      "subtitle": "Manage utilities, rates, meters, readings and billing data.",
+      "utilities": "Utilities",
+      "rates": "Utility Rates",
+      "meters": "Utility Meters",
+      "readingsLoaded": "Readings Loaded",
+      "totalUsage": "Total Usage",
+      "totalAmount": "Total Amount"
+    },
+    "pages": {
+      "utilities": "Utilities",
+      "rates": "Utility Rates",
+      "meters": "Utility Meters",
+      "readings": "Meter Readings"
+    },
+    "detail": {
+      "utility": "Utility Detail",
+      "rate": "Utility Rate Detail",
+      "meter": "Utility Meter Detail",
+      "reading": "Meter Reading Detail"
+    },
+    "analytics": {
+      "title": "Utility Billing Analytics",
+      "subtitle": "Calculated from live meter reading data.",
+      "readingsLoaded": "Readings Loaded",
+      "totalUsage": "Total Usage",
+      "totalAmount": "Total Amount",
+      "averageUsage": "Average Usage"
+    },
+    "actions": {
+      "create": "Create",
+      "edit": "Edit",
+      "update": "Update",
+      "save": "Save",
+      "cancel": "Cancel",
+      "back": "Back",
+      "refresh": "Refresh",
+      "search": "Search",
+      "clear": "Clear",
+      "analytics": "Analytics"
+    },
+    "fields": {
+      "name": "Name",
+      "code": "Code",
+      "type": "Type",
+      "unit": "Unit",
+      "status": "Status",
+      "description": "Description",
+      "utility": "Utility",
+      "utilityId": "Utility ID",
+      "ratePerUnit": "Rate / Unit",
+      "currency": "Currency",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "meterId": "Meter ID",
+      "meterNumber": "Meter Number",
+      "room": "Room",
+      "roomId": "Room ID",
+      "location": "Location",
+      "initialReading": "Initial Reading",
+      "currentReading": "Current Reading",
+      "previousReading": "Previous Reading",
+      "installedAt": "Installed At",
+      "usage": "Usage",
+      "amount": "Amount",
+      "readingDate": "Reading Date",
+      "notes": "Notes",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleted": "Deleted"
+    },
+    "utilityTypes": {
+      "electricity": "Electricity",
+      "water": "Water",
+      "gas": "Gas",
+      "internet": "Internet",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "search": {
+      "placeholder": "Search..."
+    },
+    "states": {
+      "loading": "Loading live data...",
+      "empty": "No records found."
+    },
+    "errors": {
+      "load": "Unable to load data from the API.",
+      "loadDetail": "Unable to load details."
+    },
+    "delete": {
+      "confirm": "Delete this record?"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "utilityRates": {
+    "section": "Finance",
+    "title": "Utility Rates",
+    "subtitle": "Manage live utility pricing and effective rate periods.",
+    "actions": {
+      "create": "Create Utility Rate",
+      "save": "Save",
+      "saving": "Saving...",
+      "update": "Update Utility Rate",
+      "cancel": "Cancel",
+      "back": "Back to Utility Rates",
+      "refresh": "Refresh",
+      "search": "Search",
+      "clear": "Clear",
+      "analytics": "Analytics",
+      "edit": "Edit",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "restore": "Restore"
+    },
+    "summary": {
+      "totalRecords": "Total Records",
+      "averageRate": "Average Rate",
+      "active": "Active on Page",
+      "inactive": "Inactive on Page"
+    },
+    "search": {
+      "placeholder": "Search utility, rate name, code..."
+    },
+    "filters": {
+      "allTypes": "All Utility Types",
+      "allStatuses": "All Statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleted": "Deleted"
+    },
+    "types": {
+      "electricity": "Electricity",
+      "water": "Water",
+      "gas": "Gas",
+      "internet": "Internet",
+      "other": "Other"
+    },
+    "fields": {
+      "utility": "Utility",
+      "utilityId": "Utility ID",
+      "name": "Rate Name",
+      "code": "Code",
+      "type": "Utility Type",
+      "ratePerUnit": "Rate / Unit",
+      "unit": "Unit",
+      "currency": "Currency",
+      "minimumCharge": "Minimum Charge",
+      "fixedCharge": "Fixed Charge",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "active": "Active",
+      "status": "Status",
+      "notes": "Notes",
+      "actions": "Actions"
+    },
+    "form": {
+      "title": "Utility Rate Form",
+      "subtitle": "Configure the rate, unit, currency and effective period."
+    },
+    "create": {
+      "title": "Create Utility Rate",
+      "subtitle": "Create a new utility pricing rule."
+    },
+    "edit": {
+      "title": "Edit Utility Rate",
+      "subtitle": "Update the selected utility pricing rule."
+    },
+    "detail": {
+      "section": "Finance / Utility Rates",
+      "rateInfo": "Rate Information",
+      "effectivePeriod": "Effective Period"
+    },
+    "analytics": {
+      "title": "Utility Rate Analytics",
+      "subtitle": "Calculated from live utility rate records.",
+      "recordsLoaded": "Records Loaded",
+      "averageRate": "Average Rate",
+      "maxRate": "Highest Rate"
+    },
+    "states": {
+      "loading": "Loading live utility rates...",
+      "empty": "No utility rates found."
+    },
+    "errors": {
+      "loadList": "Unable to load utility rates.",
+      "loadDetail": "Unable to load utility rate details.",
+      "create": "Unable to create utility rate.",
+      "update": "Unable to update utility rate.",
+      "delete": "Unable to delete utility rate.",
+      "toggleActive": "Unable to change active status.",
+      "restore": "Unable to restore utility rate.",
+      "action": "Unable to complete this action.",
+      "missingId": "Utility rate ID is missing."
+    },
+    "validation": {
+      "reviewFields": "Please review the required fields.",
+      "rate": "Rate must be 0 or greater.",
+      "dateRange": "Effective To must be after Effective From."
+    },
+    "delete": {
+      "confirm": "Delete utility rate \"{{name}}\"?"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "common": {
+      "noNotes": "No notes."
+    }
+  },
+  "utilityMeters": {
+    "title": "Utility Meters",
+    "create": "Create Meter",
+    "edit": "Edit Meter",
+    "analytics": "Utility Meter Analytics",
+    "active": "Active",
+    "inactive": "Inactive",
+    "deleted": "Deleted"
+  },
+  "meterReadings": {
+    "title": "Meter Readings",
+    "create": "Record Reading",
+    "edit": "Edit Reading",
+    "analytics": "Meter Reading Analytics",
+    "recorded": "Recorded",
+    "deleted": "Deleted"
+  },
+  "reports": {
+    "title": "Reports",
+    "analytics": "Analytics",
+    "run": "Run Report",
+    "history": "Run History",
+    "download": "Download",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "auditLogs": {
+    "title": "Audit Logs",
+    "liveData": "Live Data",
+    "search": "Search audit logs",
+    "success": "Success",
+    "failed": "Failed",
+    "exportCsv": "Export Page CSV"
+  },
+  "permissions": {
+    "availablePermissions": "Available permissions",
+    "create": "Create permission",
+    "createDescription": "Add a new permission that can be assigned to roles.",
+    "createFailed": "Could not create permission.",
+    "createSuccess": "Permission created successfully.",
+    "currentGroups": "Current groups",
+    "currentPage": "Current page",
+    "deleteAssignedError": "This permission is assigned and cannot be deleted.",
+    "deleteAssignedHint": "Remove this permission from assigned roles before deleting it.",
+    "deleteConfirm": "Delete this permission?",
+    "deleteFailed": "Could not delete permission.",
+    "deleteSuccess": "Permission deleted successfully.",
+    "description": "Description",
+    "edit": "Edit permission",
+    "editDescription": "Update permission name, group, and description.",
+    "formDescription": "Permission details",
+    "formTitle": "Permission form",
+    "groupsOnPage": "Groups on this page",
+    "loadFailed": "Could not load permissions.",
+    "loadOneFailed": "Could not load permission details.",
+    "loadedRecords": "Loaded records",
+    "loading": "Loading permissions...",
+    "loadingOne": "Loading permission...",
+    "missingId": "Missing permission id.",
+    "name": "Name",
+    "nameHelp": "Use a clear key such as reservations.view.",
+    "noResults": "No permissions found.",
+    "role": "Role",
+    "roles": "Roles",
+    "searchPlaceholder": "Search permissions...",
+    "section": "Administration",
+    "title": "Permissions",
+    "totalPermissions": "Total permissions",
+    "updateFailed": "Could not update permission.",
+    "updateSuccess": "Permission updated successfully.",
+    "usedBy": "Used by"
   }
 }

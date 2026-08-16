@@ -1,0 +1,58 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/settings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Settings
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePlus
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Create Setting
+        </h1>
+
+        <p class="subtitle">
+          Add a typed application configuration value.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to create setting.
+    </div>
+  }
+
+
+  <app-setting-form
+    [submitting]="submitting()"
+    submitLabel="Create Setting"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+
+</section>

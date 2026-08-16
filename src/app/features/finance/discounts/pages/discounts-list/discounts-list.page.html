@@ -1,0 +1,619 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div>
+        <p class="eyebrow">
+          {{ 'discounts.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'discounts.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'discounts.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary-button"
+        routerLink="/app/finance/discounts/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'discounts.actions.create' | translate }}
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="loading()"
+        (click)="loadDiscounts()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+          [class.spin]="loading()"
+        ></svg>
+
+        {{ 'discounts.actions.refresh' | translate }}
+      </button>
+
+
+      <a
+        class="secondary-button"
+        routerLink="/app/finance/discounts/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'discounts.actions.analytics' | translate }}
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideTicketPercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'discounts.summary.totalRecords' | translate }}
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'discounts.summary.averageValue' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageValue() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'discounts.summary.active' | translate }}
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'discounts.summary.inactive' | translate }}
+        </span>
+
+        <strong>
+          {{ inactiveCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters-card">
+
+    <div class="search-box">
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        [placeholder]="'discounts.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchDiscounts()"
+      />
+
+      @if (
+        search()
+      ) {
+        <button
+          type="button"
+          class="clear-search"
+          (click)="search.set(''); searchDiscounts()"
+        >
+          <svg lucideX
+            [size]="16"
+            [strokeWidth]="2"
+          ></svg>
+        </button>
+      }
+    </div>
+
+
+    <select
+      [ngModel]="type()"
+      (ngModelChange)="type.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'discounts.filters.allTypes' | translate }}
+      </option>
+
+      <option value="Percentage">
+        {{ 'discounts.types.percentage' | translate }}
+      </option>
+
+      <option value="FixedAmount">
+        {{ 'discounts.types.fixedAmount' | translate }}
+      </option>
+
+      <option value="PromoCode">
+        {{ 'discounts.types.promoCode' | translate }}
+      </option>
+
+      <option value="Seasonal">
+        {{ 'discounts.types.seasonal' | translate }}
+      </option>
+
+      <option value="Loyalty">
+        {{ 'discounts.types.loyalty' | translate }}
+      </option>
+
+      <option value="Corporate">
+        {{ 'discounts.types.corporate' | translate }}
+      </option>
+
+      <option value="Manual">
+        {{ 'discounts.types.manual' | translate }}
+      </option>
+
+      <option value="Other">
+        {{ 'discounts.types.other' | translate }}
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'discounts.filters.allStatuses' | translate }}
+      </option>
+
+      <option value="true">
+        {{ 'discounts.status.active' | translate }}
+      </option>
+
+      <option value="false">
+        {{ 'discounts.status.inactive' | translate }}
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="searchDiscounts()"
+    >
+      <svg lucideSearch
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'discounts.actions.search' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="clearFilters()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'discounts.actions.clear' | translate }}
+    </button>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+    <div class="alert error-alert">
+      <div>
+        <strong>
+          {{ 'discounts.errors.title' | translate }}
+        </strong>
+
+        <p>
+          {{ errorKey()! | translate }}
+        </p>
+      </div>
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        <div class="spinner"></div>
+
+        <p>
+          {{ 'discounts.states.loading' | translate }}
+        </p>
+      </div>
+
+    } @else if (
+      discounts().length ===
+      0
+    ) {
+      <div class="state">
+
+        <div class="empty-icon">
+          <svg lucideTicketPercent
+            [size]="28"
+            [strokeWidth]="1.8"
+          ></svg>
+        </div>
+
+        <h3>
+          {{ 'discounts.states.emptyTitle' | translate }}
+        </h3>
+
+        <p>
+          {{ 'discounts.states.emptyDescription' | translate }}
+        </p>
+
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('name')"
+                >
+                  {{ 'discounts.fields.discount' | translate }}
+                  {{ sortIndicator('name') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'discounts.fields.type' | translate }}
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('value')"
+                >
+                  {{ 'discounts.fields.value' | translate }}
+                  {{ sortIndicator('value') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'discounts.fields.appliesTo' | translate }}
+              </th>
+
+              <th>
+                {{ 'discounts.fields.usage' | translate }}
+              </th>
+
+              <th>
+                {{ 'discounts.fields.status' | translate }}
+              </th>
+
+              <th>
+                {{ 'discounts.fields.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of discounts();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <a
+                    class="discount-name"
+                    [routerLink]="[
+                      '/app/finance/discounts',
+                      item.id
+                    ]"
+                  >
+                    {{ item.name }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.code || '—' }}
+                  </div>
+                </td>
+
+
+                <td>
+                  <app-discount-type-badge
+                    [type]="item.type"
+                  />
+                </td>
+
+
+                <td>
+                  <strong>
+                    {{
+                      item.value |
+                      number:'1.2-2'
+                    }}
+                    {{
+                      item.isPercentage
+                        ? '%'
+                        : ''
+                    }}
+                  </strong>
+                </td>
+
+
+                <td>
+                  {{ item.appliesTo || '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.usedCount ?? 0 }}
+                  /
+                  {{ item.usageLimit ?? '∞' }}
+                </td>
+
+
+                <td>
+                  <app-discount-status-badge
+                    [active]="item.isActive"
+                    [deleted]="item.isDeleted"
+                  />
+                </td>
+
+
+                <td>
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/discounts',
+                        item.id
+                      ]"
+                      [title]="'discounts.actions.view' | translate"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/finance/discounts',
+                          item.id,
+                          'edit'
+                        ]"
+                        [title]="'discounts.actions.edit' | translate"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        [title]="
+                          (
+                            item.isActive
+                              ? 'discounts.actions.deactivate'
+                              : 'discounts.actions.activate'
+                          ) | translate
+                        "
+                        (click)="toggleActive(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        [title]="'discounts.actions.delete' | translate"
+                        (click)="deleteDiscount(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        [title]="'discounts.actions.restore' | translate"
+                        (click)="restoreDiscount(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <div class="page-size">
+        <span>
+          {{ 'discounts.pagination.rows' | translate }}
+        </span>
+
+        <select
+          [ngModel]="pageSize()"
+          (ngModelChange)="changePageSize($event)"
+        >
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="20">20</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+        </select>
+      </div>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          {{ 'discounts.pagination.previous' | translate }}
+        </button>
+
+
+        @for (
+          page of pageNumbers();
+          track page
+        ) {
+          <button
+            type="button"
+            [class.active]="page === pageNumber()"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'discounts.pagination.next' | translate }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,64 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/discounts',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'discounts.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+    <svg lucidePencil
+      [size]="24"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'discounts.edit.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'discounts.edit.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'discounts.states.loadingDetail' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    discount();
+    as item
+  ) {
+    <app-discount-form
+      [initialValue]="item"
+      [submitting]="submitting()"
+      submitLabelKey="discounts.actions.update"
+      (submitted)="update($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

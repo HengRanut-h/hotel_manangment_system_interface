@@ -1,0 +1,43 @@
+<article class="room-card">
+  <header>
+    <span class="room-icon">
+      <svg lucideBed></svg>
+    </span>
+
+    <span
+      class="status"
+      [class.status--available]="isAvailable()">
+      {{
+        room().status
+        ||
+        ('availability.unknownStatus' | translate)
+      }}
+    </span>
+  </header>
+
+  <div class="room-card__body">
+    <span class="room-type">
+      {{ room().roomTypeName }}
+    </span>
+
+    <h3>
+      {{
+        'availability.roomNumberValue'
+          | translate:{
+              number: room().roomNumber
+            }
+      }}
+    </h3>
+  </div>
+
+  <footer>
+    <span>{{ 'availability.baseRate' | translate }}</span>
+
+    <strong>
+      {{
+        room().baseRate
+          | number:'1.2-2'
+      }}
+    </strong>
+  </footer>
+</article>

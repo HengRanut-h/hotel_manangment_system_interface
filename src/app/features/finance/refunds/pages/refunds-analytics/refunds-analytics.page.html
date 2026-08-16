@@ -1,0 +1,285 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/refunds"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'refunds.actions.back' | translate }}
+  </a>
+
+
+  <div class="header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+
+      <div>
+
+        <h1>
+          {{ 'refunds.analytics.title' | translate }}
+        </h1>
+
+        <p>
+          {{ 'refunds.analytics.subtitle' | translate }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'refunds.states.loadingAnalytics' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="stats">
+
+      <article class="card">
+
+        <svg lucideRotateCcw
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'refunds.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ totalRefunds() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'refunds.analytics.totalAmount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'refunds.status.completed' | translate }}
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideClock3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'refunds.status.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'refunds.status.rejected' | translate }}
+        </span>
+
+        <strong>
+          {{ rejectedCount() }}
+        </strong>
+
+      </article>
+
+    </div>
+
+
+    <article class="reasons-card">
+
+      <h2>
+        {{ 'refunds.analytics.amountByReason' | translate }}
+      </h2>
+
+
+      <div class="reasons">
+
+        <div>
+
+          <svg lucideCalendarX2
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'refunds.reasons.cancellation' | translate }}
+          </span>
+
+          <strong>
+            {{
+              cancellationTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideCircleDollarSign
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'refunds.reasons.overpayment' | translate }}
+          </span>
+
+          <strong>
+            {{
+              overpaymentTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideCopy
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'refunds.reasons.duplicatePayment' | translate }}
+          </span>
+
+          <strong>
+            {{
+              duplicatePaymentTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideMessageSquareWarning
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'refunds.reasons.serviceIssue' | translate }}
+          </span>
+
+          <strong>
+            {{
+              serviceIssueTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideLandmark
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'refunds.reasons.depositReturn' | translate }}
+          </span>
+
+          <strong>
+            {{
+              depositReturnTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  }
+
+</section>

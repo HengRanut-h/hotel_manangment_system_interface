@@ -1,0 +1,283 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/analytics/reports/history"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to History
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading report run...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load report run.
+    </div>
+
+  } @else if (
+    item();
+    as run
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideFileChartColumn
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Analytics / Reports / History
+          </p>
+
+          <h1>
+            {{ run.reportName || run.reportCode || run.reportId }}
+          </h1>
+
+          <p class="subtitle">
+            {{ run.id }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-report-category-badge
+          [category]="run.category"
+        />
+
+        <app-report-status-badge
+          [status]="run.status"
+        />
+
+
+        <button
+          type="button"
+          class="secondary"
+          (click)="load()"
+        >
+          <svg lucideRefreshCw
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          Refresh
+        </button>
+
+
+        @if (
+          run.status === 'Completed'
+        ) {
+          <button
+            type="button"
+            class="primary"
+            [disabled]="downloading()"
+            (click)="download()"
+          >
+            <svg lucideDownload
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Download
+          </button>
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          Run Information
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Status
+            </dt>
+
+            <dd>
+              {{ run.status || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Format
+            </dt>
+
+            <dd>
+              {{ run.format || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Rows
+            </dt>
+
+            <dd>
+              {{ run.rowCount ?? '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              File
+            </dt>
+
+            <dd>
+              {{ run.fileName || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              From
+            </dt>
+
+            <dd>
+              {{
+                run.fromUtc
+                  ? (
+                      run.fromUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              To
+            </dt>
+
+            <dd>
+              {{
+                run.toUtc
+                  ? (
+                      run.toUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          Timeline
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Requested
+            </dt>
+
+            <dd>
+              {{
+                run.requestedAtUtc
+                  ? (
+                      run.requestedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Started
+            </dt>
+
+            <dd>
+              {{
+                run.startedAtUtc
+                  ? (
+                      run.startedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Completed
+            </dt>
+
+            <dd>
+              {{
+                run.completedAtUtc
+                  ? (
+                      run.completedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+
+        @if (
+          run.errorMessage
+        ) {
+          <div class="error">
+            {{ run.errorMessage }}
+          </div>
+        }
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

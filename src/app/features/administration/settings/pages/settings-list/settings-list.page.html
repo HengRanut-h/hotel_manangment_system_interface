@@ -1,0 +1,571 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div>
+        <p class="eyebrow">
+          Management
+        </p>
+
+        <h1>
+          Settings
+        </h1>
+
+        <p class="subtitle">
+          Manage application, hotel, security and integration configuration.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary"
+        routerLink="/app/management/settings/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Create Setting
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Refresh
+      </button>
+
+
+      <a
+        class="secondary"
+        routerLink="/app/management/settings/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Analytics
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideSettings
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Settings
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Active on Page
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideLockKeyhole
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Sensitive on Page
+        </span>
+
+        <strong>
+          {{ sensitiveCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideLayers3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Categories on Page
+        </span>
+
+        <strong>
+          {{ categoryCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search key, name or description..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="category()"
+      (ngModelChange)="category.set($event); filterChanged()"
+    >
+      <option value="">
+        All Categories
+      </option>
+
+      <option value="General">
+        General
+      </option>
+
+      <option value="Hotel">
+        Hotel
+      </option>
+
+      <option value="Localization">
+        Localization
+      </option>
+
+      <option value="Finance">
+        Finance
+      </option>
+
+      <option value="Reservation">
+        Reservation
+      </option>
+
+      <option value="Security">
+        Security
+      </option>
+
+      <option value="Notification">
+        Notification
+      </option>
+
+      <option value="Integration">
+        Integration
+      </option>
+
+      <option value="System">
+        System
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="valueType()"
+      (ngModelChange)="valueType.set($event); filterChanged()"
+    >
+      <option value="">
+        All Types
+      </option>
+
+      <option value="String">
+        String
+      </option>
+
+      <option value="Number">
+        Number
+      </option>
+
+      <option value="Boolean">
+        Boolean
+      </option>
+
+      <option value="Json">
+        JSON
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Statuses
+      </option>
+
+      <option value="true">
+        Active
+      </option>
+
+      <option value="false">
+        Inactive
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load settings from the API.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading settings...
+      </div>
+
+    } @else if (
+      items().length === 0
+    ) {
+      <div class="state">
+        No settings found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('name')"
+                >
+                  Setting
+                  {{ sortIndicator('name') }}
+                </button>
+              </th>
+
+
+              <th>
+                Category
+              </th>
+
+
+              <th>
+                Type
+              </th>
+
+
+              <th>
+                Value
+              </th>
+
+
+              <th>
+                Status
+              </th>
+
+
+              <th>
+                Updated
+              </th>
+
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <a
+                    class="title-link"
+                    [routerLink]="[
+                      '/app/management/settings',
+                      item.id
+                    ]"
+                  >
+                    {{ item.name }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.key }}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  {{ item.category || 'General' }}
+                </td>
+
+
+                <td>
+                  <app-setting-type-badge
+                    [type]="item.valueType"
+                  />
+                </td>
+
+
+                <td>
+                  <div class="value-preview">
+                    {{ displayValue(item) }}
+                  </div>
+                </td>
+
+
+                <td>
+                  <app-setting-status-badge
+                    [active]="item.isActive"
+                    [deleted]="item.isDeleted"
+                    [readOnly]="item.isReadOnly"
+                  />
+                </td>
+
+
+                <td>
+                  {{
+                    item.updatedAtUtc
+                      ? (
+                          item.updatedAtUtc |
+                          date:'medium'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/management/settings',
+                        item.id
+                      ]"
+                      title="View"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted &&
+                      !item.isReadOnly
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/management/settings',
+                          item.id,
+                          'edit'
+                        ]"
+                        title="Edit"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Active / Inactive"
+                        (click)="toggleActive(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      @if (
+                        !item.isSystem
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-button danger"
+                          [disabled]="actionId() === item.id"
+                          title="Delete"
+                          (click)="deleteItem(item)"
+                        >
+                          <svg lucideTrash2
+                            [size]="17"
+                            [strokeWidth]="2"
+                          ></svg>
+                        </button>
+                      }
+
+                    } @else if (
+                      item.isDeleted
+                    ) {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Restore"
+                        (click)="restoreItem(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

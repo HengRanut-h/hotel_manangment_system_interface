@@ -1,0 +1,350 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/settings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Settings
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading setting...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load setting.
+    </div>
+
+  } @else if (
+    item();
+    as setting
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideSettings
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Management / Settings
+          </p>
+
+          <h1>
+            {{ setting.name }}
+          </h1>
+
+          <p class="subtitle">
+            {{ setting.key }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-setting-type-badge
+          [type]="setting.valueType"
+        />
+
+        <app-setting-status-badge
+          [active]="setting.isActive"
+          [deleted]="setting.isDeleted"
+          [readOnly]="setting.isReadOnly"
+        />
+
+
+        @if (
+          !setting.isDeleted &&
+          !setting.isReadOnly
+        ) {
+
+          <a
+            class="secondary"
+            [routerLink]="[
+              '/app/management/settings',
+              setting.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Edit
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="toggleActive()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              setting.isActive
+                ? 'Deactivate'
+                : 'Activate'
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="reset()"
+          >
+            <svg lucideRefreshCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Reset Default
+          </button>
+
+
+          @if (
+            !setting.isSystem
+          ) {
+            <button
+              type="button"
+              class="danger"
+              [disabled]="actionLoading()"
+              (click)="deleteItem()"
+            >
+              <svg lucideTrash2
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Delete
+            </button>
+          }
+
+        } @else if (
+          setting.isDeleted
+        ) {
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Restore
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          Configuration
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Category
+            </dt>
+
+            <dd>
+              {{ setting.category || 'General' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Type
+            </dt>
+
+            <dd>
+              {{ setting.valueType || 'String' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Sensitive
+            </dt>
+
+            <dd>
+              {{
+                setting.isSensitive
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Read-only
+            </dt>
+
+            <dd>
+              {{
+                setting.isReadOnly
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              System Setting
+            </dt>
+
+            <dd>
+              {{
+                setting.isSystem
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          Timeline
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Created
+            </dt>
+
+            <dd>
+              {{
+                setting.createdAtUtc
+                  ? (
+                      setting.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Updated
+            </dt>
+
+            <dd>
+              {{
+                setting.updatedAtUtc
+                  ? (
+                      setting.updatedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Current Value
+        </h2>
+
+        <app-setting-value-viewer
+          [value]="setting.value"
+          [sensitive]="setting.isSensitive"
+          [valueType]="setting.valueType"
+        />
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Default Value
+        </h2>
+
+        <app-setting-value-viewer
+          [value]="setting.defaultValue"
+          [sensitive]="setting.isSensitive"
+          [valueType]="setting.valueType"
+        />
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Description
+        </h2>
+
+        <p>
+          {{ setting.description || 'No description.' }}
+        </p>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

@@ -1,6 +1,7 @@
 import {
   HttpErrorResponse,
-  HttpInterceptorFn
+  HttpInterceptorFn,
+  HttpRequest
 } from '@angular/common/http';
 
 import {
@@ -14,8 +15,19 @@ import {
 } from 'rxjs';
 
 import {
+  environment
+} from '../../../environments/environment';
+
+import {
   AuthStore
 } from '../auth/auth.store';
+
+const AUTH_ENDPOINTS = [
+  `${environment.apiBaseUrl}/auth/login`,
+  `${environment.apiBaseUrl}/auth/register`,
+  `${environment.apiBaseUrl}/auth/refresh-token`,
+  `${environment.apiBaseUrl}/auth/logout`
+];
 
 export const authInterceptor:
   HttpInterceptorFn =
@@ -29,39 +41,51 @@ export const authInterceptor:
       AuthStore
     );
 
-  // =========================================================
-  // AUTH ENDPOINT
-  // =========================================================
-
   const isAuthEndpoint =
-    request.url.includes(
-      '/auth/'
+    isAuthenticationEndpoint(
+      request.url
     );
 
-  // =========================================================
-  // ACCESS TOKEN
-  // =========================================================
+  if (
+    isAuthEndpoint
+  ) {
+    return next(
+      request
+    );
+  }
 
-  const accessToken =
-    auth.accessToken();
+  if (
+    auth.accessToken() &&
+    auth.isAccessTokenExpired() &&
+    !auth.isRefreshTokenExpired()
+  ) {
+    return auth
+      .refreshSession()
+      .pipe(
+        switchMap(
+          newAccessToken =>
+            next(
+              withBearerToken(
+                request,
+                newAccessToken
+              )
+            )
+        ),
 
-  const authorizedRequest =
-    !isAuthEndpoint &&
-    accessToken
-      ? request.clone({
-          setHeaders: {
-            Authorization:
-              `Bearer ${accessToken}`
-          }
-        })
-      : request;
-
-  // =========================================================
-  // SEND REQUEST
-  // =========================================================
+        catchError(
+          error =>
+            throwError(
+              () => error
+            )
+        )
+      );
+  }
 
   return next(
-    authorizedRequest
+    withBearerToken(
+      request,
+      auth.accessToken()
+    )
   )
     .pipe(
       catchError(
@@ -73,18 +97,22 @@ export const authInterceptor:
             error.status === 401;
 
           if (
-            !unauthorized ||
-            isAuthEndpoint
+            !unauthorized
           ) {
-
             return throwError(
               () => error
             );
           }
 
-          // =================================================
-          // TRY REFRESH TOKEN
-          // =================================================
+          if (
+            auth.isRefreshTokenExpired()
+          ) {
+            auth.clearSession();
+
+            return throwError(
+              () => error
+            );
+          }
 
           return auth
             .refreshSession()
@@ -95,28 +123,16 @@ export const authInterceptor:
                   if (
                     !newAccessToken
                   ) {
-
-                    auth.logout();
-
                     return throwError(
                       () => error
                     );
                   }
 
-                  // =========================================
-                  // RETRY ORIGINAL REQUEST
-                  // =========================================
-
-                  const retryRequest =
-                    request.clone({
-                      setHeaders: {
-                        Authorization:
-                          `Bearer ${newAccessToken}`
-                      }
-                    });
-
                   return next(
-                    retryRequest
+                    withBearerToken(
+                      request,
+                      newAccessToken
+                    )
                   );
                 }
               )
@@ -125,3 +141,32 @@ export const authInterceptor:
       )
     );
 };
+
+function withBearerToken(
+  request: HttpRequest<unknown>,
+  accessToken: string | null
+): HttpRequest<unknown> {
+
+  if (!accessToken) {
+    return request;
+  }
+
+  return request.clone({
+    setHeaders: {
+      Authorization:
+        `Bearer ${accessToken}`
+    }
+  });
+}
+
+function isAuthenticationEndpoint(
+  url: string
+): boolean {
+
+  return AUTH_ENDPOINTS.some(
+    endpoint =>
+      url.includes(
+        endpoint
+      )
+  );
+}

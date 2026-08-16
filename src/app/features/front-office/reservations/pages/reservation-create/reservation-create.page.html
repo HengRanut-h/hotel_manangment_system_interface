@@ -1,0 +1,90 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div class="heading-copy">
+
+      <a
+        class="back-link"
+        routerLink="/app/front-office/reservations">
+
+        <svg lucideArrowLeft></svg>
+
+        <span>
+          {{ 'reservations.backToReservations' | translate }}
+        </span>
+
+      </a>
+
+      <div class="title-row">
+
+        <span class="title-icon">
+          <svg lucideCalendar></svg>
+        </span>
+
+        <div>
+          <span class="eyebrow">
+            {{ 'reservations.section' | translate }}
+          </span>
+
+          <h1>
+            {{ 'reservations.createTitle' | translate }}
+          </h1>
+
+          <p>
+            {{ 'reservations.createDescription' | translate }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  @if (loadingLookups()) {
+
+    <section class="loading-card">
+
+      <app-spin
+        size="large"
+        [label]="'reservations.loadingBookingOptions' | translate" />
+
+    </section>
+
+  } @else if (lookupError()) {
+
+    <section class="state state--error">
+
+      <strong>
+        {{ 'reservations.lookupLoadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ lookupError() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="loadLookups()">
+
+        <svg lucideRefreshCw></svg>
+
+        {{ 'reservations.tryAgain' | translate }}
+
+      </button>
+
+    </section>
+
+  } @else {
+
+    <app-reservation-form
+      [guests]="guests()"
+      [roomTypes]="roomTypes()"
+      [rooms]="rooms()"
+      [submitting]="submitting()"
+      (submitted)="create($event)" />
+
+  }
+
+</div>

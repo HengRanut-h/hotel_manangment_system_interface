@@ -1,0 +1,71 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/analytics/reports',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePlay
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Run Report
+        </h1>
+
+        <p class="subtitle">
+          Configure filters and export format.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading report...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load or run report.
+    </div>
+
+  } @else if (
+    report();
+    as data
+  ) {
+    <app-report-run-form
+      [report]="data"
+      [submitting]="submitting()"
+      (submitted)="run($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

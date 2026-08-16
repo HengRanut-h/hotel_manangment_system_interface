@@ -1,0 +1,65 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-height: 30px;
+
+  padding:
+    5px 10px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  background:
+    #f2f4f7;
+
+  color:
+    #475467;
+}
+
+.running {
+  background:
+    #eff8ff;
+
+  color:
+    #175cd3;
+}
+
+.completed {
+  background:
+    #ecfdf3;
+
+  color:
+    #027a48;
+}
+
+.failed {
+  background:
+    #fef3f2;
+
+  color:
+    #b42318;
+}
+
+.cancelled {
+  background:
+    #f2f4f7;
+
+  color:
+    #475467;
+}
+
+.pending {
+  background:
+    #fffaeb;
+
+  color:
+    #b54708;
+}

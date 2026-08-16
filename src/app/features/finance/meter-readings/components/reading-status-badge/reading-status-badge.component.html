@@ -1,0 +1,22 @@
+@if (
+  deleted()
+) {
+  <span class="badge deleted">
+    <svg lucideTrash2
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Deleted
+  </span>
+
+} @else {
+  <span class="badge active">
+    <svg lucideCircleCheck
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Recorded
+  </span>
+}

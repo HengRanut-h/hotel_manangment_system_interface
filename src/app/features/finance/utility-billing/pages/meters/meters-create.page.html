@@ -1,0 +1,132 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing/meters"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideGauge
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityBilling.actions.create' | translate }}
+        </h1>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <form
+    class="form-card"
+    (ngSubmit)="save()"
+  >
+
+    <div class="form-grid">
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.utilityId' | translate }} *</span>
+  <input
+    name="utilityId"
+    [ngModel]="utilityId()"
+    (ngModelChange)="utilityId.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.meterNumber' | translate }} *</span>
+  <input
+    name="meterNumber"
+    [ngModel]="meterNumber()"
+    (ngModelChange)="meterNumber.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.roomId' | translate }}</span>
+  <input
+    name="roomId"
+    [ngModel]="roomId()"
+    (ngModelChange)="roomId.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.location' | translate }}</span>
+  <input
+    name="location"
+    [ngModel]="location()"
+    (ngModelChange)="location.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.initialReading' | translate }}</span>
+  <input
+    type="number"
+    step="0.01"
+    name="initialReading"
+    [ngModel]="initialReading()"
+    (ngModelChange)="initialReading.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.installedAt' | translate }}</span>
+  <input
+    type="datetime-local"
+    name="installedAt"
+    [ngModel]="installedAt()"
+    (ngModelChange)="installedAt.set($event)"
+  />
+</label>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <a
+        class="secondary-button"
+        routerLink="/app/finance/utility-billing/meters"
+      >
+        {{ 'utilityBilling.actions.cancel' | translate }}
+      </a>
+
+
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="submitting()"
+      >
+        <svg lucideSave
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.save' | translate }}
+      </button>
+
+    </div>
+
+  </form>
+
+</section>

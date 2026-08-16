@@ -1,0 +1,91 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing/readings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="alert">
+      {{ 'utilityBilling.errors.loadDetail' | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as data
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideActivity
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <h1>
+            {{ 'utilityBilling.detail.reading' | translate }}
+          </h1>
+        </div>
+
+      </div>
+
+
+      <a
+        class="secondary-button"
+        [routerLink]="[
+          '/app/finance/utility-billing/readings',
+          data.id,
+          'edit'
+        ]"
+      >
+        <svg lucidePencil
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.edit' | translate }}
+      </a>
+
+    </div>
+
+
+    <article class="form-card">
+
+<dl>
+  <div><dt>{{ 'utilityBilling.fields.meterNumber' | translate }}</dt><dd>{{ data.meterNumber || data.meterId }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.utility' | translate }}</dt><dd>{{ data.utilityName || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.previousReading' | translate }}</dt><dd>{{ data.previousReading ?? '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.currentReading' | translate }}</dt><dd>{{ data.currentReading }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.usage' | translate }}</dt><dd>{{ data.usage ?? 0 }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.amount' | translate }}</dt><dd>{{ data.amount | number:'1.2-2' }} {{ data.currency || '' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.readingDate' | translate }}</dt><dd>{{ data.readingDateUtc | date:'medium' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.notes' | translate }}</dt><dd>{{ data.notes || '—' }}</dd></div>
+</dl>
+
+    </article>
+
+  }
+
+</section>

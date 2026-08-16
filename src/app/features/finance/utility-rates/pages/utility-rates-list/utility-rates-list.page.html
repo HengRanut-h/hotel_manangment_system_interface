@@ -1,0 +1,541 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div>
+        <p class="eyebrow">
+          {{ 'utilityRates.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'utilityRates.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'utilityRates.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary-button"
+        routerLink="/app/finance/utility-rates/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityRates.actions.create' | translate }}
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityRates.actions.refresh' | translate }}
+      </button>
+
+
+      <a
+        class="secondary-button"
+        routerLink="/app/finance/utility-rates/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityRates.actions.analytics' | translate }}
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.summary.totalRecords' | translate }}
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.summary.averageRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageRate() |
+            number:'1.2-4'
+          }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.summary.active' | translate }}
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.summary.inactive' | translate }}
+        </span>
+
+        <strong>
+          {{ inactiveCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters-card">
+
+    <div class="search-box">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        [placeholder]="'utilityRates.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="utilityType()"
+      (ngModelChange)="utilityType.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'utilityRates.filters.allTypes' | translate }}
+      </option>
+
+      <option value="Electricity">
+        {{ 'utilityRates.types.electricity' | translate }}
+      </option>
+
+      <option value="Water">
+        {{ 'utilityRates.types.water' | translate }}
+      </option>
+
+      <option value="Gas">
+        {{ 'utilityRates.types.gas' | translate }}
+      </option>
+
+      <option value="Internet">
+        {{ 'utilityRates.types.internet' | translate }}
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'utilityRates.filters.allStatuses' | translate }}
+      </option>
+
+      <option value="true">
+        {{ 'utilityRates.status.active' | translate }}
+      </option>
+
+      <option value="false">
+        {{ 'utilityRates.status.inactive' | translate }}
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="searchNow()"
+    >
+      {{ 'utilityRates.actions.search' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="clearFilters()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'utilityRates.actions.clear' | translate }}
+    </button>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        {{ 'utilityRates.states.loading' | translate }}
+      </div>
+
+    } @else if (
+      items().length ===
+      0
+    ) {
+      <div class="state">
+        {{ 'utilityRates.states.empty' | translate }}
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+        <table>
+
+          <thead>
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('utilityName')"
+                >
+                  {{ 'utilityRates.fields.utility' | translate }}
+                  {{ sortIndicator('utilityName') }}
+                </button>
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.type' | translate }}
+              </th>
+
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('ratePerUnit')"
+                >
+                  {{ 'utilityRates.fields.ratePerUnit' | translate }}
+                  {{ sortIndicator('ratePerUnit') }}
+                </button>
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.unit' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.currency' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.effectiveFrom' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.status' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'utilityRates.fields.actions' | translate }}
+              </th>
+
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <a
+                    class="primary-cell"
+                    [routerLink]="[
+                      '/app/finance/utility-rates',
+                      item.id
+                    ]"
+                  >
+                    {{
+                      item.utilityName ||
+                      item.name ||
+                      item.utilityId
+                    }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.code || '—' }}
+                  </div>
+                </td>
+
+
+                <td>
+                  <app-utility-rate-type-badge
+                    [type]="item.utilityType"
+                  />
+                </td>
+
+
+                <td>
+                  <strong>
+                    {{
+                      item.ratePerUnit |
+                      number:'1.2-4'
+                    }}
+                  </strong>
+                </td>
+
+
+                <td>
+                  {{ item.unit || '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.currency || '—' }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.effectiveFromUtc
+                      ? (
+                          item.effectiveFromUtc |
+                          date:'mediumDate'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+                  <app-utility-rate-status-badge
+                    [active]="item.isActive"
+                    [deleted]="item.isDeleted"
+                  />
+                </td>
+
+
+                <td>
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/utility-rates',
+                        item.id
+                      ]"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/finance/utility-rates',
+                          item.id,
+                          'edit'
+                        ]"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        (click)="toggleActive(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        (click)="deleteItem(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        (click)="restoreItem(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        {{ pageNumber() }}
+        /
+        {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          {{ 'utilityRates.pagination.previous' | translate }}
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'utilityRates.pagination.next' | translate }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,94 @@
+<span class="badge">
+
+  @switch (
+    category()
+  ) {
+
+    @case ('FrontOffice') {
+      <svg lucideBedDouble
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Finance') {
+      <svg lucideCircleDollarSign
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Housekeeping') {
+      <svg lucideSparkles
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Maintenance') {
+      <svg lucideWrench
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Inventory') {
+      <svg lucideBoxes
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Purchasing') {
+      <svg lucideShoppingCart
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('HumanResources') {
+      <svg lucideUsers
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Security') {
+      <svg lucideShield
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Utilities') {
+      <svg lucideGauge
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Management') {
+      <svg lucideBuilding2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Other') {
+      <svg lucideChartNoAxesCombined
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ category() || 'Other' }}
+</span>

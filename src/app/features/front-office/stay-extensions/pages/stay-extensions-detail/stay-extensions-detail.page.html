@@ -1,0 +1,320 @@
+<div class="detail-page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/stay-extensions">
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'stayExtensions.backToList' | translate }}
+    </span>
+  </a>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'stayExtensions.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'stayExtensions.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as extension) {
+    <header class="detail-heading">
+      <div>
+        <span>
+          {{ 'stayExtensions.section' | translate }}
+        </span>
+
+        <h1>
+          {{ extension.referenceNumber || '—' }}
+        </h1>
+
+        <p>
+          {{ extension.title || '—' }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+        <app-stay-extension-status-badge
+          [status]="extension.status" />
+
+        @if (
+          auth.hasPermission(
+            'stay-extensions.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/front-office/stay-extensions',
+              extension.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>
+          {{ 'stayExtensions.extensionDetails' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>{{ 'stayExtensions.reference' | translate }}</dt>
+            <dd>{{ extension.referenceNumber || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.titleLabel' | translate }}</dt>
+            <dd>{{ extension.title || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.status' | translate }}</dt>
+            <dd>
+              <app-stay-extension-status-badge
+                [status]="extension.status" />
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.amount' | translate }}</dt>
+            <dd>
+              {{
+                extension.amount === null
+                  ? '—'
+                  : (extension.amount | number:'1.2-2')
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.eventAt' | translate }}</dt>
+            <dd>
+              {{
+                extension.eventAtUtc
+                  ? (extension.eventAtUtc | date:'medium')
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.createdAt' | translate }}</dt>
+            <dd>
+              {{
+                extension.createdAtUtc
+                  ? (extension.createdAtUtc | date:'medium')
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>
+          {{ 'stayExtensions.relationship' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'stayExtensions.relatedEntityType' | translate }}
+            </dt>
+            <dd>
+              {{ extension.relatedEntityType || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'stayExtensions.reservation' | translate }}
+            </dt>
+            <dd>
+              @if (
+                isReservationRelation(extension.relatedEntityType)
+              ) {
+                {{ reservationLabel(extension.relatedEntityId) }}
+              } @else {
+                —
+              }
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'stayExtensions.scope' | translate }}</dt>
+            <dd>
+              {{
+                (
+                  extension.branchId
+                    ? 'stayExtensions.branchScope'
+                    : 'stayExtensions.hotelScope'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      @if (
+        isReservationRelation(extension.relatedEntityType)
+      ) {
+        @if (
+          reservationById(
+            extension.relatedEntityId
+          );
+          as reservation
+        ) {
+          <article class="detail-card detail-card--full">
+            <h2>
+              {{ 'stayExtensions.reservationContext' | translate }}
+            </h2>
+
+            <p class="helper">
+              {{ 'stayExtensions.reservationContextHelp' | translate }}
+            </p>
+
+            <div class="context-grid">
+              <div>
+                <span>
+                  {{ 'stayExtensions.reservationNumber' | translate }}
+                </span>
+                <strong>
+                  {{ reservation.reservationNumber || '—' }}
+                </strong>
+              </div>
+
+              <div>
+                <span>{{ 'stayExtensions.guest' | translate }}</span>
+                <strong>{{ reservation.guestName || '—' }}</strong>
+              </div>
+
+              <div>
+                <span>
+                  {{ 'stayExtensions.currentReservationRoom' | translate }}
+                </span>
+                <strong>
+                  {{
+                    reservation.roomNumber
+                    ||
+                    ('stayExtensions.unassigned' | translate)
+                  }}
+                </strong>
+              </div>
+
+              <div>
+                <span>{{ 'stayExtensions.roomType' | translate }}</span>
+                <strong>{{ reservation.roomTypeName || '—' }}</strong>
+              </div>
+
+              <div>
+                <span>{{ 'stayExtensions.currentStayDates' | translate }}</span>
+                <strong>
+                  {{ reservation.checkInDate || '—' }}
+                  →
+                  {{ reservation.checkOutDate || '—' }}
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  {{ 'stayExtensions.reservationStatus' | translate }}
+                </span>
+                <strong>{{ reservation.status || '—' }}</strong>
+              </div>
+            </div>
+
+            <div class="contract-warning">
+              {{ 'stayExtensions.newCheckoutContractNote' | translate }}
+            </div>
+          </article>
+        }
+      }
+
+      <article class="detail-card detail-card--full">
+        <h2>
+          {{ 'stayExtensions.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{ extension.notes || '—' }}
+        </p>
+      </article>
+
+      @if (
+        auth.hasPermission(
+          'stay-extensions.update'
+        )
+      ) {
+        <article class="detail-card detail-card--full">
+          <h2>
+            {{ 'stayExtensions.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{ 'stayExtensions.changeStatusHelp' | translate }}
+          </p>
+
+          <div class="status-editor">
+            <input
+              type="text"
+              [value]="statusDraft()"
+              [placeholder]="'stayExtensions.statusPlaceholder' | translate"
+              (input)="setStatusDraft($event)" />
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+              <svg lucideCheckCircle2></svg>
+
+              <span>
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'stayExtensions.updateStatus'
+                  )
+                  | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      }
+
+    </section>
+  }
+
+</div>

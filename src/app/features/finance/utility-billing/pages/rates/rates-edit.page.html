@@ -1,0 +1,150 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/utility-billing/rates',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBadgeDollarSign
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityBilling.actions.edit' | translate }}
+        </h1>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else {
+
+    <form
+      class="form-card"
+      (ngSubmit)="save()"
+    >
+
+      <div class="form-grid">
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.utilityId' | translate }} *</span>
+  <input
+    name="utilityId"
+    [ngModel]="utilityId()"
+    (ngModelChange)="utilityId.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.name' | translate }}</span>
+  <input
+    name="name"
+    [ngModel]="name()"
+    (ngModelChange)="name.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.ratePerUnit' | translate }} *</span>
+  <input
+    type="number"
+    step="0.0001"
+    name="ratePerUnit"
+    [ngModel]="ratePerUnit()"
+    (ngModelChange)="ratePerUnit.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.currency' | translate }}</span>
+  <input
+    name="currency"
+    [ngModel]="currency()"
+    (ngModelChange)="currency.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.effectiveFrom' | translate }}</span>
+  <input
+    type="datetime-local"
+    name="effectiveFrom"
+    [ngModel]="effectiveFrom()"
+    (ngModelChange)="effectiveFrom.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.effectiveTo' | translate }}</span>
+  <input
+    type="datetime-local"
+    name="effectiveTo"
+    [ngModel]="effectiveTo()"
+    (ngModelChange)="effectiveTo.set($event)"
+  />
+</label>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <a
+          class="secondary-button"
+          [routerLink]="[
+            '/app/finance/utility-billing/rates',
+            id
+          ]"
+        >
+          {{ 'utilityBilling.actions.cancel' | translate }}
+        </a>
+
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="submitting()"
+        >
+          <svg lucideSave
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'utilityBilling.actions.update' | translate }}
+        </button>
+
+      </div>
+
+    </form>
+
+  }
+
+</section>

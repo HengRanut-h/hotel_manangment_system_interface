@@ -1,0 +1,298 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-rates"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityRates.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as rate
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideBadgeDollarSign
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            {{ 'utilityRates.detail.section' | translate }}
+          </p>
+
+          <h1>
+            {{
+              rate.name ||
+              rate.utilityName ||
+              rate.code ||
+              rate.id
+            }}
+          </h1>
+
+          <p class="subtitle">
+            {{ rate.utilityName || rate.utilityId }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-utility-rate-type-badge
+          [type]="rate.utilityType"
+        />
+
+        <app-utility-rate-status-badge
+          [active]="rate.isActive"
+          [deleted]="rate.isDeleted"
+        />
+
+
+        @if (
+          !rate.isDeleted
+        ) {
+
+          <a
+            class="secondary-button"
+            [routerLink]="[
+              '/app/finance/utility-rates',
+              rate.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'utilityRates.actions.edit' | translate }}
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="toggleActive()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              (
+                rate.isActive
+                  ? 'utilityRates.actions.deactivate'
+                  : 'utilityRates.actions.activate'
+              ) | translate
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="actionLoading()"
+            (click)="deleteItem()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'utilityRates.actions.delete' | translate }}
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'utilityRates.actions.restore' | translate }}
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+        <h2>
+          {{ 'utilityRates.detail.rateInfo' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.utility' | translate }}
+            </dt>
+
+            <dd>
+              {{ rate.utilityName || rate.utilityId }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.ratePerUnit' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                rate.ratePerUnit |
+                number:'1.2-4'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.unit' | translate }}
+            </dt>
+
+            <dd>
+              {{ rate.unit || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.currency' | translate }}
+            </dt>
+
+            <dd>
+              {{ rate.currency || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.minimumCharge' | translate }}
+            </dt>
+
+            <dd>
+              {{ rate.minimumCharge ?? '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.fixedCharge' | translate }}
+            </dt>
+
+            <dd>
+              {{ rate.fixedCharge ?? '—' }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card">
+        <h2>
+          <svg lucideCalendarDays
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'utilityRates.detail.effectivePeriod' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.effectiveFrom' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                rate.effectiveFromUtc
+                  ? (
+                      rate.effectiveFromUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'utilityRates.fields.effectiveTo' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                rate.effectiveToUtc
+                  ? (
+                      rate.effectiveToUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card full-card">
+        <h2>
+          {{ 'utilityRates.fields.notes' | translate }}
+        </h2>
+
+        <p>
+          {{
+            rate.notes ||
+            ('utilityRates.common.noNotes' | translate)
+          }}
+        </p>
+      </article>
+
+    </div>
+
+  }
+
+</section>

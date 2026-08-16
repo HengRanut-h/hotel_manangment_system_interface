@@ -1,0 +1,128 @@
+<form
+  class="guest-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-card">
+
+    <header>
+      <span class="form-icon">
+        <svg lucideUserRound></svg>
+      </span>
+
+      <div>
+        <h2>
+          {{ 'guests.profileDetails' | translate }}
+        </h2>
+
+        <p>
+          {{ 'guests.profileDetailsHelp' | translate }}
+        </p>
+      </div>
+    </header>
+
+    <div class="fields">
+
+      <label class="field">
+        <span>
+          {{ 'guests.firstName' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="text"
+          autocomplete="given-name"
+          [value]="firstName()"
+          (input)="setFirstName($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'guests.lastName' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="text"
+          autocomplete="family-name"
+          [value]="lastName()"
+          (input)="setLastName($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'guests.phone' | translate }}
+        </span>
+
+        <input
+          type="tel"
+          autocomplete="tel"
+          [value]="phone()"
+          (input)="setPhone($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'guests.email' | translate }}
+        </span>
+
+        <input
+          type="email"
+          autocomplete="email"
+          [value]="email()"
+          (input)="setEmail($event)" />
+      </label>
+
+      <label class="vip-option">
+
+        <input
+          type="checkbox"
+          [checked]="isVip()"
+          (change)="setVip($event)" />
+
+        <span>
+          <strong>
+            {{ 'guests.vipGuest' | translate }}
+          </strong>
+
+          <small>
+            {{ 'guests.vipGuestHelp' | translate }}
+          </small>
+        </span>
+
+      </label>
+
+    </div>
+
+  </section>
+
+  @if (errorKey()) {
+    <div class="validation-error">
+      {{ errorKey() | translate }}
+    </div>
+  }
+
+  <footer class="form-actions">
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="submitting()">
+
+      <svg lucideSave></svg>
+
+      <span>
+        {{
+          (
+            submitting()
+              ? 'guests.saving'
+              : submitLabelKey()
+          )
+            | translate
+        }}
+      </span>
+
+    </button>
+
+  </footer>
+
+</form>

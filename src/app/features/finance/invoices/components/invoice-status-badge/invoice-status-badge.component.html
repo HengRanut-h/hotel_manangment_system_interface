@@ -1,0 +1,9 @@
+
+<span
+  class="status-badge"
+  [class.status-badge--green]="tone() === 'green'"
+  [class.status-badge--blue]="tone() === 'blue'"
+  [class.status-badge--amber]="tone() === 'amber'"
+  [class.status-badge--gray]="tone() === 'gray'">
+  {{ status() || '—' }}
+</span>

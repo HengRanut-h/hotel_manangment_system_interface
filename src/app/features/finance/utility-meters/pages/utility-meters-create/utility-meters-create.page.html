@@ -1,0 +1,58 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-meters"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Utility Meters
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePlus
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Create Utility Meter
+        </h1>
+
+        <p class="subtitle">
+          Add a meter and assign it to a utility and hotel location.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to create utility meter.
+    </div>
+  }
+
+
+  <app-utility-meter-form
+    [submitting]="submitting()"
+    submitLabel="Create Meter"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+
+</section>

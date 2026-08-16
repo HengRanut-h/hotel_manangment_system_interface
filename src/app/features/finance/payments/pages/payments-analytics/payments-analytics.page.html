@@ -1,0 +1,264 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/payments"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'payments.actions.back' | translate }}
+  </a>
+
+
+  <div class="header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+
+      <div>
+
+        <h1>
+          {{ 'payments.analytics.title' | translate }}
+        </h1>
+
+        <p>
+          {{ 'payments.analytics.subtitle' | translate }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'payments.states.loadingAnalytics' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="stats">
+
+      <article class="card">
+
+        <svg lucideCreditCard
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'payments.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ totalPayments() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'payments.analytics.totalAmount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'payments.status.completed' | translate }}
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideClock3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'payments.status.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'payments.status.failed' | translate }}
+        </span>
+
+        <strong>
+          {{ failedCount() }}
+        </strong>
+
+      </article>
+
+    </div>
+
+
+    <article class="methods-card">
+
+      <h2>
+        {{ 'payments.analytics.amountByMethod' | translate }}
+      </h2>
+
+
+      <div class="methods">
+
+        <div>
+
+          <svg lucideBanknote
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'payments.methods.cash' | translate }}
+          </span>
+
+          <strong>
+            {{
+              cashTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideCreditCard
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'payments.methods.card' | translate }}
+          </span>
+
+          <strong>
+            {{
+              cardTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideLandmark
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'payments.methods.bankTransfer' | translate }}
+          </span>
+
+          <strong>
+            {{
+              bankTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideSmartphone
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'payments.methods.mobilePayment' | translate }}
+          </span>
+
+          <strong>
+            {{
+              mobileTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  }
+
+</section>

@@ -1,0 +1,87 @@
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'folios.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'folios.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'folios.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'folios.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/front-office/folios/create">
+        <svg lucideCirclePlus></svg>
+        <span>{{ 'folios.create' | translate }}</span>
+      </a>
+    }
+  </header>
+
+  <section class="workspace-grid">
+
+    <article class="workspace-card">
+      <span class="workspace-icon">
+        <svg lucideSearch></svg>
+      </span>
+
+      <div class="workspace-content">
+        <h2>{{ 'folios.openExisting' | translate }}</h2>
+        <p>{{ 'folios.openExistingDescription' | translate }}</p>
+
+        <div class="open-form">
+          <input
+            type="text"
+            autocomplete="off"
+            [value]="folioId()"
+            [placeholder]="'folios.folioIdPlaceholder' | translate"
+            (input)="setFolioId($event)"
+            (keydown)="onKeydown($event)" />
+
+          <button
+            type="button"
+            [disabled]="!folioId().trim()"
+            (click)="openFolio()">
+            <svg lucideSearch></svg>
+            <span>{{ 'folios.openFolio' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="workspace-card workspace-card--info">
+      <span class="workspace-icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <div class="workspace-content">
+        <h2>{{ 'folios.workflowTitle' | translate }}</h2>
+        <p>{{ 'folios.workflowDescription' | translate }}</p>
+
+        <div class="workflow-steps">
+          <span>1. {{ 'folios.workflowCreate' | translate }}</span>
+          <span>2. {{ 'folios.workflowCharges' | translate }}</span>
+          <span>3. {{ 'folios.workflowClose' | translate }}</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="contract-note">
+    <strong>{{ 'folios.noListTitle' | translate }}</strong>
+    <p>{{ 'folios.noListDescription' | translate }}</p>
+  </section>
+
+</div>

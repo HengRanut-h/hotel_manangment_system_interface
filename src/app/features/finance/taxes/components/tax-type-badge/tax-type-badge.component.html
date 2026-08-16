@@ -1,0 +1,59 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+
+    @case ('VAT') {
+      <svg lucideBadgePercent
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('GST') {
+      <svg lucideBuilding2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('ServiceTax') {
+      <svg lucideReceiptText
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('CityTax') {
+      <svg lucideMapPin
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('TourismTax') {
+      <svg lucidePlane
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('OccupancyTax') {
+      <svg lucideBedDouble
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ translationKey() | translate }}
+</span>

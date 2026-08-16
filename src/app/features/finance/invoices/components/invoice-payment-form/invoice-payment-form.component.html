@@ -1,0 +1,91 @@
+
+<form
+  class="payment-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <div class="field">
+    <label for="invoice-payment-amount">
+      {{ 'invoices.paymentAmount' | translate }}
+    </label>
+
+    <input
+      id="invoice-payment-amount"
+      type="number"
+      min="0.01"
+      step="0.01"
+      inputmode="decimal"
+      [value]="amount()"
+      [placeholder]="'invoices.paymentAmountPlaceholder' | translate"
+      (input)="setAmount($event)" />
+
+    @if (
+      touched() &&
+      (!amount().trim() || +amount() <= 0)
+    ) {
+      <small class="field-error">
+        {{ 'invoices.paymentAmountRequired' | translate }}
+      </small>
+    }
+  </div>
+
+  <div class="field">
+    <label for="invoice-payment-method">
+      {{ 'invoices.paymentMethod' | translate }}
+    </label>
+
+    <input
+      id="invoice-payment-method"
+      type="text"
+      autocomplete="off"
+      list="invoice-payment-methods"
+      [value]="method()"
+      [placeholder]="'invoices.paymentMethodPlaceholder' | translate"
+      (input)="setMethod($event)" />
+
+    <datalist id="invoice-payment-methods">
+      <option value="Cash"></option>
+      <option value="Khqr"></option>
+    </datalist>
+
+    <small class="field-help">
+      {{ 'invoices.paymentMethodHelp' | translate }}
+    </small>
+
+    @if (touched() && !method().trim()) {
+      <small class="field-error">
+        {{ 'invoices.paymentMethodRequired' | translate }}
+      </small>
+    }
+  </div>
+
+  <div class="field">
+    <label for="invoice-payment-reference">
+      {{ 'invoices.paymentReference' | translate }}
+    </label>
+
+    <input
+      id="invoice-payment-reference"
+      type="text"
+      autocomplete="off"
+      [value]="referenceNumber()"
+      [placeholder]="'invoices.paymentReferencePlaceholder' | translate"
+      (input)="setReference($event)" />
+  </div>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="cancel()">
+      <svg lucideX></svg>
+      <span>{{ 'common.cancel' | translate }}</span>
+    </button>
+
+    <button
+      type="submit"
+      class="primary-button">
+      <svg lucideCheckCircle2></svg>
+      <span>{{ 'invoices.recordPayment' | translate }}</span>
+    </button>
+  </div>
+</form>

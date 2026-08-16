@@ -1,0 +1,196 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-header">
+
+    <div class="form-icon">
+      <svg lucidePlay
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        Run Report
+      </h2>
+
+      <p>
+        {{ report().name }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    dateRangeInvalid()
+  ) {
+    <div class="validation">
+      To date must be after From date.
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    @if (
+      report().supportsDateRange !== false
+    ) {
+
+      <label class="field">
+        <span>
+          <svg lucideCalendarDays
+            [size]="15"
+            [strokeWidth]="2"
+          ></svg>
+
+          From Date
+        </span>
+
+        <input
+          type="date"
+          name="fromDate"
+          [ngModel]="fromDate()"
+          (ngModelChange)="fromDate.set($event)"
+        />
+      </label>
+
+
+      <label class="field">
+        <span>
+          <svg lucideCalendarDays
+            [size]="15"
+            [strokeWidth]="2"
+          ></svg>
+
+          To Date
+        </span>
+
+        <input
+          type="date"
+          name="toDate"
+          [ngModel]="toDate()"
+          (ngModelChange)="toDate.set($event)"
+        />
+      </label>
+
+    }
+
+
+    @if (
+      report().supportsHotelFilter
+    ) {
+
+      <label class="field">
+        <span>
+          Hotel ID
+        </span>
+
+        <input
+          type="text"
+          name="hotelId"
+          [ngModel]="hotelId()"
+          (ngModelChange)="hotelId.set($event)"
+        />
+      </label>
+
+    }
+
+
+    @if (
+      report().supportsBranchFilter
+    ) {
+
+      <label class="field">
+        <span>
+          Branch ID
+        </span>
+
+        <input
+          type="text"
+          name="branchId"
+          [ngModel]="branchId()"
+          (ngModelChange)="branchId.set($event)"
+        />
+      </label>
+
+    }
+
+
+    <label class="field">
+      <span>
+        <svg lucideFileDown
+          [size]="15"
+          [strokeWidth]="2"
+        ></svg>
+
+        Format
+      </span>
+
+      <select
+        name="format"
+        [ngModel]="format()"
+        (ngModelChange)="format.set($event)"
+      >
+        <option value="Pdf">
+          PDF
+        </option>
+
+        <option value="Excel">
+          Excel
+        </option>
+
+        <option value="Csv">
+          CSV
+        </option>
+
+        <option value="Json">
+          JSON
+        </option>
+      </select>
+    </label>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      Cancel
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucidePlay
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? 'Running...'
+          : 'Run Report'
+      }}
+    </button>
+
+  </div>
+
+</form>

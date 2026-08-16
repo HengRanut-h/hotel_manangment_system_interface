@@ -1,0 +1,45 @@
+<span class="badge">
+
+  @switch (
+    environment()
+  ) {
+
+    @case ('Development') {
+      <svg lucideCode2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Testing') {
+      <svg lucideFlaskConical
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Staging') {
+      <svg lucideCloud
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Production') {
+      <svg lucideServer
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideLayers3
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ environment() || 'All' }}
+</span>

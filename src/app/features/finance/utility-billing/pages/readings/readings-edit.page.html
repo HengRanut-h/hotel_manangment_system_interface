@@ -1,0 +1,132 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/utility-billing/readings',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideActivity
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityBilling.actions.edit' | translate }}
+        </h1>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else {
+
+    <form
+      class="form-card"
+      (ngSubmit)="save()"
+    >
+
+      <div class="form-grid">
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.meterId' | translate }} *</span>
+  <input
+    name="meterId"
+    [ngModel]="meterId()"
+    (ngModelChange)="meterId.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.currentReading' | translate }} *</span>
+  <input
+    type="number"
+    step="0.01"
+    name="currentReading"
+    [ngModel]="currentReading()"
+    (ngModelChange)="currentReading.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.readingDate' | translate }} *</span>
+  <input
+    type="datetime-local"
+    name="readingDate"
+    [ngModel]="readingDate()"
+    (ngModelChange)="readingDate.set($event)"
+  />
+</label>
+
+<label class="field field-full">
+  <span>{{ 'utilityBilling.fields.notes' | translate }}</span>
+  <textarea
+    rows="4"
+    name="notes"
+    [ngModel]="notes()"
+    (ngModelChange)="notes.set($event)"
+  ></textarea>
+</label>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <a
+          class="secondary-button"
+          [routerLink]="[
+            '/app/finance/utility-billing/readings',
+            id
+          ]"
+        >
+          {{ 'utilityBilling.actions.cancel' | translate }}
+        </a>
+
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="submitting()"
+        >
+          <svg lucideSave
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'utilityBilling.actions.update' | translate }}
+        </button>
+
+      </div>
+
+    </form>
+
+  }
+
+</section>

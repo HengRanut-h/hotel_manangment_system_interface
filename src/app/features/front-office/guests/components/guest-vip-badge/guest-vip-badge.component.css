@@ -1,0 +1,33 @@
+:host {
+  display: inline-flex;
+}
+
+.vip-badge,
+.regular-badge {
+  min-height: 25px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.vip-badge {
+  border: 1px solid #fedf89;
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.vip-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.regular-badge {
+  border: 1px solid #d0d5dd;
+  background: #f9fafb;
+  color: #475467;
+}

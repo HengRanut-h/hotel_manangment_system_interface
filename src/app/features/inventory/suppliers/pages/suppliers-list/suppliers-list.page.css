@@ -78,13 +78,13 @@
     box-shadow 160ms ease;
 }
 
-.summary-card:hover {
+/* .summary-card:hover {
   transform: translateY(-3px);
   border-color: #d0d5dd;
   box-shadow:
     0 8px 20px rgba(16, 24, 40, .06),
     0 2px 6px rgba(16, 24, 40, .04);
-}
+} */
 
 .summary-icon {
   width: 52px;
@@ -97,9 +97,9 @@
     transform 160ms ease;
 }
 
-.summary-card:hover .summary-icon {
+/* .summary-card:hover .summary-icon {
   transform: scale(1.05);
-}
+} */
 
 .summary-icon svg {
   width: 21px;

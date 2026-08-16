@@ -1,0 +1,469 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/analytics/reports"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Reports
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucideHistory
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Report Run History
+        </h1>
+
+        <p class="subtitle">
+          Review generated reports, failures and downloadable files.
+        </p>
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="load()"
+    >
+      <svg lucideRefreshCw
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      Refresh
+    </button>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideHistory
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Runs
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Completed on Page
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Failed on Page
+        </span>
+
+        <strong>
+          {{ failedCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search report run..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="status()"
+      (ngModelChange)="status.set($event); filterChanged()"
+    >
+      <option value="">
+        All Statuses
+      </option>
+
+      <option value="Pending">
+        Pending
+      </option>
+
+      <option value="Running">
+        Running
+      </option>
+
+      <option value="Completed">
+        Completed
+      </option>
+
+      <option value="Failed">
+        Failed
+      </option>
+
+      <option value="Cancelled">
+        Cancelled
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="category()"
+      (ngModelChange)="category.set($event); filterChanged()"
+    >
+      <option value="">
+        All Categories
+      </option>
+
+      <option value="FrontOffice">
+        Front Office
+      </option>
+
+      <option value="Finance">
+        Finance
+      </option>
+
+      <option value="Housekeeping">
+        Housekeeping
+      </option>
+
+      <option value="Maintenance">
+        Maintenance
+      </option>
+
+      <option value="Inventory">
+        Inventory
+      </option>
+
+      <option value="Utilities">
+        Utilities
+      </option>
+
+      <option value="Management">
+        Management
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load report history.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading report runs...
+      </div>
+
+    } @else if (
+      items().length === 0
+    ) {
+      <div class="state">
+        No report runs found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                Report
+              </th>
+
+              <th>
+                Category
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Format
+              </th>
+
+              <th>
+                Rows
+              </th>
+
+              <th>
+                Requested
+              </th>
+
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <a
+                    class="title-link"
+                    [routerLink]="[
+                      '/app/analytics/reports/history',
+                      item.id
+                    ]"
+                  >
+                    {{ item.reportName || item.reportCode || item.reportId }}
+                  </a>
+                </td>
+
+
+                <td>
+                  <app-report-category-badge
+                    [category]="item.category"
+                  />
+                </td>
+
+
+                <td>
+                  <app-report-status-badge
+                    [status]="item.status"
+                  />
+                </td>
+
+
+                <td>
+                  {{ item.format || '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.rowCount ?? '—' }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.requestedAtUtc
+                      ? (
+                          item.requestedAtUtc |
+                          date:'medium'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/analytics/reports/history',
+                        item.id
+                      ]"
+                      title="View"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      item.status === 'Completed'
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Download"
+                        (click)="download(item)"
+                      >
+                        <svg lucideDownload
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+                    }
+
+
+                    @if (
+                      item.status === 'Pending' ||
+                      item.status === 'Running'
+                    ) {
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Cancel"
+                        (click)="cancelRun(item)"
+                      >
+                        <svg lucideBan
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+                    }
+
+
+                    <button
+                      type="button"
+                      class="icon-button danger"
+                      [disabled]="actionId() === item.id"
+                      title="Delete history"
+                      (click)="deleteRun(item)"
+                    >
+                      <svg lucideTrash2
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,60 @@
+<div class="form-page">
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'roomAssignments.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <strong>
+        {{ 'roomAssignments.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as assignment) {
+
+    <header>
+      <span>
+        {{ 'roomAssignments.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'roomAssignments.edit' | translate }}
+      </h1>
+
+      <p>
+        {{ assignment.referenceNumber }}
+      </p>
+    </header>
+
+    <app-room-assignment-form
+      submitLabel="roomAssignments.saveChanges"
+      [showReferenceNumber]="false"
+      [initialBranchId]="assignment.branchId"
+      [initialReferenceNumber]="assignment.referenceNumber"
+      [initialTitle]="assignment.title"
+      [initialNotes]="assignment.notes"
+      [initialAmount]="assignment.amount"
+      [initialEventAtUtc]="assignment.eventAtUtc"
+      [initialRelatedEntityId]="assignment.relatedEntityId"
+      [initialRelatedEntityType]="assignment.relatedEntityType"
+      [submitting]="submitting()"
+      (submitted)="submit($event)"
+      (cancelled)="cancel()" />
+
+  }
+
+</div>

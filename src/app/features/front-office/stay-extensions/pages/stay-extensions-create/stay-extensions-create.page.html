@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'stayExtensions.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'stayExtensions.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'stayExtensions.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-stay-extension-form
+    submitLabel="stayExtensions.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

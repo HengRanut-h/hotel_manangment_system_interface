@@ -21,10 +21,32 @@ export interface RegisterRequest {
 }
 
 // =========================================================
-// CURRENT USER
+// API RESPONSE
 // =========================================================
 
-export interface CurrentUser {
+export interface ApiResponse<T> {
+  success: boolean;
+
+  status: number;
+
+  code: string;
+
+  message: string;
+
+  data: T;
+
+  meta?: unknown;
+
+  timestampUtc: string;
+
+  traceId: string;
+}
+
+// =========================================================
+// AUTH USER
+// =========================================================
+
+export interface AuthUser {
   id: string;
 
   fullName: string;
@@ -40,6 +62,8 @@ export interface CurrentUser {
   permissions: string[];
 }
 
+export type CurrentUser = AuthUser;
+
 // =========================================================
 // AUTH RESPONSE
 // =========================================================
@@ -53,5 +77,13 @@ export interface AuthResponse {
 
   refreshTokenExpiresAtUtc: string;
 
-  user: CurrentUser;
+  user: AuthUser;
+}
+
+// =========================================================
+// REFRESH TOKEN REQUEST
+// =========================================================
+
+export interface RefreshTokenRequest {
+  refreshToken: string;
 }

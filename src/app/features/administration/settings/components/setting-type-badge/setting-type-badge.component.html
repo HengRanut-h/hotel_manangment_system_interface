@@ -1,0 +1,38 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+
+    @case ('Number') {
+      <svg lucideHash
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Boolean') {
+      <svg lucideToggleLeft
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Json') {
+      <svg lucideBraces
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideType
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ type() || 'String' }}
+</span>

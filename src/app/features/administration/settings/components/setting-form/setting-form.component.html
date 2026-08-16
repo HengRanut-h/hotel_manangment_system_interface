@@ -1,0 +1,363 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-header">
+
+    <div class="form-icon">
+      <svg lucideSettings
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        Setting
+      </h2>
+
+      <p>
+        Configure application behavior using typed values.
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation">
+      Please review required fields and value validation.
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        Key *
+      </span>
+
+      <input
+        type="text"
+        name="key"
+        placeholder="hotel.timezone"
+        [ngModel]="key()"
+        (ngModelChange)="key.set($event)"
+      />
+
+      @if (
+        touched() &&
+        keyInvalid()
+      ) {
+        <small class="field-error">
+          Use letters, numbers, dash, underscore or dot only.
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        Name *
+      </span>
+
+      <input
+        type="text"
+        name="name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Category
+      </span>
+
+      <select
+        name="category"
+        [ngModel]="category()"
+        (ngModelChange)="category.set($event)"
+      >
+        <option value="General">
+          General
+        </option>
+
+        <option value="Hotel">
+          Hotel
+        </option>
+
+        <option value="Localization">
+          Localization
+        </option>
+
+        <option value="Finance">
+          Finance
+        </option>
+
+        <option value="Reservation">
+          Reservation
+        </option>
+
+        <option value="Security">
+          Security
+        </option>
+
+        <option value="Notification">
+          Notification
+        </option>
+
+        <option value="Integration">
+          Integration
+        </option>
+
+        <option value="System">
+          System
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        Value Type
+      </span>
+
+      <select
+        name="valueType"
+        [ngModel]="valueType()"
+        (ngModelChange)="valueType.set($event)"
+      >
+        <option value="String">
+          String
+        </option>
+
+        <option value="Number">
+          Number
+        </option>
+
+        <option value="Boolean">
+          Boolean
+        </option>
+
+        <option value="Json">
+          JSON
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Value
+      </span>
+
+      @if (
+        valueType() === 'Json'
+      ) {
+        <textarea
+          rows="8"
+          name="value"
+          [ngModel]="value()"
+          (ngModelChange)="value.set($event)"
+        ></textarea>
+
+      } @else if (
+        valueType() === 'Boolean'
+      ) {
+        <select
+          name="value"
+          [ngModel]="value()"
+          (ngModelChange)="value.set($event)"
+        >
+          <option value="">
+            Not set
+          </option>
+
+          <option value="true">
+            True
+          </option>
+
+          <option value="false">
+            False
+          </option>
+        </select>
+
+      } @else {
+        <input
+          [type]="isSensitive() ? 'password' : 'text'"
+          name="value"
+          [ngModel]="value()"
+          (ngModelChange)="value.set($event)"
+        />
+      }
+
+      @if (
+        touched() &&
+        valueInvalid()
+      ) {
+        <small class="field-error">
+          Current value does not match the selected type.
+        </small>
+      }
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Default Value
+      </span>
+
+      @if (
+        valueType() === 'Json'
+      ) {
+        <textarea
+          rows="6"
+          name="defaultValue"
+          [ngModel]="defaultValue()"
+          (ngModelChange)="defaultValue.set($event)"
+        ></textarea>
+
+      } @else {
+        <input
+          type="text"
+          name="defaultValue"
+          [ngModel]="defaultValue()"
+          (ngModelChange)="defaultValue.set($event)"
+        />
+      }
+
+      @if (
+        touched() &&
+        defaultInvalid()
+      ) {
+        <small class="field-error">
+          Default value does not match the selected type.
+        </small>
+      }
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Description
+      </span>
+
+      <textarea
+        rows="4"
+        name="description"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+      ></textarea>
+    </label>
+
+
+    <div class="checkbox-grid">
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="isSensitive"
+          [ngModel]="isSensitive()"
+          (ngModelChange)="isSensitive.set($event)"
+        />
+
+        <span>
+          Sensitive Value
+        </span>
+      </label>
+
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="isReadOnly"
+          [ngModel]="isReadOnly()"
+          (ngModelChange)="isReadOnly.set($event)"
+        />
+
+        <span>
+          Read-only
+        </span>
+      </label>
+
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="isSystem"
+          [ngModel]="isSystem()"
+          (ngModelChange)="isSystem.set($event)"
+        />
+
+        <span>
+          System Setting
+        </span>
+      </label>
+
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="isActive"
+          [ngModel]="isActive()"
+          (ngModelChange)="isActive.set($event)"
+        />
+
+        <span>
+          Active
+        </span>
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      Cancel
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? 'Saving...'
+          : submitLabel()
+      }}
+    </button>
+
+  </div>
+
+</form>

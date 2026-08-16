@@ -1,0 +1,34 @@
+@if (
+  deleted()
+) {
+  <span class="badge deleted">
+    <svg lucideTrash2
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.status.deleted' | translate }}
+  </span>
+
+} @else if (
+  active()
+) {
+  <span class="badge active">
+    <svg lucideCircleCheck
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.status.active' | translate }}
+  </span>
+
+} @else {
+  <span class="badge inactive">
+    <svg lucideCircleX
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.status.inactive' | translate }}
+  </span>
+}

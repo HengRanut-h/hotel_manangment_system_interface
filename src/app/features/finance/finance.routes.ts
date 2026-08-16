@@ -1,11 +1,361 @@
-import { Routes } from '@angular/router';import { permissionGuard } from '../../core/guards/permission.guard';
-const explorer=(path:string,title:string,endpoint:string,permission:string,columns:unknown[])=>({path,loadComponent:()=>import('../../shared/pages/data-explorer/data-explorer.page').then(m=>m.DataExplorerPage),canActivate:[permissionGuard],data:{title,endpoint,permission,columns}});
-export const financeRoutes:Routes=[
- {path:'folios',loadComponent:()=>import('./pages/folios/folios.page').then(m=>m.FoliosPage),canActivate:[permissionGuard],data:{permission:'folios.view'}},
- explorer('invoices','Invoices','invoices','invoices.view',[{key:'invoiceNumber',label:'Invoice'},{key:'guestName',label:'Guest'},{key:'invoiceDate',label:'Date'},{key:'totalAmount',label:'Total',type:'money'},{key:'balanceAmount',label:'Balance',type:'money'},{key:'status',label:'Status',type:'status'}]),
- explorer('payments','Payments','payments','payments.view',[{key:'paymentNumber',label:'Payment'},{key:'amount',label:'Amount',type:'money'},{key:'method',label:'Method'},{key:'referenceNumber',label:'Reference'},{key:'paidAtUtc',label:'Paid At',type:'date'}]),
- ...['deposits','refunds','taxes','discounts','utility-rates'].map(path=>({path,loadComponent:()=>import('../../shared/resource/resource-page.component').then(m=>m.ResourcePageComponent),canActivate:[permissionGuard],data:{resource:path,permission:`${path}.view`}})),
- {path:'utilities',loadComponent:()=>import('./pages/utilities/utilities.page').then(m=>m.UtilitiesPage),canActivate:[permissionGuard],data:{permission:'utilities.view'}},
- {path:'utility-meters',loadComponent:()=>import('./pages/utilities/utilities.page').then(m=>m.UtilitiesPage),canActivate:[permissionGuard],data:{permission:'utilities.view'}},
- {path:'meter-readings',loadComponent:()=>import('./pages/utilities/utilities.page').then(m=>m.UtilitiesPage),canActivate:[permissionGuard],data:{permission:'utilities.view'}}
+// src/app/features/finance/finance.routes.ts
+
+import {
+  Routes
+} from '@angular/router';
+
+import {
+  permissionGuard
+} from '../../core/guards/permission.guard';
+
+
+// =========================================================
+// DATA EXPLORER
+// =========================================================
+
+const explorer = (
+  path: string,
+  title: string,
+  endpoint: string,
+  permission: string,
+  columns: unknown[]
+) => ({
+  path,
+
+  loadComponent: () =>
+    import(
+      '../../shared/pages/data-explorer/data-explorer.page'
+    )
+      .then(
+        module =>
+          module.DataExplorerPage
+      ),
+
+  canActivate: [
+    permissionGuard
+  ],
+
+  data: {
+    title,
+    endpoint,
+    permission,
+    columns
+  }
+});
+
+
+// =========================================================
+// FINANCE ROUTES
+// =========================================================
+
+export const financeRoutes:
+  Routes =
+[
+
+  // =======================================================
+  // FOLIOS
+  // =======================================================
+
+  {
+    path:
+      'folios',
+
+    loadChildren: () =>
+      import(
+        './folios/folios.routes'
+      )
+        .then(
+          module =>
+            module.foliosRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'folios.view'
+    }
+  },
+
+
+  // =======================================================
+  // INVOICES
+  // =======================================================
+
+  {
+    path:
+      'invoices',
+
+    loadChildren: () =>
+      import(
+        './invoices/invoices.routes'
+      )
+        .then(
+          module =>
+            module.invoicesRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'invoices.view'
+    }
+  },
+
+
+  // =======================================================
+  // PAYMENTS
+  // =======================================================
+
+  {
+    path:
+      'payments',
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'payments.view'
+    },
+
+    loadChildren: () =>
+      import(
+        './payments/payments.routes'
+      )
+        .then(
+          module =>
+            module.paymentRoutes
+        )
+  },
+
+
+  // =======================================================
+  // DEPOSITS
+  // =======================================================
+
+  {
+    path:
+      'deposits',
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'deposits.view'
+    },
+
+    loadChildren: () =>
+      import(
+        './deposits/deposits.routes'
+      )
+        .then(
+          module =>
+            module.depositRoutes
+        )
+  },
+
+
+  // =======================================================
+  // REFUNDS
+  //
+  {
+    path:
+      'refunds',
+
+    loadChildren: () =>
+      import(
+        './refunds/refunds.routes'
+      )
+        .then(
+          module =>
+            module.refundRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'refunds.view'
+    }
+  },
+
+
+  // =======================================================
+  // TAXES
+  // =======================================================
+
+  {
+    path:
+      'taxes',
+
+    loadChildren: () =>
+      import(
+        './taxes/taxes.routes'
+      )
+        .then(
+          module =>
+            module.taxRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'taxes.view'
+    }
+  },
+
+
+  // =======================================================
+  // DISCOUNTS
+  // =======================================================
+
+  {
+    path:
+      'discounts',
+
+    loadChildren: () =>
+      import(
+        './discounts/discounts.routes'
+      )
+        .then(
+          module =>
+            module.discountsRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'discounts.view'
+    }
+  },
+
+
+  // =======================================================
+  // UTILITIES
+  // =======================================================
+
+  {
+    path:
+      'utilities',
+
+    loadChildren: () =>
+      import(
+        './utility-billing/utility-billing.routes'
+      )
+        .then(
+          module =>
+            module.utilityBillingRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'utilities.view'
+    }
+  },
+
+
+  // =======================================================
+  // UTILITY RATES
+  // =======================================================
+
+  {
+    path:
+      'utility-rates',
+
+    loadChildren: () =>
+      import(
+        './utility-rates/utility-rates.routes'
+      )
+        .then(
+          module =>
+            module.utilityRatesRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'utility-rates.view'
+    }
+  },
+
+
+  // =======================================================
+  // UTILITY METERS
+  // =======================================================
+
+  {
+    path:
+      'utility-meters',
+
+    loadChildren: () =>
+      import(
+        './utility-meters/utility-meters.routes'
+      )
+        .then(
+          module =>
+            module.utilityMetersRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'utilities.view'
+    }
+  },
+
+
+  // =======================================================
+  // METER READINGS
+  // =======================================================
+
+  {
+    path:
+      'meter-readings',
+
+    loadChildren: () =>
+      import(
+        './meter-readings/meter-readings.routes'
+      )
+        .then(
+          module =>
+            module.meterReadingsRoutes
+        ),
+
+    canActivate: [
+      permissionGuard
+    ],
+
+    data: {
+      permission:
+        'utilities.view'
+    }
+  }
+
 ];

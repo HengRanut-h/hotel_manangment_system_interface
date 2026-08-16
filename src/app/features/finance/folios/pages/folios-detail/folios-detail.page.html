@@ -1,0 +1,495 @@
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/folios">
+    <svg lucideArrowLeft></svg>
+    <span>{{ 'folios.backToWorkspace' | translate }}</span>
+  </a>
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'folios.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'folios.loadOneFailed' | translate }}
+      </strong>
+
+      <span>{{ errorMessage() }}</span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else if (
+    folio();
+    as item
+  ) {
+
+    <header class="detail-heading">
+      <div>
+        <span class="eyebrow">
+          {{ 'folios.section' | translate }}
+        </span>
+
+        <h1>
+          {{
+            item.folioNumber
+            || item.id
+          }}
+        </h1>
+
+        <p>
+          {{
+            item.isClosed
+              ? ('folios.closedDescription' | translate)
+              : ('folios.openDescription' | translate)
+          }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+
+        <span
+          class="status-badge"
+          [class.status-badge--closed]="item.isClosed"
+          [class.status-badge--open]="!item.isClosed">
+          {{
+            (
+              item.isClosed
+                ? 'folios.closed'
+                : 'folios.open'
+            )
+              | translate
+          }}
+        </span>
+
+        @if (
+          !item.isClosed
+          &&
+          canMutate()
+        ) {
+          <button
+            type="button"
+            class="action-button action-button--primary"
+            (click)="openChargeModal()">
+            <svg lucideCirclePlus></svg>
+            <span>{{ 'folios.addCharge' | translate }}</span>
+          </button>
+
+          <button
+            type="button"
+            class="action-button action-button--success"
+            (click)="requestClose()">
+            <svg lucideCheckCircle2></svg>
+            <span>{{ 'folios.closeFolio' | translate }}</span>
+          </button>
+        }
+
+      </div>
+    </header>
+
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>{{ 'folios.totalCharges' | translate }}</span>
+          <strong>{{ item.charges.length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideCheckCircle2></svg>
+        </span>
+        <div>
+          <span>{{ 'folios.activeCharges' | translate }}</span>
+          <strong>{{ activeCharges().length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--red">
+          <svg lucideTriangleAlert></svg>
+        </span>
+        <div>
+          <span>{{ 'folios.voidedCharges' | translate }}</span>
+          <strong>{{ voidedChargesCount() }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideCircleDollarSign></svg>
+        </span>
+        <div>
+          <span>{{ 'folios.recordedAmount' | translate }}</span>
+          <strong>
+            {{
+              recordedAmount()
+                | number:'1.2-2'
+            }}
+          </strong>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>{{ 'folios.folioDetails' | translate }}</h2>
+
+        <dl>
+          <div>
+            <dt>{{ 'folios.folioNumber' | translate }}</dt>
+            <dd>{{ item.folioNumber || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'folios.status' | translate }}</dt>
+            <dd>
+              {{
+                (
+                  item.isClosed
+                    ? 'folios.closed'
+                    : 'folios.open'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'folios.createdAt' | translate }}</dt>
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'folios.scope' | translate }}</dt>
+            <dd>
+              {{
+                (
+                  item.branchId
+                    ? 'folios.branchScope'
+                    : 'folios.hotelScope'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>{{ 'folios.reservationContext' | translate }}</h2>
+
+        @if (
+          reservation();
+          as reservationItem
+        ) {
+
+          <dl>
+            <div>
+              <dt>{{ 'folios.reservationNumber' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.reservationNumber
+                  || item.reservationId
+                  || '—'
+                }}
+              </dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.guest' | translate }}</dt>
+              <dd>{{ reservationItem.guestName || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.room' | translate }}</dt>
+              <dd>{{ reservationItem.roomNumber || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.roomType' | translate }}</dt>
+              <dd>{{ reservationItem.roomTypeName || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.checkInDate' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.checkInDate
+                    ? (
+                        reservationItem.checkInDate
+                          | date:'mediumDate'
+                      )
+                    : '—'
+                }}
+              </dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.checkOutDate' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.checkOutDate
+                    ? (
+                        reservationItem.checkOutDate
+                          | date:'mediumDate'
+                      )
+                    : '—'
+                }}
+              </dd>
+            </div>
+          </dl>
+
+        } @else {
+
+          <dl>
+            <div>
+              <dt>{{ 'folios.reservationId' | translate }}</dt>
+              <dd>{{ item.reservationId || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'folios.guestId' | translate }}</dt>
+              <dd>{{ item.guestId || '—' }}</dd>
+            </div>
+          </dl>
+
+        }
+
+      </article>
+
+    </section>
+
+    <section class="charges-card">
+      <header class="charges-heading">
+        <div>
+          <h2>{{ 'folios.charges' | translate }}</h2>
+          <p>{{ 'folios.chargesDescription' | translate }}</p>
+        </div>
+
+        @if (
+          !item.isClosed
+          &&
+          canMutate()
+        ) {
+          <button
+            type="button"
+            class="action-button action-button--primary"
+            (click)="openChargeModal()">
+            <svg lucideCirclePlus></svg>
+            <span>{{ 'folios.addCharge' | translate }}</span>
+          </button>
+        }
+      </header>
+
+      @if (
+        item.charges.length === 0
+      ) {
+
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+          <strong>{{ 'folios.noCharges' | translate }}</strong>
+          <span>{{ 'folios.noChargesDescription' | translate }}</span>
+        </div>
+
+      } @else {
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'folios.chargeCategory' | translate }}</th>
+                <th>{{ 'folios.chargeDescription' | translate }}</th>
+                <th>{{ 'folios.chargeAmount' | translate }}</th>
+                <th>{{ 'folios.status' | translate }}</th>
+                <th>{{ 'folios.createdAt' | translate }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                charge of item.charges;
+                track charge.id
+              ) {
+                <tr [class.voided-row]="charge.isVoided">
+                  <td>{{ charge.category || '—' }}</td>
+                  <td>{{ charge.description || '—' }}</td>
+                  <td>
+                    {{
+                      charge.amount
+                        | number:'1.2-2'
+                    }}
+                  </td>
+                  <td>
+                    <span
+                      class="charge-status"
+                      [class.charge-status--voided]="charge.isVoided">
+                      {{
+                        (
+                          charge.isVoided
+                            ? 'folios.voided'
+                            : 'folios.active'
+                        )
+                          | translate
+                      }}
+                    </span>
+                  </td>
+                  <td>
+                    {{
+                      charge.createdAtUtc
+                        ? (
+                            charge.createdAtUtc
+                              | date:'medium'
+                          )
+                        : '—'
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      }
+    </section>
+
+  }
+
+  @if (showChargeModal()) {
+
+    <div
+      class="modal-backdrop"
+      (click)="closeChargeModal()">
+
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        (click)="$event.stopPropagation()">
+
+        <header class="modal-heading">
+          <div>
+            <h2>{{ 'folios.addCharge' | translate }}</h2>
+            <p>{{ 'folios.addChargeDescription' | translate }}</p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            [disabled]="addingCharge()"
+            [title]="'common.close' | translate"
+            [attr.aria-label]="'common.close' | translate"
+            (click)="closeChargeModal()">
+            <svg lucideX></svg>
+          </button>
+        </header>
+
+        @if (addingCharge()) {
+          <app-spin
+            [inline]="true"
+            size="small"
+            [label]="'folios.addingCharge' | translate" />
+        } @else {
+          <app-folio-charge-form
+            (submitted)="addCharge($event)"
+            (cancelled)="closeChargeModal()" />
+        }
+
+      </section>
+
+    </div>
+
+  }
+
+  @if (showCloseModal()) {
+
+    <div
+      class="modal-backdrop"
+      (click)="cancelClose()">
+
+      <section
+        class="confirm-card"
+        role="dialog"
+        aria-modal="true"
+        (click)="$event.stopPropagation()">
+
+        <span class="confirm-icon">
+          <svg lucideCheckCircle2></svg>
+        </span>
+
+        <h2>{{ 'folios.closeTitle' | translate }}</h2>
+
+        <p>{{ 'folios.closeDescription' | translate }}</p>
+
+        <div class="confirm-actions">
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="closing()"
+            (click)="cancelClose()">
+            {{ 'common.cancel' | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="success-button"
+            [disabled]="closing()"
+            (click)="confirmClose()">
+
+            @if (closing()) {
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+            } @else {
+              <svg lucideCheckCircle2></svg>
+            }
+
+            <span>
+              {{
+                (
+                  closing()
+                    ? 'common.saving'
+                    : 'folios.closeFolio'
+                )
+                  | translate
+              }}
+            </span>
+          </button>
+        </div>
+
+      </section>
+
+    </div>
+
+  }
+
+</div>

@@ -1,0 +1,56 @@
+<section class="search-card">
+  <header class="search-card__heading">
+    <span class="search-card__icon">
+      <svg lucideCalendar></svg>
+    </span>
+
+    <div>
+      <h2>{{ 'availability.searchTitle' | translate }}</h2>
+      <p>{{ 'availability.searchDescription' | translate }}</p>
+    </div>
+  </header>
+
+  <form
+    class="search-form"
+    (submit)="$event.preventDefault(); submit()">
+
+    <label class="field">
+      <span>{{ 'availability.checkIn' | translate }}</span>
+      <input
+        type="date"
+        [value]="checkInDate()"
+        (input)="setCheckInDate($event)" />
+    </label>
+
+    <label class="field">
+      <span>{{ 'availability.checkOut' | translate }}</span>
+      <input
+        type="date"
+        [value]="checkOutDate()"
+        (input)="setCheckOutDate($event)" />
+    </label>
+
+    <button
+      type="submit"
+      class="search-button"
+      [disabled]="submitting()">
+      <svg lucideSearch></svg>
+      <span>
+        {{
+          (
+            submitting()
+              ? 'availability.searching'
+              : 'availability.search'
+          )
+            | translate
+        }}
+      </span>
+    </button>
+  </form>
+
+  @if (errorKey()) {
+    <p class="validation-error">
+      {{ errorKey() | translate }}
+    </p>
+  }
+</section>

@@ -1,0 +1,14 @@
+<span
+  class="badge"
+  [class.low]="priority() === 'Low'"
+  [class.normal]="!priority() || priority() === 'Normal'"
+  [class.high]="priority() === 'High'"
+  [class.urgent]="priority() === 'Urgent'"
+>
+  <svg lucideFlag
+    [size]="13"
+    [strokeWidth]="2"
+  ></svg>
+
+  {{ priority() || 'Normal' }}
+</span>

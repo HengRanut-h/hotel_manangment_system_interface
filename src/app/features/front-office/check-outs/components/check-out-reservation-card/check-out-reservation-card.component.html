@@ -1,0 +1,79 @@
+<article class="reservation-card">
+  <header>
+    <div>
+      <span class="reservation-number">
+        {{ reservation().reservationNumber || '—' }}
+      </span>
+
+      <h3>
+        {{ reservation().guestName || ('checkOuts.unknownGuest' | translate) }}
+      </h3>
+    </div>
+
+    <app-check-out-status-badge [status]="reservation().status" />
+  </header>
+
+  <div class="meta-grid">
+    <div class="meta-item">
+      <span class="meta-icon"><svg lucideCalendarDays></svg></span>
+      <div>
+        <span>{{ 'checkOuts.departure' | translate }}</span>
+        <strong>{{ reservation().checkOutDate | date:'mediumDate' }}</strong>
+      </div>
+    </div>
+
+    <div class="meta-item">
+      <span class="meta-icon"><svg lucideBed></svg></span>
+      <div>
+        <span>{{ 'checkOuts.room' | translate }}</span>
+        <strong>{{ reservation().roomNumber || ('checkOuts.unassigned' | translate) }}</strong>
+        <small>{{ reservation().roomTypeName || '—' }}</small>
+      </div>
+    </div>
+
+    <div class="meta-item">
+      <span class="meta-icon"><svg lucideUsers></svg></span>
+      <div>
+        <span>{{ 'checkOuts.occupancy' | translate }}</span>
+        <strong>{{ reservation().adults + reservation().children }}</strong>
+        <small>
+          {{
+            'checkOuts.occupancyBreakdown'
+              | translate:{
+                  adults: reservation().adults,
+                  children: reservation().children
+                }
+          }}
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="stay-summary">
+      {{
+        'checkOuts.staySummary'
+          | translate:{
+              nights: reservation().nights,
+              amount: reservation().totalAmount
+            }
+      }}
+    </div>
+
+    @if (canCheckOut()) {
+      <button
+        type="button"
+        class="check-out-button"
+        [disabled]="processing()"
+        (click)="requestCheckOut()">
+        <svg lucideLogOut></svg>
+        <span>
+          {{
+            (processing() ? 'checkOuts.processing' : 'checkOuts.checkOut')
+              | translate
+          }}
+        </span>
+      </button>
+    }
+  </footer>
+</article>

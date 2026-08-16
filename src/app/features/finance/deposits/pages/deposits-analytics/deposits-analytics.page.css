@@ -1,0 +1,171 @@
+:host {
+  display: block;
+}
+
+.page {
+  padding: 24px;
+  color: #17191c;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #344054;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.header {
+  margin: 18px 0 24px;
+}
+
+.heading-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.heading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e4e7ec;
+  border-radius: 14px;
+  background: #f9fafb;
+  color: #344054;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.header p {
+  margin: 8px 0 0;
+  color: #667085;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card,
+.types-card {
+  padding: 20px;
+  border: 1px solid #eaecf0;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.card span,
+.types span {
+  color: #667085;
+  font-size: 13px;
+}
+
+.card strong {
+  font-size: 24px;
+}
+
+.types-card {
+  margin-top: 16px;
+}
+
+.types-card h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+.types {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.types > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+}
+
+.types strong {
+  font-size: 20px;
+}
+
+.state,
+.alert {
+  padding: 48px 20px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.state {
+  border: 1px solid #eaecf0;
+  background: #fff;
+  color: #667085;
+}
+
+.alert {
+  border: 1px solid #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  margin: 0 auto 12px;
+  border: 3px solid #eaecf0;
+  border-top-color: #101828;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1100px) {
+  .stats {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 16px;
+  }
+
+  .stats,
+  .types {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .stats,
+  .types {
+    grid-template-columns:
+      1fr;
+  }
+}

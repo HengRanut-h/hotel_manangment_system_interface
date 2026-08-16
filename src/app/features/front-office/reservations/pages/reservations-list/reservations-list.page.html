@@ -1,0 +1,468 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+      <span class="eyebrow">
+        {{ 'reservations.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'reservations.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'reservations.description' | translate }}
+      </p>
+    </div>
+
+    <div class="page-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="loading()"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'reservations.refresh' | translate }}
+        </span>
+
+      </button>
+
+      @if (
+        auth.hasPermission(
+          'reservations.create'
+        )
+      ) {
+
+        <a
+          class="primary-button"
+          routerLink="/app/front-office/reservations/create">
+
+          <svg lucidePlus></svg>
+
+          <span>
+            {{ 'reservations.newReservation' | translate }}
+          </span>
+
+        </a>
+
+      }
+
+    </div>
+
+  </header>
+
+  <section class="summary-grid">
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--purple">
+        <svg lucideCalendar></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'reservations.loadedReservations' | translate }}
+        </span>
+
+        <strong>
+          {{ loadedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--blue">
+        <svg lucideUserCheck></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'reservations.confirmedLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ confirmedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--green">
+        <svg lucideUserCheck></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'reservations.checkedInLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ checkedInCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--amber">
+        <svg lucideDollarSign></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'reservations.loadedValue' | translate }}
+        </span>
+
+        <strong>
+          {{
+            loadedValue()
+              | number:'1.2-2'
+          }}
+        </strong>
+      </div>
+
+    </article>
+
+  </section>
+
+  <section class="list-card">
+
+    <header class="list-card__header">
+
+      <div>
+        <h2>
+          {{ 'reservations.reservationList' | translate }}
+        </h2>
+
+        <p>
+          @if (
+            backendTotalItems() !== null
+          ) {
+            {{
+              'reservations.loadedOfTotal'
+                | translate:{
+                    loaded:
+                      loadedCount(),
+                    total:
+                      (backendTotalItems() ?? 0)
+                  }
+            }}
+          } @else {
+            {{
+              'reservations.loadedCount'
+                | translate:{
+                    count:
+                      loadedCount()
+                  }
+            }}
+          }
+        </p>
+      </div>
+
+    </header>
+
+    <div class="filters">
+
+      <div class="search-field">
+
+        <svg lucideSearch></svg>
+
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="search()"
+          [placeholder]="'reservations.searchPlaceholder' | translate"
+          (input)="setSearch($event)" />
+
+      </div>
+
+      <select
+        [value]="statusFilter()"
+        (change)="setStatus($event)">
+
+        <option value="">
+          {{ 'reservations.allStatuses' | translate }}
+        </option>
+
+        @for (
+          status of statuses();
+          track status
+        ) {
+          <option [value]="status.toLowerCase()">
+            {{ status }}
+          </option>
+        }
+
+      </select>
+
+      @if (hasFilters()) {
+
+        <button
+          type="button"
+          class="clear-button"
+          (click)="clearFilters()">
+
+          <svg lucideX></svg>
+
+          <span>
+            {{ 'reservations.clearFilters' | translate }}
+          </span>
+
+        </button>
+
+      }
+
+    </div>
+
+    @if (loading()) {
+
+      <div class="loading-state">
+
+        <app-spin
+          size="large"
+          [label]="'reservations.loading' | translate" />
+
+      </div>
+
+    } @else if (errorMessage()) {
+
+      <div class="state state--error">
+
+        <strong>
+          {{ 'reservations.loadFailed' | translate }}
+        </strong>
+
+        <span>
+          {{ errorMessage() }}
+        </span>
+
+        <button
+          type="button"
+          (click)="load()">
+
+          <svg lucideRefreshCw></svg>
+
+          {{ 'reservations.tryAgain' | translate }}
+
+        </button>
+
+      </div>
+
+    } @else if (
+      reservations().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideCalendar></svg>
+
+        <strong>
+          {{ 'reservations.emptyTitle' | translate }}
+        </strong>
+
+        <span>
+          {{ 'reservations.emptyDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else if (
+      filtered().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideSearch></svg>
+
+        <strong>
+          {{ 'reservations.noMatches' | translate }}
+        </strong>
+
+        <span>
+          {{ 'reservations.noMatchesDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else {
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                {{ 'reservations.reservationNumber' | translate }}
+              </th>
+
+              <th>
+                {{ 'reservations.guest' | translate }}
+              </th>
+
+              <th>
+                {{ 'reservations.stay' | translate }}
+              </th>
+
+              <th>
+                {{ 'reservations.room' | translate }}
+              </th>
+
+              <th>
+                {{ 'reservations.guests' | translate }}
+              </th>
+
+              <th class="money">
+                {{ 'reservations.totalAmount' | translate }}
+              </th>
+
+              <th>
+                {{ 'reservations.fields.status' | translate }}
+              </th>
+
+              <th class="actions-column">
+                {{ 'reservations.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (
+              item of filtered();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <strong class="reservation-number">
+                    {{ item.reservationNumber || '—' }}
+                  </strong>
+                </td>
+
+                <td>
+                  <span class="primary-text">
+                    {{ item.guestName || '—' }}
+                  </span>
+                </td>
+
+                <td>
+                  <div class="stay-cell">
+                    <strong>
+                      {{
+                        item.checkInDate
+                          | date:'mediumDate'
+                      }}
+                    </strong>
+
+                    <span>
+                      →
+                      {{
+                        item.checkOutDate
+                          | date:'mediumDate'
+                      }}
+                    </span>
+
+                    <small>
+                      {{
+                        'reservations.nightsValue'
+                          | translate:{
+                              count:
+                                item.nights
+                            }
+                      }}
+                    </small>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="room-cell">
+                    <strong>
+                      {{ item.roomTypeName || '—' }}
+                    </strong>
+
+                    <span>
+                      {{
+                        item.roomNumber
+                        ||
+                        ('reservations.unassigned' | translate)
+                      }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  {{
+                    item.adults
+                    +
+                    item.children
+                  }}
+                </td>
+
+                <td class="money">
+                  {{
+                    item.totalAmount
+                      | number:'1.2-2'
+                  }}
+                </td>
+
+                <td>
+                  <app-reservation-status-badge
+                    [status]="item.status" />
+                </td>
+
+                <td class="actions-column">
+
+                  <a
+                    class="icon-action icon-action--view"
+                    [routerLink]="[
+                      '/app/front-office/reservations',
+                      item.id
+                    ]"
+                    [title]="'reservations.view' | translate"
+                    [attr.aria-label]="'reservations.view' | translate">
+
+                    <svg lucideEye></svg>
+
+                  </a>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+    <footer class="list-footer">
+      {{
+        'reservations.showingLoaded'
+          | translate:{
+              shown:
+                filtered().length,
+              loaded:
+                loadedCount()
+            }
+      }}
+    </footer>
+
+  </section>
+
+</div>

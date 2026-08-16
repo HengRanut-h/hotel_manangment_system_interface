@@ -1,0 +1,89 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing/meters"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="alert">
+      {{ 'utilityBilling.errors.loadDetail' | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as data
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideGauge
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <h1>
+            {{ 'utilityBilling.detail.meter' | translate }}
+          </h1>
+        </div>
+
+      </div>
+
+
+      <a
+        class="secondary-button"
+        [routerLink]="[
+          '/app/finance/utility-billing/meters',
+          data.id,
+          'edit'
+        ]"
+      >
+        <svg lucidePencil
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.edit' | translate }}
+      </a>
+
+    </div>
+
+
+    <article class="form-card">
+
+<dl>
+  <div><dt>{{ 'utilityBilling.fields.meterNumber' | translate }}</dt><dd>{{ data.meterNumber }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.utility' | translate }}</dt><dd>{{ data.utilityName || data.utilityId }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.room' | translate }}</dt><dd>{{ data.roomNumber || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.location' | translate }}</dt><dd>{{ data.location || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.initialReading' | translate }}</dt><dd>{{ data.initialReading ?? 0 }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.currentReading' | translate }}</dt><dd>{{ data.currentReading ?? data.initialReading ?? 0 }}</dd></div>
+</dl>
+
+    </article>
+
+  }
+
+</section>

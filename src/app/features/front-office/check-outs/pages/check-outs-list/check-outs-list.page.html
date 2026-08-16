@@ -1,0 +1,243 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+      <span class="eyebrow">
+        {{ 'checkOuts.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'checkOuts.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'checkOuts.description' | translate }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="secondary-button"
+      [disabled]="loading() || !!permissionMessage()"
+      (click)="load()">
+
+      <svg lucideRefreshCw></svg>
+
+      <span>
+        {{ 'checkOuts.refresh' | translate }}
+      </span>
+
+    </button>
+
+  </header>
+
+  <section class="summary-grid">
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--purple">
+        <svg lucideCalendarCheck></svg>
+      </span>
+      <div>
+        <span>{{ 'checkOuts.loadedReservations' | translate }}</span>
+        <strong>{{ loadedCount() }}</strong>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--green">
+        <svg lucideClock3></svg>
+      </span>
+      <div>
+        <span>{{ 'checkOuts.checkedInLoaded' | translate }}</span>
+        <strong>{{ checkedInCount() }}</strong>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--blue">
+        <svg lucideCircleCheckBig></svg>
+      </span>
+      <div>
+        <span>{{ 'checkOuts.checkedOutLoaded' | translate }}</span>
+        <strong>{{ checkedOutCount() }}</strong>
+      </div>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-icon summary-icon--amber">
+        <svg lucideUsers></svg>
+      </span>
+      <div>
+        <span>{{ 'checkOuts.departuresTodayLoaded' | translate }}</span>
+        <strong>{{ departuresToday() }}</strong>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="workspace-card">
+
+    <header class="workspace-header">
+      <div>
+        <h2>{{ 'checkOuts.reservationWorkspace' | translate }}</h2>
+
+        <p>
+          @if (backendTotalItems() !== null) {
+            {{
+              'checkOuts.loadedOfTotal'
+                | translate:{
+                    loaded: loadedCount(),
+                    total: (backendTotalItems() ?? 0)
+                  }
+            }}
+          } @else {
+            {{
+              'checkOuts.loadedCount'
+                | translate:{
+                    count: loadedCount()
+                  }
+            }}
+          }
+        </p>
+      </div>
+
+      @if (!canCheckOut()) {
+        <span class="permission-badge">
+          {{ 'checkOuts.readOnly' | translate }}
+        </span>
+      }
+    </header>
+
+    <div class="workflow-note">
+      {{ 'checkOuts.workflowNote' | translate }}
+    </div>
+
+    @if (!permissionMessage()) {
+
+      <div class="filters">
+
+        <div class="search-field">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'checkOuts.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+        </div>
+
+        <select
+          [value]="statusFilter()"
+          (change)="setStatus($event)">
+
+          <option value="">
+            {{ 'checkOuts.allStatuses' | translate }}
+          </option>
+
+          @for (status of statuses(); track status) {
+            <option [value]="status.toLowerCase()">
+              {{ status }}
+            </option>
+          }
+
+        </select>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+
+            <svg lucideX></svg>
+
+            <span>
+              {{ 'checkOuts.clearFilters' | translate }}
+            </span>
+          </button>
+        }
+
+      </div>
+
+    }
+
+    @if (permissionMessage()) {
+
+      <div class="state state--permission">
+        <svg lucideCalendarCheck></svg>
+        <strong>{{ 'checkOuts.cannotLoadReservations' | translate }}</strong>
+        <span>{{ permissionMessage() }}</span>
+      </div>
+
+    } @else if (loading()) {
+
+      <div class="loading-state">
+        <app-spin
+          size="large"
+          [label]="'checkOuts.loading' | translate" />
+      </div>
+
+    } @else if (errorMessage()) {
+
+      <div class="state state--error">
+        <strong>{{ 'checkOuts.loadFailed' | translate }}</strong>
+        <span>{{ errorMessage() }}</span>
+
+        <button
+          type="button"
+          (click)="load()">
+          <svg lucideRefreshCw></svg>
+          {{ 'checkOuts.tryAgain' | translate }}
+        </button>
+      </div>
+
+    } @else if (reservations().length === 0) {
+
+      <div class="state">
+        <svg lucideCalendarCheck></svg>
+        <strong>{{ 'checkOuts.emptyTitle' | translate }}</strong>
+        <span>{{ 'checkOuts.emptyDescription' | translate }}</span>
+      </div>
+
+    } @else if (filtered().length === 0) {
+
+      <div class="state">
+        <svg lucideSearch></svg>
+        <strong>{{ 'checkOuts.noMatches' | translate }}</strong>
+        <span>{{ 'checkOuts.noMatchesDescription' | translate }}</span>
+      </div>
+
+    } @else {
+
+      <div class="reservation-grid">
+        @for (reservation of filtered(); track reservation.id) {
+          <app-check-out-reservation-card
+            [reservation]="reservation"
+            [canCheckOut]="canCheckOut()"
+            [processing]="processingId() === reservation.id"
+            (checkOutRequested)="checkOut($event)" />
+        }
+      </div>
+
+    }
+
+    <footer class="workspace-footer">
+      <span>
+        {{
+          'checkOuts.showingLoaded'
+            | translate:{
+                shown: filtered().length,
+                loaded: loadedCount()
+              }
+        }}
+      </span>
+
+      <span>
+        {{ 'checkOuts.backendAuthority' | translate }}
+      </span>
+    </footer>
+
+  </section>
+
+</div>

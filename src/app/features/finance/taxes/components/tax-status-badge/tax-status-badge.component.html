@@ -1,0 +1,27 @@
+<span
+  class="badge"
+  [class]="className()"
+>
+  @if (
+    deleted()
+  ) {
+    <svg lucideTrash2
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+  } @else if (
+    active()
+  ) {
+    <svg lucideCircleCheck
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+  } @else {
+    <svg lucideCircleX
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+  }
+
+  {{ translationKey() | translate }}
+</span>

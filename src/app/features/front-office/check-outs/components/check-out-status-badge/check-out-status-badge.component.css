@@ -1,0 +1,20 @@
+:host { display: inline-flex; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.badge--checked-in { border-color:#abefc6; background:#ecfdf3; color:#027a48; }
+.badge--checked-out { border-color:#d9d6fe; background:#f4f3ff; color:#5925dc; }
+.badge--confirmed { border-color:#b2ddff; background:#eff8ff; color:#175cd3; }
+.badge--cancelled { border-color:#fecdca; background:#fef3f2; color:#b42318; }
+.badge--pending { border-color:#fedf89; background:#fffaeb; color:#b54708; }
+.badge--neutral { border-color:#d0d5dd; background:#f9fafb; color:#475467; }

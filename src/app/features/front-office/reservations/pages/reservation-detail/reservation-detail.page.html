@@ -1,0 +1,451 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+
+      <a
+        class="back-link"
+        routerLink="/app/front-office/reservations">
+
+        <svg lucideArrowLeft></svg>
+
+        <span>
+          {{ 'reservations.backToReservations' | translate }}
+        </span>
+
+      </a>
+
+      <span class="eyebrow">
+        {{ 'reservations.section' | translate }}
+      </span>
+
+      <h1>
+        {{
+          reservation()?.reservationNumber
+          ||
+          ('reservations.detailTitle' | translate)
+        }}
+      </h1>
+
+      <p>
+        {{ 'reservations.detailDescription' | translate }}
+      </p>
+
+    </div>
+
+    @if (reservation(); as item) {
+
+      <app-reservation-status-badge
+        [status]="item.status" />
+
+    }
+
+  </header>
+
+  @if (loading()) {
+
+    <section class="loading-card">
+
+      <app-spin
+        size="large"
+        [label]="'reservations.loadingDetail' | translate" />
+
+    </section>
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <strong>
+        {{ 'reservations.detailLoadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        {{ 'reservations.tryAgain' | translate }}
+
+      </button>
+
+    </section>
+
+  } @else if (reservation(); as item) {
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+
+        <header>
+          <span class="detail-icon detail-icon--purple">
+            <svg lucideCalendar></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'reservations.stayDetails' | translate }}
+            </h2>
+
+            <p>
+              {{ 'reservations.stayDetailsHelp' | translate }}
+            </p>
+          </div>
+        </header>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'reservations.checkInDate' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.checkInDate
+                  | date:'fullDate'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.checkOutDate' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.checkOutDate
+                  | date:'fullDate'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.nights' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.nights }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.createdAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+      <article class="detail-card">
+
+        <header>
+          <span class="detail-icon detail-icon--blue">
+            <svg lucideUser></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'reservations.guestDetails' | translate }}
+            </h2>
+
+            <p>
+              {{ 'reservations.guestDetailsHelp' | translate }}
+            </p>
+          </div>
+        </header>
+
+        <dl>
+
+          <div class="full-row">
+            <dt>
+              {{ 'reservations.guest' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.guestName || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.adults' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.adults }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.children' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.children }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+      <article class="detail-card">
+
+        <header>
+          <span class="detail-icon detail-icon--green">
+            <svg lucideBed></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'reservations.roomDetails' | translate }}
+            </h2>
+
+            <p>
+              {{ 'reservations.roomDetailsHelp' | translate }}
+            </p>
+          </div>
+        </header>
+
+        <dl>
+
+          <div class="full-row">
+            <dt>
+              {{ 'reservations.roomType' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.roomTypeName || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.roomNumber' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.roomNumber
+                ||
+                ('reservations.unassigned' | translate)
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.fields.status' | translate }}
+            </dt>
+
+            <dd>
+              <app-reservation-status-badge
+                [status]="item.status" />
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+      <article class="detail-card">
+
+        <header>
+          <span class="detail-icon detail-icon--amber">
+            <svg lucideCalendar></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'reservations.rateDetails' | translate }}
+            </h2>
+
+            <p>
+              {{ 'reservations.rateDetailsHelp' | translate }}
+            </p>
+          </div>
+        </header>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'reservations.nightlyRate' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.nightlyRate
+                  | number:'1.2-2'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'reservations.totalAmount' | translate }}
+            </dt>
+
+            <dd class="total-value">
+              {{
+                item.totalAmount
+                  | number:'1.2-2'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+    </section>
+
+    @if (
+      auth.hasPermission(
+        'reservations.cancel'
+      )
+      ||
+      auth.hasPermission(
+        'reservations.check-in'
+      )
+      ||
+      auth.hasPermission(
+        'reservations.check-out'
+      )
+    ) {
+
+      <section class="workflow-card">
+
+        <header>
+          <div>
+            <h2>
+              {{ 'reservations.workflowActions' | translate }}
+            </h2>
+
+            <p>
+              {{ 'reservations.workflowHelp' | translate }}
+            </p>
+          </div>
+        </header>
+
+        <div class="workflow-actions">
+
+          @if (
+            auth.hasPermission(
+              'reservations.check-in'
+            )
+          ) {
+
+            <button
+              type="button"
+              class="workflow-button workflow-button--check-in"
+              [disabled]="runningWorkflow() !== null"
+              (click)="checkIn()">
+
+              <svg lucideLogIn></svg>
+
+              <span>
+                {{
+                  (
+                    runningWorkflow() === 'checkIn'
+                      ? 'reservations.processing'
+                      : 'reservations.checkIn'
+                  )
+                    | translate
+                }}
+              </span>
+
+            </button>
+
+          }
+
+          @if (
+            auth.hasPermission(
+              'reservations.check-out'
+            )
+          ) {
+
+            <button
+              type="button"
+              class="workflow-button workflow-button--check-out"
+              [disabled]="runningWorkflow() !== null"
+              (click)="checkOut()">
+
+              <svg lucideLogOut></svg>
+
+              <span>
+                {{
+                  (
+                    runningWorkflow() === 'checkOut'
+                      ? 'reservations.processing'
+                      : 'reservations.checkOut'
+                  )
+                    | translate
+                }}
+              </span>
+
+            </button>
+
+          }
+
+          @if (
+            auth.hasPermission(
+              'reservations.cancel'
+            )
+          ) {
+
+            <button
+              type="button"
+              class="workflow-button workflow-button--cancel"
+              [disabled]="runningWorkflow() !== null"
+              (click)="cancel()">
+
+              <svg lucideBan></svg>
+
+              <span>
+                {{
+                  (
+                    runningWorkflow() === 'cancel'
+                      ? 'reservations.processing'
+                      : 'reservations.cancel'
+                  )
+                    | translate
+                }}
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+      </section>
+
+    }
+
+  }
+
+</div>

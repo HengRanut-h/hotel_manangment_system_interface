@@ -1,0 +1,73 @@
+<span class="badge">
+
+  @switch (
+    action()?.toLowerCase()
+  ) {
+
+    @case ('create') {
+      <svg lucidePlus
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('update') {
+      <svg lucidePencil
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('delete') {
+      <svg lucideTrash2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('view') {
+      <svg lucideEye
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('login') {
+      <svg lucideLogIn
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('logout') {
+      <svg lucideLogOut
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('restore') {
+      <svg lucideRotateCcw
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('permission') {
+      <svg lucideShield
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideActivity
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ action() || 'Unknown' }}
+</span>

@@ -1,0 +1,565 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div>
+        <p class="eyebrow">
+          Management
+        </p>
+
+        <h1>
+          Feature Flags
+        </h1>
+
+        <p class="subtitle">
+          Control feature availability, environment targeting and gradual rollout.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary"
+        routerLink="/app/management/feature-flags/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Create Feature Flag
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Refresh
+      </button>
+
+
+      <a
+        class="secondary"
+        routerLink="/app/management/feature-flags/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Analytics
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideFlag
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Flags
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideToggleRight
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Enabled on Page
+        </span>
+
+        <strong>
+          {{ enabledCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideGauge
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Average Rollout
+        </span>
+
+        <strong>
+          {{
+            averageRollout() |
+            number:'1.0-1'
+          }}%
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideLayers3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Environments on Page
+        </span>
+
+        <strong>
+          {{ environmentCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search key, name or description..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="environment()"
+      (ngModelChange)="environment.set($event); filterChanged()"
+    >
+      <option value="">
+        All Environments
+      </option>
+
+      <option value="All">
+        All
+      </option>
+
+      <option value="Development">
+        Development
+      </option>
+
+      <option value="Testing">
+        Testing
+      </option>
+
+      <option value="Staging">
+        Staging
+      </option>
+
+      <option value="Production">
+        Production
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="enabledFilter()"
+      (ngModelChange)="enabledFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Statuses
+      </option>
+
+      <option value="true">
+        Enabled
+      </option>
+
+      <option value="false">
+        Disabled
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="includeDeleted()"
+      (ngModelChange)="includeDeleted.set($event === 'true'); filterChanged()"
+    >
+      <option value="false">
+        Active Records
+      </option>
+
+      <option value="true">
+        Include Deleted
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load feature flags from the API.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading feature flags...
+      </div>
+
+    } @else if (
+      items().length === 0
+    ) {
+      <div class="state">
+        No feature flags found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('name')"
+                >
+                  Feature
+                  {{ sortIndicator('name') }}
+                </button>
+              </th>
+
+
+              <th>
+                Environment
+              </th>
+
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('rolloutPercentage')"
+                >
+                  Rollout
+                  {{ sortIndicator('rolloutPercentage') }}
+                </button>
+              </th>
+
+
+              <th>
+                Status
+              </th>
+
+
+              <th>
+                Start
+              </th>
+
+
+              <th>
+                End
+              </th>
+
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <a
+                    class="title-link"
+                    [routerLink]="[
+                      '/app/management/feature-flags',
+                      item.id
+                    ]"
+                  >
+                    {{ item.name }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.key }}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  <app-feature-flag-environment-badge
+                    [environment]="item.environment"
+                  />
+                </td>
+
+
+                <td>
+
+                  <div class="rollout">
+
+                    <div class="rollout-track">
+                      <div
+                        class="rollout-fill"
+                        [style.width.%]="item.rolloutPercentage ?? 100"
+                      ></div>
+                    </div>
+
+                    <strong>
+                      {{ item.rolloutPercentage ?? 100 }}%
+                    </strong>
+
+                  </div>
+
+                </td>
+
+
+                <td>
+                  <app-feature-flag-status-badge
+                    [enabled]="item.isEnabled"
+                    [deleted]="item.isDeleted"
+                  />
+                </td>
+
+
+                <td>
+                  {{
+                    item.startsAtUtc
+                      ? (
+                          item.startsAtUtc |
+                          date:'mediumDate'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.endsAtUtc
+                      ? (
+                          item.endsAtUtc |
+                          date:'mediumDate'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/management/feature-flags',
+                        item.id
+                      ]"
+                      title="View"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/management/feature-flags',
+                          item.id,
+                          'edit'
+                        ]"
+                        title="Edit"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Enable / Disable"
+                        (click)="toggleEnabled(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        title="Delete"
+                        (click)="deleteItem(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Restore"
+                        (click)="restoreItem(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

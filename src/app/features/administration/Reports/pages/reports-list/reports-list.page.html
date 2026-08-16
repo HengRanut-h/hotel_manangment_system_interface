@@ -1,0 +1,436 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div>
+        <p class="eyebrow">
+          Analytics
+        </p>
+
+        <h1>
+          Reports
+        </h1>
+
+        <p class="subtitle">
+          Browse and run hotel operational and management reports.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Refresh
+      </button>
+
+
+      <a
+        class="secondary"
+        routerLink="/app/analytics/reports/history"
+      >
+        <svg lucideHistory
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Run History
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideChartNoAxesCombined
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Reports
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Active on Page
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Inactive on Page
+        </span>
+
+        <strong>
+          {{ inactiveCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideLayers3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Categories on Page
+        </span>
+
+        <strong>
+          {{ categoryCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search report name or code..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="category()"
+      (ngModelChange)="category.set($event); filterChanged()"
+    >
+      <option value="">
+        All Categories
+      </option>
+
+      <option value="FrontOffice">
+        Front Office
+      </option>
+
+      <option value="Finance">
+        Finance
+      </option>
+
+      <option value="Housekeeping">
+        Housekeeping
+      </option>
+
+      <option value="Maintenance">
+        Maintenance
+      </option>
+
+      <option value="Inventory">
+        Inventory
+      </option>
+
+      <option value="Purchasing">
+        Purchasing
+      </option>
+
+      <option value="HumanResources">
+        Human Resources
+      </option>
+
+      <option value="Security">
+        Security
+      </option>
+
+      <option value="Utilities">
+        Utilities
+      </option>
+
+      <option value="Management">
+        Management
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Statuses
+      </option>
+
+      <option value="true">
+        Active
+      </option>
+
+      <option value="false">
+        Inactive
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load reports from the API.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading reports...
+      </div>
+
+    } @else if (
+      items().length === 0
+    ) {
+      <div class="state">
+        No reports found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                Report
+              </th>
+
+              <th>
+                Category
+              </th>
+
+              <th>
+                Default Format
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <a
+                    class="title-link"
+                    [routerLink]="[
+                      '/app/analytics/reports',
+                      item.id
+                    ]"
+                  >
+                    {{ item.name }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.code || '—' }}
+                  </div>
+                </td>
+
+
+                <td>
+                  <app-report-category-badge
+                    [category]="item.category"
+                  />
+                </td>
+
+
+                <td>
+                  {{ item.defaultFormat || 'Pdf' }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.isActive === false
+                      ? 'Inactive'
+                      : 'Active'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/analytics/reports',
+                        item.id
+                      ]"
+                      title="View"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/analytics/reports',
+                        item.id,
+                        'run'
+                      ]"
+                      title="Run report"
+                    >
+                      <svg lucidePlay
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

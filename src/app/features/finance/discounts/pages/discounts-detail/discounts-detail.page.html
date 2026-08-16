@@ -1,0 +1,347 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/discounts"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'discounts.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'discounts.states.loadingDetail' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    discount();
+    as item
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideTicketPercent
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            {{ 'discounts.detail.section' | translate }}
+          </p>
+
+          <h1>
+            {{ item.name }}
+          </h1>
+
+          <p class="subtitle">
+            {{ item.code || item.id }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-discount-type-badge
+          [type]="item.type"
+        />
+
+        <app-discount-status-badge
+          [active]="item.isActive"
+          [deleted]="item.isDeleted"
+        />
+
+
+        @if (
+          !item.isDeleted
+        ) {
+
+          <a
+            class="secondary-button"
+            [routerLink]="[
+              '/app/finance/discounts',
+              item.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'discounts.actions.edit' | translate }}
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="toggleActive()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              (
+                item.isActive
+                  ? 'discounts.actions.deactivate'
+                  : 'discounts.actions.activate'
+              ) | translate
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="actionLoading()"
+            (click)="deleteDiscount()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'discounts.actions.delete' | translate }}
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'discounts.actions.restore' | translate }}
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+        <h2>
+          {{ 'discounts.detail.discountInfo' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'discounts.fields.type' | translate }}
+            </dt>
+
+            <dd>
+              <app-discount-type-badge
+                [type]="item.type"
+              />
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.value' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.value |
+                number:'1.2-2'
+              }}
+              {{ item.isPercentage ? '%' : '' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.appliesTo' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.appliesTo || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.status' | translate }}
+            </dt>
+
+            <dd>
+              <app-discount-status-badge
+                [active]="item.isActive"
+                [deleted]="item.isDeleted"
+              />
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card">
+        <h2>
+          {{ 'discounts.detail.rules' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'discounts.fields.minimumAmount' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.minimumAmount ?? '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.maximumDiscountAmount' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.maximumDiscountAmount ?? '—' }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card">
+        <h2>
+          <svg lucideCalendarDays
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'discounts.detail.validity' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'discounts.fields.validFrom' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.validFromUtc
+                  ? (
+                      item.validFromUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.validTo' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.validToUtc
+                  ? (
+                      item.validToUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card">
+        <h2>
+          <svg lucideGauge
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'discounts.detail.usage' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'discounts.fields.usageLimit' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.usageLimit ?? '∞' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'discounts.fields.usedCount' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.usedCount ?? 0 }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+
+      <article class="card description-card">
+        <h2>
+          <svg lucideFileText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'discounts.fields.description' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.description ||
+            ('discounts.common.noDescription' | translate)
+          }}
+        </p>
+      </article>
+
+    </div>
+
+  }
+
+</section>

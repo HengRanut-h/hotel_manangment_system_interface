@@ -1,0 +1,72 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/utility-meters',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePencil
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Edit Utility Meter
+        </h1>
+
+        <p class="subtitle">
+          Update meter assignment and configuration.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading meter...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load or update utility meter.
+    </div>
+
+  } @else if (
+    item();
+    as meter
+  ) {
+    <app-utility-meter-form
+      [initialValue]="meter"
+      [submitting]="submitting()"
+      submitLabel="Update Meter"
+      (submitted)="update($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

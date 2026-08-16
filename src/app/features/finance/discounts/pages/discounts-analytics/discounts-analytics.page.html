@@ -1,0 +1,119 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/discounts"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'discounts.actions.back' | translate }}
+  </a>
+
+
+  <div class="header">
+    <svg lucideBarChart3
+      [size]="26"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'discounts.analytics.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'discounts.analytics.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'discounts.states.loadingAnalytics' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="stats">
+
+      <article>
+        <svg lucideTicketPercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'discounts.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ total() }}
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'discounts.status.active' | translate }}
+        </span>
+
+        <strong>
+          {{ active() }}
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'discounts.status.inactive' | translate }}
+        </span>
+
+        <strong>
+          {{ inactive() }}
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideTicketPercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'discounts.types.percentage' | translate }}
+        </span>
+
+        <strong>
+          {{ percentage() }}
+        </strong>
+      </article>
+
+    </div>
+
+  }
+
+</section>

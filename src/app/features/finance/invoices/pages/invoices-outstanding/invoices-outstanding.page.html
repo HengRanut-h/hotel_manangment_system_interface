@@ -1,0 +1,218 @@
+
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/invoices">
+    <svg lucideArrowLeft></svg>
+    <span>{{ 'invoices.backToList' | translate }}</span>
+  </a>
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'invoices.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'invoices.outstandingCenter' | translate }}
+      </h1>
+
+      <p>
+        {{ 'invoices.outstandingDescription' | translate }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="refresh-button"
+      [disabled]="loading()"
+      (click)="load()">
+      <svg lucideRefreshCw></svg>
+      <span>{{ 'invoices.refresh' | translate }}</span>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'invoices.loading' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+      <strong>{{ 'invoices.loadFailed' | translate }}</strong>
+      <span>{{ errorMessage() }}</span>
+
+      <button type="button" (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.outstandingInvoices' | translate }}</span>
+          <strong>{{ outstandingItems().length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideCircleDollarSign></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.outstandingAmount' | translate }}</span>
+          <strong>{{ outstandingAmount() | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideCalendarDays></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.overdueInvoices' | translate }}</span>
+          <strong>{{ overdueItems().length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--red">
+          <svg lucideTriangleAlert></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.overdueAmount' | translate }}</span>
+          <strong class="danger-value">
+            {{ overdueAmount() | number:'1.2-2' }}
+          </strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <header class="panel-heading">
+        <div>
+          <h2>{{ 'invoices.outstandingInvoices' | translate }}</h2>
+          <p>
+            {{
+              'invoices.dueSoonCount'
+                | translate:{ count: dueSoonItems().length }
+            }}
+          </p>
+        </div>
+
+        <svg lucideCalendarDays></svg>
+      </header>
+
+      @if (outstandingItems().length === 0) {
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+          <strong>{{ 'invoices.noOutstanding' | translate }}</strong>
+          <span>
+            {{ 'invoices.noOutstandingDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'invoices.invoiceNumber' | translate }}</th>
+                <th>{{ 'invoices.guest' | translate }}</th>
+                <th>{{ 'invoices.dueDate' | translate }}</th>
+                <th>{{ 'invoices.totalAmount' | translate }}</th>
+                <th>{{ 'invoices.paidAmount' | translate }}</th>
+                <th>{{ 'invoices.balanceAmount' | translate }}</th>
+                <th>{{ 'invoices.status' | translate }}</th>
+                <th>{{ 'invoices.dueState' | translate }}</th>
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                invoice of outstandingItems();
+                track invoice.id
+              ) {
+                <tr>
+                  <td>
+                    <strong>{{ invoice.invoiceNumber || '—' }}</strong>
+                  </td>
+                  <td>{{ invoice.guestName || '—' }}</td>
+                  <td>
+                    {{
+                      invoice.dueDate
+                        ? (invoice.dueDate | date:'mediumDate')
+                        : '—'
+                    }}
+                  </td>
+                  <td>{{ invoice.totalAmount | number:'1.2-2' }}</td>
+                  <td>{{ invoice.paidAmount | number:'1.2-2' }}</td>
+                  <td>
+                    <strong class="balance-value">
+                      {{ invoice.balanceAmount | number:'1.2-2' }}
+                    </strong>
+                  </td>
+                  <td>
+                    <app-invoice-status-badge
+                      [status]="invoice.status" />
+                  </td>
+                  <td>
+                    @if (isOverdue(invoice)) {
+                      <span class="due-badge due-badge--overdue">
+                        {{
+                          'invoices.daysOverdue'
+                            | translate:{
+                                days:
+                                  -(daysRelativeToDue(invoice) ?? 0)
+                              }
+                        }}
+                      </span>
+                    } @else if (isDueSoon(invoice)) {
+                      <span class="due-badge due-badge--soon">
+                        {{
+                          'invoices.dueInDays'
+                            | translate:{
+                                days:
+                                  daysRelativeToDue(invoice) ?? 0
+                              }
+                        }}
+                      </span>
+                    } @else {
+                      <span class="due-badge">
+                        {{ 'invoices.outstanding' | translate }}
+                      </span>
+                    }
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <a
+                        class="icon-action"
+                        [routerLink]="[
+                          '/app/front-office/invoices',
+                          invoice.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  }
+</div>

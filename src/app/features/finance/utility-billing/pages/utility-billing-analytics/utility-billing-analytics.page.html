@@ -1,0 +1,142 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityBilling.analytics.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'utilityBilling.analytics.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideActivity
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.analytics.readingsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ readings().length }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--green">
+        <svg lucideActivity
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.analytics.totalUsage' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalUsage() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.analytics.totalAmount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideActivity
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.analytics.averageUsage' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageUsage() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

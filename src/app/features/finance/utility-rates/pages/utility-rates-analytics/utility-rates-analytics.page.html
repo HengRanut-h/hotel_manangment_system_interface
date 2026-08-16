@@ -1,0 +1,131 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-rates"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityRates.analytics.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'utilityRates.analytics.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ total() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.status.active' | translate }}
+        </span>
+
+        <strong>
+          {{ active() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.analytics.averageRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageRate() |
+            number:'1.2-4'
+          }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityRates.analytics.maxRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            maxRate() |
+            number:'1.2-4'
+          }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+</section>

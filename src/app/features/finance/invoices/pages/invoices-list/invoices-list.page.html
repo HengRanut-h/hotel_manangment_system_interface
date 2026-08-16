@@ -1,0 +1,401 @@
+
+<div class="page">
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'invoices.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'invoices.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'invoices.description' | translate }}
+      </p>
+
+      <div class="live-indicator">
+        <span class="live-dot"></span>
+        <span>{{ 'invoices.liveData' | translate }}</span>
+
+        @if (lastUpdated(); as updated) {
+          <small>
+            {{ updated | date:'mediumTime' }}
+          </small>
+        }
+      </div>
+    </div>
+
+    <div class="heading-actions">
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="refreshing() || loading()"
+        (click)="refresh()">
+
+        @if (refreshing()) {
+          <app-spin
+            [inline]="true"
+            size="small"
+            label="" />
+        } @else {
+          <svg lucideRefreshCw></svg>
+        }
+
+        <span>{{ 'invoices.refresh' | translate }}</span>
+      </button>
+
+      @if (
+        auth.hasPermission(
+          'invoices.create'
+        )
+      ) {
+        <a
+          class="create-button"
+          routerLink="/app/front-office/invoices/create">
+          <svg lucideCirclePlus></svg>
+          <span>{{ 'invoices.create' | translate }}</span>
+        </a>
+      }
+    </div>
+  </header>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'invoices.loading' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'invoices.loadFailed' | translate }}
+      </strong>
+
+      <span>{{ errorMessage() }}</span>
+
+      <button type="button" (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.loadedInvoices' | translate }}</span>
+          <strong>{{ items().length }}</strong>
+
+          @if (
+            backendTotalItems() !== items().length
+          ) {
+            <small>
+              {{
+                'invoices.backendTotal'
+                  | translate:{ total: backendTotalItems() }
+              }}
+            </small>
+          }
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideCalendarDays></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.billedLoaded' | translate }}</span>
+          <strong>
+            {{ totalBilled() | number:'1.2-2' }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideCheckCircle2></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.paidLoaded' | translate }}</span>
+          <strong>
+            {{ totalPaid() | number:'1.2-2' }}
+          </strong>
+          <small>
+            {{
+              'invoices.paidCount'
+                | translate:{ count: paidCount() }
+            }}
+          </small>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideCalendarDays></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.outstandingLoaded' | translate }}</span>
+          <strong>
+            {{ totalOutstanding() | number:'1.2-2' }}
+          </strong>
+          <small>
+            {{
+              'invoices.overdueCount'
+                | translate:{ count: overdueCount() }
+            }}
+          </small>
+        </div>
+      </article>
+    </section>
+
+    <nav class="feature-nav">
+      <a routerLink="/app/front-office/invoices/outstanding">
+        {{ 'invoices.outstandingCenter' | translate }}
+      </a>
+
+      <a routerLink="/app/front-office/invoices/analytics">
+        {{ 'invoices.analytics' | translate }}
+      </a>
+    </nav>
+
+    <section class="panel">
+      <header class="toolbar">
+        <div class="search-field">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'invoices.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+        </div>
+
+        <select
+          class="filter-control"
+          [value]="status()"
+          (change)="setStatus($event)">
+          <option value="">
+            {{ 'invoices.allStatuses' | translate }}
+          </option>
+
+          @for (
+            option of statusOptions();
+            track option
+          ) {
+            <option [value]="option">
+              {{ option }}
+            </option>
+          }
+        </select>
+
+        <select
+          class="filter-control"
+          [value]="dueState()"
+          (change)="setDueState($event)">
+          <option value="all">
+            {{ 'invoices.allDueStates' | translate }}
+          </option>
+          <option value="outstanding">
+            {{ 'invoices.outstanding' | translate }}
+          </option>
+          <option value="overdue">
+            {{ 'invoices.overdue' | translate }}
+          </option>
+          <option value="dueSoon">
+            {{ 'invoices.dueSoon' | translate }}
+          </option>
+          <option value="paid">
+            {{ 'invoices.settled' | translate }}
+          </option>
+        </select>
+
+        <div class="date-filter">
+          <span>{{ 'invoices.from' | translate }}</span>
+          <input
+            type="date"
+            [value]="invoiceFrom()"
+            (input)="setInvoiceFrom($event)" />
+        </div>
+
+        <div class="date-filter">
+          <span>{{ 'invoices.to' | translate }}</span>
+          <input
+            type="date"
+            [value]="invoiceTo()"
+            (input)="setInvoiceTo($event)" />
+        </div>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+            <span>{{ 'common.clear' | translate }}</span>
+          </button>
+        }
+      </header>
+
+      @if (filteredItems().length === 0) {
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+          <strong>{{ 'invoices.noResults' | translate }}</strong>
+          <span>{{ 'invoices.noResultsDescription' | translate }}</span>
+        </div>
+
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'invoices.invoiceNumber' | translate }}</th>
+                <th>{{ 'invoices.guest' | translate }}</th>
+                <th>{{ 'invoices.invoiceDate' | translate }}</th>
+                <th>{{ 'invoices.dueDate' | translate }}</th>
+                <th>{{ 'invoices.totalAmount' | translate }}</th>
+                <th>{{ 'invoices.paidAmount' | translate }}</th>
+                <th>{{ 'invoices.balanceAmount' | translate }}</th>
+                <th>{{ 'invoices.status' | translate }}</th>
+                <th>{{ 'invoices.dueState' | translate }}</th>
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                invoice of pagedItems();
+                track invoice.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="invoice-number">
+                      {{ invoice.invoiceNumber || '—' }}
+                    </strong>
+                  </td>
+
+                  <td>{{ invoice.guestName || '—' }}</td>
+
+                  <td>
+                    {{
+                      invoice.invoiceDate
+                        ? (invoice.invoiceDate | date:'mediumDate')
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    {{
+                      invoice.dueDate
+                        ? (invoice.dueDate | date:'mediumDate')
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    <strong>
+                      {{ invoice.totalAmount | number:'1.2-2' }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    {{ invoice.paidAmount | number:'1.2-2' }}
+                  </td>
+
+                  <td>
+                    <strong
+                      [class.balance-positive]="
+                        invoice.balanceAmount > 0
+                      ">
+                      {{ invoice.balanceAmount | number:'1.2-2' }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <app-invoice-status-badge
+                      [status]="invoice.status" />
+                  </td>
+
+                  <td>
+                    <span
+                      class="due-badge"
+                      [class.due-badge--overdue]="isOverdue(invoice)"
+                      [class.due-badge--soon]="isDueSoon(invoice)"
+                      [class.due-badge--settled]="
+                        invoice.balanceAmount <= 0
+                      ">
+                      {{ dueLabelKey(invoice) | translate }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="row-actions">
+                      <a
+                        class="icon-action icon-action--view"
+                        [routerLink]="[
+                          '/app/front-office/invoices',
+                          invoice.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="pagination">
+          <span>
+            {{
+              'invoices.showingLoaded'
+                | translate:{
+                    count: pagedItems().length,
+                    total: filteredItems().length
+                  }
+            }}
+          </span>
+
+          <div>
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="!hasPreviousPage()"
+              (click)="previousPage()">
+              <svg lucideChevronLeft></svg>
+              <span>{{ 'common.previous' | translate }}</span>
+            </button>
+
+            <span class="page-number">
+              {{ 'common.page' | translate }}
+              <strong>{{ pageNumber() }}</strong>
+              {{ 'common.of' | translate }}
+              <strong>{{ totalPages() }}</strong>
+            </span>
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="!hasNextPage()"
+              (click)="nextPage()">
+              <span>{{ 'common.next' | translate }}</span>
+              <svg lucideChevronRight></svg>
+            </button>
+          </div>
+        </footer>
+      }
+    </section>
+  }
+</div>

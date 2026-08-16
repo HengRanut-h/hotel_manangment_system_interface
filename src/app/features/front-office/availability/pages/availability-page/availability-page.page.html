@@ -1,0 +1,220 @@
+<div class="page">
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'availability.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'availability.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'availability.description' | translate }}
+      </p>
+    </div>
+  </header>
+
+  <app-availability-search
+    [submitting]="loading()"
+    (searched)="search($event)" />
+
+  @if (loading()) {
+    <section class="loading-card">
+      <app-spin
+        size="large"
+        [label]="'availability.searching' | translate" />
+    </section>
+
+  } @else if (errorMessage()) {
+    <section class="state state--error">
+      <svg lucideBed></svg>
+
+      <strong>
+        {{ 'availability.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="retry()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (!searched()) {
+    <section class="state">
+      <svg lucideSearch></svg>
+
+      <strong>
+        {{ 'availability.searchFirst' | translate }}
+      </strong>
+
+      <span>
+        {{ 'availability.searchFirstDescription' | translate }}
+      </span>
+    </section>
+
+  } @else {
+    <app-availability-stats
+      [summary]="summary()" />
+
+    @if (lastQuery(); as query) {
+      <section class="search-context">
+        <div>
+          <span>
+            {{ 'availability.searchPeriod' | translate }}
+          </span>
+
+          <strong>
+            {{ query.checkInDate }}
+            →
+            {{ query.checkOutDate }}
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            {{ 'availability.nights' | translate }}
+          </span>
+
+          <strong>
+            {{ nights() }}
+          </strong>
+        </div>
+      </section>
+    }
+
+    <section class="results-panel">
+      <header class="results-heading">
+        <div>
+          <h2>
+            {{ 'availability.resultsTitle' | translate }}
+          </h2>
+
+          <p>
+            {{
+              'availability.resultsDescription'
+                | translate:{
+                    count: rooms().length
+                  }
+            }}
+          </p>
+        </div>
+      </header>
+
+      @if (rooms().length > 0) {
+        <div class="filters">
+          <div class="search-field">
+            <svg lucideSearch></svg>
+
+            <input
+              type="search"
+              autocomplete="off"
+              [value]="searchText()"
+              [placeholder]="'availability.filterSearchPlaceholder' | translate"
+              (input)="setSearchText($event)" />
+          </div>
+
+          <select
+            [value]="roomTypeFilter()"
+            (change)="setRoomTypeFilter($event)">
+            <option value="">
+              {{ 'availability.allRoomTypes' | translate }}
+            </option>
+
+            @for (
+              type of roomTypes();
+              track type.id
+            ) {
+              <option [value]="type.id">
+                {{ type.name }}
+              </option>
+            }
+          </select>
+
+          <select
+            [value]="statusFilter()"
+            (change)="setStatusFilter($event)">
+            <option value="">
+              {{ 'availability.allStatuses' | translate }}
+            </option>
+
+            @for (
+              status of statuses();
+              track status
+            ) {
+              <option [value]="status.toLowerCase()">
+                {{ status }}
+              </option>
+            }
+          </select>
+
+          @if (hasFilters()) {
+            <button
+              type="button"
+              class="clear-button"
+              (click)="clearFilters()">
+              <svg lucideX></svg>
+              {{ 'common.clear' | translate }}
+            </button>
+          }
+        </div>
+      }
+
+      @if (rooms().length === 0) {
+        <div class="empty">
+          <svg lucideBed></svg>
+
+          <strong>
+            {{ 'availability.noResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'availability.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else if (
+        filteredRooms().length === 0
+      ) {
+        <div class="empty">
+          <svg lucideSearch></svg>
+
+          <strong>
+            {{ 'availability.noFilteredResults' | translate }}
+          </strong>
+
+          <span>
+            {{ 'availability.noFilteredResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+        <div class="room-grid">
+          @for (
+            room of filteredRooms();
+            track room.id
+          ) {
+            <app-availability-room-card
+              [room]="room" />
+          }
+        </div>
+      }
+
+      <footer class="results-footer">
+        {{
+          'availability.showing'
+            | translate:{
+                shown: filteredRooms().length,
+                total: rooms().length
+              }
+        }}
+      </footer>
+    </section>
+  }
+</div>

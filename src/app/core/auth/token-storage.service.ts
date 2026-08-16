@@ -18,7 +18,7 @@ export class TokenStorageService {
   // READ
   // =========================================================
 
-  read(): AuthResponse | null {
+  get(): AuthResponse | null {
 
     try {
 
@@ -56,11 +56,16 @@ export class TokenStorageService {
     }
   }
 
+  read(): AuthResponse | null {
+
+    return this.get();
+  }
+
   // =========================================================
   // WRITE
   // =========================================================
 
-  write(
+  save(
     value: AuthResponse
   ): void {
 
@@ -69,6 +74,15 @@ export class TokenStorageService {
       JSON.stringify(
         value
       )
+    );
+  }
+
+  write(
+    value: AuthResponse
+  ): void {
+
+    this.save(
+      value
     );
   }
 
@@ -109,8 +123,26 @@ export class TokenStorageService {
     }
 
     if (
+      typeof session.accessTokenExpiresAtUtc !== 'string' ||
+      !this.isValidDate(
+        session.accessTokenExpiresAtUtc
+      )
+    ) {
+      return false;
+    }
+
+    if (
       typeof session.refreshToken !== 'string' ||
       !session.refreshToken
+    ) {
+      return false;
+    }
+
+    if (
+      typeof session.refreshTokenExpiresAtUtc !== 'string' ||
+      !this.isValidDate(
+        session.refreshTokenExpiresAtUtc
+      )
     ) {
       return false;
     }
@@ -123,5 +155,17 @@ export class TokenStorageService {
     }
 
     return true;
+  }
+
+  private isValidDate(
+    value: string
+  ): boolean {
+
+    return !Number.isNaN(
+      new Date(
+        value
+      )
+        .getTime()
+    );
   }
 }

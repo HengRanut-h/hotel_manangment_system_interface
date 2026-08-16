@@ -1,0 +1,401 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/refunds"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'refunds.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'refunds.states.loadingDetail' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    refund();
+    as item
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideRotateCcw
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            {{ 'refunds.detail.section' | translate }}
+          </p>
+
+          <h1>
+            {{
+              item.refundNumber ||
+              ('refunds.detail.refund' | translate)
+            }}
+          </h1>
+
+          <p class="subtitle">
+            {{ item.referenceNumber || item.id }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="badges">
+
+        <app-refund-reason-badge
+          [reason]="item.reason"
+        />
+
+        <app-refund-status-badge
+          [status]="item.status"
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          <svg lucideCircleDollarSign
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'refunds.detail.refundInfo' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.amount' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.amount |
+                number:'1.2-2'
+              }}
+              {{ item.currency || '' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.reason' | translate }}
+            </dt>
+
+            <dd>
+              <app-refund-reason-badge
+                [reason]="item.reason"
+              />
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.method' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.method || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.status' | translate }}
+            </dt>
+
+            <dd>
+              <app-refund-status-badge
+                [status]="item.status"
+              />
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideReceiptText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'refunds.detail.references' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.reference' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.referenceNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.transaction' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.transactionId || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.payment' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.paymentNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.invoice' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.invoiceNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.reservation' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.reservationNumber || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideUserRound
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'refunds.detail.guest' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.guestName' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.guestName ||
+                ('refunds.common.unknownGuest' | translate)
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.guestId' | translate }}
+            </dt>
+
+            <dd class="wrap">
+              {{ item.guestId || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideClock3
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'refunds.detail.timeline' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.requestedAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.requestedAtUtc
+                  ? (
+                      item.requestedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.processedAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.processedAtUtc
+                  ? (
+                      item.processedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          {{ 'refunds.detail.audit' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.created' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'refunds.fields.updated' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.updatedAtUtc
+                  ? (
+                      item.updatedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card notes-card">
+
+        <h2>
+          <svg lucideFileText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'refunds.fields.notes' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.notes ||
+            ('refunds.common.noNotes' | translate)
+          }}
+        </p>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

@@ -1,0 +1,64 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/utility-rates',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityRates.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+    <svg lucidePencil
+      [size]="24"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'utilityRates.edit.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'utilityRates.edit.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityRates.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as rate
+  ) {
+    <app-utility-rate-form
+      [initialValue]="rate"
+      [submitting]="submitting()"
+      submitLabelKey="utilityRates.actions.update"
+      (submitted)="update($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

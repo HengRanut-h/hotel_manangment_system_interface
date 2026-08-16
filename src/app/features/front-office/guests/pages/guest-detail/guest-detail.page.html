@@ -1,0 +1,350 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+      <a
+        class="back-link"
+        routerLink="/app/front-office/guests">
+
+        <svg lucideArrowLeft></svg>
+
+        {{ 'guests.backToGuests' | translate }}
+
+      </a>
+
+      <span class="eyebrow">
+        {{ 'guests.section' | translate }}
+      </span>
+
+      <h1>
+        {{
+          guest()?.fullName
+          ||
+          ('guests.detailTitle' | translate)
+        }}
+      </h1>
+
+      <p>
+        {{ 'guests.detailDescription' | translate }}
+      </p>
+    </div>
+
+    @if (
+      guest();
+      as item
+    ) {
+
+      <div class="heading-actions">
+
+        <app-guest-vip-badge
+          [isVip]="item.isVip" />
+
+        @if (
+          auth.hasPermission(
+            'guests.update'
+          )
+        ) {
+
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/front-office/guests',
+              item.id,
+              'edit'
+            ]">
+
+            <svg lucidePencil></svg>
+
+            {{ 'guests.editGuest' | translate }}
+
+          </a>
+
+        }
+
+      </div>
+
+    }
+
+  </header>
+
+  @if (loading()) {
+
+    <section class="loading-card">
+
+      <app-spin
+        size="large"
+        [label]="'guests.loadingGuest' | translate" />
+
+    </section>
+
+  } @else if (errorMessage()) {
+
+    <section class="state state--error">
+
+      <strong>
+        {{ 'guests.detailLoadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        {{ 'guests.tryAgain' | translate }}
+
+      </button>
+
+    </section>
+
+  } @else if (
+    guest();
+    as item
+  ) {
+
+    <section class="profile-card">
+
+      <div class="avatar">
+        {{
+          item.firstName
+            .slice(0, 1)
+            .toUpperCase()
+        }}
+        {{
+          item.lastName
+            .slice(0, 1)
+            .toUpperCase()
+        }}
+      </div>
+
+      <div class="profile-copy">
+
+        <span>
+          {{ 'guests.guestProfile' | translate }}
+        </span>
+
+        <h2>
+          {{ item.fullName }}
+        </h2>
+
+        <app-guest-vip-badge
+          [isVip]="item.isVip" />
+
+      </div>
+
+    </section>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+
+        <header>
+
+          <span class="detail-icon detail-icon--purple">
+            <svg lucideUserRound></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'guests.personalInformation' | translate }}
+            </h2>
+
+            <p>
+              {{ 'guests.personalInformationHelp' | translate }}
+            </p>
+          </div>
+
+        </header>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'guests.firstName' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.firstName || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'guests.lastName' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.lastName || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'guests.guestType' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                (
+                  item.isVip
+                    ? 'guests.vip'
+                    : 'guests.regular'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'guests.createdAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc
+                        | date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+      <article class="detail-card">
+
+        <header>
+
+          <span class="detail-icon detail-icon--blue">
+            <svg lucidePhone></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'guests.contactInformation' | translate }}
+            </h2>
+
+            <p>
+              {{ 'guests.contactInformationHelp' | translate }}
+            </p>
+          </div>
+
+        </header>
+
+        <div class="contact-list">
+
+          <div>
+
+            <span class="contact-icon">
+              <svg lucidePhone></svg>
+            </span>
+
+            <div>
+              <span>
+                {{ 'guests.phone' | translate }}
+              </span>
+
+              <strong>
+                {{ item.phone || '—' }}
+              </strong>
+            </div>
+
+          </div>
+
+          <div>
+
+            <span class="contact-icon">
+              <svg lucideMail></svg>
+            </span>
+
+            <div>
+              <span>
+                {{ 'guests.email' | translate }}
+              </span>
+
+              <strong>
+                {{ item.email || '—' }}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+      <article class="detail-card detail-card--wide">
+
+        <header>
+
+          <span class="detail-icon detail-icon--green">
+            <svg lucideLink></svg>
+          </span>
+
+          <div>
+            <h2>
+              {{ 'guests.accountInformation' | translate }}
+            </h2>
+
+            <p>
+              {{ 'guests.accountInformationHelp' | translate }}
+            </p>
+          </div>
+
+        </header>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'guests.portalAccount' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                (
+                  item.userId
+                    ? 'guests.linked'
+                    : 'guests.notLinked'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'guests.profileType' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                (
+                  item.isVip
+                    ? 'guests.vipGuest'
+                    : 'guests.regularGuest'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+    </section>
+
+  }
+
+</div>

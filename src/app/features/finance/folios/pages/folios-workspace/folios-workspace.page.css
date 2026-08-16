@@ -1,0 +1,225 @@
+.page {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #6941c6;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: #101828;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.page-heading p {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.create-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  border: 1px solid #2f69ff;
+  border-radius: 10px;
+  padding: 0 14px;
+  background: #2f69ff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.create-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.workspace-card {
+  display: flex;
+  gap: 16px;
+  min-width: 0;
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+  padding: 20px;
+  background: #fff;
+}
+
+.workspace-card--info {
+  background: #fcfcfd;
+}
+
+.workspace-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  border: 1px solid #d6bbfb;
+  border-radius: 12px;
+  background: #f9f5ff;
+  color: #7f56d9;
+}
+
+.workspace-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.workspace-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.workspace-content h2 {
+  margin: 0;
+  color: #101828;
+  font-size: 17px;
+}
+
+.workspace-content p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.open-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.open-form input {
+  min-width: 0;
+  flex: 1;
+  min-height: 42px;
+  box-sizing: border-box;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 9px 12px;
+  outline: none;
+  font: inherit;
+}
+
+.open-form input:focus {
+  border-color: #84adff;
+  box-shadow: 0 0 0 3px rgba(47, 105, 255, .10);
+}
+
+.open-form button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 0 14px;
+  background: #fff;
+  color: #344054;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.open-form button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.open-form button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.workflow-steps {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.workflow-steps span {
+  border: 1px solid #eaecf0;
+  border-radius: 9px;
+  padding: 9px 11px;
+  background: #fff;
+  color: #475467;
+  font-size: 13px;
+}
+
+.contract-note {
+  border: 1px solid #fedf89;
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #fffaeb;
+}
+
+.contract-note strong {
+  color: #93370d;
+  font-size: 14px;
+}
+
+.contract-note p {
+  margin: 6px 0 0;
+  color: #b54708;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .page-heading {
+    flex-direction: column;
+  }
+
+  .create-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .workspace-card {
+    flex-direction: column;
+  }
+
+  .open-form {
+    flex-direction: column;
+  }
+}

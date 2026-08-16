@@ -1,0 +1,21 @@
+<div class="form-page">
+  <header>
+    <span>
+      {{ 'roomAssignments.section' | translate }}
+    </span>
+
+    <h1>
+      {{ 'roomAssignments.create' | translate }}
+    </h1>
+
+    <p>
+      {{ 'roomAssignments.createDescription' | translate }}
+    </p>
+  </header>
+
+  <app-room-assignment-form
+    submitLabel="roomAssignments.create"
+    [submitting]="submitting()"
+    (submitted)="submit($event)"
+    (cancelled)="cancel()" />
+</div>

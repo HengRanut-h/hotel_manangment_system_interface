@@ -1,0 +1,51 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  min-height: 28px;
+
+  padding:
+    4px 9px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+.low {
+  background:
+    #f2f4f7;
+
+  color:
+    #475467;
+}
+
+.normal {
+  background:
+    #eff8ff;
+
+  color:
+    #175cd3;
+}
+
+.high {
+  background:
+    #fffaeb;
+
+  color:
+    #b54708;
+}
+
+.urgent {
+  background:
+    #fef3f2;
+
+  color:
+    #b42318;
+}

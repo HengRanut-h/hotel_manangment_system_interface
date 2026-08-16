@@ -1,0 +1,568 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        {{ 'roomChanges.section' | translate }}
+      </p>
+
+      <h1>
+        {{ 'roomChanges.title' | translate }}
+      </h1>
+
+      <p class="subtitle">
+        {{ 'roomChanges.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <a
+      class="secondary-button"
+      routerLink="/app/front-office/room-changes/analytics"
+    >
+      <svg lucideBarChart3></svg>
+
+      <span>
+        {{ 'roomChanges.actions.analytics' | translate }}
+      </span>
+    </a>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+
+      <svg
+        class="summary-icon summary-icon--purple"
+        lucideClipboardList></svg>
+
+      <div>
+        <span>
+          {{ 'roomChanges.summary.total' | translate }}
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <svg
+        class="summary-icon summary-icon--green"
+        lucideCheckCircle2></svg>
+
+      <div>
+        <span>
+          {{ 'roomChanges.summary.completed' | translate }}
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <svg
+        class="summary-icon summary-icon--blue"
+        lucideCircleCheck></svg>
+
+      <div>
+        <span>
+          {{ 'roomChanges.summary.approved' | translate }}
+        </span>
+
+        <strong>
+          {{ approvedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <svg
+        class="summary-icon summary-icon--amber"
+        lucideClock></svg>
+
+      <div>
+        <span>
+          {{ 'roomChanges.summary.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search-box">
+
+      <svg lucideSearch></svg>
+
+      <input
+        type="search"
+        [placeholder]="'roomChanges.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="onSearch()"
+      />
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="onSearch()"
+      >
+        <svg lucideSearch></svg>
+
+        <span>
+          {{ 'roomChanges.actions.search' | translate }}
+        </span>
+      </button>
+
+    </div>
+
+
+    <select
+      [ngModel]="status()"
+      (ngModelChange)="status.set($event); onFilterChange()"
+    >
+
+      <option value="">
+        {{ 'roomChanges.filters.allStatuses' | translate }}
+      </option>
+
+      <option value="Pending">
+        {{ 'roomChanges.status.pending' | translate }}
+      </option>
+
+      <option value="Approved">
+        {{ 'roomChanges.status.approved' | translate }}
+      </option>
+
+      <option value="Completed">
+        {{ 'roomChanges.status.completed' | translate }}
+      </option>
+
+      <option value="Rejected">
+        {{ 'roomChanges.status.rejected' | translate }}
+      </option>
+
+      <option value="Cancelled">
+        {{ 'roomChanges.status.cancelled' | translate }}
+      </option>
+
+    </select>
+
+
+    <button
+      type="button"
+      class="ghost-button"
+      (click)="clearFilters()"
+    >
+      <svg lucideX></svg>
+
+      <span>
+        {{ 'roomChanges.actions.clear' | translate }}
+      </span>
+    </button>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+
+    <div class="alert error-alert">
+
+      <div>
+
+        <strong>
+          {{ 'roomChanges.errors.title' | translate }}
+        </strong>
+
+        <p>
+          {{ errorKey()! | translate }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="ghost-button"
+        (click)="loadRoomChanges()"
+      >
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'roomChanges.actions.retry' | translate }}
+        </span>
+      </button>
+
+    </div>
+
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+
+      <div class="state">
+
+        <div class="spinner"></div>
+
+        <p>
+          {{ 'roomChanges.states.loading' | translate }}
+        </p>
+
+      </div>
+
+    } @else if (
+      roomChanges().length ===
+      0
+    ) {
+
+      <div class="state">
+
+        <svg lucideClipboardList></svg>
+
+        <h3>
+          {{ 'roomChanges.states.emptyTitle' | translate }}
+        </h3>
+
+        <p>
+          {{ 'roomChanges.states.emptyDescription' | translate }}
+        </p>
+
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('requestedAtUtc')"
+                >
+                  {{ 'roomChanges.fields.requested' | translate }}
+                  {{ sortIndicator('requestedAtUtc') }}
+                </button>
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('reservationNumber')"
+                >
+                  {{ 'roomChanges.fields.reservation' | translate }}
+                  {{ sortIndicator('reservationNumber') }}
+                </button>
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('guestName')"
+                >
+                  {{ 'roomChanges.fields.guest' | translate }}
+                  {{ sortIndicator('guestName') }}
+                </button>
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('fromRoomNumber')"
+                >
+                  {{ 'roomChanges.fields.fromRoom' | translate }}
+                  {{ sortIndicator('fromRoomNumber') }}
+                </button>
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('toRoomNumber')"
+                >
+                  {{ 'roomChanges.fields.toRoom' | translate }}
+                  {{ sortIndicator('toRoomNumber') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'roomChanges.fields.reason' | translate }}
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('status')"
+                >
+                  {{ 'roomChanges.fields.status' | translate }}
+                  {{ sortIndicator('status') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'roomChanges.fields.actions' | translate }}
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of roomChanges();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{
+                      item.requestedAtUtc
+                        ? (
+                            item.requestedAtUtc |
+                            date:'mediumDate'
+                          )
+                        : '—'
+                    }}
+                  </div>
+
+                  <div class="secondary-cell">
+                    {{
+                      item.requestedAtUtc
+                        ? (
+                            item.requestedAtUtc |
+                            date:'shortTime'
+                          )
+                        : ''
+                    }}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  {{ item.reservationNumber || '—' }}
+                </td>
+
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{
+                      item.guestName ||
+                      ('roomChanges.common.unknownGuest' | translate)
+                    }}
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{ item.fromRoomNumber || '—' }}
+                  </div>
+
+                  @if (
+                    item.fromRoomTypeName
+                  ) {
+
+                    <div class="secondary-cell">
+                      {{ item.fromRoomTypeName }}
+                    </div>
+
+                  }
+
+                </td>
+
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{ item.toRoomNumber || '—' }}
+                  </div>
+
+                  @if (
+                    item.toRoomTypeName
+                  ) {
+
+                    <div class="secondary-cell">
+                      {{ item.toRoomTypeName }}
+                    </div>
+
+                  }
+
+                </td>
+
+
+                <td class="reason-cell">
+                  {{
+                    item.reason ||
+                    ('roomChanges.common.noReason' | translate)
+                  }}
+                </td>
+
+
+                <td>
+
+                  <app-room-change-status-badge
+                    [status]="item.status"
+                  />
+
+                </td>
+
+
+                <td class="actions">
+
+                  <a
+                    class="details-link"
+                    [routerLink]="[
+                      '/app/front-office/room-changes',
+                      item.id
+                    ]"
+                  >
+                    <svg lucideEye></svg>
+
+                    <span>
+                      {{ 'roomChanges.actions.view' | translate }}
+                    </span>
+                  </a>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <div class="page-size">
+
+        <span>
+          {{ 'roomChanges.pagination.rows' | translate }}
+        </span>
+
+        <select
+          [ngModel]="pageSize()"
+          (ngModelChange)="changePageSize($event)"
+        >
+          <option [ngValue]="10">
+            10
+          </option>
+
+          <option [ngValue]="20">
+            20
+          </option>
+
+          <option [ngValue]="50">
+            50
+          </option>
+
+          <option [ngValue]="100">
+            100
+          </option>
+        </select>
+
+      </div>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          <svg lucideChevronLeft></svg>
+
+          {{ 'roomChanges.pagination.previous' | translate }}
+        </button>
+
+
+        @for (
+          page of pageNumbers();
+          track page
+        ) {
+
+          <button
+            type="button"
+            [class.active]="page === pageNumber()"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+
+        }
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'roomChanges.pagination.next' | translate }}
+
+          <svg lucideChevronRight></svg>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

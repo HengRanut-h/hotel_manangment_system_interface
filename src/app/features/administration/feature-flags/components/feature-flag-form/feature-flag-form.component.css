@@ -1,0 +1,291 @@
+.form-card {
+  padding:
+    22px;
+
+  border:
+    1px solid #eaecf0;
+
+  border-radius:
+    18px;
+
+  background:
+    #fff;
+}
+
+.form-header {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  margin-bottom:
+    22px;
+}
+
+.form-icon {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  width:
+    42px;
+
+  height:
+    42px;
+
+  border:
+    1px solid #e4e7ec;
+
+  border-radius:
+    13px;
+
+  background:
+    #f9fafb;
+}
+
+.form-header h2 {
+  margin:
+    0;
+
+  font-size:
+    20px;
+}
+
+.form-header p {
+  margin:
+    5px 0 0;
+
+  color:
+    #667085;
+}
+
+.validation {
+  margin-bottom:
+    16px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid #fecdca;
+
+  border-radius:
+    12px;
+
+  background:
+    #fef3f2;
+
+  color:
+    #b42318;
+}
+
+.form-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    16px;
+}
+
+.field {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    7px;
+}
+
+.field span,
+.checkbox-field span {
+  color:
+    #344054;
+
+  font-size:
+    13px;
+
+  font-weight:
+    700;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width:
+    100%;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid #d0d5dd;
+
+  border-radius:
+    11px;
+
+  background:
+    #fff;
+
+  padding:
+    10px 12px;
+
+  color:
+    #101828;
+
+  font:
+    inherit;
+
+  outline:
+    none;
+}
+
+.field input,
+.field select {
+  min-height:
+    43px;
+}
+
+.field textarea {
+  resize:
+    vertical;
+}
+
+.full {
+  grid-column:
+    1 / -1;
+}
+
+.checkbox-field {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  min-height:
+    43px;
+}
+
+.checkbox-field input {
+  width:
+    17px;
+
+  height:
+    17px;
+}
+
+.field-error {
+  color:
+    #b42318;
+}
+
+.actions {
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    10px;
+
+  margin-top:
+    22px;
+}
+
+.primary,
+.secondary {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  min-height:
+    42px;
+
+  padding:
+    0 15px;
+
+  border-radius:
+    11px;
+
+  font:
+    inherit;
+
+  font-weight:
+    700;
+
+  cursor:
+    pointer;
+}
+
+.primary {
+  border:
+    1px solid #101828;
+
+  background:
+    #101828;
+
+  color:
+    #fff;
+}
+
+.secondary {
+  border:
+    1px solid #d0d5dd;
+
+  background:
+    #fff;
+
+  color:
+    #344054;
+}
+
+button:disabled {
+  opacity:
+    .55;
+
+  cursor:
+    not-allowed;
+}
+
+@media (max-width: 720px) {
+  .form-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .full {
+    grid-column:
+      auto;
+  }
+
+  .actions {
+    flex-direction:
+      column-reverse;
+  }
+}

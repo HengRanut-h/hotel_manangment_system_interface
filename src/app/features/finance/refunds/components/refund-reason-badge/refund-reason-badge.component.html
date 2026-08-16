@@ -1,0 +1,62 @@
+<span class="badge">
+
+  @switch (
+    reason()
+  ) {
+
+    @case (
+      'Cancellation'
+    ) {
+      <svg lucideCalendarX2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Overpayment'
+    ) {
+      <svg lucideCircleDollarSign
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'ServiceIssue'
+    ) {
+      <svg lucideMessageSquareWarning
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'DuplicatePayment'
+    ) {
+      <svg lucideCopy
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'DepositReturn'
+    ) {
+      <svg lucideLandmark
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ translationKey() | translate }}
+</span>

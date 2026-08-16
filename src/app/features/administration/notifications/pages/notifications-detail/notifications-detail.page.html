@@ -1,0 +1,348 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/inbox/notifications"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Notifications
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading notification...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load notification.
+    </div>
+
+  } @else if (
+    item();
+    as notification
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideBell
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Inbox / Notifications
+          </p>
+
+          <h1>
+            {{ notification.title }}
+          </h1>
+
+          <p class="subtitle">
+            {{
+              notification.createdAtUtc
+                ? (
+                    notification.createdAtUtc |
+                    date:'medium'
+                  )
+                : ''
+            }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-notification-type-badge
+          [type]="notification.type"
+        />
+
+        <app-notification-priority-badge
+          [priority]="notification.priority"
+        />
+
+
+        @if (
+          !notification.isDeleted
+        ) {
+
+          @if (
+            notification.isRead
+          ) {
+            <button
+              type="button"
+              class="secondary"
+              [disabled]="actionLoading()"
+              (click)="markUnread()"
+            >
+              <svg lucideMail
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Mark Unread
+            </button>
+
+          } @else {
+            <button
+              type="button"
+              class="secondary"
+              [disabled]="actionLoading()"
+              (click)="markRead()"
+            >
+              <svg lucideMailOpen
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Mark Read
+            </button>
+          }
+
+
+          @if (
+            notification.isArchived
+          ) {
+            <button
+              type="button"
+              class="secondary"
+              [disabled]="actionLoading()"
+              (click)="unarchive()"
+            >
+              <svg lucideRotateCcw
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Unarchive
+            </button>
+
+          } @else {
+            <button
+              type="button"
+              class="secondary"
+              [disabled]="actionLoading()"
+              (click)="archive()"
+            >
+              <svg lucideArchive
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Archive
+            </button>
+          }
+
+
+          <button
+            type="button"
+            class="danger"
+            [disabled]="actionLoading()"
+            (click)="deleteItem()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Delete
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Restore
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          Message
+        </h2>
+
+        <div class="message-body">
+          {{ notification.message }}
+        </div>
+
+
+        @if (
+          notification.actionUrl
+        ) {
+          <div style="margin-top: 20px;">
+            <a
+              class="primary"
+              [href]="notification.actionUrl"
+            >
+              <svg lucideExternalLink
+                [size]="17"
+                [strokeWidth]="2"
+              ></svg>
+
+              Open Related Item
+            </a>
+          </div>
+        }
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          Details
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Type
+            </dt>
+
+            <dd>
+              {{ notification.type || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Priority
+            </dt>
+
+            <dd>
+              {{ notification.priority || 'Normal' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Source
+            </dt>
+
+            <dd>
+              {{ notification.source || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Entity
+            </dt>
+
+            <dd>
+              {{
+                notification.entityType ||
+                '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Entity ID
+            </dt>
+
+            <dd>
+              {{
+                notification.entityId ||
+                '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Read
+            </dt>
+
+            <dd>
+              {{
+                notification.isRead
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Read At
+            </dt>
+
+            <dd>
+              {{
+                notification.readAtUtc
+                  ? (
+                      notification.readAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Archived
+            </dt>
+
+            <dd>
+              {{
+                notification.isArchived
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

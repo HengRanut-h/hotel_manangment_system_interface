@@ -1,0 +1,334 @@
+<div class="detail-page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/room-assignments">
+    <svg lucideArrowLeft></svg>
+
+    <span>
+      {{ 'roomAssignments.backToList' | translate }}
+    </span>
+  </a>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'roomAssignments.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'roomAssignments.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as assignment) {
+    <header class="detail-heading">
+      <div>
+        <span>
+          {{ 'roomAssignments.section' | translate }}
+        </span>
+
+        <h1>
+          {{ assignment.referenceNumber || '—' }}
+        </h1>
+
+        <p>
+          {{ assignment.title || '—' }}
+        </p>
+      </div>
+
+      <div class="heading-actions">
+        <app-room-assignment-status-badge
+          [status]="assignment.status" />
+
+        @if (
+          auth.hasPermission(
+            'room-assignments.update'
+          )
+        ) {
+          <a
+            class="edit-button"
+            [routerLink]="[
+              '/app/front-office/room-assignments',
+              assignment.id,
+              'edit'
+            ]">
+            <svg lucidePencil></svg>
+            <span>
+              {{ 'common.edit' | translate }}
+            </span>
+          </a>
+        }
+      </div>
+    </header>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>
+          {{ 'roomAssignments.assignmentDetails' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>{{ 'roomAssignments.reference' | translate }}</dt>
+            <dd>{{ assignment.referenceNumber || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.titleLabel' | translate }}</dt>
+            <dd>{{ assignment.title || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.status' | translate }}</dt>
+            <dd>
+              <app-room-assignment-status-badge
+                [status]="assignment.status" />
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.amount' | translate }}</dt>
+            <dd>
+              {{
+                assignment.amount === null
+                  ? '—'
+                  : (assignment.amount | number:'1.2-2')
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.eventAt' | translate }}</dt>
+            <dd>
+              {{
+                assignment.eventAtUtc
+                  ? (assignment.eventAtUtc | date:'medium')
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.createdAt' | translate }}</dt>
+            <dd>
+              {{
+                assignment.createdAtUtc
+                  ? (assignment.createdAtUtc | date:'medium')
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>
+          {{ 'roomAssignments.relationship' | translate }}
+        </h2>
+
+        <dl>
+          <div>
+            <dt>
+              {{ 'roomAssignments.relatedEntityType' | translate }}
+            </dt>
+            <dd>
+              {{ assignment.relatedEntityType || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>
+              {{ 'roomAssignments.reservation' | translate }}
+            </dt>
+            <dd>
+              @if (
+                (
+                  assignment.relatedEntityType
+                  ||
+                  ''
+                )
+                  .trim()
+                  .toLowerCase()
+                === 'reservation'
+              ) {
+                {{ reservationLabel(assignment.relatedEntityId) }}
+              } @else {
+                —
+              }
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'roomAssignments.scope' | translate }}</dt>
+            <dd>
+              {{
+                (
+                  assignment.branchId
+                    ? 'roomAssignments.branchScope'
+                    : 'roomAssignments.hotelScope'
+                )
+                  | translate
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      @if (
+        (
+          assignment.relatedEntityType
+          ||
+          ''
+        )
+          .trim()
+          .toLowerCase()
+        === 'reservation'
+      ) {
+        @if (
+          reservationById(
+            assignment.relatedEntityId
+          );
+          as reservation
+        ) {
+          <article class="detail-card detail-card--full">
+            <h2>
+              {{ 'roomAssignments.reservationContext' | translate }}
+            </h2>
+
+            <p class="helper">
+              {{ 'roomAssignments.reservationContextHelp' | translate }}
+            </p>
+
+            <div class="context-grid">
+              <div>
+                <span>
+                  {{ 'roomAssignments.reservationNumber' | translate }}
+                </span>
+                <strong>
+                  {{ reservation.reservationNumber || '—' }}
+                </strong>
+              </div>
+
+              <div>
+                <span>{{ 'roomAssignments.guest' | translate }}</span>
+                <strong>{{ reservation.guestName || '—' }}</strong>
+              </div>
+
+              <div>
+                <span>
+                  {{ 'roomAssignments.currentReservationRoom' | translate }}
+                </span>
+                <strong>
+                  {{
+                    reservation.roomNumber
+                    ||
+                    ('roomAssignments.unassigned' | translate)
+                  }}
+                </strong>
+              </div>
+
+              <div>
+                <span>{{ 'roomAssignments.roomType' | translate }}</span>
+                <strong>{{ reservation.roomTypeName || '—' }}</strong>
+              </div>
+
+              <div>
+                <span>{{ 'roomAssignments.stayDates' | translate }}</span>
+                <strong>
+                  {{ reservation.checkInDate || '—' }}
+                  →
+                  {{ reservation.checkOutDate || '—' }}
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  {{ 'roomAssignments.reservationStatus' | translate }}
+                </span>
+                <strong>{{ reservation.status || '—' }}</strong>
+              </div>
+            </div>
+
+            <div class="contract-warning">
+              {{ 'roomAssignments.roomTargetContractNote' | translate }}
+            </div>
+          </article>
+        }
+      }
+
+      <article class="detail-card detail-card--full">
+        <h2>
+          {{ 'roomAssignments.notes' | translate }}
+        </h2>
+
+        <p class="notes">
+          {{ assignment.notes || '—' }}
+        </p>
+      </article>
+
+      @if (
+        auth.hasPermission(
+          'room-assignments.update'
+        )
+      ) {
+        <article class="detail-card detail-card--full">
+          <h2>
+            {{ 'roomAssignments.changeStatus' | translate }}
+          </h2>
+
+          <p class="helper">
+            {{ 'roomAssignments.changeStatusHelp' | translate }}
+          </p>
+
+          <div class="status-editor">
+            <input
+              type="text"
+              [value]="statusDraft()"
+              [placeholder]="'roomAssignments.statusPlaceholder' | translate"
+              (input)="setStatusDraft($event)" />
+
+            <button
+              type="button"
+              [disabled]="
+                updatingStatus()
+                ||
+                !statusDraft().trim()
+              "
+              (click)="saveStatus()">
+              <svg lucideCheckCircle2></svg>
+
+              <span>
+                {{
+                  (
+                    updatingStatus()
+                      ? 'common.saving'
+                      : 'roomAssignments.updateStatus'
+                  )
+                  | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      }
+
+    </section>
+  }
+
+</div>

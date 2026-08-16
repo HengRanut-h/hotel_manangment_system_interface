@@ -1,0 +1,52 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/taxes"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'taxes.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <svg lucidePlus
+      [size]="24"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'taxes.create.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'taxes.create.subtitle' | translate }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+  }
+
+
+  <app-tax-form
+    [submitting]="submitting()"
+    submitLabelKey="taxes.actions.create"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+
+</section>

@@ -1,0 +1,171 @@
+:host {
+  display: block;
+}
+
+.reservation-card {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #e4e7ec;
+  border-radius: 15px;
+  background: #fff;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.reservation-card:hover {
+  transform: translateY(-2px);
+  border-color: #d0d5dd;
+  box-shadow:
+    0 8px 20px rgba(16, 24, 40, .06),
+    0 2px 6px rgba(16, 24, 40, .04);
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reservation-number {
+  display: block;
+  margin-bottom: 5px;
+  color: #667085;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0;
+  color: #101828;
+  font-size: 15px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.meta-item {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 11px;
+  border: 1px solid #eaecf0;
+  border-radius: 11px;
+  background: #fcfcfd;
+}
+
+.meta-icon {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.meta-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.meta-item div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.meta-item span {
+  color: #667085;
+  font-size: 9px;
+}
+
+.meta-item strong {
+  color: #101828;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.meta-item small {
+  color: #667085;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 2px;
+}
+
+.stay-summary {
+  color: #667085;
+  font-size: 10px;
+}
+
+.check-in-button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 13px;
+  border: 1px solid #abefc6;
+  border-radius: 10px;
+  background: #ecfdf3;
+  color: #027a48;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.check-in-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: #75e0a7;
+  background: #dcfae6;
+}
+
+.check-in-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.check-in-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 760px) {
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .check-in-button {
+    width: 100%;
+  }
+}

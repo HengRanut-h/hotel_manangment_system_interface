@@ -1,0 +1,215 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-header">
+
+    <div class="form-icon">
+      <svg lucideGauge
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        Utility Meter
+      </h2>
+
+      <p>
+        Configure meter assignment, location and initial reading.
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation">
+      Meter Number and Utility ID are required. Initial reading cannot be negative.
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        Meter Number *
+      </span>
+
+      <input
+        name="meterNumber"
+        maxlength="100"
+        [ngModel]="meterNumber()"
+        (ngModelChange)="meterNumber.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Utility ID *
+      </span>
+
+      <input
+        name="utilityId"
+        [ngModel]="utilityId()"
+        (ngModelChange)="utilityId.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Room ID
+      </span>
+
+      <input
+        name="roomId"
+        [ngModel]="roomId()"
+        (ngModelChange)="roomId.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Building ID
+      </span>
+
+      <input
+        name="buildingId"
+        [ngModel]="buildingId()"
+        (ngModelChange)="buildingId.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Floor ID
+      </span>
+
+      <input
+        name="floorId"
+        [ngModel]="floorId()"
+        (ngModelChange)="floorId.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Location
+      </span>
+
+      <input
+        name="location"
+        [ngModel]="location()"
+        (ngModelChange)="location.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Initial Reading
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="initialReading"
+        [ngModel]="initialReading()"
+        (ngModelChange)="initialReading.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Installed At
+      </span>
+
+      <input
+        type="datetime-local"
+        name="installedAt"
+        [ngModel]="installedAt()"
+        (ngModelChange)="installedAt.set($event)"
+      />
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isActive"
+        [ngModel]="isActive()"
+        (ngModelChange)="isActive.set($event)"
+      />
+
+      <span>
+        Active
+      </span>
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Notes
+      </span>
+
+      <textarea
+        rows="5"
+        name="notes"
+        [ngModel]="notes()"
+        (ngModelChange)="notes.set($event)"
+      ></textarea>
+    </label>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      Cancel
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? 'Saving...'
+          : submitLabel()
+      }}
+    </button>
+
+  </div>
+
+</form>

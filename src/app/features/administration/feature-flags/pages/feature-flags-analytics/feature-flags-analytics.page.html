@@ -1,0 +1,147 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/feature-flags"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Feature Flags
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Feature Flag Analytics
+        </h1>
+
+        <p class="subtitle">
+          Summary calculated from live feature flag records.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading analytics...
+    </div>
+
+  } @else {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--purple">
+          <svg lucideFlag
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Records Loaded
+          </span>
+
+          <strong>
+            {{ total() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--green">
+          <svg lucideToggleRight
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Enabled
+          </span>
+
+          <strong>
+            {{ enabled() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--blue">
+          <svg lucideGauge
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Average Rollout
+          </span>
+
+          <strong>
+            {{
+              averageRollout() |
+              number:'1.0-1'
+            }}%
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--amber">
+          <svg lucideServer
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Production Flags
+          </span>
+
+          <strong>
+            {{ production() }}
+          </strong>
+        </div>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

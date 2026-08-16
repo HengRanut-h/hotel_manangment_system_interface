@@ -1,0 +1,49 @@
+.badge {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  min-height:
+    30px;
+
+  padding:
+    5px 10px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+.enabled {
+  background:
+    #ecfdf3;
+
+  color:
+    #027a48;
+}
+
+.disabled {
+  background:
+    #f2f4f7;
+
+  color:
+    #475467;
+}
+
+.deleted {
+  background:
+    #fef3f2;
+
+  color:
+    #b42318;
+}

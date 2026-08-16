@@ -1,0 +1,185 @@
+<form
+  class="request-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-card">
+    <div class="form-card__heading">
+      <span class="form-card__icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <div>
+        <h2>{{ 'stayExtensions.extensionInformation' | translate }}</h2>
+        <p>{{ 'stayExtensions.extensionInformationDescription' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      @if (showReferenceNumber()) {
+        <label class="field">
+          <span>{{ 'stayExtensions.referenceNumber' | translate }}</span>
+          <input
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            [value]="referenceNumber()"
+            [placeholder]="'stayExtensions.referencePlaceholder' | translate"
+            (input)="setReferenceNumber($event)" />
+
+          @if (isReferenceNumberInvalid()) {
+            <small class="field-error">
+              {{ 'stayExtensions.referenceRequired' | translate }}
+            </small>
+          }
+        </label>
+      }
+
+      <label class="field">
+        <span>{{ 'stayExtensions.titleLabel' | translate }}</span>
+        <input
+          type="text"
+          maxlength="200"
+          autocomplete="off"
+          [value]="title()"
+          [placeholder]="'stayExtensions.titlePlaceholder' | translate"
+          (input)="setTitle($event)" />
+
+        @if (isTitleInvalid()) {
+          <small class="field-error">
+            {{ 'stayExtensions.titleRequired' | translate }}
+          </small>
+        }
+      </label>
+
+      <label class="field field--full">
+        <span>{{ 'stayExtensions.reservation' | translate }}</span>
+        <select
+          [value]="relatedEntityId()"
+          [disabled]="reservationsLoading()"
+          (change)="setReservation($event)">
+
+          <option value="">
+            {{
+              (
+                reservationsLoading()
+                  ? 'stayExtensions.loadingReservations'
+                  : 'stayExtensions.selectReservation'
+              ) | translate
+            }}
+          </option>
+
+          @for (reservation of reservations(); track reservation.id) {
+            <option [value]="reservation.id">
+              {{ reservation.reservationNumber || reservation.id }}
+              — {{ reservation.guestName || ('stayExtensions.unknownGuest' | translate) }}
+              @if (reservation.roomNumber) {
+                — {{ 'stayExtensions.roomShort' | translate }} {{ reservation.roomNumber }}
+              }
+            </option>
+          }
+        </select>
+
+        <small class="field-hint">
+          {{ 'stayExtensions.reservationHelp' | translate }}
+        </small>
+      </label>
+
+      @if (selectedReservation(); as reservation) {
+        <section class="reservation-preview field--full">
+          <div class="preview-item">
+            <span class="preview-icon"><svg lucideUserRound></svg></span>
+            <div>
+              <span>{{ 'stayExtensions.guest' | translate }}</span>
+              <strong>{{ reservation.guestName || '—' }}</strong>
+            </div>
+          </div>
+
+          <div class="preview-item">
+            <span class="preview-icon"><svg lucideBedDouble></svg></span>
+            <div>
+              <span>{{ 'stayExtensions.currentReservationRoom' | translate }}</span>
+              <strong>
+                {{ reservation.roomNumber || ('stayExtensions.unassigned' | translate) }}
+              </strong>
+              <small>{{ reservation.roomTypeName || '—' }}</small>
+            </div>
+          </div>
+
+          <div class="preview-item">
+            <span class="preview-icon"><svg lucideCalendarDays></svg></span>
+            <div>
+              <span>{{ 'stayExtensions.currentCheckoutDate' | translate }}</span>
+              <strong>{{ reservation.checkOutDate || '—' }}</strong>
+              <small>{{ reservation.status || '—' }}</small>
+            </div>
+          </div>
+        </section>
+      }
+
+      <label class="field">
+        <span>{{ 'stayExtensions.eventAt' | translate }}</span>
+        <input
+          type="datetime-local"
+          [value]="eventAtUtc()"
+          (input)="setEventAtUtc($event)" />
+        <small class="field-hint">
+          {{ 'stayExtensions.eventAtHelp' | translate }}
+        </small>
+      </label>
+
+      <label class="field">
+        <span>{{ 'stayExtensions.amount' | translate }}</span>
+        <input
+          type="number"
+          step="0.01"
+          [value]="amount()"
+          [placeholder]="'stayExtensions.amountPlaceholder' | translate"
+          (input)="setAmount($event)" />
+        <small class="field-hint">
+          {{ 'stayExtensions.amountHelp' | translate }}
+        </small>
+      </label>
+
+      <label class="field field--full">
+        <span>{{ 'stayExtensions.notes' | translate }}</span>
+        <textarea
+          rows="5"
+          maxlength="2000"
+          [value]="notes()"
+          [placeholder]="'stayExtensions.notesPlaceholder' | translate"
+          (input)="setNotes($event)"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="contract-note">
+    {{ 'stayExtensions.newCheckoutContractNote' | translate }}
+  </section>
+
+  <footer class="form-actions">
+    <button
+      type="button"
+      class="button button--secondary"
+      [disabled]="submitting()"
+      (click)="cancel()">
+      <svg lucideArrowLeft></svg>
+      <span>{{ 'common.cancel' | translate }}</span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary"
+      [disabled]="submitting()">
+      <svg lucideCheck></svg>
+      <span>
+        {{
+          (
+            submitting()
+              ? 'common.saving'
+              : submitLabel()
+          ) | translate
+        }}
+      </span>
+    </button>
+  </footer>
+</form>

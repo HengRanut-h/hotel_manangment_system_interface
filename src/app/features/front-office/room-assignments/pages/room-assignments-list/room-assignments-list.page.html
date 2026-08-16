@@ -1,0 +1,446 @@
+<div class="page">
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'roomAssignments.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'roomAssignments.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'roomAssignments.description' | translate }}
+      </p>
+    </div>
+
+    @if (
+      auth.hasPermission(
+        'room-assignments.create'
+      )
+    ) {
+      <a
+        class="create-button"
+        routerLink="/app/front-office/room-assignments/create">
+        <svg lucideCirclePlus></svg>
+        <span>
+          {{ 'roomAssignments.create' | translate }}
+        </span>
+      </a>
+    }
+  </header>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'roomAssignments.loading' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state state--error">
+      <span class="state-icon">
+        <svg lucideClipboardList></svg>
+      </span>
+
+      <strong>
+        {{ 'roomAssignments.loadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>
+          {{ 'common.tryAgain' | translate }}
+        </span>
+      </button>
+    </section>
+
+  } @else {
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>
+            {{ 'roomAssignments.totalAssignments' | translate }}
+          </span>
+          <strong>{{ totalItems() }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideCalendarCheck></svg>
+        </span>
+        <div>
+          <span>
+            {{ 'roomAssignments.completedOnPage' | translate }}
+          </span>
+          <strong>{{ completedOnPage() }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideLink2></svg>
+        </span>
+        <div>
+          <span>
+            {{ 'roomAssignments.linkedReservationsOnPage' | translate }}
+          </span>
+          <strong>{{ linkedReservationsOnPage() }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>
+            {{ 'roomAssignments.recordedAmountOnPage' | translate }}
+          </span>
+          <strong>
+            {{
+              recordedAmountOnPage()
+                | number:'1.0-2'
+            }}
+          </strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <header class="toolbar">
+        <div class="search-field">
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'roomAssignments.searchPlaceholder' | translate"
+            (input)="setSearch($event)"
+            (keydown)="onSearchKeydown($event)" />
+        </div>
+
+        <input
+          class="filter-control"
+          type="text"
+          autocomplete="off"
+          [value]="status()"
+          [placeholder]="'roomAssignments.statusFilterPlaceholder' | translate"
+          (input)="setStatus($event)"
+          (keydown)="onSearchKeydown($event)" />
+
+        <button
+          type="button"
+          class="filter-button"
+          [disabled]="loading()"
+          (click)="applyFilters()">
+          <svg lucideSearch></svg>
+          <span>{{ 'common.search' | translate }}</span>
+        </button>
+
+        @if (hasFilters()) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+            <svg lucideX></svg>
+            <span>{{ 'common.clear' | translate }}</span>
+          </button>
+        }
+      </header>
+
+      @if (items().length === 0) {
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+          <strong>
+            {{ 'roomAssignments.noResults' | translate }}
+          </strong>
+          <span>
+            {{ 'roomAssignments.noResultsDescription' | translate }}
+          </span>
+        </div>
+
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'roomAssignments.reference' | translate }}</th>
+                <th>{{ 'roomAssignments.titleLabel' | translate }}</th>
+                <th>{{ 'roomAssignments.status' | translate }}</th>
+                <th>{{ 'roomAssignments.relatedTo' | translate }}</th>
+                <th>{{ 'roomAssignments.eventAt' | translate }}</th>
+                <th>{{ 'roomAssignments.amount' | translate }}</th>
+                <th class="actions-heading">
+                  {{ 'common.actions' | translate }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                item of items();
+                track item.id
+              ) {
+                <tr>
+                  <td>
+                    <strong class="reference">
+                      {{ item.referenceNumber || '—' }}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <div class="title-cell">
+                      <strong>{{ item.title || '—' }}</strong>
+                      @if (item.notes) {
+                        <small>{{ item.notes }}</small>
+                      }
+                    </div>
+                  </td>
+
+                  <td>
+                    <app-room-assignment-status-badge
+                      [status]="item.status" />
+                  </td>
+
+                  <td>
+                    <div class="related-cell">
+                      @if (
+                        (
+                          item.relatedEntityType
+                          ||
+                          ''
+                        )
+                          .trim()
+                          .toLowerCase()
+                        === 'reservation'
+                      ) {
+                        <strong>
+                          {{ reservationLabel(item.relatedEntityId) }}
+                        </strong>
+
+                        @if (reservationContext(item.relatedEntityId)) {
+                          <small>
+                            {{ reservationContext(item.relatedEntityId) }}
+                          </small>
+                        } @else {
+                          <small>
+                            {{ 'roomAssignments.reservation' | translate }}
+                          </small>
+                        }
+                      } @else {
+                        <strong>
+                          {{ item.relatedEntityType || '—' }}
+                        </strong>
+                      }
+                    </div>
+                  </td>
+
+                  <td>
+                    {{
+                      item.eventAtUtc
+                        ? (item.eventAtUtc | date:'medium')
+                        : '—'
+                    }}
+                  </td>
+
+                  <td>
+                    {{
+                      item.amount === null
+                        ? '—'
+                        : (item.amount | number:'1.2-2')
+                    }}
+                  </td>
+
+                  <td>
+                    <div class="row-actions">
+                      <a
+                        class="icon-action icon-action--view"
+                        [routerLink]="[
+                          '/app/front-office/room-assignments',
+                          item.id
+                        ]"
+                        [title]="'common.view' | translate"
+                        [attr.aria-label]="'common.view' | translate">
+                        <svg lucideEye></svg>
+                      </a>
+
+                      @if (
+                        auth.hasPermission(
+                          'room-assignments.update'
+                        )
+                      ) {
+                        <a
+                          class="icon-action icon-action--edit"
+                          [routerLink]="[
+                            '/app/front-office/room-assignments',
+                            item.id,
+                            'edit'
+                          ]"
+                          [title]="'common.edit' | translate"
+                          [attr.aria-label]="'common.edit' | translate">
+                          <svg lucidePencil></svg>
+                        </a>
+                      }
+
+                      @if (
+                        auth.hasPermission(
+                          'room-assignments.delete'
+                        )
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-action icon-action--delete"
+                          [disabled]="deletingId() !== null"
+                          [title]="'common.delete' | translate"
+                          [attr.aria-label]="'common.delete' | translate"
+                          (click)="requestDelete(item)">
+                          @if (
+                            deletingId() === item.id
+                          ) {
+                            <app-spin
+                              [inline]="true"
+                              size="small"
+                              label="" />
+                          } @else {
+                            <svg lucideTrash2></svg>
+                          }
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="pagination">
+          <span>
+            {{ 'roomAssignments.showing' | translate }}
+            <strong>{{ items().length }}</strong>
+            {{ 'roomAssignments.of' | translate }}
+            <strong>{{ totalItems() }}</strong>
+          </span>
+
+          <div>
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="
+                loading()
+                ||
+                !hasPreviousPage()
+              "
+              (click)="previousPage()">
+              <svg lucideChevronLeft></svg>
+              {{ 'common.previous' | translate }}
+            </button>
+
+            <span class="page-number">
+              {{ 'roomAssignments.page' | translate }}
+              {{ pageNumber() }}
+              /
+              {{ totalPages() }}
+            </span>
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="
+                loading()
+                ||
+                !hasNextPage()
+              "
+              (click)="nextPage()">
+              {{ 'common.next' | translate }}
+              <svg lucideChevronRight></svg>
+            </button>
+          </div>
+        </footer>
+      }
+    </section>
+  }
+
+  @if (deleteTarget(); as target) {
+    <div
+      class="modal-backdrop"
+      role="presentation"
+      (click)="cancelDelete()">
+
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="'roomAssignments.deleteTitle' | translate"
+        (click)="$event.stopPropagation()">
+
+        <span class="confirm-dialog__icon">
+          <svg lucideTrash2></svg>
+        </span>
+
+        <h2>
+          {{ 'roomAssignments.deleteTitle' | translate }}
+        </h2>
+
+        <p>
+          {{
+            'roomAssignments.deleteMessage'
+              | translate:{
+                  reference:
+                    target.referenceNumber
+                    ||
+                    target.title
+                    ||
+                    target.id
+                }
+          }}
+        </p>
+
+        <div class="confirm-dialog__actions">
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="deletingId() !== null"
+            (click)="cancelDelete()">
+            {{ 'common.cancel' | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="deletingId() !== null"
+            (click)="confirmDelete()">
+            @if (deletingId() !== null) {
+              <app-spin
+                [inline]="true"
+                size="small"
+                label="" />
+            } @else {
+              <svg lucideTrash2></svg>
+            }
+
+            {{
+              (
+                deletingId() !== null
+                  ? 'roomAssignments.deleting'
+                  : 'common.delete'
+              )
+                | translate
+            }}
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+</div>

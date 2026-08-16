@@ -17,13 +17,13 @@ export const administrationRoutes:
  {
   path: 'users',
 
-  loadComponent: () =>
+  loadChildren: () =>
     import(
-      './pages/users/users.page'
+      './users/users.routes'
     )
       .then(
         module =>
-          module.UsersPage
+          module.userRoutes
       ),
 
   canActivate: [
@@ -106,14 +106,14 @@ export const administrationRoutes:
     path:
       'notifications',
 
-    loadComponent:
+    loadChildren:
       () =>
         import(
-          './pages/notifications/notifications.page'
+          './notifications/notifications.routes'
         )
           .then(
             module =>
-              module.NotificationsPage
+              module.notificationRoutes
           )
   },
 
@@ -126,14 +126,14 @@ export const administrationRoutes:
     path:
       'reports',
 
-    loadComponent:
+    loadChildren:
       () =>
         import(
-          '../finance/pages/reports/reports.page'
+          './Reports/reports.routes'
         )
           .then(
             module =>
-              module.ReportsPage
+              module.reportsRoutes
           ),
 
     canActivate:
@@ -157,14 +157,14 @@ export const administrationRoutes:
     path:
       'audit-logs',
 
-    loadComponent:
+    loadChildren:
       () =>
         import(
-          '../../shared/pages/data-explorer/data-explorer.page'
+          './audit-logs/audit-logs.routes'
         )
           .then(
             module =>
-              module.DataExplorerPage
+              module.auditLogsRoutes
           ),
 
     canActivate:
@@ -175,59 +175,7 @@ export const administrationRoutes:
     data:
     {
       permission:
-        'audit.view',
-
-      title:
-        'Audit Logs',
-
-      endpoint:
-        'audit-logs',
-
-      columns:
-      [
-        {
-          key:
-            'createdAtUtc',
-
-          label:
-            'Time',
-
-          type:
-            'date'
-        },
-
-        {
-          key:
-            'userId',
-
-          label:
-            'User'
-        },
-
-        {
-          key:
-            'action',
-
-          label:
-            'Action'
-        },
-
-        {
-          key:
-            'entityType',
-
-          label:
-            'Entity'
-        },
-
-        {
-          key:
-            'entityId',
-
-          label:
-            'Entity ID'
-        }
-      ]
+        'audit.view'
     }
   },
 
@@ -240,14 +188,14 @@ export const administrationRoutes:
     path:
       'feature-flags',
 
-    loadComponent:
+    loadChildren:
       () =>
         import(
-          '../../shared/resource/resource-page.component'
+          './feature-flags/feature-flags.routes'
         )
           .then(
             module =>
-              module.ResourcePageComponent
+              module.featureFlagsRoutes
           ),
 
     canActivate:
@@ -257,9 +205,6 @@ export const administrationRoutes:
 
     data:
     {
-      resource:
-        'feature-flags',
-
       permission:
         'feature-flags.view'
     }
@@ -274,14 +219,14 @@ export const administrationRoutes:
     path:
       'settings',
 
-    loadComponent:
+    loadChildren:
       () =>
         import(
-          '../../shared/resource/resource-page.component'
+          './settings/settings.routes'
         )
           .then(
             module =>
-              module.ResourcePageComponent
+              module.settingsRoutes
           ),
 
     canActivate:
@@ -291,9 +236,6 @@ export const administrationRoutes:
 
     data:
     {
-      resource:
-        'settings',
-
       permission:
         'settings.view'
     }

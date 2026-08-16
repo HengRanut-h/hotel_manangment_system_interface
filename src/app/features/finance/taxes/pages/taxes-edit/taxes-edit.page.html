@@ -1,0 +1,64 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/taxes',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'taxes.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+    <svg lucidePencil
+      [size]="24"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'taxes.edit.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'taxes.edit.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'taxes.states.loadingDetail' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    tax();
+    as item
+  ) {
+    <app-tax-form
+      [initialValue]="item"
+      [submitting]="submitting()"
+      submitLabelKey="taxes.actions.update"
+      (submitted)="update($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

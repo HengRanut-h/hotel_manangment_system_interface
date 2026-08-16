@@ -1,0 +1,273 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBadgeDollarSign
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <p class="eyebrow">
+          {{ 'utilityBilling.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'utilityBilling.pages.rates' | translate }}
+        </h1>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary-button"
+        routerLink="/app/finance/utility-billing/rates/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.create' | translate }}
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.refresh' | translate }}
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="filters-card">
+
+    <div class="search-box">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        [placeholder]="'utilityBilling.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="searchNow()"
+    >
+      {{ 'utilityBilling.actions.search' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="clear()"
+    >
+      {{ 'utilityBilling.actions.clear' | translate }}
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="alert">
+      {{ 'utilityBilling.errors.load' | translate }}
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        {{ 'utilityBilling.states.loading' | translate }}
+      </div>
+
+    } @else if (
+      items().length ===
+      0
+    ) {
+      <div class="state">
+        {{ 'utilityBilling.states.empty' | translate }}
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+        <table>
+
+          <thead>
+            <tr>
+
+<th>{{ 'utilityBilling.fields.utility' | translate }}</th>
+<th>{{ 'utilityBilling.fields.ratePerUnit' | translate }}</th>
+<th>{{ 'utilityBilling.fields.currency' | translate }}</th>
+<th>{{ 'utilityBilling.fields.effectiveFrom' | translate }}</th>
+
+              <th>
+                {{ 'utilityBilling.fields.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+              <tr>
+
+<td>
+  <div class="primary-cell">
+    {{ item.utilityName || item.name || '—' }}
+  </div>
+</td>
+
+<td>
+  {{ item.ratePerUnit | number:'1.2-4' }}
+</td>
+
+<td>
+  {{ item.currency || '—' }}
+</td>
+
+<td>
+  {{
+    item.effectiveFromUtc
+      ? (
+          item.effectiveFromUtc |
+          date:'mediumDate'
+        )
+      : '—'
+  }}
+</td>
+
+
+                <td>
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/utility-billing/rates',
+                        item.id
+                      ]"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/utility-billing/rates',
+                        item.id,
+                        'edit'
+                      ]"
+                    >
+                      <svg lucidePencil
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    <button
+                      type="button"
+                      class="icon-button danger"
+                      [disabled]="actionId() === item.id"
+                      (click)="deleteItem(item)"
+                    >
+                      <svg lucideTrash2
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </button>
+
+                  </div>
+                </td>
+
+              </tr>
+            }
+
+          </tbody>
+
+        </table>
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        {{ pageNumber() }}
+        /
+        {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          {{ 'utilityBilling.pagination.previous' | translate }}
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'utilityBilling.pagination.next' | translate }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

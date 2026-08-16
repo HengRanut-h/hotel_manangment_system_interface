@@ -1,0 +1,34 @@
+<div class="viewer">
+
+  <pre>{{ formatted() }}</pre>
+
+
+  @if (
+    sensitive()
+  ) {
+    <button
+      type="button"
+      class="toggle"
+      (click)="revealed.set(!revealed())"
+    >
+      @if (
+        revealed()
+      ) {
+        <svg lucideEyeOff
+          [size]="16"
+          [strokeWidth]="2"
+        ></svg>
+
+        Hide
+      } @else {
+        <svg lucideEye
+          [size]="16"
+          [strokeWidth]="2"
+        ></svg>
+
+        Reveal
+      }
+    </button>
+  }
+
+</div>

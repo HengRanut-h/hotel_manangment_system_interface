@@ -1,0 +1,183 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/meter-readings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Meter Readings
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Meter Reading Analytics
+        </h1>
+
+        <p class="subtitle">
+          Summary calculated from live meter reading records.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading analytics...
+    </div>
+
+  } @else {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--purple">
+          <svg lucideGauge
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Records Loaded
+          </span>
+
+          <strong>
+            {{ total() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--green">
+          <svg lucideTrendingUp
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Total Usage
+          </span>
+
+          <strong>
+            {{
+              totalUsage() |
+              number:'1.2-2'
+            }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--blue">
+          <svg lucideCircleDollarSign
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Total Amount
+          </span>
+
+          <strong>
+            {{
+              totalAmount() |
+              number:'1.2-2'
+            }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="summary-card">
+
+        <div class="summary-icon summary-icon--amber">
+          <svg lucideActivity
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Average Usage
+          </span>
+
+          <strong>
+            {{
+              averageUsage() |
+              number:'1.2-2'
+            }}
+          </strong>
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+        <div>
+          <span>
+            Electricity Records
+          </span>
+
+          <strong>
+            {{ electricity() }}
+          </strong>
+        </div>
+      </article>
+
+
+      <article class="summary-card">
+        <div>
+          <span>
+            Water Records
+          </span>
+
+          <strong>
+            {{ water() }}
+          </strong>
+        </div>
+      </article>
+
+    </div>
+
+  }
+
+</section>

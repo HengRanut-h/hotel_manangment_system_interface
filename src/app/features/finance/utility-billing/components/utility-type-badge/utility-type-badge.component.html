@@ -1,0 +1,45 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+
+    @case ('Electricity') {
+      <svg lucideZap
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Water') {
+      <svg lucideDroplets
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Gas') {
+      <svg lucideFlame
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Internet') {
+      <svg lucideWifi
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ key() | translate }}
+</span>

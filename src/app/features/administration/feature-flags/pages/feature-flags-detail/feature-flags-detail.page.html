@@ -1,0 +1,321 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/feature-flags"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Feature Flags
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading feature flag...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load feature flag.
+    </div>
+
+  } @else if (
+    item();
+    as flag
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideFlag
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Management / Feature Flags
+          </p>
+
+          <h1>
+            {{ flag.name }}
+          </h1>
+
+          <p class="subtitle">
+            {{ flag.key }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-feature-flag-environment-badge
+          [environment]="flag.environment"
+        />
+
+        <app-feature-flag-status-badge
+          [enabled]="flag.isEnabled"
+          [deleted]="flag.isDeleted"
+        />
+
+
+        @if (
+          !flag.isDeleted
+        ) {
+
+          <a
+            class="secondary"
+            [routerLink]="[
+              '/app/management/feature-flags',
+              flag.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Edit
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="toggleEnabled()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              flag.isEnabled
+                ? 'Disable'
+                : 'Enable'
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="danger"
+            [disabled]="actionLoading()"
+            (click)="deleteItem()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Delete
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Restore
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          <svg lucideGauge
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          Rollout
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Environment
+            </dt>
+
+            <dd>
+              {{ flag.environment || 'All' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Enabled
+            </dt>
+
+            <dd>
+              {{
+                flag.isEnabled
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Percentage
+            </dt>
+
+            <dd>
+              {{ flag.rolloutPercentage ?? 100 }}%
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideCalendarDays
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          Schedule
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Starts
+            </dt>
+
+            <dd>
+              {{
+                flag.startsAtUtc
+                  ? (
+                      flag.startsAtUtc |
+                      date:'medium'
+                    )
+                  : 'Immediately'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Ends
+            </dt>
+
+            <dd>
+              {{
+                flag.endsAtUtc
+                  ? (
+                      flag.endsAtUtc |
+                      date:'medium'
+                    )
+                  : 'No end date'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Created
+            </dt>
+
+            <dd>
+              {{
+                flag.createdAtUtc
+                  ? (
+                      flag.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Description
+        </h2>
+
+        <p>
+          {{ flag.description || 'No description.' }}
+        </p>
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Conditions
+        </h2>
+
+        <app-feature-flag-json-viewer
+          [value]="flag.conditionsJson"
+        />
+
+      </article>
+
+
+      <article class="card full">
+
+        <h2>
+          Metadata
+        </h2>
+
+        <app-feature-flag-json-viewer
+          [value]="flag.metadataJson"
+        />
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

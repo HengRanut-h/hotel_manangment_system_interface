@@ -552,3 +552,39 @@ select:disabled {
     justify-content: space-between;
   }
 }
+
+.summary-icon--purple {
+  background: #f4ebff;
+  color: #7f56d9;
+  border-color: #e9d7fe;
+}
+
+.summary-icon--green {
+  background: #ecfdf3;
+  color: #039855;
+  border-color: #abefc6;
+}
+
+.summary-icon--blue {
+  background: #eff8ff;
+  color: #175cd3;
+  border-color: #b2ddff;
+}
+
+.summary-icon--amber {
+  background: #fffaeb;
+  color: #b54708;
+  border-color: #fedf89;
+}
+
+.summary-icon--red {
+  background: #fff1f3;
+  color: #c01048;
+  border-color: #fecdd6;
+}
+
+.summary-icon--gray {
+  background: #f9fafb;
+  color: #475467;
+  border-color: #eaecf0;
+}

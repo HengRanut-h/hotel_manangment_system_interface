@@ -1,0 +1,373 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-meters"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Utility Meters
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading utility meter...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load utility meter.
+    </div>
+
+  } @else if (
+    item();
+    as meter
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideGauge
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Finance / Utility Meters
+          </p>
+
+          <h1>
+            {{ meter.meterNumber }}
+          </h1>
+
+          <p class="subtitle">
+            {{ meter.utilityName || meter.utilityId }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-meter-utility-type-badge
+          [type]="meter.utilityType"
+        />
+
+        <app-meter-status-badge
+          [active]="meter.isActive"
+          [deleted]="meter.isDeleted"
+        />
+
+
+        @if (
+          !meter.isDeleted
+        ) {
+
+          <a
+            class="secondary"
+            [routerLink]="[
+              '/app/finance/utility-meters',
+              meter.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Edit
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="toggleActive()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              meter.isActive
+                ? 'Deactivate'
+                : 'Activate'
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="danger"
+            [disabled]="actionLoading()"
+            (click)="deleteItem()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Delete
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            Restore
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          Meter Information
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Meter Number
+            </dt>
+
+            <dd>
+              {{ meter.meterNumber }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Utility
+            </dt>
+
+            <dd>
+              {{ meter.utilityName || meter.utilityId }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Unit
+            </dt>
+
+            <dd>
+              {{ meter.unit || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Initial Reading
+            </dt>
+
+            <dd>
+              {{ meter.initialReading ?? 0 }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Current Reading
+            </dt>
+
+            <dd>
+              {{
+                meter.currentReading ??
+                meter.initialReading ??
+                0
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideMapPin
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          Assignment
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Room
+            </dt>
+
+            <dd>
+              {{ meter.roomNumber || meter.roomId || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Building
+            </dt>
+
+            <dd>
+              {{ meter.buildingName || meter.buildingId || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Floor
+            </dt>
+
+            <dd>
+              {{ meter.floorName || meter.floorId || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Location
+            </dt>
+
+            <dd>
+              {{ meter.location || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideActivity
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          Timeline
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              Installed At
+            </dt>
+
+            <dd>
+              {{
+                meter.installedAtUtc
+                  ? (
+                      meter.installedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Last Reading
+            </dt>
+
+            <dd>
+              {{
+                meter.lastReadingAtUtc
+                  ? (
+                      meter.lastReadingAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Created
+            </dt>
+
+            <dd>
+              {{
+                meter.createdAtUtc
+                  ? (
+                      meter.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card full-card">
+
+        <h2>
+          Notes
+        </h2>
+
+        <p>
+          {{ meter.notes || 'No notes.' }}
+        </p>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

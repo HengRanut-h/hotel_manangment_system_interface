@@ -1,0 +1,136 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/settings"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Settings
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Settings Analytics
+        </h1>
+
+        <p class="subtitle">
+          Summary calculated from live setting records.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading analytics...
+    </div>
+
+  } @else {
+
+    <div class="summary-grid">
+
+      <article class="summary-card">
+        <div class="summary-icon summary-icon--purple">
+          <svg lucideSettings
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Records Loaded
+          </span>
+
+          <strong>
+            {{ total() }}
+          </strong>
+        </div>
+      </article>
+
+
+      <article class="summary-card">
+        <div class="summary-icon summary-icon--green">
+          <svg lucideCircleCheck
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Active
+          </span>
+
+          <strong>
+            {{ active() }}
+          </strong>
+        </div>
+      </article>
+
+
+      <article class="summary-card">
+        <div class="summary-icon summary-icon--blue">
+          <svg lucideLockKeyhole
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            Sensitive
+          </span>
+
+          <strong>
+            {{ sensitive() }}
+          </strong>
+        </div>
+      </article>
+
+
+      <article class="summary-card">
+        <div class="summary-icon summary-icon--amber">
+          <svg lucideShieldCheck
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <span>
+            System Settings
+          </span>
+
+          <strong>
+            {{ system() }}
+          </strong>
+        </div>
+      </article>
+
+    </div>
+
+  }
+
+</section>

@@ -1,0 +1,307 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/taxes"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'taxes.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'taxes.states.loadingDetail' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    tax();
+    as item
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideBadgePercent
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            {{ 'taxes.detail.section' | translate }}
+          </p>
+
+          <h1>
+            {{ item.name }}
+          </h1>
+
+          <p class="subtitle">
+            {{ item.code || item.id }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-tax-type-badge
+          [type]="item.type"
+        />
+
+        <app-tax-status-badge
+          [active]="item.isActive"
+          [deleted]="item.isDeleted"
+        />
+
+
+        @if (
+          !item.isDeleted
+        ) {
+
+          <a
+            class="secondary-button"
+            [routerLink]="[
+              '/app/finance/taxes',
+              item.id,
+              'edit'
+            ]"
+          >
+            <svg lucidePencil
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'taxes.actions.edit' | translate }}
+          </a>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="toggleActive()"
+          >
+            <svg lucidePower
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{
+              (
+                item.isActive
+                  ? 'taxes.actions.deactivate'
+                  : 'taxes.actions.activate'
+              ) | translate
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            class="danger-button"
+            [disabled]="actionLoading()"
+            (click)="deleteTax()"
+          >
+            <svg lucideTrash2
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'taxes.actions.delete' | translate }}
+          </button>
+
+        } @else {
+
+          <button
+            type="button"
+            class="secondary-button"
+            [disabled]="actionLoading()"
+            (click)="restore()"
+          >
+            <svg lucideRotateCcw
+              [size]="17"
+              [strokeWidth]="2"
+            ></svg>
+
+            {{ 'taxes.actions.restore' | translate }}
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+        <h2>
+          {{ 'taxes.detail.taxInfo' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.type' | translate }}
+            </dt>
+
+            <dd>
+              <app-tax-type-badge
+                [type]="item.type"
+              />
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.rate' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.rate |
+                number:'1.2-2'
+              }}
+              {{ item.isPercentage === false ? '' : '%' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.appliesTo' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.appliesTo || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.inclusive' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.isInclusive
+                  ? ('taxes.common.yes' | translate)
+                  : ('taxes.common.no' | translate)
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.status' | translate }}
+            </dt>
+
+            <dd>
+              <app-tax-status-badge
+                [active]="item.isActive"
+                [deleted]="item.isDeleted"
+              />
+            </dd>
+          </div>
+
+        </dl>
+      </article>
+
+
+      <article class="card">
+        <h2>
+          <svg lucideCalendarDays
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'taxes.detail.effectivePeriod' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.effectiveFrom' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.effectiveFromUtc
+                  ? (
+                      item.effectiveFromUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'taxes.fields.effectiveTo' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.effectiveToUtc
+                  ? (
+                      item.effectiveToUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+      </article>
+
+
+      <article class="card description-card">
+        <h2>
+          <svg lucideFileText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'taxes.fields.description' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.description ||
+            ('taxes.common.noDescription' | translate)
+          }}
+        </p>
+      </article>
+
+    </div>
+
+  }
+
+</section>

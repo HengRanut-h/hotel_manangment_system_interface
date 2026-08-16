@@ -1,0 +1,42 @@
+pre {
+  max-height:
+    420px;
+
+  margin:
+    0;
+
+  overflow:
+    auto;
+
+  padding:
+    14px;
+
+  border:
+    1px solid #eaecf0;
+
+  border-radius:
+    12px;
+
+  background:
+    #101828;
+
+  color:
+    #f2f4f7;
+
+  font-family:
+    Consolas,
+    "Courier New",
+    monospace;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.55;
+
+  white-space:
+    pre-wrap;
+
+  overflow-wrap:
+    anywhere;
+}

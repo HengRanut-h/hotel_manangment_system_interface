@@ -1,0 +1,500 @@
+
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/invoices">
+    <svg lucideArrowLeft></svg>
+    <span>{{ 'invoices.backToList' | translate }}</span>
+  </a>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'invoices.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+      <strong>{{ 'invoices.loadOneFailed' | translate }}</strong>
+      <span>{{ errorMessage() }}</span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else if (invoice(); as item) {
+
+    <header class="detail-heading">
+      <div>
+        <span class="eyebrow">
+          {{ 'invoices.section' | translate }}
+        </span>
+
+        <h1>
+          {{ item.invoiceNumber || item.id }}
+        </h1>
+
+        <div class="invoice-meta">
+          <app-invoice-status-badge
+            [status]="item.status" />
+
+          @if (isOverdue(item)) {
+            <span class="overdue-badge">
+              {{ 'invoices.overdue' | translate }}
+            </span>
+          }
+
+          <span class="live-indicator">
+            <span class="live-dot"></span>
+            {{ 'invoices.liveData' | translate }}
+
+            @if (lastUpdated(); as updated) {
+              <small>
+                {{ updated | date:'mediumTime' }}
+              </small>
+            }
+          </span>
+        </div>
+      </div>
+
+      <div class="heading-actions">
+        <button
+          type="button"
+          class="action-button action-button--neutral"
+          [disabled]="refreshing()"
+          (click)="refresh()">
+
+          @if (refreshing()) {
+            <app-spin
+              [inline]="true"
+              size="small"
+              label="" />
+          } @else {
+            <svg lucideRefreshCw></svg>
+          }
+
+          <span>{{ 'invoices.refresh' | translate }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="action-button action-button--blue"
+          [disabled]="pdfLoading()"
+          (click)="previewPdf()">
+
+          @if (pdfLoading()) {
+            <app-spin
+              [inline]="true"
+              size="small"
+              label="" />
+          } @else {
+            <svg lucideEye></svg>
+          }
+
+          <span>{{ 'invoices.previewPdf' | translate }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="action-button action-button--neutral"
+          [disabled]="pdfLoading()"
+          (click)="downloadPdf()">
+          <svg lucideClipboardList></svg>
+          <span>{{ 'invoices.downloadPdf' | translate }}</span>
+        </button>
+
+        @if (
+          item.balanceAmount > 0 &&
+          canRecordPayment()
+        ) {
+          <button
+            type="button"
+            class="action-button action-button--success"
+            (click)="openPaymentModal()">
+            <svg lucideCheckCircle2></svg>
+            <span>{{ 'invoices.recordPayment' | translate }}</span>
+          </button>
+        }
+      </div>
+    </header>
+
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideCircleDollarSign></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.totalAmount' | translate }}</span>
+          <strong>{{ item.totalAmount | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideCheckCircle2></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.paidAmount' | translate }}</span>
+          <strong>{{ item.paidAmount | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideWalletCards></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.balanceAmount' | translate }}</span>
+          <strong
+            [class.amount-due]="item.balanceAmount > 0">
+            {{ item.balanceAmount | number:'1.2-2' }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.itemsCount' | translate }}</span>
+          <strong>{{ item.items.length }}</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-grid">
+
+      <article class="detail-card">
+        <h2>{{ 'invoices.invoiceDetails' | translate }}</h2>
+
+        <dl>
+          <div>
+            <dt>{{ 'invoices.invoiceNumber' | translate }}</dt>
+            <dd>{{ item.invoiceNumber || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.status' | translate }}</dt>
+            <dd>{{ item.status || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.invoiceDate' | translate }}</dt>
+            <dd>
+              {{
+                item.invoiceDate
+                  ? (item.invoiceDate | date:'mediumDate')
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.dueDate' | translate }}</dt>
+            <dd>
+              {{
+                item.dueDate
+                  ? (item.dueDate | date:'mediumDate')
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.guest' | translate }}</dt>
+            <dd>
+              {{ item.guestName || item.guestId || '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.createdAt' | translate }}</dt>
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (item.createdAtUtc | date:'medium')
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>{{ 'invoices.reservationContext' | translate }}</h2>
+
+        @if (reservation(); as reservationItem) {
+          <dl>
+            <div>
+              <dt>{{ 'invoices.reservationNumber' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.reservationNumber
+                  || item.reservationId
+                  || '—'
+                }}
+              </dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.room' | translate }}</dt>
+              <dd>{{ reservationItem.roomNumber || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.roomType' | translate }}</dt>
+              <dd>{{ reservationItem.roomTypeName || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.reservationStatus' | translate }}</dt>
+              <dd>{{ reservationItem.status || '—' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.checkInDate' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.checkInDate
+                    ? (reservationItem.checkInDate | date:'mediumDate')
+                    : '—'
+                }}
+              </dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.checkOutDate' | translate }}</dt>
+              <dd>
+                {{
+                  reservationItem.checkOutDate
+                    ? (reservationItem.checkOutDate | date:'mediumDate')
+                    : '—'
+                }}
+              </dd>
+            </div>
+          </dl>
+
+        } @else {
+          <div class="fallback-id">
+            <span>{{ 'invoices.reservationId' | translate }}</span>
+            <strong>{{ item.reservationId || '—' }}</strong>
+          </div>
+        }
+      </article>
+
+      <article class="detail-card">
+        <h2>{{ 'invoices.financialSummary' | translate }}</h2>
+
+        <dl class="financial-list">
+          <div>
+            <dt>{{ 'invoices.subtotal' | translate }}</dt>
+            <dd>{{ item.subtotal | number:'1.2-2' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.discountAmount' | translate }}</dt>
+            <dd>{{ item.discountAmount | number:'1.2-2' }}</dd>
+          </div>
+
+          <div>
+            <dt>{{ 'invoices.taxAmount' | translate }}</dt>
+            <dd>{{ item.taxAmount | number:'1.2-2' }}</dd>
+          </div>
+
+          <div class="financial-total">
+            <dt>{{ 'invoices.totalAmount' | translate }}</dt>
+            <dd>{{ item.totalAmount | number:'1.2-2' }}</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>{{ 'invoices.paymentProgress' | translate }}</h2>
+
+        <div class="payment-progress">
+          <div class="payment-progress__heading">
+            <span>
+              {{ 'invoices.paidAmount' | translate }}
+            </span>
+            <strong>
+              {{ paymentPercentage() | number:'1.0-1' }}%
+            </strong>
+          </div>
+
+          <div class="payment-progress__track">
+            <span
+              class="payment-progress__bar"
+              [style.width.%]="paymentPercentage()">
+            </span>
+          </div>
+
+          <div class="payment-progress__meta">
+            <span>
+              {{ item.paidAmount | number:'1.2-2' }}
+              {{ 'invoices.paid' | translate }}
+            </span>
+
+            <span>
+              {{ item.balanceAmount | number:'1.2-2' }}
+              {{ 'invoices.remaining' | translate }}
+            </span>
+          </div>
+        </div>
+
+        @if (
+          item.balanceAmount > 0 &&
+          canRecordPayment()
+        ) {
+          <button
+            type="button"
+            class="record-payment-button"
+            (click)="openPaymentModal()">
+            <svg lucideCheckCircle2></svg>
+            <span>{{ 'invoices.recordPayment' | translate }}</span>
+          </button>
+        }
+      </article>
+    </section>
+
+    <section class="items-card">
+      <header class="items-heading">
+        <div>
+          <h2>{{ 'invoices.invoiceItems' | translate }}</h2>
+          <p>{{ 'invoices.invoiceItemsDetailHelp' | translate }}</p>
+        </div>
+
+        @if (item.items.length > 0) {
+          <span>
+            {{
+              'invoices.itemSubtotal'
+                | translate:{
+                    amount:
+                      ((calculatedItemSubtotal() | number:'1.2-2') ?? '')
+                  }
+            }}
+          </span>
+        }
+      </header>
+
+      @if (item.items.length === 0) {
+        <div class="empty">
+          <svg lucideClipboardList></svg>
+          <strong>{{ 'invoices.noItems' | translate }}</strong>
+          <span>{{ 'invoices.noItemsDescription' | translate }}</span>
+        </div>
+
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'invoices.itemDescription' | translate }}</th>
+                <th>{{ 'invoices.quantity' | translate }}</th>
+                <th>{{ 'invoices.unit' | translate }}</th>
+                <th>{{ 'invoices.unitPrice' | translate }}</th>
+                <th>{{ 'invoices.lineTotal' | translate }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (
+                invoiceItem of item.items;
+                track invoiceItem.id
+              ) {
+                <tr>
+                  <td>
+                    <strong>{{ invoiceItem.description || '—' }}</strong>
+                  </td>
+                  <td>{{ invoiceItem.quantity | number:'1.0-2' }}</td>
+                  <td>{{ invoiceItem.unit || '—' }}</td>
+                  <td>{{ invoiceItem.unitPrice | number:'1.2-2' }}</td>
+                  <td>
+                    <strong>
+                      {{
+                        lineTotal(
+                          invoiceItem.quantity,
+                          invoiceItem.unitPrice
+                        )
+                          | number:'1.2-2'
+                      }}
+                    </strong>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  }
+
+  @if (
+    paymentModalOpen() &&
+    invoice();
+    as paymentInvoice
+  ) {
+    <div
+      class="modal-backdrop"
+      (click)="closePaymentModal()">
+
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        (click)="$event.stopPropagation()">
+
+        <header class="modal-heading">
+          <div>
+            <h2>{{ 'invoices.recordPayment' | translate }}</h2>
+            <p>
+              {{
+                'invoices.paymentModalDescription'
+                  | translate:{
+                      invoice:
+                        paymentInvoice.invoiceNumber
+                        || paymentInvoice.id
+                    }
+              }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            [disabled]="recordingPayment()"
+            [title]="'common.close' | translate"
+            [attr.aria-label]="'common.close' | translate"
+            (click)="closePaymentModal()">
+            <svg lucideX></svg>
+          </button>
+        </header>
+
+        <div class="modal-balance">
+          <span>{{ 'invoices.balanceAmount' | translate }}</span>
+          <strong>
+            {{ paymentInvoice.balanceAmount | number:'1.2-2' }}
+          </strong>
+        </div>
+
+        @if (recordingPayment()) {
+          <app-spin
+            [inline]="true"
+            size="small"
+            [label]="'invoices.recordingPayment' | translate" />
+
+        } @else {
+          <app-invoice-payment-form
+            [suggestedAmount]="paymentInvoice.balanceAmount"
+            (submitted)="recordPayment($event)"
+            (cancelled)="closePaymentModal()" />
+        }
+      </section>
+    </div>
+  }
+</div>

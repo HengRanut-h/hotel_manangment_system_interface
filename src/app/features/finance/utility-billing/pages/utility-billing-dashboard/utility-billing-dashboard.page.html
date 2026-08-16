@@ -1,0 +1,166 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div>
+        <p class="eyebrow">
+          {{ 'utilityBilling.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'utilityBilling.dashboard.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'utilityBilling.dashboard.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <a
+      class="secondary-button"
+      routerLink="/app/finance/utility-billing/analytics"
+    >
+      <svg lucideBarChart3
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'utilityBilling.actions.analytics' | translate }}
+    </a>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <a
+      class="summary-card link-card"
+      routerLink="/app/finance/utility-billing/utilities"
+    >
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideZap
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.dashboard.utilities' | translate }}
+        </span>
+
+        <strong>
+          {{ utilitiesCount() }}
+        </strong>
+      </div>
+    </a>
+
+
+    <a
+      class="summary-card link-card"
+      routerLink="/app/finance/utility-billing/rates"
+    >
+      <div class="summary-icon summary-icon--green">
+        <svg lucideBadgeDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.dashboard.rates' | translate }}
+        </span>
+
+        <strong>
+          {{ ratesCount() }}
+        </strong>
+      </div>
+    </a>
+
+
+    <a
+      class="summary-card link-card"
+      routerLink="/app/finance/utility-billing/meters"
+    >
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideGauge
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.dashboard.meters' | translate }}
+        </span>
+
+        <strong>
+          {{ metersCount() }}
+        </strong>
+      </div>
+    </a>
+
+
+    <a
+      class="summary-card link-card"
+      routerLink="/app/finance/utility-billing/readings"
+    >
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideActivity
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'utilityBilling.dashboard.readingsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ readings().length }}
+        </strong>
+      </div>
+    </a>
+
+  </div>
+
+
+  <div class="dashboard-grid">
+
+    <article class="metric-card">
+      <span>
+        {{ 'utilityBilling.dashboard.totalUsage' | translate }}
+      </span>
+
+      <strong>
+        {{
+          totalUsage() |
+          number:'1.2-2'
+        }}
+      </strong>
+    </article>
+
+
+    <article class="metric-card">
+      <span>
+        {{ 'utilityBilling.dashboard.totalAmount' | translate }}
+      </span>
+
+      <strong>
+        {{
+          totalAmount() |
+          number:'1.2-2'
+        }}
+      </strong>
+    </article>
+
+  </div>
+
+</section>

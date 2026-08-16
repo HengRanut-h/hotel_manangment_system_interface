@@ -1,0 +1,10 @@
+@if (isVip()) {
+  <span class="vip-badge">
+    <svg lucideCrown></svg>
+    {{ 'guests.vip' | translate }}
+  </span>
+} @else {
+  <span class="regular-badge">
+    {{ 'guests.regular' | translate }}
+  </span>
+}

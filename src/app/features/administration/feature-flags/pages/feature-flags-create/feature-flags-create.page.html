@@ -1,0 +1,58 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/management/feature-flags"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Feature Flags
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePlus
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Create Feature Flag
+        </h1>
+
+        <p class="subtitle">
+          Add a new feature toggle with rollout rules.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to create feature flag.
+    </div>
+  }
+
+
+  <app-feature-flag-form
+    [submitting]="submitting()"
+    submitLabel="Create Feature Flag"
+    (submitted)="create($event)"
+    (cancelled)="cancel()"
+  />
+
+</section>

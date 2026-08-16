@@ -1,0 +1,82 @@
+<span
+  class="badge"
+  [class]="className()"
+>
+  @switch (
+    status()
+  ) {
+
+    @case (
+      'Received'
+    ) {
+      <svg lucideCircleCheck
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Applied'
+    ) {
+      <svg lucideCircleCheck
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'PartiallyApplied'
+    ) {
+      <svg lucideClock3
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Pending'
+    ) {
+      <svg lucideClock3
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Refunded'
+    ) {
+      <svg lucideRotateCcw
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'PartiallyRefunded'
+    ) {
+      <svg lucideRotateCcw
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Cancelled'
+    ) {
+      <svg lucideBan
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ translationKey() | translate }}
+</span>

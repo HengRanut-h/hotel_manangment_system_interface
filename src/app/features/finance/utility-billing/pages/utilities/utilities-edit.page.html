@@ -1,0 +1,144 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/finance/utility-billing/utilities',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideZap
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          {{ 'utilityBilling.actions.edit' | translate }}
+        </h1>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else {
+
+    <form
+      class="form-card"
+      (ngSubmit)="save()"
+    >
+
+      <div class="form-grid">
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.name' | translate }} *</span>
+  <input
+    name="name"
+    [ngModel]="name()"
+    (ngModelChange)="name.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.code' | translate }}</span>
+  <input
+    name="code"
+    [ngModel]="code()"
+    (ngModelChange)="code.set($event)"
+  />
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.type' | translate }}</span>
+  <select
+    name="type"
+    [ngModel]="type()"
+    (ngModelChange)="type.set($event)"
+  >
+    <option value="Electricity">Electricity</option>
+    <option value="Water">Water</option>
+    <option value="Gas">Gas</option>
+    <option value="Internet">Internet</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+
+<label class="field">
+  <span>{{ 'utilityBilling.fields.unit' | translate }} *</span>
+  <input
+    name="unit"
+    [ngModel]="unit()"
+    (ngModelChange)="unit.set($event)"
+  />
+</label>
+
+<label class="field field-full">
+  <span>{{ 'utilityBilling.fields.description' | translate }}</span>
+  <textarea
+    rows="4"
+    name="description"
+    [ngModel]="description()"
+    (ngModelChange)="description.set($event)"
+  ></textarea>
+</label>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <a
+          class="secondary-button"
+          [routerLink]="[
+            '/app/finance/utility-billing/utilities',
+            id
+          ]"
+        >
+          {{ 'utilityBilling.actions.cancel' | translate }}
+        </a>
+
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="submitting()"
+        >
+          <svg lucideSave
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'utilityBilling.actions.update' | translate }}
+        </button>
+
+      </div>
+
+    </form>
+
+  }
+
+</section>

@@ -1,0 +1,264 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/deposits"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'deposits.actions.back' | translate }}
+  </a>
+
+
+  <div class="header">
+
+    <div class="heading-group">
+
+      <div class="heading-icon">
+        <svg lucideBarChart3
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+
+      <div>
+
+        <h1>
+          {{ 'deposits.analytics.title' | translate }}
+        </h1>
+
+        <p>
+          {{ 'deposits.analytics.subtitle' | translate }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'deposits.states.loadingAnalytics' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="stats">
+
+      <article class="card">
+
+        <svg lucideLandmark
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'deposits.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ totalDeposits() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'deposits.analytics.totalAmount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            totalAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'deposits.status.received' | translate }}
+        </span>
+
+        <strong>
+          {{ receivedCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideClock3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'deposits.status.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+
+      </article>
+
+
+      <article class="card">
+
+        <svg lucideRotateCcw
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'deposits.status.refunded' | translate }}
+        </span>
+
+        <strong>
+          {{ refundedCount() }}
+        </strong>
+
+      </article>
+
+    </div>
+
+
+    <article class="types-card">
+
+      <h2>
+        {{ 'deposits.analytics.amountByType' | translate }}
+      </h2>
+
+
+      <div class="types">
+
+        <div>
+
+          <svg lucideCircleDollarSign
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'deposits.types.reservation' | translate }}
+          </span>
+
+          <strong>
+            {{
+              reservationTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideShieldCheck
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'deposits.types.security' | translate }}
+          </span>
+
+          <strong>
+            {{
+              securityTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideLandmark
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'deposits.types.advance' | translate }}
+          </span>
+
+          <strong>
+            {{
+              advanceTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <svg lucideTriangleAlert
+            [size]="20"
+            [strokeWidth]="2"
+          ></svg>
+
+          <span>
+            {{ 'deposits.types.damage' | translate }}
+          </span>
+
+          <strong>
+            {{
+              damageTotal() |
+              number:'1.2-2'
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  }
+
+</section>

@@ -1,0 +1,37 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.completed {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.approved {
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.pending {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.rejected {
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.cancelled,
+.neutral {
+  background: #f2f4f7;
+  color: #344054;
+}

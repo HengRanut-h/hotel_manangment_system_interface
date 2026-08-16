@@ -1,0 +1,72 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/management/feature-flags',
+      id
+    ]"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back
+  </a>
+
+
+  <div class="page-header">
+
+    <div class="heading">
+
+      <div class="heading-icon">
+        <svg lucidePencil
+          [size]="24"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <h1>
+          Edit Feature Flag
+        </h1>
+
+        <p class="subtitle">
+          Update rollout, targeting and availability.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading feature flag...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load or update feature flag.
+    </div>
+
+  } @else if (
+    item();
+    as flag
+  ) {
+    <app-feature-flag-form
+      [initialValue]="flag"
+      [submitting]="submitting()"
+      submitLabel="Update Feature Flag"
+      (submitted)="update($event)"
+      (cancelled)="cancel()"
+    />
+  }
+
+</section>

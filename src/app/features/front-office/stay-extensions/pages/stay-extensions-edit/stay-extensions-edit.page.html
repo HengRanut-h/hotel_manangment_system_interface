@@ -1,0 +1,60 @@
+<div class="form-page">
+
+  @if (loading()) {
+
+    <app-spin
+      size="large"
+      [label]="'stayExtensions.loadingOne' | translate" />
+
+  } @else if (errorMessage()) {
+
+    <section class="state">
+      <strong>
+        {{ 'stayExtensions.loadOneFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (item(); as extension) {
+
+    <header>
+      <span>
+        {{ 'stayExtensions.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'stayExtensions.edit' | translate }}
+      </h1>
+
+      <p>
+        {{ extension.referenceNumber }}
+      </p>
+    </header>
+
+    <app-stay-extension-form
+      submitLabel="stayExtensions.saveChanges"
+      [showReferenceNumber]="false"
+      [initialBranchId]="extension.branchId"
+      [initialReferenceNumber]="extension.referenceNumber"
+      [initialTitle]="extension.title"
+      [initialNotes]="extension.notes"
+      [initialAmount]="extension.amount"
+      [initialEventAtUtc]="extension.eventAtUtc"
+      [initialRelatedEntityId]="extension.relatedEntityId"
+      [initialRelatedEntityType]="extension.relatedEntityType"
+      [submitting]="submitting()"
+      (submitted)="submit($event)"
+      (cancelled)="cancel()" />
+
+  }
+
+</div>

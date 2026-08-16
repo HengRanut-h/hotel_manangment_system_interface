@@ -1,0 +1,40 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+    @case ('Percentage') {
+      <svg lucideBadgePercent [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('FixedAmount') {
+      <svg lucideCircleDollarSign [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('PromoCode') {
+      <svg lucideTicketPercent [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('Seasonal') {
+      <svg lucideCalendarRange [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('Loyalty') {
+      <svg lucideHeartHandshake [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('Corporate') {
+      <svg lucideBuilding2 [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @case ('Manual') {
+      <svg lucideHandCoins [size]="14" [strokeWidth]="2" ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp [size]="14" [strokeWidth]="2" ></svg>
+    }
+  }
+
+  {{ translationKey() | translate }}
+</span>

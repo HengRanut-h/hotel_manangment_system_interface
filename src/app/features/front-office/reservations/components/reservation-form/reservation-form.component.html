@@ -1,0 +1,244 @@
+<form
+  class="reservation-form"
+  (submit)="$event.preventDefault(); submit()">
+
+  <section class="form-section">
+
+    <header>
+      <span class="section-icon">
+        <svg lucideCalendar></svg>
+      </span>
+
+      <div>
+        <h2>
+          {{ 'reservations.bookingDetails' | translate }}
+        </h2>
+
+        <p>
+          {{ 'reservations.bookingDetailsHelp' | translate }}
+        </p>
+      </div>
+    </header>
+
+    <div class="fields">
+
+      <label class="field field--wide">
+        <span>
+          {{ 'reservations.guest' | translate }}
+          <b>*</b>
+        </span>
+
+        <select
+          [value]="guestId()"
+          (change)="setGuest($event)">
+
+          <option value="">
+            {{ 'reservations.selectGuest' | translate }}
+          </option>
+
+          @for (
+            guest of guests();
+            track guest.id
+          ) {
+            <option [value]="guest.id">
+              {{ guest.fullName }}
+              @if (guest.phone) {
+                — {{ guest.phone }}
+              }
+            </option>
+          }
+
+        </select>
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.roomType' | translate }}
+          <b>*</b>
+        </span>
+
+        <select
+          [value]="roomTypeId()"
+          (change)="setRoomType($event)">
+
+          <option value="">
+            {{ 'reservations.selectRoomType' | translate }}
+          </option>
+
+          @for (
+            roomType of roomTypes();
+            track roomType.id
+          ) {
+            <option [value]="roomType.id">
+              {{ roomType.name }}
+              @if (roomType.code) {
+                ({{ roomType.code }})
+              }
+            </option>
+          }
+
+        </select>
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.roomOptional' | translate }}
+        </span>
+
+        <select
+          [disabled]="!roomTypeId()"
+          [value]="roomId()"
+          (change)="setRoom($event)">
+
+          <option value="">
+            {{ 'reservations.assignLater' | translate }}
+          </option>
+
+          @for (
+            room of matchingRooms();
+            track room.id
+          ) {
+            <option [value]="room.id">
+              {{ room.roomNumber }}
+              @if (room.status) {
+                — {{ room.status }}
+              }
+            </option>
+          }
+
+        </select>
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.checkInDate' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="date"
+          [value]="checkInDate()"
+          (input)="setCheckInDate($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.checkOutDate' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="date"
+          [value]="checkOutDate()"
+          (input)="setCheckOutDate($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.adults' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="number"
+          min="1"
+          step="1"
+          [value]="adults()"
+          (input)="setAdults($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.children' | translate }}
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          step="1"
+          [value]="children()"
+          (input)="setChildren($event)" />
+      </label>
+
+      <label class="field">
+        <span>
+          {{ 'reservations.nightlyRate' | translate }}
+          <b>*</b>
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          step="0.01"
+          [value]="nightlyRate()"
+          (input)="setNightlyRate($event)" />
+      </label>
+
+    </div>
+
+  </section>
+
+  <section class="estimate-card">
+
+    <div>
+      <span>
+        {{ 'reservations.nights' | translate }}
+      </span>
+
+      <strong>
+        {{ nights() }}
+      </strong>
+    </div>
+
+    <div>
+      <span>
+        {{ 'reservations.estimatedTotal' | translate }}
+      </span>
+
+      <strong>
+        {{
+          estimatedTotal()
+            | number:'1.2-2'
+        }}
+      </strong>
+    </div>
+
+    <p>
+      {{ 'reservations.estimateHelp' | translate }}
+    </p>
+
+  </section>
+
+  @if (errorKey()) {
+
+    <div class="validation-error">
+      {{ errorKey() | translate }}
+    </div>
+
+  }
+
+  <footer class="form-actions">
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="submitting()">
+
+      <svg lucideSave></svg>
+
+      <span>
+        {{
+          (
+            submitting()
+              ? 'reservations.creating'
+              : 'reservations.createReservation'
+          )
+            | translate
+        }}
+      </span>
+
+    </button>
+
+  </footer>
+
+</form>

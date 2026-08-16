@@ -23,6 +23,7 @@ import {
 import {
   AuthResponse,
   LoginRequest,
+  RefreshTokenRequest,
   RegisterRequest
 } from './auth.models';
 
@@ -99,12 +100,16 @@ export class AuthApiService {
     refreshToken: string
   ): Observable<AuthResponse> {
 
+    const request:
+      RefreshTokenRequest =
+    {
+      refreshToken
+    };
+
     return this.http
       .post<unknown>(
         `${environment.apiBaseUrl}/auth/refresh-token`,
-        {
-          refreshToken
-        }
+        request
       )
       .pipe(
         map(response =>

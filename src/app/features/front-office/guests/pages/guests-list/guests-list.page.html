@@ -1,0 +1,440 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+      <span class="eyebrow">
+        {{ 'guests.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'guests.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'guests.description' | translate }}
+      </p>
+    </div>
+
+    <div class="page-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="loading()"
+        (click)="load()">
+
+        <svg lucideRefreshCw></svg>
+
+        <span>
+          {{ 'guests.refresh' | translate }}
+        </span>
+
+      </button>
+
+      @if (
+        auth.hasPermission(
+          'guests.create'
+        )
+      ) {
+
+        <a
+          class="primary-button"
+          routerLink="/app/front-office/guests/create">
+
+          <svg lucideUserRoundPlus></svg>
+
+          <span>
+            {{ 'guests.newGuest' | translate }}
+          </span>
+
+        </a>
+
+      }
+
+    </div>
+
+  </header>
+
+  <section class="summary-grid">
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--purple">
+        <svg lucideUsers></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'guests.loadedGuests' | translate }}
+        </span>
+
+        <strong>
+          {{ loadedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--amber">
+        <svg lucideCrown></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'guests.vipLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ vipCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--blue">
+        <svg lucideUsers></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'guests.regularLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ regularCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--green">
+        <svg lucideUsers></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'guests.linkedAccountsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ linkedAccountCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+  </section>
+
+  <section class="list-card">
+
+    <header class="list-card__header">
+
+      <div>
+        <h2>
+          {{ 'guests.guestDirectory' | translate }}
+        </h2>
+
+        <p>
+          @if (
+            backendTotalItems() !== null
+          ) {
+            {{
+              'guests.loadedOfTotal'
+                | translate:{
+                    loaded:
+                      loadedCount(),
+                    total:
+                      (backendTotalItems() ?? 0)
+                  }
+            }}
+          } @else {
+            {{
+              'guests.loadedCount'
+                | translate:{
+                    count:
+                      loadedCount()
+                  }
+            }}
+          }
+        </p>
+      </div>
+
+    </header>
+
+    <div class="filters">
+
+      <div class="search-field">
+
+        <svg lucideSearch></svg>
+
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="search()"
+          [placeholder]="'guests.searchPlaceholder' | translate"
+          (input)="setSearch($event)" />
+
+      </div>
+
+      <select
+        [value]="vipFilter()"
+        (change)="setVipFilter($event)">
+
+        <option value="all">
+          {{ 'guests.allGuestTypes' | translate }}
+        </option>
+
+        <option value="vip">
+          {{ 'guests.vipOnly' | translate }}
+        </option>
+
+        <option value="regular">
+          {{ 'guests.regularOnly' | translate }}
+        </option>
+
+      </select>
+
+      @if (hasFilters()) {
+
+        <button
+          type="button"
+          class="clear-button"
+          (click)="clearFilters()">
+
+          <svg lucideX></svg>
+
+          {{ 'guests.clearFilters' | translate }}
+
+        </button>
+
+      }
+
+    </div>
+
+    @if (loading()) {
+
+      <div class="loading-state">
+
+        <app-spin
+          size="large"
+          [label]="'guests.loading' | translate" />
+
+      </div>
+
+    } @else if (errorMessage()) {
+
+      <div class="state state--error">
+
+        <strong>
+          {{ 'guests.loadFailed' | translate }}
+        </strong>
+
+        <span>
+          {{ errorMessage() }}
+        </span>
+
+        <button
+          type="button"
+          (click)="load()">
+
+          <svg lucideRefreshCw></svg>
+
+          {{ 'guests.tryAgain' | translate }}
+
+        </button>
+
+      </div>
+
+    } @else if (
+      guests().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideUsers></svg>
+
+        <strong>
+          {{ 'guests.emptyTitle' | translate }}
+        </strong>
+
+        <span>
+          {{ 'guests.emptyDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else if (
+      filtered().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideSearch></svg>
+
+        <strong>
+          {{ 'guests.noMatches' | translate }}
+        </strong>
+
+        <span>
+          {{ 'guests.noMatchesDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else {
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                {{ 'guests.guest' | translate }}
+              </th>
+
+              <th>
+                {{ 'guests.phone' | translate }}
+              </th>
+
+              <th>
+                {{ 'guests.email' | translate }}
+              </th>
+
+              <th>
+                {{ 'guests.type' | translate }}
+              </th>
+
+              <th>
+                {{ 'guests.accountLink' | translate }}
+              </th>
+
+              <th class="actions-column">
+                {{ 'guests.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (
+              guest of filtered();
+              track guest.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <div class="guest-name">
+                    <strong>
+                      {{ guest.fullName }}
+                    </strong>
+
+                    <span>
+                      {{ guest.firstName }}
+                      {{ guest.lastName }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  {{ guest.phone || '—' }}
+                </td>
+
+                <td>
+                  {{ guest.email || '—' }}
+                </td>
+
+                <td>
+                  <app-guest-vip-badge
+                    [isVip]="guest.isVip" />
+                </td>
+
+                <td>
+                  {{
+                    (
+                      guest.userId
+                        ? 'guests.linked'
+                        : 'guests.notLinked'
+                    )
+                      | translate
+                  }}
+                </td>
+
+                <td class="actions-column">
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-action icon-action--view"
+                      [routerLink]="[
+                        '/app/front-office/guests',
+                        guest.id
+                      ]"
+                      [title]="'guests.view' | translate"
+                      [attr.aria-label]="'guests.view' | translate">
+
+                      <svg lucideEye></svg>
+
+                    </a>
+
+                    @if (
+                      auth.hasPermission(
+                        'guests.update'
+                      )
+                    ) {
+
+                      <a
+                        class="icon-action icon-action--edit"
+                        [routerLink]="[
+                          '/app/front-office/guests',
+                          guest.id,
+                          'edit'
+                        ]"
+                        [title]="'guests.edit' | translate"
+                        [attr.aria-label]="'guests.edit' | translate">
+
+                        <svg lucidePencil></svg>
+
+                      </a>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+    <footer class="list-footer">
+      {{
+        'guests.showingLoaded'
+          | translate:{
+              shown:
+                filtered().length,
+              loaded:
+                loadedCount()
+            }
+      }}
+    </footer>
+
+  </section>
+
+</div>

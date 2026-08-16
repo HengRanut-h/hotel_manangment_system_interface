@@ -1,0 +1,8 @@
+:host { display:block; }
+.page { max-width:980px; margin:0 auto; padding:24px; color:#17191c; }
+.back-link { display:inline-flex; align-items:center; gap:7px; color:#344054; text-decoration:none; font-weight:700; }
+.page-header { display:flex; align-items:flex-start; gap:12px; margin:22px 0; }
+.page-header h1 { margin:0; font-size:30px; }
+.page-header p { margin:7px 0 0; color:#667085; }
+.alert { margin-bottom:16px; padding:14px; border:1px solid #fecdca; border-radius:12px; background:#fef3f2; color:#b42318; }
+@media (max-width:640px) { .page { padding:16px; } }

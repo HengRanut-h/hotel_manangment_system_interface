@@ -1,0 +1,191 @@
+
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/invoices">
+    <svg lucideArrowLeft></svg>
+    <span>{{ 'invoices.backToList' | translate }}</span>
+  </a>
+
+  <header class="page-heading">
+    <div>
+      <span class="eyebrow">
+        {{ 'invoices.section' | translate }}
+      </span>
+
+      <h1>{{ 'invoices.analytics' | translate }}</h1>
+
+      <p>
+        {{ 'invoices.analyticsDescription' | translate }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="refresh-button"
+      [disabled]="loading()"
+      (click)="load()">
+      <svg lucideRefreshCw></svg>
+      <span>{{ 'invoices.refresh' | translate }}</span>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'invoices.loading' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+      <strong>{{ 'invoices.loadFailed' | translate }}</strong>
+      <span>{{ errorMessage() }}</span>
+
+      <button type="button" (click)="load()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <section class="summary-grid">
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--purple">
+          <svg lucideCircleDollarSign></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.totalBilled' | translate }}</span>
+          <strong>{{ totalBilled() | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--green">
+          <svg lucideCheckCircle2></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.totalCollected' | translate }}</span>
+          <strong>{{ totalPaid() | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--blue">
+          <svg lucideWalletCards></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.totalOutstanding' | translate }}</span>
+          <strong>{{ totalOutstanding() | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-icon summary-icon--amber">
+          <svg lucideClipboardList></svg>
+        </span>
+        <div>
+          <span>{{ 'invoices.averageInvoice' | translate }}</span>
+          <strong>{{ averageInvoice() | number:'1.2-2' }}</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="analytics-grid">
+      <article class="analytics-card">
+        <header>
+          <div>
+            <h2>{{ 'invoices.collectionRate' | translate }}</h2>
+            <p>
+              {{ 'invoices.collectionRateDescription' | translate }}
+            </p>
+          </div>
+
+          <svg lucideCheckCircle2></svg>
+        </header>
+
+        <div class="collection-rate">
+          <strong>
+            {{ collectionRate() | number:'1.0-1' }}%
+          </strong>
+
+          <div class="progress-track">
+            <span [style.width.%]="collectionRate()"></span>
+          </div>
+
+          <div class="collection-meta">
+            <span>
+              {{
+                'invoices.paidCount'
+                  | translate:{ count: paidCount() }
+              }}
+            </span>
+
+            <span>
+              {{
+                'invoices.outstandingCount'
+                  | translate:{ count: outstandingCount() }
+              }}
+            </span>
+
+            <span>
+              {{
+                'invoices.overdueCount'
+                  | translate:{ count: overdueCount() }
+              }}
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article class="analytics-card">
+        <header>
+          <div>
+            <h2>{{ 'invoices.statusBreakdown' | translate }}</h2>
+            <p>
+              {{ 'invoices.statusBreakdownDescription' | translate }}
+            </p>
+          </div>
+
+          <svg lucideClipboardList></svg>
+        </header>
+
+        @if (statusRows().length === 0) {
+          <div class="empty-inline">
+            {{ 'invoices.noResults' | translate }}
+          </div>
+
+        } @else {
+          <div class="status-breakdown">
+            @for (
+              row of statusRows();
+              track row.status
+            ) {
+              <div class="status-row">
+                <div class="status-row__heading">
+                  <strong>{{ row.status }}</strong>
+
+                  <span>
+                    {{ row.count }}
+                    ·
+                    {{ row.amount | number:'1.2-2' }}
+                  </span>
+                </div>
+
+                <div class="status-track">
+                  <span
+                    [style.width.%]="statusPercentage(row.count)">
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </article>
+    </section>
+
+    <section class="source-note">
+      {{ 'invoices.analyticsLoadedNote' | translate }}
+    </section>
+  }
+</div>

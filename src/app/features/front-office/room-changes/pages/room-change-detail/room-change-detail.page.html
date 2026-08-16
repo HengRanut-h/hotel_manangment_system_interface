@@ -1,0 +1,348 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <a
+      routerLink="/app/front-office/room-changes"
+      class="back-link"
+    >
+      <svg lucideArrowLeft></svg>
+
+      <span>
+        {{ 'roomChanges.actions.back' | translate }}
+      </span>
+    </a>
+
+
+    <h1>
+      {{ 'roomChanges.detail.title' | translate }}
+    </h1>
+
+
+    <p class="subtitle">
+      {{ 'roomChanges.detail.subtitle' | translate }}
+    </p>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+
+      <div class="state">
+
+        <div class="spinner"></div>
+
+      <p>
+        {{ 'roomChanges.states.loadingDetail' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert error-alert">
+      <svg lucideRefreshCw></svg>
+
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    roomChange();
+    as item
+  ) {
+
+    <div class="detail-grid">
+
+
+      <article class="card change-summary">
+
+        <div>
+
+          <p class="label">
+            {{ 'roomChanges.detail.roomTransfer' | translate }}
+          </p>
+
+          <div class="transfer">
+            {{ item.fromRoomNumber || '—' }}
+
+            <svg lucideArrowRight></svg>
+
+            {{ item.toRoomNumber || '—' }}
+          </div>
+
+        </div>
+
+
+        <app-room-change-status-badge
+          [status]="item.status"
+        />
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideUser></svg>
+
+          {{ 'roomChanges.detail.guestReservation' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.guest' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.guestName ||
+                ('roomChanges.common.unknownGuest' | translate)
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.reservation' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.reservationNumber || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideBed></svg>
+
+          {{ 'roomChanges.detail.originalRoom' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.roomNumber' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.fromRoomNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.roomType' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.fromRoomTypeName || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideShuffle></svg>
+
+          {{ 'roomChanges.detail.newRoom' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.roomNumber' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.toRoomNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.roomType' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.toRoomTypeName || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideClock></svg>
+
+          {{ 'roomChanges.detail.timeline' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.requested' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.requestedAtUtc
+                  ? (
+                      item.requestedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.changed' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.changedAtUtc
+                  ? (
+                      item.changedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card notes-card">
+
+        <h2>
+          <svg lucideFileText></svg>
+
+          {{ 'roomChanges.fields.reason' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.reason ||
+            ('roomChanges.common.noReason' | translate)
+          }}
+        </p>
+
+      </article>
+
+
+      <article class="card notes-card">
+
+        <h2>
+          <svg lucideFileText></svg>
+
+          {{ 'roomChanges.fields.notes' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.notes ||
+            ('roomChanges.common.noNotes' | translate)
+          }}
+        </p>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideClipboardList></svg>
+
+          {{ 'roomChanges.detail.audit' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.created' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.updated' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.updatedAtUtc
+                  ? (
+                      item.updatedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'roomChanges.fields.roomChangeId' | translate }}
+            </dt>
+
+            <dd class="id-value">
+              {{ item.id }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

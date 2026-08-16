@@ -1,0 +1,53 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+
+    @case (
+      'Reservation'
+    ) {
+      <svg lucideCircleDollarSign
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Security'
+    ) {
+      <svg lucideShieldCheck
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Advance'
+    ) {
+      <svg lucideLandmark
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Damage'
+    ) {
+      <svg lucideTriangleAlert
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ translationKey() | translate }}
+</span>

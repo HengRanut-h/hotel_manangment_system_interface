@@ -1,0 +1,309 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-heading">
+
+    <div class="form-icon">
+      <svg lucideBadgePercent
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        {{ 'taxes.form.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'taxes.form.subtitle' | translate }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation-alert">
+      {{ 'taxes.validation.reviewFields' | translate }}
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.name' | translate }} *
+      </span>
+
+      <input
+        type="text"
+        maxlength="150"
+        name="name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.code' | translate }}
+      </span>
+
+      <input
+        type="text"
+        maxlength="50"
+        name="code"
+        [ngModel]="code()"
+        (ngModelChange)="code.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.type' | translate }} *
+      </span>
+
+      <select
+        name="type"
+        [ngModel]="type()"
+        (ngModelChange)="type.set($event)"
+      >
+        <option value="VAT">
+          {{ 'taxes.types.vat' | translate }}
+        </option>
+
+        <option value="GST">
+          {{ 'taxes.types.gst' | translate }}
+        </option>
+
+        <option value="ServiceTax">
+          {{ 'taxes.types.serviceTax' | translate }}
+        </option>
+
+        <option value="CityTax">
+          {{ 'taxes.types.cityTax' | translate }}
+        </option>
+
+        <option value="TourismTax">
+          {{ 'taxes.types.tourismTax' | translate }}
+        </option>
+
+        <option value="OccupancyTax">
+          {{ 'taxes.types.occupancyTax' | translate }}
+        </option>
+
+        <option value="Other">
+          {{ 'taxes.types.other' | translate }}
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.rate' | translate }} *
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="rate"
+        [ngModel]="rate()"
+        (ngModelChange)="rate.set($event)"
+      />
+
+      @if (
+        touched() &&
+        rateInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'taxes.validation.rate' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.appliesTo' | translate }} *
+      </span>
+
+      <select
+        name="appliesTo"
+        [ngModel]="appliesTo()"
+        (ngModelChange)="appliesTo.set($event)"
+      >
+        <option value="All">
+          {{ 'taxes.appliesTo.all' | translate }}
+        </option>
+
+        <option value="Room">
+          {{ 'taxes.appliesTo.room' | translate }}
+        </option>
+
+        <option value="Restaurant">
+          {{ 'taxes.appliesTo.restaurant' | translate }}
+        </option>
+
+        <option value="Service">
+          {{ 'taxes.appliesTo.service' | translate }}
+        </option>
+
+        <option value="Laundry">
+          {{ 'taxes.appliesTo.laundry' | translate }}
+        </option>
+
+        <option value="Transportation">
+          {{ 'taxes.appliesTo.transportation' | translate }}
+        </option>
+
+        <option value="Invoice">
+          {{ 'taxes.appliesTo.invoice' | translate }}
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.effectiveFrom' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="effectiveFrom"
+        [ngModel]="effectiveFrom()"
+        (ngModelChange)="effectiveFrom.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'taxes.fields.effectiveTo' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="effectiveTo"
+        [ngModel]="effectiveTo()"
+        (ngModelChange)="effectiveTo.set($event)"
+      />
+
+      @if (
+        touched() &&
+        dateRangeInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'taxes.validation.dateRange' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isPercentage"
+        [ngModel]="isPercentage()"
+        (ngModelChange)="isPercentage.set($event)"
+      />
+
+      <span>
+        {{ 'taxes.fields.percentage' | translate }}
+      </span>
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isInclusive"
+        [ngModel]="isInclusive()"
+        (ngModelChange)="isInclusive.set($event)"
+      />
+
+      <span>
+        {{ 'taxes.fields.inclusive' | translate }}
+      </span>
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isActive"
+        [ngModel]="isActive()"
+        (ngModelChange)="isActive.set($event)"
+      />
+
+      <span>
+        {{ 'taxes.fields.active' | translate }}
+      </span>
+    </label>
+
+
+    <label class="field field-full">
+      <span>
+        {{ 'taxes.fields.description' | translate }}
+      </span>
+
+      <textarea
+        rows="5"
+        maxlength="1000"
+        name="description"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+      ></textarea>
+    </label>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="secondary-button"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'taxes.actions.cancel' | translate }}
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? ('taxes.actions.saving' | translate)
+          : (submitLabelKey() | translate)
+      }}
+    </button>
+
+  </div>
+
+</form>

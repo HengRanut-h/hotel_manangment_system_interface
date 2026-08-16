@@ -1,0 +1,575 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+      <div>
+        <p class="eyebrow">
+          Inbox
+        </p>
+
+        <h1>
+          Notifications
+        </h1>
+
+        <p class="subtitle">
+          View hotel alerts, system messages and operational updates.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="primary"
+        [disabled]="bulkLoading()"
+        (click)="markAllRead()"
+      >
+        <svg lucideCheckCheck
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Mark All Read
+      </button>
+
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="load(); loadUnreadCount()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Refresh
+      </button>
+
+
+      <a
+        class="secondary"
+        routerLink="/app/inbox/notifications/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Analytics
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideBell
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Results
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--green">
+        <svg lucideMail
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Unread
+        </span>
+
+        <strong>
+          {{ unreadCount() || pageUnread() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideMailOpen
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Read on Page
+        </span>
+
+        <strong>
+          {{ pageRead() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideArchive
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Archived on Page
+        </span>
+
+        <strong>
+          {{ pageArchived() }}
+        </strong>
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search title or message..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="readFilter()"
+      (ngModelChange)="readFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Read States
+      </option>
+
+      <option value="false">
+        Unread
+      </option>
+
+      <option value="true">
+        Read
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="archivedFilter()"
+      (ngModelChange)="archivedFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Archive States
+      </option>
+
+      <option value="false">
+        Inbox
+      </option>
+
+      <option value="true">
+        Archived
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="typeFilter()"
+      (ngModelChange)="typeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Types
+      </option>
+
+      <option value="Info">
+        Info
+      </option>
+
+      <option value="Success">
+        Success
+      </option>
+
+      <option value="Warning">
+        Warning
+      </option>
+
+      <option value="Error">
+        Error
+      </option>
+
+      <option value="Reservation">
+        Reservation
+      </option>
+
+      <option value="Payment">
+        Payment
+      </option>
+
+      <option value="Housekeeping">
+        Housekeeping
+      </option>
+
+      <option value="Maintenance">
+        Maintenance
+      </option>
+
+      <option value="System">
+        System
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load notifications from the API.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading notifications...
+      </div>
+
+    } @else if (
+      items().length === 0
+    ) {
+      <div class="state">
+        No notifications found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Notification
+              </th>
+
+              <th>
+                Type
+              </th>
+
+              <th>
+                Priority
+              </th>
+
+              <th>
+                Created
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr
+                [class.unread-row]="!item.isRead && !item.isDeleted"
+              >
+
+                <td>
+
+                  <a
+                    class="title-link"
+                    [routerLink]="[
+                      '/app/inbox/notifications',
+                      item.id
+                    ]"
+                  >
+                    @if (
+                      !item.isRead &&
+                      !item.isDeleted
+                    ) {
+                      <span class="unread-dot"></span>
+                    }
+
+                    {{ item.title }}
+                  </a>
+
+                  <div class="message-preview">
+                    {{ item.message }}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  <app-notification-type-badge
+                    [type]="item.type"
+                  />
+                </td>
+
+
+                <td>
+                  <app-notification-priority-badge
+                    [priority]="item.priority"
+                  />
+                </td>
+
+
+                <td>
+                  {{
+                    item.createdAtUtc
+                      ? (
+                          item.createdAtUtc |
+                          date:'medium'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/inbox/notifications',
+                        item.id
+                      ]"
+                      title="View"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      @if (
+                        item.isRead
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-button"
+                          [disabled]="actionId() === item.id"
+                          title="Mark unread"
+                          (click)="markUnread(item)"
+                        >
+                          <svg lucideMail
+                            [size]="17"
+                            [strokeWidth]="2"
+                          ></svg>
+                        </button>
+
+                      } @else {
+                        <button
+                          type="button"
+                          class="icon-button"
+                          [disabled]="actionId() === item.id"
+                          title="Mark read"
+                          (click)="markRead(item)"
+                        >
+                          <svg lucideMailOpen
+                            [size]="17"
+                            [strokeWidth]="2"
+                          ></svg>
+                        </button>
+                      }
+
+
+                      @if (
+                        item.isArchived
+                      ) {
+                        <button
+                          type="button"
+                          class="icon-button"
+                          [disabled]="actionId() === item.id"
+                          title="Unarchive"
+                          (click)="unarchive(item)"
+                        >
+                          <svg lucideRotateCcw
+                            [size]="17"
+                            [strokeWidth]="2"
+                          ></svg>
+                        </button>
+
+                      } @else {
+                        <button
+                          type="button"
+                          class="icon-button"
+                          [disabled]="actionId() === item.id"
+                          title="Archive"
+                          (click)="archive(item)"
+                        >
+                          <svg lucideArchive
+                            [size]="17"
+                            [strokeWidth]="2"
+                          ></svg>
+                        </button>
+                      }
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        title="Delete"
+                        (click)="deleteItem(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        title="Restore"
+                        (click)="restore(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

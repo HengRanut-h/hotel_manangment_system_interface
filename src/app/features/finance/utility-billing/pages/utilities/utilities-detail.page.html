@@ -1,0 +1,88 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing/utilities"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="alert">
+      {{ 'utilityBilling.errors.loadDetail' | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as data
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideZap
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <h1>
+            {{ 'utilityBilling.detail.utility' | translate }}
+          </h1>
+        </div>
+
+      </div>
+
+
+      <a
+        class="secondary-button"
+        [routerLink]="[
+          '/app/finance/utility-billing/utilities',
+          data.id,
+          'edit'
+        ]"
+      >
+        <svg lucidePencil
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.edit' | translate }}
+      </a>
+
+    </div>
+
+
+    <article class="form-card">
+
+<dl>
+  <div><dt>{{ 'utilityBilling.fields.name' | translate }}</dt><dd>{{ data.name }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.code' | translate }}</dt><dd>{{ data.code || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.type' | translate }}</dt><dd>{{ data.type || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.unit' | translate }}</dt><dd>{{ data.unit || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.description' | translate }}</dt><dd>{{ data.description || '—' }}</dd></div>
+</dl>
+
+    </article>
+
+  }
+
+</section>

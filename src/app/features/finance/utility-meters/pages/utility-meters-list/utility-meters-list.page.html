@@ -1,0 +1,550 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading">
+      <div>
+        <p class="eyebrow">
+          Finance
+        </p>
+
+        <h1>
+          Utility Meters
+        </h1>
+
+        <p class="subtitle">
+          Manage hotel utility meters and live meter readings.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary"
+        routerLink="/app/finance/utility-meters/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Create Meter
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="load()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Refresh
+      </button>
+
+
+      <a
+        class="secondary"
+        routerLink="/app/finance/utility-meters/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        Analytics
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideGauge
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Total Meters
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Active on Page
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Inactive on Page
+        </span>
+
+        <strong>
+          {{ inactiveCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideActivity
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          Current Reading Total
+        </span>
+
+        <strong>
+          {{
+            totalCurrentReading() |
+            number:'1.2-2'
+          }}
+        </strong>
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="filters">
+
+    <div class="search">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        placeholder="Search meter number, room, location..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchNow()"
+      />
+
+    </div>
+
+
+    <select
+      [ngModel]="utilityType()"
+      (ngModelChange)="utilityType.set($event); filterChanged()"
+    >
+      <option value="">
+        All Utility Types
+      </option>
+
+      <option value="Electricity">
+        Electricity
+      </option>
+
+      <option value="Water">
+        Water
+      </option>
+
+      <option value="Gas">
+        Gas
+      </option>
+
+      <option value="Internet">
+        Internet
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        All Statuses
+      </option>
+
+      <option value="true">
+        Active
+      </option>
+
+      <option value="false">
+        Inactive
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary"
+      (click)="searchNow()"
+    >
+      Search
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  @if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load utility meters from the API.
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        Loading live utility meters...
+      </div>
+
+    } @else if (
+      items().length ===
+      0
+    ) {
+      <div class="state">
+        No utility meters found.
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('meterNumber')"
+                >
+                  Meter
+                  {{ sortIndicator('meterNumber') }}
+                </button>
+              </th>
+
+
+              <th>
+                Utility
+              </th>
+
+
+              <th>
+                Room
+              </th>
+
+
+              <th>
+                Location
+              </th>
+
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('currentReading')"
+                >
+                  Current Reading
+                  {{ sortIndicator('currentReading') }}
+                </button>
+              </th>
+
+
+              <th>
+                Last Reading
+              </th>
+
+
+              <th>
+                Status
+              </th>
+
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of items();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <a
+                    class="primary-cell"
+                    [routerLink]="[
+                      '/app/finance/utility-meters',
+                      item.id
+                    ]"
+                  >
+                    {{ item.meterNumber }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.unit || '—' }}
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{ item.utilityName || item.utilityId }}
+                  </div>
+
+                  <app-meter-utility-type-badge
+                    [type]="item.utilityType"
+                  />
+
+                </td>
+
+
+                <td>
+                  {{ item.roomNumber || '—' }}
+                </td>
+
+
+                <td>
+                  {{ item.location || '—' }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.currentReading ??
+                    item.initialReading ??
+                    0
+                  }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.lastReadingAtUtc
+                      ? (
+                          item.lastReadingAtUtc |
+                          date:'medium'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+                  <app-meter-status-badge
+                    [active]="item.isActive"
+                    [deleted]="item.isDeleted"
+                  />
+                </td>
+
+
+                <td>
+
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/utility-meters',
+                        item.id
+                      ]"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/finance/utility-meters',
+                          item.id,
+                          'edit'
+                        ]"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        (click)="toggleActive(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        (click)="deleteItem(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        (click)="restoreItem(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <span>
+        Page {{ pageNumber() }} / {{ totalPages() }}
+      </span>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          Previous
+        </button>
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

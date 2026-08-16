@@ -1,0 +1,122 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/taxes"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'taxes.actions.back' | translate }}
+  </a>
+
+
+  <div class="header">
+    <svg lucideBarChart3
+      [size]="26"
+      [strokeWidth]="2"
+    ></svg>
+
+    <div>
+      <h1>
+        {{ 'taxes.analytics.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'taxes.analytics.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'taxes.states.loadingAnalytics' | translate }}
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="stats">
+
+      <article>
+        <svg lucideBadgePercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'taxes.analytics.recordsLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ total() }}
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideBadgePercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'taxes.analytics.averageRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageRate() |
+            number:'1.2-2'
+          }}%
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'taxes.status.active' | translate }}
+        </span>
+
+        <strong>
+          {{ active() }}
+        </strong>
+      </article>
+
+
+      <article>
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+
+        <span>
+          {{ 'taxes.status.inactive' | translate }}
+        </span>
+
+        <strong>
+          {{ inactive() }}
+        </strong>
+      </article>
+
+    </div>
+
+  }
+
+</section>

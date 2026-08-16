@@ -1,0 +1,356 @@
+<div class="page">
+
+  <header class="page-heading">
+
+    <div>
+      <span class="eyebrow">
+        {{ 'checkIns.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'checkIns.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'checkIns.description' | translate }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="secondary-button"
+      [disabled]="
+        loading()
+        ||
+        !!permissionMessage()
+      "
+      (click)="load()">
+
+      <svg lucideRefreshCw></svg>
+
+      <span>
+        {{ 'checkIns.refresh' | translate }}
+      </span>
+
+    </button>
+
+  </header>
+
+  <section class="summary-grid">
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--purple">
+        <svg lucideCalendarCheck></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'checkIns.loadedReservations' | translate }}
+        </span>
+
+        <strong>
+          {{ loadedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--blue">
+        <svg lucideClock3></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'checkIns.confirmedLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ confirmedCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--green">
+        <svg lucideCircleCheckBig></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'checkIns.checkedInLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ checkedInCount() }}
+        </strong>
+      </div>
+
+    </article>
+
+    <article class="summary-card">
+
+      <span class="summary-icon summary-icon--amber">
+        <svg lucideUsers></svg>
+      </span>
+
+      <div>
+        <span>
+          {{ 'checkIns.arrivalsTodayLoaded' | translate }}
+        </span>
+
+        <strong>
+          {{ arrivalsToday() }}
+        </strong>
+      </div>
+
+    </article>
+
+  </section>
+
+  <section class="workspace-card">
+
+    <header class="workspace-header">
+
+      <div>
+        <h2>
+          {{ 'checkIns.reservationWorkspace' | translate }}
+        </h2>
+
+        <p>
+          @if (
+            backendTotalItems() !== null
+          ) {
+            {{
+              'checkIns.loadedOfTotal'
+                | translate:{
+                    loaded:
+                      loadedCount(),
+                    total:
+                      (backendTotalItems() ?? 0)
+                  }
+            }}
+          } @else {
+            {{
+              'checkIns.loadedCount'
+                | translate:{
+                    count:
+                      loadedCount()
+                  }
+            }}
+          }
+        </p>
+      </div>
+
+      @if (
+        !canCheckIn()
+      ) {
+
+        <span class="permission-badge">
+          {{ 'checkIns.readOnly' | translate }}
+        </span>
+
+      }
+
+    </header>
+
+    <div class="workflow-note">
+      {{ 'checkIns.workflowNote' | translate }}
+    </div>
+
+    @if (
+      !permissionMessage()
+    ) {
+
+      <div class="filters">
+
+        <div class="search-field">
+
+          <svg lucideSearch></svg>
+
+          <input
+            type="search"
+            autocomplete="off"
+            [value]="search()"
+            [placeholder]="'checkIns.searchPlaceholder' | translate"
+            (input)="setSearch($event)" />
+
+        </div>
+
+        <select
+          [value]="statusFilter()"
+          (change)="setStatus($event)">
+
+          <option value="">
+            {{ 'checkIns.allStatuses' | translate }}
+          </option>
+
+          @for (
+            status of statuses();
+            track status
+          ) {
+            <option [value]="status.toLowerCase()">
+              {{ status }}
+            </option>
+          }
+
+        </select>
+
+        @if (hasFilters()) {
+
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearFilters()">
+
+            <svg lucideX></svg>
+
+            <span>
+              {{ 'checkIns.clearFilters' | translate }}
+            </span>
+
+          </button>
+
+        }
+
+      </div>
+
+    }
+
+    @if (permissionMessage()) {
+
+      <div class="state state--permission">
+
+        <svg lucideCalendarCheck></svg>
+
+        <strong>
+          {{ 'checkIns.cannotLoadReservations' | translate }}
+        </strong>
+
+        <span>
+          {{ permissionMessage() }}
+        </span>
+
+      </div>
+
+    } @else if (loading()) {
+
+      <div class="loading-state">
+
+        <app-spin
+          size="large"
+          [label]="'checkIns.loading' | translate" />
+
+      </div>
+
+    } @else if (errorMessage()) {
+
+      <div class="state state--error">
+
+        <strong>
+          {{ 'checkIns.loadFailed' | translate }}
+        </strong>
+
+        <span>
+          {{ errorMessage() }}
+        </span>
+
+        <button
+          type="button"
+          (click)="load()">
+
+          <svg lucideRefreshCw></svg>
+
+          {{ 'checkIns.tryAgain' | translate }}
+
+        </button>
+
+      </div>
+
+    } @else if (
+      reservations().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideCalendarCheck></svg>
+
+        <strong>
+          {{ 'checkIns.emptyTitle' | translate }}
+        </strong>
+
+        <span>
+          {{ 'checkIns.emptyDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else if (
+      filtered().length === 0
+    ) {
+
+      <div class="state">
+
+        <svg lucideSearch></svg>
+
+        <strong>
+          {{ 'checkIns.noMatches' | translate }}
+        </strong>
+
+        <span>
+          {{ 'checkIns.noMatchesDescription' | translate }}
+        </span>
+
+      </div>
+
+    } @else {
+
+      <div class="reservation-grid">
+
+        @for (
+          reservation of filtered();
+          track reservation.id
+        ) {
+
+          <app-check-in-reservation-card
+            [reservation]="reservation"
+            [canCheckIn]="canCheckIn()"
+            [processing]="
+              processingId()
+              === reservation.id
+            "
+            (checkInRequested)="checkIn($event)" />
+
+        }
+
+      </div>
+
+    }
+
+    <footer class="workspace-footer">
+
+      <span>
+        {{
+          'checkIns.showingLoaded'
+            | translate:{
+                shown:
+                  filtered().length,
+                loaded:
+                  loadedCount()
+              }
+        }}
+      </span>
+
+      <span>
+        {{ 'checkIns.backendAuthority' | translate }}
+      </span>
+
+    </footer>
+
+  </section>
+
+</div>

@@ -1,0 +1,602 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+      <div>
+        <p class="eyebrow">
+          {{ 'taxes.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'taxes.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'taxes.subtitle' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <a
+        class="primary-button"
+        routerLink="/app/finance/taxes/create"
+      >
+        <svg lucidePlus
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'taxes.actions.create' | translate }}
+      </a>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="loading()"
+        (click)="loadTaxes()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+          [class.spin]="loading()"
+        ></svg>
+
+        {{ 'taxes.actions.refresh' | translate }}
+      </button>
+
+
+      <a
+        class="secondary-button"
+        routerLink="/app/finance/taxes/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'taxes.actions.analytics' | translate }}
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideBadgePercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'taxes.summary.totalRecords' | translate }}
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--green">
+        <svg lucideBadgePercent
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'taxes.summary.averageRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            averageRate() |
+            number:'1.2-2'
+          }}%
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'taxes.summary.active' | translate }}
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+      </div>
+    </article>
+
+
+    <article class="summary-card">
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideCircleX
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+        <span>
+          {{ 'taxes.summary.inactive' | translate }}
+        </span>
+
+        <strong>
+          {{ inactiveCount() }}
+        </strong>
+      </div>
+    </article>
+
+  </div>
+
+
+  <div class="filters-card">
+
+    <div class="search-box">
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        [placeholder]="'taxes.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchTaxes()"
+      />
+
+      @if (
+        search()
+      ) {
+        <button
+          type="button"
+          class="clear-search"
+          (click)="search.set(''); searchTaxes()"
+        >
+          <svg lucideX
+            [size]="16"
+            [strokeWidth]="2"
+          ></svg>
+        </button>
+      }
+    </div>
+
+
+    <select
+      [ngModel]="type()"
+      (ngModelChange)="type.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'taxes.filters.allTypes' | translate }}
+      </option>
+
+      <option value="VAT">
+        {{ 'taxes.types.vat' | translate }}
+      </option>
+
+      <option value="GST">
+        {{ 'taxes.types.gst' | translate }}
+      </option>
+
+      <option value="ServiceTax">
+        {{ 'taxes.types.serviceTax' | translate }}
+      </option>
+
+      <option value="CityTax">
+        {{ 'taxes.types.cityTax' | translate }}
+      </option>
+
+      <option value="TourismTax">
+        {{ 'taxes.types.tourismTax' | translate }}
+      </option>
+
+      <option value="OccupancyTax">
+        {{ 'taxes.types.occupancyTax' | translate }}
+      </option>
+
+      <option value="Other">
+        {{ 'taxes.types.other' | translate }}
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="activeFilter()"
+      (ngModelChange)="activeFilter.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'taxes.filters.allStatuses' | translate }}
+      </option>
+
+      <option value="true">
+        {{ 'taxes.status.active' | translate }}
+      </option>
+
+      <option value="false">
+        {{ 'taxes.status.inactive' | translate }}
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="searchTaxes()"
+    >
+      <svg lucideSearch
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'taxes.actions.search' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="clearFilters()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'taxes.actions.clear' | translate }}
+    </button>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+    <div class="alert error-alert">
+      {{ errorKey()! | translate }}
+    </div>
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+      <div class="state">
+        <div class="spinner"></div>
+
+        <p>
+          {{ 'taxes.states.loading' | translate }}
+        </p>
+      </div>
+
+    } @else if (
+      taxes().length ===
+      0
+    ) {
+      <div class="state">
+
+        <div class="empty-icon">
+          <svg lucideBadgePercent
+            [size]="28"
+            [strokeWidth]="1.8"
+          ></svg>
+        </div>
+
+        <h3>
+          {{ 'taxes.states.emptyTitle' | translate }}
+        </h3>
+
+        <p>
+          {{ 'taxes.states.emptyDescription' | translate }}
+        </p>
+
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+        <table>
+
+          <thead>
+            <tr>
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('name')"
+                >
+                  {{ 'taxes.fields.tax' | translate }}
+                  {{ sortIndicator('name') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'taxes.fields.type' | translate }}
+              </th>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('rate')"
+                >
+                  {{ 'taxes.fields.rate' | translate }}
+                  {{ sortIndicator('rate') }}
+                </button>
+              </th>
+
+              <th>
+                {{ 'taxes.fields.appliesTo' | translate }}
+              </th>
+
+              <th>
+                {{ 'taxes.fields.inclusive' | translate }}
+              </th>
+
+              <th>
+                {{ 'taxes.fields.status' | translate }}
+              </th>
+
+              <th>
+                {{ 'taxes.fields.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              item of taxes();
+              track item.id
+            ) {
+
+              <tr>
+
+                <td>
+                  <a
+                    class="tax-name"
+                    [routerLink]="[
+                      '/app/finance/taxes',
+                      item.id
+                    ]"
+                  >
+                    {{ item.name }}
+                  </a>
+
+                  <div class="secondary-cell">
+                    {{ item.code || '—' }}
+                  </div>
+                </td>
+
+
+                <td>
+                  <app-tax-type-badge
+                    [type]="item.type"
+                  />
+                </td>
+
+
+                <td>
+                  <strong>
+                    {{
+                      item.rate |
+                      number:'1.2-2'
+                    }}
+                    {{ item.isPercentage === false ? '' : '%' }}
+                  </strong>
+                </td>
+
+
+                <td>
+                  {{ item.appliesTo || '—' }}
+                </td>
+
+
+                <td>
+                  {{
+                    item.isInclusive
+                      ? ('taxes.common.yes' | translate)
+                      : ('taxes.common.no' | translate)
+                  }}
+                </td>
+
+
+                <td>
+                  <app-tax-status-badge
+                    [active]="item.isActive"
+                    [deleted]="item.isDeleted"
+                  />
+                </td>
+
+
+                <td>
+                  <div class="row-actions">
+
+                    <a
+                      class="icon-button"
+                      [routerLink]="[
+                        '/app/finance/taxes',
+                        item.id
+                      ]"
+                      [title]="'taxes.actions.view' | translate"
+                    >
+                      <svg lucideEye
+                        [size]="17"
+                        [strokeWidth]="2"
+                      ></svg>
+                    </a>
+
+
+                    @if (
+                      !item.isDeleted
+                    ) {
+
+                      <a
+                        class="icon-button"
+                        [routerLink]="[
+                          '/app/finance/taxes',
+                          item.id,
+                          'edit'
+                        ]"
+                        [title]="'taxes.actions.edit' | translate"
+                      >
+                        <svg lucidePencil
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </a>
+
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        [title]="
+                          (
+                            item.isActive
+                              ? 'taxes.actions.deactivate'
+                              : 'taxes.actions.activate'
+                          ) | translate
+                        "
+                        (click)="toggleActive(item)"
+                      >
+                        <svg lucidePower
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="icon-button danger"
+                        [disabled]="actionId() === item.id"
+                        [title]="'taxes.actions.delete' | translate"
+                        (click)="deleteTax(item)"
+                      >
+                        <svg lucideTrash2
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="icon-button"
+                        [disabled]="actionId() === item.id"
+                        [title]="'taxes.actions.restore' | translate"
+                        (click)="restoreTax(item)"
+                      >
+                        <svg lucideRotateCcw
+                          [size]="17"
+                          [strokeWidth]="2"
+                        ></svg>
+                      </button>
+
+                    }
+
+                  </div>
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <div class="page-size">
+        <span>
+          {{ 'taxes.pagination.rows' | translate }}
+        </span>
+
+        <select
+          [ngModel]="pageSize()"
+          (ngModelChange)="changePageSize($event)"
+        >
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="20">20</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+        </select>
+      </div>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          {{ 'taxes.pagination.previous' | translate }}
+        </button>
+
+
+        @for (
+          page of pageNumbers();
+          track page
+        ) {
+          <button
+            type="button"
+            [class.active]="page === pageNumber()"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'taxes.pagination.next' | translate }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,50 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 30px;
+
+  padding:
+    5px 10px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+.cash {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.card {
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.bank {
+  background: #f4f3ff;
+  color: #5925dc;
+}
+
+.mobile {
+  background: #fff6ed;
+  color: #c4320a;
+}
+
+.online {
+  background: #ecfdff;
+  color: #0e7090;
+}
+
+.neutral {
+  background: #f2f4f7;
+  color: #475467;
+}

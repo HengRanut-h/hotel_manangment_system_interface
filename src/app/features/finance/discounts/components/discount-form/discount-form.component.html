@@ -1,0 +1,347 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-heading">
+
+    <div class="form-icon">
+      <svg lucideTicketPercent
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        {{ 'discounts.form.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'discounts.form.subtitle' | translate }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation-alert">
+      {{ 'discounts.validation.reviewFields' | translate }}
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.name' | translate }} *
+      </span>
+
+      <input
+        type="text"
+        maxlength="150"
+        name="name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.code' | translate }}
+      </span>
+
+      <input
+        type="text"
+        maxlength="50"
+        name="code"
+        [ngModel]="code()"
+        (ngModelChange)="code.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.type' | translate }} *
+      </span>
+
+      <select
+        name="type"
+        [ngModel]="type()"
+        (ngModelChange)="setType($event)"
+      >
+        <option value="Percentage">
+          {{ 'discounts.types.percentage' | translate }}
+        </option>
+
+        <option value="FixedAmount">
+          {{ 'discounts.types.fixedAmount' | translate }}
+        </option>
+
+        <option value="PromoCode">
+          {{ 'discounts.types.promoCode' | translate }}
+        </option>
+
+        <option value="Seasonal">
+          {{ 'discounts.types.seasonal' | translate }}
+        </option>
+
+        <option value="Loyalty">
+          {{ 'discounts.types.loyalty' | translate }}
+        </option>
+
+        <option value="Corporate">
+          {{ 'discounts.types.corporate' | translate }}
+        </option>
+
+        <option value="Manual">
+          {{ 'discounts.types.manual' | translate }}
+        </option>
+
+        <option value="Other">
+          {{ 'discounts.types.other' | translate }}
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.value' | translate }} *
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="value"
+        [ngModel]="value()"
+        (ngModelChange)="value.set($event)"
+      />
+
+      @if (
+        touched() &&
+        valueInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'discounts.validation.value' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.appliesTo' | translate }} *
+      </span>
+
+      <select
+        name="appliesTo"
+        [ngModel]="appliesTo()"
+        (ngModelChange)="appliesTo.set($event)"
+      >
+        <option value="All">
+          {{ 'discounts.appliesTo.all' | translate }}
+        </option>
+
+        <option value="Room">
+          {{ 'discounts.appliesTo.room' | translate }}
+        </option>
+
+        <option value="Restaurant">
+          {{ 'discounts.appliesTo.restaurant' | translate }}
+        </option>
+
+        <option value="Service">
+          {{ 'discounts.appliesTo.service' | translate }}
+        </option>
+
+        <option value="Laundry">
+          {{ 'discounts.appliesTo.laundry' | translate }}
+        </option>
+
+        <option value="Transportation">
+          {{ 'discounts.appliesTo.transportation' | translate }}
+        </option>
+
+        <option value="Invoice">
+          {{ 'discounts.appliesTo.invoice' | translate }}
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.minimumAmount' | translate }}
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="minimumAmount"
+        [ngModel]="minimumAmount()"
+        (ngModelChange)="minimumAmount.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.maximumDiscountAmount' | translate }}
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="maximumDiscountAmount"
+        [ngModel]="maximumDiscountAmount()"
+        (ngModelChange)="maximumDiscountAmount.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.usageLimit' | translate }}
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="1"
+        name="usageLimit"
+        [ngModel]="usageLimit()"
+        (ngModelChange)="usageLimit.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.validFrom' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="validFrom"
+        [ngModel]="validFrom()"
+        (ngModelChange)="validFrom.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'discounts.fields.validTo' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="validTo"
+        [ngModel]="validTo()"
+        (ngModelChange)="validTo.set($event)"
+      />
+
+      @if (
+        touched() &&
+        dateRangeInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'discounts.validation.dateRange' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isPercentage"
+        [ngModel]="isPercentage()"
+        (ngModelChange)="isPercentage.set($event)"
+      />
+
+      <span>
+        {{ 'discounts.fields.percentage' | translate }}
+      </span>
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isActive"
+        [ngModel]="isActive()"
+        (ngModelChange)="isActive.set($event)"
+      />
+
+      <span>
+        {{ 'discounts.fields.active' | translate }}
+      </span>
+    </label>
+
+
+    <label class="field field-full">
+      <span>
+        {{ 'discounts.fields.description' | translate }}
+      </span>
+
+      <textarea
+        rows="5"
+        maxlength="1000"
+        name="description"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+      ></textarea>
+    </label>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="secondary-button"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'discounts.actions.cancel' | translate }}
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? ('discounts.actions.saving' | translate)
+          : (submitLabelKey() | translate)
+      }}
+    </button>
+
+  </div>
+
+</form>

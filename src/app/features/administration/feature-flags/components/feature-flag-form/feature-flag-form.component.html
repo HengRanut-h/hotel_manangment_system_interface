@@ -1,0 +1,292 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-header">
+
+    <div class="form-icon">
+      <svg lucideFlag
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        Feature Flag
+      </h2>
+
+      <p>
+        Configure availability, rollout and targeting rules.
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation">
+      Please review the required fields and validation errors.
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        Key *
+      </span>
+
+      <input
+        type="text"
+        name="key"
+        placeholder="new-booking-engine"
+        [ngModel]="key()"
+        (ngModelChange)="key.set($event)"
+      />
+
+      @if (
+        touched() &&
+        keyInvalid()
+      ) {
+        <small class="field-error">
+          Use letters, numbers, dash, underscore or dot only.
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        Name *
+      </span>
+
+      <input
+        type="text"
+        name="name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Environment
+      </span>
+
+      <select
+        name="environment"
+        [ngModel]="environment()"
+        (ngModelChange)="environment.set($event)"
+      >
+        <option value="All">
+          All
+        </option>
+
+        <option value="Development">
+          Development
+        </option>
+
+        <option value="Testing">
+          Testing
+        </option>
+
+        <option value="Staging">
+          Staging
+        </option>
+
+        <option value="Production">
+          Production
+        </option>
+      </select>
+    </label>
+
+
+    <label class="field">
+      <span>
+        Rollout Percentage *
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        max="100"
+        step="1"
+        name="rolloutPercentage"
+        [ngModel]="rolloutPercentage()"
+        (ngModelChange)="rolloutPercentage.set($event)"
+      />
+
+      @if (
+        touched() &&
+        rolloutInvalid()
+      ) {
+        <small class="field-error">
+          Rollout must be between 0 and 100.
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        Starts At
+      </span>
+
+      <input
+        type="datetime-local"
+        name="startsAt"
+        [ngModel]="startsAt()"
+        (ngModelChange)="startsAt.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        Ends At
+      </span>
+
+      <input
+        type="datetime-local"
+        name="endsAt"
+        [ngModel]="endsAt()"
+        (ngModelChange)="endsAt.set($event)"
+      />
+
+      @if (
+        touched() &&
+        dateRangeInvalid()
+      ) {
+        <small class="field-error">
+          End date must be after start date.
+        </small>
+      }
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isEnabled"
+        [ngModel]="isEnabled()"
+        (ngModelChange)="isEnabled.set($event)"
+      />
+
+      <span>
+        Enabled
+      </span>
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Description
+      </span>
+
+      <textarea
+        rows="4"
+        name="description"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+      ></textarea>
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Conditions JSON
+      </span>
+
+      <textarea
+        rows="7"
+        name="conditionsJson"
+        placeholder='{"role":"manager","hotelIds":[]}'
+        [ngModel]="conditionsJson()"
+        (ngModelChange)="conditionsJson.set($event)"
+      ></textarea>
+
+      @if (
+        touched() &&
+        jsonInvalid(
+          conditionsJson()
+        )
+      ) {
+        <small class="field-error">
+          Conditions JSON is invalid.
+        </small>
+      }
+    </label>
+
+
+    <label class="field full">
+      <span>
+        Metadata JSON
+      </span>
+
+      <textarea
+        rows="6"
+        name="metadataJson"
+        placeholder='{"owner":"platform-team"}'
+        [ngModel]="metadataJson()"
+        (ngModelChange)="metadataJson.set($event)"
+      ></textarea>
+
+      @if (
+        touched() &&
+        jsonInvalid(
+          metadataJson()
+        )
+      ) {
+        <small class="field-error">
+          Metadata JSON is invalid.
+        </small>
+      }
+    </label>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      type="button"
+      class="secondary"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      Cancel
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? 'Saving...'
+          : submitLabel()
+      }}
+    </button>
+
+  </div>
+
+</form>

@@ -1,0 +1,46 @@
+@if (
+  deleted()
+) {
+  <span class="badge deleted">
+    <svg lucideTrash2
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Deleted
+  </span>
+
+} @else if (
+  readOnly()
+) {
+  <span class="badge readonly">
+    <svg lucideLockKeyhole
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Read-only
+  </span>
+
+} @else if (
+  active()
+) {
+  <span class="badge active">
+    <svg lucideCircleCheck
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Active
+  </span>
+
+} @else {
+  <span class="badge inactive">
+    <svg lucideCircleX
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Inactive
+  </span>
+}

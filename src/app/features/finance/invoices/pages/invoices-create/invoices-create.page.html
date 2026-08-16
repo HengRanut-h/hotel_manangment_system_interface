@@ -1,0 +1,350 @@
+
+<div class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/front-office/invoices">
+    <svg lucideArrowLeft></svg>
+    <span>{{ 'invoices.backToList' | translate }}</span>
+  </a>
+
+  <header class="page-heading">
+    <span class="eyebrow">
+      {{ 'invoices.section' | translate }}
+    </span>
+
+    <h1>{{ 'invoices.create' | translate }}</h1>
+
+    <p>
+      {{ 'invoices.createDescription' | translate }}
+    </p>
+  </header>
+
+  @if (loading()) {
+    <app-spin
+      size="large"
+      [label]="'invoices.loadingReservations' | translate" />
+
+  } @else if (errorMessage()) {
+    <section class="state">
+      <svg lucideClipboardList></svg>
+
+      <strong>
+        {{ 'invoices.reservationsLoadFailed' | translate }}
+      </strong>
+
+      <span>{{ errorMessage() }}</span>
+
+      <button
+        type="button"
+        (click)="loadReservations()">
+        <svg lucideRefreshCw></svg>
+        <span>{{ 'common.tryAgain' | translate }}</span>
+      </button>
+    </section>
+
+  } @else {
+    <section class="form-layout">
+
+      <div class="main-column">
+        <article class="form-card">
+          <h2>
+            {{ 'invoices.invoiceContext' | translate }}
+          </h2>
+
+          <div class="form-grid">
+            <div class="field field--full">
+              <label for="invoice-reservation">
+                {{ 'invoices.reservation' | translate }}
+              </label>
+
+              <select
+                id="invoice-reservation"
+                [value]="selectedReservationId()"
+                (change)="setReservation($event)">
+                <option value="">
+                  {{ 'invoices.selectReservation' | translate }}
+                </option>
+
+                @for (
+                  reservation of reservations();
+                  track reservation.id
+                ) {
+                  <option [value]="reservation.id">
+                    {{
+                      reservation.reservationNumber
+                      || reservation.id
+                    }}
+                    —
+                    {{ reservation.guestName || '—' }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="invoice-date">
+                {{ 'invoices.invoiceDate' | translate }}
+              </label>
+              <input
+                id="invoice-date"
+                type="date"
+                [value]="invoiceDate()"
+                (input)="setInvoiceDate($event)" />
+            </div>
+
+            <div class="field">
+              <label for="invoice-due-date">
+                {{ 'invoices.dueDate' | translate }}
+              </label>
+              <input
+                id="invoice-due-date"
+                type="date"
+                [value]="dueDate()"
+                (input)="setDueDate($event)" />
+            </div>
+
+            <div class="field">
+              <label for="invoice-discount">
+                {{ 'invoices.discountAmount' | translate }}
+              </label>
+              <input
+                id="invoice-discount"
+                type="number"
+                min="0"
+                step="0.01"
+                [value]="discountAmount()"
+                (input)="setDiscount($event)" />
+            </div>
+
+            <div class="field">
+              <label for="invoice-tax">
+                {{ 'invoices.taxAmount' | translate }}
+              </label>
+              <input
+                id="invoice-tax"
+                type="number"
+                min="0"
+                step="0.01"
+                [value]="taxAmount()"
+                (input)="setTax($event)" />
+            </div>
+          </div>
+
+          @if (
+            selectedReservation();
+            as reservation
+          ) {
+            <section class="reservation-context">
+              <h3>
+                {{ 'invoices.reservationContext' | translate }}
+              </h3>
+
+              <dl>
+                <div>
+                  <dt>{{ 'invoices.guest' | translate }}</dt>
+                  <dd>{{ reservation.guestName || '—' }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'invoices.room' | translate }}</dt>
+                  <dd>{{ reservation.roomNumber || '—' }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'invoices.roomType' | translate }}</dt>
+                  <dd>{{ reservation.roomTypeName || '—' }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'invoices.reservationStatus' | translate }}</dt>
+                  <dd>{{ reservation.status || '—' }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'invoices.checkInDate' | translate }}</dt>
+                  <dd>
+                    {{
+                      reservation.checkInDate
+                        ? (reservation.checkInDate | date:'mediumDate')
+                        : '—'
+                    }}
+                  </dd>
+                </div>
+                <div>
+                  <dt>{{ 'invoices.checkOutDate' | translate }}</dt>
+                  <dd>
+                    {{
+                      reservation.checkOutDate
+                        ? (reservation.checkOutDate | date:'mediumDate')
+                        : '—'
+                    }}
+                  </dd>
+                </div>
+              </dl>
+            </section>
+          }
+        </article>
+
+        <article class="form-card">
+          <header class="card-heading">
+            <div>
+              <h2>{{ 'invoices.invoiceItems' | translate }}</h2>
+              <p>{{ 'invoices.invoiceItemsHelp' | translate }}</p>
+            </div>
+
+            <button
+              type="button"
+              class="add-item-button"
+              (click)="addItem()">
+              <svg lucideCirclePlus></svg>
+              <span>{{ 'invoices.addItem' | translate }}</span>
+            </button>
+          </header>
+
+          <div class="items">
+            @for (
+              item of items();
+              track $index;
+              let index = $index
+            ) {
+              <article class="item-row">
+                <div class="item-number">
+                  {{ index + 1 }}
+                </div>
+
+                <div class="item-fields">
+                  <div class="field field--description">
+                    <label>
+                      {{ 'invoices.itemDescription' | translate }}
+                    </label>
+                    <input
+                      type="text"
+                      autocomplete="off"
+                      [value]="item.description"
+                      [placeholder]="'invoices.itemDescriptionPlaceholder' | translate"
+                      (input)="setItemDescription(index, $event)" />
+                  </div>
+
+                  <div class="field">
+                    <label>{{ 'invoices.quantity' | translate }}</label>
+                    <input
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      [value]="item.quantity"
+                      (input)="setItemQuantity(index, $event)" />
+                  </div>
+
+                  <div class="field">
+                    <label>{{ 'invoices.unit' | translate }}</label>
+                    <input
+                      type="text"
+                      autocomplete="off"
+                      [value]="item.unit"
+                      [placeholder]="'invoices.unitPlaceholder' | translate"
+                      (input)="setItemUnit(index, $event)" />
+                  </div>
+
+                  <div class="field">
+                    <label>{{ 'invoices.unitPrice' | translate }}</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      [value]="item.unitPrice"
+                      (input)="setItemUnitPrice(index, $event)" />
+                  </div>
+
+                  <div class="line-total">
+                    <span>{{ 'invoices.lineTotal' | translate }}</span>
+                    <strong>
+                      {{ lineTotal(item) | number:'1.2-2' }}
+                    </strong>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="remove-item-button"
+                  [disabled]="items().length <= 1"
+                  [title]="'invoices.removeItem' | translate"
+                  [attr.aria-label]="'invoices.removeItem' | translate"
+                  (click)="removeItem(index)">
+                  <svg lucideTrash2></svg>
+                </button>
+              </article>
+            }
+          </div>
+        </article>
+      </div>
+
+      <aside class="summary-column">
+        <article class="totals-card">
+          <h2>{{ 'invoices.previewTotals' | translate }}</h2>
+
+          <dl>
+            <div>
+              <dt>{{ 'invoices.subtotal' | translate }}</dt>
+              <dd>
+                {{ calculatedSubtotal() | number:'1.2-2' }}
+              </dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.discountAmount' | translate }}</dt>
+              <dd>{{ +discountAmount() | number:'1.2-2' }}</dd>
+            </div>
+
+            <div>
+              <dt>{{ 'invoices.taxAmount' | translate }}</dt>
+              <dd>{{ +taxAmount() | number:'1.2-2' }}</dd>
+            </div>
+
+            <div class="total-row">
+              <dt>{{ 'invoices.totalAmount' | translate }}</dt>
+              <dd>
+                {{ calculatedTotal() | number:'1.2-2' }}
+              </dd>
+            </div>
+          </dl>
+
+          <p class="compatibility-note">
+            {{ 'invoices.createCompatibilityNote' | translate }}
+          </p>
+
+          <div class="submit-actions">
+            <a
+              class="secondary-button"
+              routerLink="/app/front-office/invoices">
+              {{ 'common.cancel' | translate }}
+            </a>
+
+            <button
+              type="button"
+              class="primary-button"
+              [disabled]="!valid() || saving()"
+              (click)="submit()">
+
+              @if (saving()) {
+                <app-spin
+                  [inline]="true"
+                  size="small"
+                  label="" />
+              } @else {
+                <svg lucideCheckCircle2></svg>
+              }
+
+              <span>
+                {{
+                  (
+                    saving()
+                      ? 'common.saving'
+                      : 'invoices.create'
+                  )
+                    | translate
+                }}
+              </span>
+            </button>
+          </div>
+        </article>
+      </aside>
+    </section>
+  }
+</div>

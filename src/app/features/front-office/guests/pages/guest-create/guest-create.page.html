@@ -1,0 +1,33 @@
+<div class="page">
+  <a
+    class="back-link"
+    routerLink="/app/front-office/guests">
+    <svg lucideArrowLeft></svg>
+    {{ 'guests.backToGuests' | translate }}
+  </a>
+
+  <header class="page-heading">
+    <span class="title-icon">
+      <svg lucideUserRoundPlus></svg>
+    </span>
+
+    <div>
+      <span class="eyebrow">
+        {{ 'guests.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'guests.createTitle' | translate }}
+      </h1>
+
+      <p>
+        {{ 'guests.createDescription' | translate }}
+      </p>
+    </div>
+  </header>
+
+  <app-guest-form
+    [submitting]="submitting()"
+    submitLabelKey="guests.createGuest"
+    (submitted)="create($event)" />
+</div>

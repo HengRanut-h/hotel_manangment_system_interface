@@ -1,0 +1,397 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/deposits"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'deposits.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'deposits.states.loadingDetail' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert">
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else if (
+    deposit();
+    as item
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideLandmark
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            {{ 'deposits.detail.section' | translate }}
+          </p>
+
+          <h1>
+            {{
+              item.depositNumber ||
+              ('deposits.detail.deposit' | translate)
+            }}
+          </h1>
+
+          <p class="subtitle">
+            {{ item.referenceNumber || item.id }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="badges">
+
+        <app-deposit-type-badge
+          [type]="item.depositType"
+        />
+
+        <app-deposit-status-badge
+          [status]="item.status"
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          <svg lucideCircleDollarSign
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'deposits.detail.depositInfo' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.amount' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.amount |
+                number:'1.2-2'
+              }}
+              {{ item.currency || '' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.type' | translate }}
+            </dt>
+
+            <dd>
+              <app-deposit-type-badge
+                [type]="item.depositType"
+              />
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.status' | translate }}
+            </dt>
+
+            <dd>
+              <app-deposit-status-badge
+                [status]="item.status"
+              />
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.paymentMethod' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.paymentMethod || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideReceiptText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'deposits.detail.references' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.reference' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.referenceNumber || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.transaction' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.transactionId || '—' }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.reservation' | translate }}
+            </dt>
+
+            <dd>
+              {{ item.reservationNumber || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideUserRound
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'deposits.detail.guest' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.guestName' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.guestName ||
+                ('deposits.common.unknownGuest' | translate)
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.guestId' | translate }}
+            </dt>
+
+            <dd class="wrap">
+              {{ item.guestId || '—' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          <svg lucideClock3
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'deposits.detail.timeline' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.receivedAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.receivedAtUtc
+                  ? (
+                      item.receivedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.appliedAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.appliedAtUtc
+                  ? (
+                      item.appliedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.refundedAt' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.refundedAtUtc
+                  ? (
+                      item.refundedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          {{ 'deposits.detail.audit' | translate }}
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.created' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.createdAtUtc
+                  ? (
+                      item.createdAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              {{ 'deposits.fields.updated' | translate }}
+            </dt>
+
+            <dd>
+              {{
+                item.updatedAtUtc
+                  ? (
+                      item.updatedAtUtc |
+                      date:'medium'
+                    )
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+
+      <article class="card notes-card">
+
+        <h2>
+          <svg lucideFileText
+            [size]="19"
+            [strokeWidth]="2"
+          ></svg>
+
+          {{ 'deposits.fields.notes' | translate }}
+        </h2>
+
+        <p>
+          {{
+            item.notes ||
+            ('deposits.common.noNotes' | translate)
+          }}
+        </p>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

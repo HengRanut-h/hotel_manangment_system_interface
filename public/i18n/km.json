@@ -1,3006 +1,1582 @@
 {
   "common": {
     "back": "ត្រឡប់ក្រោយ",
-
     "save": "រក្សាទុក",
-
     "saving": "កំពុងរក្សាទុក...",
-
     "cancel": "បោះបង់",
-
     "create": "បង្កើត",
-
     "edit": "កែប្រែ",
-
     "update": "ធ្វើបច្ចុប្បន្នភាព",
-
     "delete": "លុប",
-
     "details": "ព័ត៌មានលម្អិត",
-
     "search": "ស្វែងរក",
-
     "clear": "សម្អាត",
-
     "refresh": "ផ្ទុកឡើងវិញ",
-
     "loading": "កំពុងផ្ទុក...",
-
-    "more": "ផ្សេងទៀត"
+    "more": "ផ្សេងទៀត",
+    "actions": "សកម្មភាព",
+    "next": "បន្ទាប់",
+    "previous": "មុន",
+    "tryAgain": "ព្យាយាមម្ដងទៀត",
+    "view": "មើល",
+    "close": "បិទ",
+    "of": "នៃ",
+    "page": "ទំព័រ",
+    "rows": "ជួរ",
+    "showing": "កំពុងបង្ហាញ"
   },
-
   "roles": {
     "section": "រដ្ឋបាល",
-
     "title": "តួនាទី និងសិទ្ធិចូលប្រើ",
-
     "subtitle": "បង្កើតតួនាទី និងគ្រប់គ្រងសិទ្ធិចូលប្រើប្រតិបត្តិការសណ្ឋាគារ។",
-
     "roles": "តួនាទី",
-
     "user": "អ្នកប្រើ",
-
     "users": "អ្នកប្រើ",
-
     "totalRoles": "តួនាទីសរុប",
-
     "assignedUsers": "អ្នកប្រើដែលបានកំណត់",
-
     "permissions": "សិទ្ធិ",
-
     "searchPlaceholder": "ស្វែងរកតួនាទី ឬសិទ្ធិ...",
-
     "add": "បន្ថែមតួនាទី",
-
     "loading": "កំពុងផ្ទុកតួនាទី...",
-
     "loadFailed": "មិនអាចផ្ទុកតួនាទីបានទេ។",
-
     "noRoles": "រកមិនឃើញតួនាទី",
-
     "noPermissions": "មិនទាន់បានកំណត់សិទ្ធិ",
-
     "create": "បង្កើតតួនាទី",
-
     "creating": "កំពុងបង្កើត...",
-
     "createDescription": "បង្កើតតួនាទីថ្មីសម្រាប់គ្រប់គ្រងសិទ្ធិបុគ្គលិកសណ្ឋាគារ។",
-
     "createPermissionsHint": "បង្កើតតួនាទីជាមុន ហើយបន្ទាប់មកអាចកំណត់សិទ្ធិបាន។",
-
     "edit": "កែប្រែតួនាទី",
-
     "editDescription": "កែប្រែឈ្មោះ និងព័ត៌មានរបស់តួនាទី។",
-
     "detail": "ព័ត៌មានលម្អិតតួនាទី",
-
     "name": "ឈ្មោះតួនាទី",
-
     "namePlaceholder": "ឧទាហរណ៍៖ អ្នកគ្រប់គ្រង Front Desk",
-
     "nameHelp": "ប្រើឈ្មោះច្បាស់លាស់ដែលបង្ហាញពីទំនួលខុសត្រូវរបស់បុគ្គលិក។",
-
     "update": "កែប្រែតួនាទី",
-
     "managePermissions": "គ្រប់គ្រងសិទ្ធិ",
-
     "savePermissions": "រក្សាទុកសិទ្ធិ",
-
     "createSuccess": "បានបង្កើតតួនាទីដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតតួនាទីបានទេ។",
-
     "updateSuccess": "បានកែប្រែតួនាទីដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែប្រែតួនាទីបានទេ។",
-
     "deleteSuccess": "បានលុបតួនាទីដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបតួនាទីបានទេ។",
-
     "deleteAssignedError": "តួនាទីនេះកំពុងត្រូវបានកំណត់ឱ្យអ្នកប្រើ ដូច្នេះមិនអាចលុបបានទេ។",
-
-    "deleteConfirm": "តើអ្នកចង់លុបតួនាទី \"{{name}}\" មែនទេ?"
+    "deleteConfirm": "តើអ្នកចង់លុបតួនាទី \"{{name}}\" មែនទេ?",
+    "assignedPermissions": "សិទ្ធិបានផ្តល់",
+    "assignedPermissionsDescription": "ជ្រើសសិទ្ធិដែលតួនាទីនេះគួរមាន។",
+    "clearAll": "សម្អាតទាំងអស់",
+    "clearGroup": "សម្អាតក្រុម",
+    "deleteAssignedHint": "អ្នកប្រើដែលមានតួនាទីនេះអាចទទួលផលប៉ះពាល់។",
+    "description": "ការពិពណ៌នា",
+    "detailDescription": "ពិនិត្យព័ត៌មានតួនាទី និងសិទ្ធិដែលបានផ្តល់។",
+    "missingId": "ខ្វះលេខសម្គាល់តួនាទី។",
+    "noResults": "រកមិនឃើញតួនាទីទេ។",
+    "noResultsDescription": "បង្កើតតួនាទីដើម្បីចាប់ផ្តើមផ្តល់សិទ្ធិ។",
+    "permissionAssignments": "ការផ្តល់សិទ្ធិ",
+    "permissionDefaultDescription": "សិទ្ធិសម្រាប់គ្រប់គ្រងការចូលប្រើតាមតួនាទី។",
+    "permissionsDescription": "គ្រប់គ្រងសិទ្ធិដែលភ្ជាប់នឹងតួនាទីនេះ។",
+    "permissionsLoadFailed": "មិនអាចផ្ទុកសិទ្ធិតួនាទីបានទេ។",
+    "permissionsLoading": "កំពុងផ្ទុកសិទ្ធិតួនាទី...",
+    "permissionsSaveFailed": "មិនអាចរក្សាទុកសិទ្ធិតួនាទីបានទេ។",
+    "permissionsSaveSuccess": "បានរក្សាទុកសិទ្ធិតួនាទីដោយជោគជ័យ។",
+    "selectAll": "ជ្រើសទាំងអស់",
+    "selectGroup": "ជ្រើសក្រុម",
+    "selectedPermissions": "សិទ្ធិបានជ្រើស"
   },
-
   "users": {
     "section": "ការគ្រប់គ្រង",
-
     "title": "អ្នកប្រើប្រាស់",
-
     "description": "គ្រប់គ្រងអ្នកប្រើប្រាស់ តួនាទី និងស្ថានភាពគណនីក្នុងសណ្ឋាគារ។",
-
     "loading": "កំពុងផ្ទុកអ្នកប្រើប្រាស់...",
-
     "loadingOne": "កំពុងផ្ទុកអ្នកប្រើប្រាស់...",
-
     "loadingRoles": "កំពុងផ្ទុកតួនាទី...",
-
     "loadFailed": "មិនអាចផ្ទុកអ្នកប្រើប្រាស់បានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកអ្នកប្រើប្រាស់នេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់អ្នកប្រើប្រាស់។",
-
     "totalUsers": "អ្នកប្រើប្រាស់សរុប",
-
     "activeUsers": "អ្នកប្រើប្រាស់សកម្ម",
-
     "inactiveUsers": "អ្នកប្រើប្រាស់អសកម្ម",
-
     "searchPlaceholder": "ស្វែងរកតាមឈ្មោះ អ៊ីមែល ឬតួនាទី...",
-
     "noResults": "រកមិនឃើញអ្នកប្រើប្រាស់",
-
     "noResultsDescription": "សូមសាកល្បងពាក្យស្វែងរកផ្សេង។",
-
     "create": "បង្កើតអ្នកប្រើប្រាស់",
-
     "createDescription": "បង្កើតអ្នកប្រើប្រាស់សណ្ឋាគារ និងផ្ដល់តួនាទី។",
-
     "createSuccess": "បានបង្កើតអ្នកប្រើប្រាស់ដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតអ្នកប្រើប្រាស់បានទេ។",
-
     "edit": "កែសម្រួលអ្នកប្រើប្រាស់",
-
     "editDescription": "កែប្រែព័ត៌មាន ស្ថានភាព និងតួនាទីរបស់អ្នកប្រើប្រាស់។",
-
     "update": "ធ្វើបច្ចុប្បន្នភាពអ្នកប្រើប្រាស់",
-
     "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពអ្នកប្រើប្រាស់ដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចធ្វើបច្ចុប្បន្នភាពអ្នកប្រើប្រាស់បានទេ។",
-
     "detail": "ព័ត៌មានលម្អិតអ្នកប្រើប្រាស់",
-
     "fullName": "ឈ្មោះពេញ",
-
     "fullNamePlaceholder": "បញ្ចូលឈ្មោះពេញ",
-
     "email": "អ៊ីមែល",
-
     "emailPlaceholder": "បញ្ចូលអ៊ីមែល",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "branchIdPlaceholder": "Branch GUID (ជាជម្រើស)",
-
     "branchIdHelp": "ទុកទទេដើម្បីប្រើសាខាលំនាំដើមនៅពេលបង្កើត។",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "roles": "តួនាទី",
-
     "rolesHelp": "ជ្រើសរើសតួនាទីសម្រាប់អ្នកប្រើប្រាស់នេះ។",
-
     "rolesDescription": "តួនាទីដែលបានផ្ដល់ឱ្យអ្នកប្រើប្រាស់នេះ។",
-
     "noAvailableRoles": "មិនមានតួនាទីសម្រាប់ជ្រើសរើសទេ។",
-
     "noRolesAssigned": "មិនទាន់មានតួនាទីត្រូវបានផ្ដល់ទេ។",
-
     "manageRoles": "គ្រប់គ្រងតួនាទី",
-
     "manageRolesDescription": "ជ្រើសរើសតួនាទីដែលត្រូវផ្ដល់ឱ្យអ្នកប្រើប្រាស់នេះ។",
-
     "selectedRoles": "តួនាទីដែលបានជ្រើសរើស",
-
     "searchRoles": "ស្វែងរកតួនាទី...",
-
     "selectAllRoles": "ជ្រើសរើសទាំងអស់",
-
     "clearRoles": "សម្អាតទាំងអស់",
-
     "saveRoles": "រក្សាទុកតួនាទី",
-
     "rolesLoadFailed": "មិនអាចផ្ទុកតួនាទីអ្នកប្រើប្រាស់បានទេ។",
-
     "rolesSaveSuccess": "បានធ្វើបច្ចុប្បន្នភាពតួនាទីដោយជោគជ័យ។",
-
     "rolesSaveFailed": "មិនអាចធ្វើបច្ចុប្បន្នភាពតួនាទីបានទេ។",
-
     "enable": "បើកដំណើរការ",
-
     "disable": "បិទដំណើរការ",
-
     "enableSuccess": "បានបើកដំណើរការអ្នកប្រើប្រាស់ដោយជោគជ័យ។",
-
     "enableFailed": "មិនអាចបើកដំណើរការអ្នកប្រើប្រាស់បានទេ។",
-
     "disableSuccess": "បានបិទដំណើរការអ្នកប្រើប្រាស់ដោយជោគជ័យ។",
-
     "disableFailed": "មិនអាចបិទដំណើរការអ្នកប្រើប្រាស់បានទេ។",
-
     "password": "ពាក្យសម្ងាត់",
-
     "passwordHelp": "ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច 8 តួអក្សរ។",
-
     "togglePassword": "បង្ហាញ ឬលាក់ពាក្យសម្ងាត់",
-
     "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
-
     "resetPasswordDescription": "កំណត់ពាក្យសម្ងាត់ថ្មីសម្រាប់គណនីនេះ។",
-
     "resetPasswordHelp": "បញ្ចូលពាក្យសម្ងាត់ថ្មីយ៉ាងតិច 8 តួអក្សរ។",
-
     "newPassword": "ពាក្យសម្ងាត់ថ្មី",
-
     "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
-
     "passwordMismatch": "ពាក្យសម្ងាត់មិនដូចគ្នា។",
-
     "resetPasswordSuccess": "បានកំណត់ពាក្យសម្ងាត់ឡើងវិញដោយជោគជ័យ។",
-
     "resetPasswordFailed": "មិនអាចកំណត់ពាក្យសម្ងាត់ឡើងវិញបានទេ។",
-
     "deleteConfirm": "លុបអ្នកប្រើប្រាស់ {{name}}?",
-
     "deleteSuccess": "បានលុបអ្នកប្រើប្រាស់ដោយជោគជ័យ។",
-
-    "deleteFailed": "មិនអាចលុបអ្នកប្រើប្រាស់បានទេ។"
+    "deleteFailed": "មិនអាចលុបអ្នកប្រើប្រាស់បានទេ។",
+    "addUser": "បន្ថែមអ្នកប្រើ",
+    "addUserDescription": "បង្កើតគណនីបុគ្គលិក និងផ្តល់សិទ្ធិចូលប្រើ។",
+    "assignRoles": "ផ្តល់តួនាទី",
+    "automaticScopeDescription": "សិទ្ធិចូលប្រើសណ្ឋាគារត្រូវបានអនុវត្តតាមតួនាទី និងបរិបទគណនី។",
+    "automaticScopeTitle": "វិសាលភាពចូលប្រើស្វ័យប្រវត្តិ",
+    "emailInvalid": "សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ។",
+    "fullNameRequired": "ត្រូវការឈ្មោះពេញ។",
+    "passwordPlaceholder": "បញ្ចូលពាក្យសម្ងាត់បណ្តោះអាសន្ន",
+    "roleRequired": "សូមជ្រើសតួនាទីយ៉ាងហោចណាស់មួយ។",
+    "saveUser": "រក្សាទុកអ្នកប្រើ",
+    "temporaryPassword": "ពាក្យសម្ងាត់បណ្តោះអាសន្ន"
   },
-
   "departments": {
     "section": "ធនធានមនុស្ស",
-
     "title": "នាយកដ្ឋាន",
-
     "department": "នាយកដ្ឋាន",
-
     "description": "គ្រប់គ្រងនាយកដ្ឋានធនធានមនុស្ស បរិបទសាខា ស្ថានភាពកាតាឡុក និងលេខកូដនាយកដ្ឋាន។",
-
     "create": "បន្ថែមនាយកដ្ឋាន",
-
     "createTitle": "បង្កើតនាយកដ្ឋាន",
-
     "createDescription": "បង្កើតនាយកដ្ឋានសម្រាប់បរិបទសណ្ឋាគារបច្ចុប្បន្ន និងអាចកំណត់សាខាបាន។",
-
     "edit": "កែសម្រួលនាយកដ្ឋាន",
-
     "editTitle": "កែសម្រួលនាយកដ្ឋាន",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណ ការពិពណ៌នា និងស្ថានភាពសកម្មរបស់នាយកដ្ឋាន។",
-
     "detail": "ព័ត៌មានលម្អិតនាយកដ្ឋាន",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "departmentInformation": "ព័ត៌មាននាយកដ្ឋាន",
-
     "departmentInformationDescription": "អត្តសញ្ញាណនាយកដ្ឋាន បរិបទសាខា និងស្ថានភាពកាតាឡុក។",
-
     "name": "ឈ្មោះនាយកដ្ឋាន",
-
     "code": "លេខកូដនាយកដ្ឋាន",
-
     "departmentId": "លេខសម្គាល់នាយកដ្ឋាន",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "descriptionLabel": "ការពិពណ៌នា",
-
     "noDescription": "គ្មានការពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬលេខកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "លេខកូដ",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលនាយកដ្ឋាន",
-
     "editAction": "កែសម្រួលនាយកដ្ឋាន",
-
     "activateAction": "ធ្វើឱ្យសកម្ម",
-
     "deactivateAction": "ធ្វើឱ្យអសកម្ម",
-
     "deleteAction": "លុបនាយកដ្ឋាន",
-
     "loading": "កំពុងផ្ទុកនាយកដ្ឋាន...",
-
     "loadingOne": "កំពុងផ្ទុកនាយកដ្ឋាន...",
-
     "loadFailed": "មិនអាចផ្ទុកនាយកដ្ឋានបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកនាយកដ្ឋាននេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់នាយកដ្ឋាន។",
-
     "noResults": "រកមិនឃើញនាយកដ្ឋាន",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតនាយកដ្ឋានថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalDepartments": "នាយកដ្ឋានសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតនាយកដ្ឋានដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតនាយកដ្ឋានបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលនាយកដ្ឋានដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលនាយកដ្ឋានបានទេ។",
-
     "activateSuccess": "បានធ្វើឱ្យនាយកដ្ឋានសកម្មដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចធ្វើឱ្យនាយកដ្ឋានសកម្មបានទេ។",
-
     "deactivateSuccess": "បានធ្វើឱ្យនាយកដ្ឋានអសកម្មដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចធ្វើឱ្យនាយកដ្ឋានអសកម្មបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបនាយកដ្ឋាន \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបនាយកដ្ឋានដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបនាយកដ្ឋានបានទេ។",
-
     "form": {
       "identity": "អត្តសញ្ញាណនាយកដ្ឋាន",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់នាយកដ្ឋាននេះ។",
-
       "name": "ឈ្មោះនាយកដ្ឋាន",
-
       "namePlaceholder": "ឧទាហរណ៍៖ ផ្នែកទទួលភ្ញៀវ",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះនាយកដ្ឋាន។",
-
       "code": "លេខកូដនាយកដ្ឋាន",
-
       "codePlaceholder": "ឧទាហរណ៍៖ FO",
-
       "codeHelp": "ប្រើលេខកូដខ្លីនិងតែមួយសម្រាប់នាយកដ្ឋាន។",
-
       "codeRequired": "ត្រូវបញ្ចូលលេខកូដនាយកដ្ឋាន។",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "branchIdHelp": "ទុកទទេដើម្បីប្រើបរិបទសាខាបច្ចុប្បន្នរបស់អ្នក ប្រសិនបើមាន។",
-
       "description": "ការពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីនាយកដ្ឋាននេះ។",
-
       "status": "ស្ថានភាពនាយកដ្ឋាន",
-
       "statusDescription": "នាយកដ្ឋានអសកម្មនៅតែរក្សាទុកក្នុងប្រព័ន្ធ ប៉ុន្តែត្រូវបានលាក់ពីប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "positions": {
     "section": "ធនធានមនុស្ស",
-
     "title": "មុខតំណែង",
-
     "position": "មុខតំណែង",
-
     "description": "គ្រប់គ្រងមុខតំណែងការងារធនធានមនុស្ស បរិបទសាខា ស្ថានភាពកាតាឡុក និងលេខកូដមុខតំណែង។",
-
     "create": "បន្ថែមមុខតំណែង",
-
     "createTitle": "បង្កើតមុខតំណែង",
-
     "createDescription": "បង្កើតមុខតំណែងការងារសម្រាប់បរិបទសណ្ឋាគារបច្ចុប្បន្ន និងអាចកំណត់សាខាបាន។",
-
     "edit": "កែសម្រួលមុខតំណែង",
-
     "editTitle": "កែសម្រួលមុខតំណែង",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណ ការពិពណ៌នា និងស្ថានភាពសកម្មរបស់មុខតំណែង។",
-
     "detail": "ព័ត៌មានលម្អិតមុខតំណែង",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "positionInformation": "ព័ត៌មានមុខតំណែង",
-
     "positionInformationDescription": "អត្តសញ្ញាណមុខតំណែង បរិបទសាខា និងស្ថានភាពកាតាឡុក។",
-
     "name": "ឈ្មោះមុខតំណែង",
-
     "code": "លេខកូដមុខតំណែង",
-
     "positionId": "លេខសម្គាល់មុខតំណែង",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "descriptionLabel": "ការពិពណ៌នា",
-
     "noDescription": "គ្មានការពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬលេខកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "លេខកូដ",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលមុខតំណែង",
-
     "editAction": "កែសម្រួលមុខតំណែង",
-
     "activateAction": "ធ្វើឱ្យសកម្ម",
-
     "deactivateAction": "ធ្វើឱ្យអសកម្ម",
-
     "deleteAction": "លុបមុខតំណែង",
-
     "loading": "កំពុងផ្ទុកមុខតំណែង...",
-
     "loadingOne": "កំពុងផ្ទុកមុខតំណែង...",
-
     "loadFailed": "មិនអាចផ្ទុកមុខតំណែងបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកមុខតំណែងនេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់មុខតំណែង។",
-
     "noResults": "រកមិនឃើញមុខតំណែង",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតមុខតំណែងថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalPositions": "មុខតំណែងសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតមុខតំណែងដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតមុខតំណែងបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលមុខតំណែងដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលមុខតំណែងបានទេ។",
-
     "activateSuccess": "បានធ្វើឱ្យមុខតំណែងសកម្មដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចធ្វើឱ្យមុខតំណែងសកម្មបានទេ។",
-
     "deactivateSuccess": "បានធ្វើឱ្យមុខតំណែងអសកម្មដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចធ្វើឱ្យមុខតំណែងអសកម្មបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបមុខតំណែង \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបមុខតំណែងដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបមុខតំណែងបានទេ។",
-
     "form": {
       "identity": "អត្តសញ្ញាណមុខតំណែង",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់មុខតំណែងការងារនេះ។",
-
       "name": "ឈ្មោះមុខតំណែង",
-
       "namePlaceholder": "ឧទាហរណ៍៖ ប្រធានផ្នែកទទួលភ្ញៀវ",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះមុខតំណែង។",
-
       "code": "លេខកូដមុខតំណែង",
-
       "codePlaceholder": "ឧទាហរណ៍៖ FOM",
-
       "codeHelp": "ប្រើលេខកូដខ្លីនិងតែមួយសម្រាប់មុខតំណែង។",
-
       "codeRequired": "ត្រូវបញ្ចូលលេខកូដមុខតំណែង។",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "branchIdHelp": "ទុកទទេដើម្បីប្រើបរិបទសាខាបច្ចុប្បន្នរបស់អ្នក ប្រសិនបើមាន។",
-
       "description": "ការពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីមុខតំណែងនេះ។",
-
       "status": "ស្ថានភាពមុខតំណែង",
-
       "statusDescription": "មុខតំណែងអសកម្មនៅតែរក្សាទុកក្នុងប្រព័ន្ធ ប៉ុន្តែត្រូវបានលាក់ពីប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "employees": {
     "section": "ធនធានមនុស្ស",
-
     "title": "បុគ្គលិក",
-
     "employee": "បុគ្គលិក",
-
     "description": "គ្រប់គ្រងកំណត់ត្រាបុគ្គលិក ការចាត់តាំងការងារ និងស្ថានភាពបុគ្គលិក។",
-
     "create": "បន្ថែមបុគ្គលិក",
-
     "createTitle": "បង្កើតបុគ្គលិក",
-
     "createDescription": "បង្កើតកំណត់ត្រាបុគ្គលិកធនធានមនុស្ស ដោយប្រើវាលដែល backend គាំទ្រ។",
-
     "edit": "កែសម្រួលបុគ្គលិក",
-
     "editTitle": "កែសម្រួលបុគ្គលិក",
-
     "editDescription": "កែប្រែព័ត៌មានទំនាក់ទំនង និងការចាត់តាំងការងាររបស់បុគ្គលិក។",
-
     "detail": "ព័ត៌មានលម្អិតបុគ្គលិក",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "employeeInformation": "ព័ត៌មានបុគ្គលិក",
-
     "employeeInformationDescription": "អត្តសញ្ញាណបុគ្គលិកមូលដ្ឋាន និងស្ថានភាពបច្ចុប្បន្ន។",
-
     "workInformation": "ព័ត៌មានការងារ",
-
     "workInformationDescription": "នាយកដ្ឋាន មុខតំណែង និងសាខាដែលបានរក្សាទុកលើកំណត់ត្រាបុគ្គលិក។",
-
     "employeeNumber": "លេខបុគ្គលិក",
-
     "fullName": "ឈ្មោះពេញ",
-
     "email": "អ៊ីមែល",
-
     "noEmail": "គ្មានអ៊ីមែល",
-
     "department": "នាយកដ្ឋាន",
-
     "position": "មុខតំណែង",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "unassigned": "មិនបានចាត់តាំង",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "employeeId": "លេខសម្គាល់បុគ្គលិក",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "លេខបុគ្គលិក ឈ្មោះ ឬអ៊ីមែល",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortFullName": "ឈ្មោះពេញ",
-
     "sortEmployeeNumber": "លេខបុគ្គលិក",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលបុគ្គលិក",
-
     "editAction": "កែសម្រួលបុគ្គលិក",
-
     "deleteAction": "លុបបុគ្គលិក",
-
     "loading": "កំពុងផ្ទុកបុគ្គលិក...",
-
     "loadingOne": "កំពុងផ្ទុកបុគ្គលិក...",
-
     "loadingReferences": "កំពុងផ្ទុកនាយកដ្ឋាន និងមុខតំណែង...",
-
     "loadFailed": "មិនអាចផ្ទុកបុគ្គលិកបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកបុគ្គលិកនេះបានទេ។",
-
     "loadReferencesFailed": "មិនអាចផ្ទុកនាយកដ្ឋាន និងមុខតំណែងបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់បុគ្គលិក។",
-
     "noResults": "រកមិនឃើញបុគ្គលិក",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតបុគ្គលិកថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalEmployees": "បុគ្គលិកសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតបុគ្គលិកដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតបុគ្គលិកបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលបុគ្គលិកដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលបុគ្គលិកបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបបុគ្គលិក \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបបុគ្គលិកដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបបុគ្គលិកបានទេ។",
-
     "form": {
       "basic": "ព័ត៌មានមូលដ្ឋាន",
-
       "basicDescription": "បញ្ចូលអត្តសញ្ញាណ និងព័ត៌មានទំនាក់ទំនងបុគ្គលិកដែល backend គាំទ្រ។",
-
       "work": "ព័ត៌មានការងារ",
-
       "workDescription": "ចាត់តាំងនាយកដ្ឋាន មុខតំណែង និងលេខសាខាជាជម្រើស។",
-
       "employeeNumber": "លេខបុគ្គលិក",
-
       "employeeNumberPlaceholder": "ឧទាហរណ៍៖ EMP-001",
-
       "employeeNumberHelp": "ប្រើលេខបុគ្គលិកតែមួយដែល HR រំពឹងទុក។",
-
       "employeeNumberReadonlyHelp": "លេខបុគ្គលិកត្រូវបានរក្សាដដែល ព្រោះ backend update ផ្លាស់ប្តូរតែប្រវត្តិរូប និងការចាត់តាំង។",
-
       "employeeNumberRequired": "ត្រូវបញ្ចូលលេខបុគ្គលិក។",
-
       "fullName": "ឈ្មោះពេញ",
-
       "fullNamePlaceholder": "ឧទាហរណ៍៖ សុខ ដារ៉ា",
-
       "fullNameRequired": "ត្រូវបញ្ចូលឈ្មោះពេញ។",
-
       "email": "អ៊ីមែល",
-
       "emailPlaceholder": "ឧទាហរណ៍៖ dara@hotel.com",
-
       "department": "នាយកដ្ឋាន",
-
       "noDepartment": "គ្មាននាយកដ្ឋាន",
-
       "position": "មុខតំណែង",
-
       "noPosition": "គ្មានមុខតំណែង",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "branchIdHelp": "ទុកទទេដើម្បីប្រើបរិបទសាខាបច្ចុប្បន្នរបស់ backend ប្រសិនបើមាន។"
     }
   },
-
   "shifts": {
     "section": "ធនធានមនុស្ស",
-
     "title": "វេនការងារ",
-
     "shift": "វេនការងារ",
-
     "description": "គ្រប់គ្រងកំណត់ត្រាវេនការងារ បរិបទសាខា ស្ថានភាពសកម្ម និងលេខកូដវេន។",
-
     "create": "បន្ថែមវេន",
-
     "createTitle": "បង្កើតវេន",
-
     "createDescription": "បង្កើតនិយមន័យវេនសម្រាប់បរិបទសណ្ឋាគារបច្ចុប្បន្ន និងអាចកំណត់សាខាបាន។",
-
     "edit": "កែសម្រួលវេន",
-
     "editTitle": "កែសម្រួលវេន",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណ ការពិពណ៌នា និងស្ថានភាពសកម្មរបស់វេន។",
-
     "detail": "ព័ត៌មានលម្អិតវេន",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "shiftInformation": "ព័ត៌មានវេន",
-
     "shiftInformationDescription": "អត្តសញ្ញាណវេន បរិបទសាខា និងស្ថានភាពកាតាឡុក។",
-
     "name": "ឈ្មោះវេន",
-
     "code": "លេខកូដវេន",
-
     "shiftId": "លេខសម្គាល់វេន",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "descriptionLabel": "ការពិពណ៌នា",
-
     "noDescription": "គ្មានការពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬលេខកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "លេខកូដ",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលវេន",
-
     "editAction": "កែសម្រួលវេន",
-
     "activateAction": "ធ្វើឱ្យសកម្ម",
-
     "deactivateAction": "ធ្វើឱ្យអសកម្ម",
-
     "deleteAction": "លុបវេន",
-
     "loading": "កំពុងផ្ទុកវេន...",
-
     "loadingOne": "កំពុងផ្ទុកវេន...",
-
     "loadFailed": "មិនអាចផ្ទុកវេនបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកវេននេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់វេន។",
-
     "noResults": "រកមិនឃើញវេន",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតវេនថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalShifts": "វេនសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតវេនដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតវេនបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលវេនដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលវេនបានទេ។",
-
     "activateSuccess": "បានធ្វើឱ្យវេនសកម្មដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចធ្វើឱ្យវេនសកម្មបានទេ។",
-
     "deactivateSuccess": "បានធ្វើឱ្យវេនអសកម្មដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចធ្វើឱ្យវេនអសកម្មបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបវេន \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបវេនដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបវេនបានទេ។",
-
     "form": {
       "identity": "អត្តសញ្ញាណវេន",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់កំណត់ត្រាវេននេះ។",
-
       "name": "ឈ្មោះវេន",
-
       "namePlaceholder": "ឧទាហរណ៍៖ វេនព្រឹក",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះវេន។",
-
       "code": "លេខកូដវេន",
-
       "codePlaceholder": "ឧទាហរណ៍៖ MORNING",
-
       "codeHelp": "ប្រើលេខកូដខ្លីនិងតែមួយសម្រាប់វេន។",
-
       "codeRequired": "ត្រូវបញ្ចូលលេខកូដវេន។",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "branchIdHelp": "ទុកទទេដើម្បីប្រើបរិបទសាខាបច្ចុប្បន្នរបស់អ្នក ប្រសិនបើមាន។",
-
       "description": "ការពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីវេននេះ។",
-
       "status": "ស្ថានភាពវេន",
-
       "statusDescription": "វេនអសកម្មនៅតែរក្សាទុកក្នុងប្រព័ន្ធ ប៉ុន្តែត្រូវបានលាក់ពីប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "attendance": {
     "section": "ធនធានមនុស្ស",
-
     "title": "វត្តមាន",
-
     "record": "កំណត់ត្រាវត្តមាន",
-
     "description": "គ្រប់គ្រងកំណត់ត្រាវត្តមានប្រតិបត្តិការ តាម workflow ដែល backend គាំទ្រ។",
-
     "create": "បន្ថែមវត្តមាន",
-
     "createTitle": "បង្កើតកំណត់ត្រាវត្តមាន",
-
     "createDescription": "បង្កើតកំណត់ត្រាវត្តមានប្រតិបត្តិការ ជាមួយចំណងជើង ពេលវេលាព្រឹត្តិការណ៍ ស្ថានភាព និងកំណត់ចំណាំ។",
-
     "edit": "កែសម្រួលវត្តមាន",
-
     "editTitle": "កែសម្រួលកំណត់ត្រាវត្តមាន",
-
     "editDescription": "កែប្រែព័ត៌មានកំណត់ត្រាប្រតិបត្តិការ ដោយរក្សាលេខយោងដែលបានបង្កើត។",
-
     "detail": "ព័ត៌មានលម្អិតវត្តមាន",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "recordInformation": "ព័ត៌មានកំណត់ត្រា",
-
     "recordInformationDescription": "លេខយោង ស្ថានភាព ពេលវេលាព្រឹត្តិការណ៍ បរិបទ និងកំណត់ចំណាំសម្រាប់កំណត់ត្រាវត្តមាននេះ។",
-
     "reference": "លេខយោង",
-
     "titleLabel": "ចំណងជើង",
-
     "status": "ស្ថានភាព",
-
     "statusPlaceholder": "ស្ថានភាពពិតប្រាកដ",
-
     "amount": "ចំនួន",
-
     "eventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
     "created": "បានបង្កើត",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "relatedEntity": "អង្គភាពពាក់ព័ន្ធ",
-
     "noRelatedEntity": "គ្មានអង្គភាពពាក់ព័ន្ធ",
-
     "notes": "កំណត់ចំណាំ",
-
     "noNotes": "គ្មានកំណត់ចំណាំ",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "លេខយោង ឬចំណងជើង",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortCreated": "បានបង្កើត",
-
     "sortEventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
     "sortReference": "លេខយោង",
-
     "sortTitle": "ចំណងជើង",
-
     "sortStatus": "ស្ថានភាព",
-
     "sortAmount": "ចំនួន",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលវត្តមាន",
-
     "editAction": "កែសម្រួលវត្តមាន",
-
     "deleteAction": "លុបវត្តមាន",
-
     "loading": "កំពុងផ្ទុកវត្តមាន...",
-
     "loadingOne": "កំពុងផ្ទុកកំណត់ត្រាវត្តមាន...",
-
     "loadFailed": "មិនអាចផ្ទុកវត្តមានបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកកំណត់ត្រាវត្តមាននេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់វត្តមាន។",
-
     "noResults": "រកមិនឃើញកំណត់ត្រាវត្តមាន",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតកំណត់ត្រាវត្តមាន។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalRecords": "កំណត់ត្រាសរុប",
-
     "completedOnPage": "បានបញ្ចប់លើទំព័រនេះ",
-
     "openOnPage": "បើកលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតកំណត់ត្រាវត្តមានដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតកំណត់ត្រាវត្តមានបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលកំណត់ត្រាវត្តមានដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលកំណត់ត្រាវត្តមានបានទេ។",
-
     "statusChangeSuccess": "បានកែប្រែស្ថានភាពវត្តមានដោយជោគជ័យ។",
-
     "statusChangeFailed": "មិនអាចកែប្រែស្ថានភាពវត្តមានបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបកំណត់ត្រាវត្តមាន \"{{reference}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបកំណត់ត្រាវត្តមានដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបកំណត់ត្រាវត្តមានបានទេ។",
-
     "form": {
       "record": "កំណត់ត្រាវត្តមាន",
-
       "recordDescription": "បញ្ចូលវាលវត្តមានប្រតិបត្តិការដែល backend គាំទ្រ។",
-
       "context": "បរិបទកំណត់ត្រា",
-
       "contextDescription": "លេខសាខា និងលេខអង្គភាពពាក់ព័ន្ធជាជម្រើស ដែលរក្សាទុកជាមួយកំណត់ត្រា។",
-
       "title": "ចំណងជើង",
-
       "titlePlaceholder": "ឧទាហរណ៍៖ កែតម្រូវវត្តមានដោយដៃ",
-
       "titleRequired": "ត្រូវបញ្ចូលចំណងជើង។",
-
       "eventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
       "eventAtRequired": "ត្រូវបញ្ចូលពេលវេលាព្រឹត្តិការណ៍។",
-
       "amount": "ចំនួន",
-
       "status": "ស្ថានភាព",
-
       "statusPlaceholder": "Open",
-
       "notes": "កំណត់ចំណាំ",
-
       "notesPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីកំណត់ត្រាវត្តមាននេះ។",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "relatedEntityId": "លេខសម្គាល់អង្គភាពពាក់ព័ន្ធ",
-
       "relatedEntityIdPlaceholder": "លេខ GUID អង្គភាពពាក់ព័ន្ធ ជាជម្រើស",
-
       "relatedEntityType": "ប្រភេទអង្គភាពពាក់ព័ន្ធ",
-
       "relatedEntityTypePlaceholder": "ប្រភេទជាជម្រើស ដូចជា Employee"
     }
   },
-
   "hotels": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "សណ្ឋាគារ",
-
     "hotel": "សណ្ឋាគារ",
-
     "description": "គ្រប់គ្រងសណ្ឋាគារ រូបិយប័ណ្ណ ស្ថានភាព និងរចនាសម្ព័ន្ធអចលនទ្រព្យ។",
-
     "create": "បន្ថែមសណ្ឋាគារ",
-
     "createTitle": "បង្កើតសណ្ឋាគារ",
-
     "createDescription": "បង្កើតសណ្ឋាគារថ្មី និងកំណត់រូបិយប័ណ្ណលំនាំដើម និងស្ថានភាព។",
-
     "edit": "កែសម្រួលសណ្ឋាគារ",
-
     "editTitle": "កែសម្រួលសណ្ឋាគារ",
-
     "editDescription": "កែប្រែព័ត៌មានសណ្ឋាគារ រូបិយប័ណ្ណលំនាំដើម និងស្ថានភាព។",
-
     "detail": "ព័ត៌មានលម្អិតសណ្ឋាគារ",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "hotelInformation": "ព័ត៌មានសណ្ឋាគារ",
-
     "hotelInformationDescription": "ព័ត៌មានមូលដ្ឋាន និងការកំណត់របស់សណ្ឋាគារ។",
-
     "name": "ឈ្មោះសណ្ឋាគារ",
-
     "namePlaceholder": "បញ្ចូលឈ្មោះសណ្ឋាគារ",
-
     "code": "កូដសណ្ឋាគារ",
-
     "codePlaceholder": "ឧទាហរណ៍៖ AGH01",
-
     "currency": "រូបិយប័ណ្ណ",
-
     "defaultCurrency": "រូបិយប័ណ្ណលំនាំដើម",
-
     "currencyPlaceholder": "USD",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "កាលបរិច្ឆេទបង្កើត",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ កូដ រូបិយប័ណ្ណ ឬលេខសម្គាល់",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "កូដ",
-
     "sortCurrency": "រូបិយប័ណ្ណ",
-
     "sortStatus": "ស្ថានភាព",
-
     "sortCreated": "កាលបរិច្ឆេទបង្កើត",
-
     "ascending": "លំដាប់ឡើង",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលសណ្ឋាគារ",
-
     "editAction": "កែសម្រួលសណ្ឋាគារ",
-
     "activateAction": "បើកដំណើរការសណ្ឋាគារ",
-
     "deactivateAction": "បិទដំណើរការសណ្ឋាគារ",
-
     "deleteAction": "លុបសណ្ឋាគារ",
-
     "loading": "កំពុងផ្ទុកសណ្ឋាគារ...",
-
     "loadingOne": "កំពុងផ្ទុកសណ្ឋាគារ...",
-
     "loadFailed": "មិនអាចផ្ទុកសណ្ឋាគារបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកសណ្ឋាគារនេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់សណ្ឋាគារ។",
-
     "noResults": "រកមិនឃើញសណ្ឋាគារ",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតសណ្ឋាគារថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalHotels": "សណ្ឋាគារសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "save": "រក្សាទុកសណ្ឋាគារ",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "saving": "កំពុងរក្សាទុក...",
-
     "cancel": "បោះបង់",
-
     "createSuccess": "បានបង្កើតសណ្ឋាគារដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតសណ្ឋាគារបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលសណ្ឋាគារដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលសណ្ឋាគារបានទេ។",
-
     "activateSuccess": "បានបើកដំណើរការសណ្ឋាគារដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចបើកដំណើរការសណ្ឋាគារបានទេ។",
-
     "deactivateSuccess": "បានបិទដំណើរការសណ្ឋាគារដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចបិទដំណើរការសណ្ឋាគារបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបសណ្ឋាគារ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបសណ្ឋាគារដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបសណ្ឋាគារបានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងសាខា អគារ ជាន់ និងបន្ទប់។",
-
     "branches": "សាខា",
-
     "buildings": "អគារ",
-
     "floors": "ជាន់",
-
     "roomTypes": "ប្រភេទបន្ទប់",
-
     "rooms": "បន្ទប់",
-
     "amenities": "សេវាកម្ម និងបរិក្ខារ",
-
     "rates": "តម្លៃបន្ទប់",
-
     "form": {
       "identity": "អត្តសញ្ញាណសណ្ឋាគារ",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់សណ្ឋាគារនេះ។",
-
       "name": "ឈ្មោះសណ្ឋាគារ",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Aurora Grand Hotel",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះសណ្ឋាគារ។",
-
       "code": "កូដសណ្ឋាគារ",
-
       "codePlaceholder": "ឧទាហរណ៍៖ AGH01",
-
       "codeHelp": "ប្រើកូដខ្លី និងមិនស្ទួនសម្រាប់សណ្ឋាគារ។",
-
       "codeRequired": "ត្រូវបញ្ចូលកូដសណ្ឋាគារ។",
-
       "currency": "រូបិយប័ណ្ណលំនាំដើម",
-
       "currencyPlaceholder": "USD",
-
       "currencyHelp": "ប្រើកូដរូបិយប័ណ្ណ 3 តួអក្សរ ដូចជា USD, KHR ឬ EUR។",
-
       "currencyRequired": "ត្រូវបញ្ចូលរូបិយប័ណ្ណ។",
-
       "status": "ស្ថានភាពសណ្ឋាគារ",
-
       "statusDescription": "សណ្ឋាគារអសកម្មនៅតែមានក្នុងប្រព័ន្ធ ប៉ុន្តែមិនអាចប្រើសម្រាប់ប្រតិបត្តិការធម្មតាបានទេ។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "branches": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "សាខា",
-
     "branch": "សាខា",
-
     "description": "គ្រប់គ្រងសាខាសណ្ឋាគារ ស្ថានភាពកាតាឡុក និងលេខសម្គាល់សាខា។",
-
     "create": "បន្ថែមសាខា",
-
     "createTitle": "បង្កើតសាខា",
-
     "createDescription": "បង្កើតសាខាថ្មីសម្រាប់សណ្ឋាគារបច្ចុប្បន្ន។",
-
     "edit": "កែសម្រួលសាខា",
-
     "editTitle": "កែសម្រួលសាខា",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណសាខា សេចក្ដីពិពណ៌នា និងស្ថានភាព។",
-
     "detail": "ព័ត៌មានលម្អិតសាខា",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "branchInformation": "ព័ត៌មានសាខា",
-
     "branchInformationDescription": "អត្តសញ្ញាណសាខា និងទំនាក់ទំនងសណ្ឋាគារ។",
-
     "name": "ឈ្មោះសាខា",
-
     "code": "កូដសាខា",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "descriptionLabel": "សេចក្ដីពិពណ៌នា",
-
     "noDescription": "មិនមានសេចក្ដីពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "កាលបរិច្ឆេទបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "កូដ",
-
     "sortCreated": "កាលបរិច្ឆេទបង្កើត",
-
     "ascending": "លំដាប់ឡើង",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលសាខា",
-
     "editAction": "កែសម្រួលសាខា",
-
     "activateAction": "បើកដំណើរការសាខា",
-
     "deactivateAction": "បិទដំណើរការសាខា",
-
     "deleteAction": "លុបសាខា",
-
     "loading": "កំពុងផ្ទុកសាខា...",
-
     "loadingOne": "កំពុងផ្ទុកសាខា...",
-
     "loadFailed": "មិនអាចផ្ទុកសាខាបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកសាខានេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់សាខា។",
-
     "noResults": "រកមិនឃើញសាខា",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតសាខាថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalBranches": "សាខាសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតសាខាដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតសាខាបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលសាខាដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលសាខាបានទេ។",
-
     "activateSuccess": "បានបើកដំណើរការសាខាដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចបើកដំណើរការសាខាបានទេ។",
-
     "deactivateSuccess": "បានបិទដំណើរការសាខាដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចបិទដំណើរការសាខាបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបសាខា \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបសាខាដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបសាខាបានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងអគារ ជាន់ និងបន្ទប់សម្រាប់សាខានេះ។",
-
     "buildings": "អគារ",
-
     "floors": "ជាន់",
-
     "rooms": "បន្ទប់",
-
     "form": {
       "identity": "អត្តសញ្ញាណសាខា",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់សាខានេះ។",
-
       "name": "ឈ្មោះសាខា",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Main Branch",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះសាខា។",
-
       "code": "កូដសាខា",
-
       "codePlaceholder": "ឧទាហរណ៍៖ MAIN",
-
       "codeHelp": "ប្រើកូដខ្លី និងមិនស្ទួនសម្រាប់សាខា។",
-
       "codeRequired": "ត្រូវបញ្ចូលកូដសាខា។",
-
       "description": "សេចក្ដីពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំបន្ថែមអំពីសាខានេះ។",
-
       "status": "ស្ថានភាពសាខា",
-
       "statusDescription": "សាខាអសកម្មនៅតែមានក្នុងប្រព័ន្ធ ប៉ុន្តែមិនបង្ហាញសម្រាប់ប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "buildings": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "អគារ",
-
     "building": "អគារ",
-
     "description": "គ្រប់គ្រងអគារ ការភ្ជាប់ទៅសាខា ស្ថានភាព និងព័ត៌មានកាតាឡុក។",
-
     "create": "បន្ថែមអគារ",
-
     "createTitle": "បង្កើតអគារ",
-
     "createDescription": "បង្កើតអគារថ្មី និងអាចជ្រើសសាខាបាន។",
-
     "edit": "កែសម្រួលអគារ",
-
     "editTitle": "កែសម្រួលអគារ",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណអគារ សេចក្ដីពិពណ៌នា និងស្ថានភាព។",
-
     "detail": "ព័ត៌មានលម្អិតអគារ",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "buildingInformation": "ព័ត៌មានអគារ",
-
     "buildingInformationDescription": "អត្តសញ្ញាណអគារ និងទំនាក់ទំនងអចលនទ្រព្យ។",
-
     "name": "ឈ្មោះអគារ",
-
     "code": "កូដអគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "buildingId": "លេខសម្គាល់អគារ",
-
     "descriptionLabel": "សេចក្ដីពិពណ៌នា",
-
     "noDescription": "មិនមានសេចក្ដីពិពណ៌នា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "កាលបរិច្ឆេទបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "កូដ",
-
     "sortCreated": "កាលបរិច្ឆេទបង្កើត",
-
     "ascending": "លំដាប់ឡើង",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលអគារ",
-
     "editAction": "កែសម្រួលអគារ",
-
     "activateAction": "បើកដំណើរការអគារ",
-
     "deactivateAction": "បិទដំណើរការអគារ",
-
     "deleteAction": "លុបអគារ",
-
     "loading": "កំពុងផ្ទុកអគារ...",
-
     "loadingOne": "កំពុងផ្ទុកអគារ...",
-
     "loadFailed": "មិនអាចផ្ទុកអគារបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកអគារនេះបានទេ។",
-
     "loadBranchesFailed": "មិនអាចផ្ទុកសាខាបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់អគារ។",
-
     "noResults": "រកមិនឃើញអគារ",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតអគារថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalBuildings": "អគារសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតអគារដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតអគារបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលអគារដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលអគារបានទេ។",
-
     "activateSuccess": "បានបើកដំណើរការអគារដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចបើកដំណើរការអគារបានទេ។",
-
     "deactivateSuccess": "បានបិទដំណើរការអគារដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចបិទដំណើរការអគារបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបអគារ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបអគារដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបអគារបានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងសាខា ជាន់ និងបន្ទប់សម្រាប់អចលនទ្រព្យនេះ។",
-
     "branches": "សាខា",
-
     "floors": "ជាន់",
-
     "rooms": "បន្ទប់",
-
     "form": {
       "identity": "អត្តសញ្ញាណអគារ",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់អគារនេះ។",
-
       "name": "ឈ្មោះអគារ",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Tower A",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះអគារ។",
-
       "code": "កូដអគារ",
-
       "codePlaceholder": "ឧទាហរណ៍៖ BLD-A",
-
       "codeHelp": "ប្រើកូដខ្លី និងមិនស្ទួនសម្រាប់អគារ។",
-
       "codeRequired": "ត្រូវបញ្ចូលកូដអគារ។",
-
       "branch": "សាខា",
-
       "defaultBranch": "ប្រើសាខាបច្ចុប្បន្ន",
-
       "loadingBranches": "កំពុងផ្ទុកសាខា...",
-
       "branchHelp": "ទុកទទេដើម្បីប្រើសាខាបច្ចុប្បន្ន។",
-
       "description": "សេចក្ដីពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំបន្ថែមអំពីអគារនេះ។",
-
       "status": "ស្ថានភាពអគារ",
-
       "statusDescription": "អគារអសកម្មនៅតែមានក្នុងប្រព័ន្ធ ប៉ុន្តែមិនបង្ហាញសម្រាប់ប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "floors": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "ជាន់",
-
     "floor": "ជាន់",
-
     "description": "គ្រប់គ្រងជាន់ បរិបទសាខា ស្ថានភាព និងព័ត៌មានកាតាឡុក។",
-
     "create": "បន្ថែមជាន់",
-
     "createTitle": "បង្កើតជាន់",
-
     "createDescription": "បង្កើតជាន់ថ្មីសម្រាប់សណ្ឋាគារ ឬសាខាបច្ចុប្បន្ន។",
-
     "edit": "កែសម្រួលជាន់",
-
     "editTitle": "កែសម្រួលជាន់",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណជាន់ សេចក្ដីពិពណ៌នា និងស្ថានភាព។",
-
     "detail": "ព័ត៌មានលម្អិតជាន់",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "floorInformation": "ព័ត៌មានជាន់",
-
     "floorInformationDescription": "អត្តសញ្ញាណជាន់ និងទំនាក់ទំនងអចលនទ្រព្យ។",
-
     "name": "ឈ្មោះជាន់",
-
     "code": "កូដជាន់",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "លំនាំដើមសណ្ឋាគារ",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "floorId": "លេខសម្គាល់ជាន់",
-
     "descriptionLabel": "សេចក្ដីពិពណ៌នា",
-
     "noDescription": "មិនមានសេចក្ដីពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "កាលបរិច្ឆេទបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "កូដ",
-
     "sortCreated": "កាលបរិច្ឆេទបង្កើត",
-
     "ascending": "លំដាប់ឡើង",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលជាន់",
-
     "editAction": "កែសម្រួលជាន់",
-
     "activateAction": "បើកដំណើរការជាន់",
-
     "deactivateAction": "បិទដំណើរការជាន់",
-
     "deleteAction": "លុបជាន់",
-
     "loading": "កំពុងផ្ទុកជាន់...",
-
     "loadingOne": "កំពុងផ្ទុកជាន់...",
-
     "loadFailed": "មិនអាចផ្ទុកជាន់បានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកជាន់នេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់ជាន់។",
-
     "noResults": "រកមិនឃើញជាន់",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតជាន់ថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalFloors": "ជាន់សរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតជាន់ដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតជាន់បានទេ។",
-
     "updateSuccess": "បានកែសម្រួលជាន់ដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលជាន់បានទេ។",
-
     "activateSuccess": "បានបើកដំណើរការជាន់ដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចបើកដំណើរការជាន់បានទេ។",
-
     "deactivateSuccess": "បានបិទដំណើរការជាន់ដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចបិទដំណើរការជាន់បានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបជាន់ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបជាន់ដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបជាន់បានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងអគារ បន្ទប់ និងប្រភេទបន្ទប់សម្រាប់អចលនទ្រព្យនេះ។",
-
     "buildings": "អគារ",
-
     "roomTypes": "ប្រភេទបន្ទប់",
-
     "rooms": "បន្ទប់",
-
     "form": {
       "identity": "អត្តសញ្ញាណជាន់",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់ជាន់នេះ។",
-
       "name": "ឈ្មោះជាន់",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Level 2",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះជាន់។",
-
       "code": "កូដជាន់",
-
       "codePlaceholder": "ឧទាហរណ៍៖ L02",
-
       "codeHelp": "ប្រើកូដខ្លី និងមិនស្ទួនសម្រាប់ជាន់។",
-
       "codeRequired": "ត្រូវបញ្ចូលកូដជាន់។",
-
       "description": "សេចក្ដីពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំបន្ថែមអំពីជាន់នេះ។",
-
       "status": "ស្ថានភាពជាន់",
-
       "statusDescription": "ជាន់អសកម្មនៅតែមានក្នុងប្រព័ន្ធ ប៉ុន្តែមិនបង្ហាញសម្រាប់ប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "roomTypes": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "ប្រភេទបន្ទប់",
-
     "roomType": "ប្រភេទបន្ទប់",
-
     "description": "គ្រប់គ្រងប្រភេទបន្ទប់សម្រាប់លក់ តម្លៃមូលដ្ឋាន ចំនួនភ្ញៀវ និងស្ថានភាព។",
-
     "create": "បន្ថែមប្រភេទបន្ទប់",
-
     "createTitle": "បង្កើតប្រភេទបន្ទប់",
-
     "createDescription": "បង្កើតប្រភេទបន្ទប់ជាមួយតម្លៃ និងចំនួនភ្ញៀវអនុញ្ញាត។",
-
     "edit": "កែសម្រួលប្រភេទបន្ទប់",
-
     "editTitle": "កែសម្រួលប្រភេទបន្ទប់",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណ តម្លៃ ចំនួនភ្ញៀវ សេចក្ដីពិពណ៌នា និងស្ថានភាព។",
-
     "detail": "ព័ត៌មានលម្អិតប្រភេទបន្ទប់",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "roomTypeInformation": "ព័ត៌មានប្រភេទបន្ទប់",
-
     "roomTypeInformationDescription": "អត្តសញ្ញាណ តម្លៃ និងចំនួនភ្ញៀវអតិបរមារបស់ប្រភេទបន្ទប់។",
-
     "name": "ឈ្មោះប្រភេទបន្ទប់",
-
     "code": "កូដប្រភេទបន្ទប់",
-
     "roomTypeId": "លេខសម្គាល់ប្រភេទបន្ទប់",
-
     "baseRate": "តម្លៃមូលដ្ឋាន",
-
     "maxAdults": "មនុស្សពេញវ័យអតិបរមា",
-
     "maxChildren": "កុមារអតិបរមា",
-
     "capacity": "ចំនួនភ្ញៀវ",
-
     "capacityValue": "មនុស្សពេញវ័យ {{adults}} / កុមារ {{children}}",
-
     "descriptionLabel": "សេចក្ដីពិពណ៌នា",
-
     "noDescription": "មិនមានសេចក្ដីពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬកូដ",
-
     "clear": "សម្អាត",
-
     "apply": "ស្វែងរក",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលប្រភេទបន្ទប់",
-
     "editAction": "កែសម្រួលប្រភេទបន្ទប់",
-
     "activateAction": "បើកដំណើរការប្រភេទបន្ទប់",
-
     "deactivateAction": "បិទដំណើរការប្រភេទបន្ទប់",
-
     "deleteAction": "លុបប្រភេទបន្ទប់",
-
     "loading": "កំពុងផ្ទុកប្រភេទបន្ទប់...",
-
     "loadingOne": "កំពុងផ្ទុកប្រភេទបន្ទប់...",
-
     "loadFailed": "មិនអាចផ្ទុកប្រភេទបន្ទប់បានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកប្រភេទបន្ទប់នេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់ប្រភេទបន្ទប់។",
-
     "noResults": "រកមិនឃើញប្រភេទបន្ទប់",
-
     "noResultsDescription": "សូមប្ដូរពាក្យស្វែងរក ឬបង្កើតប្រភេទបន្ទប់ថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalRoomTypes": "ប្រភេទបន្ទប់សរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតប្រភេទបន្ទប់ដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតប្រភេទបន្ទប់បានទេ។",
-
     "updateSuccess": "បានកែសម្រួលប្រភេទបន្ទប់ដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលប្រភេទបន្ទប់បានទេ។",
-
     "activateSuccess": "បានបើកដំណើរការប្រភេទបន្ទប់ដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចបើកដំណើរការប្រភេទបន្ទប់បានទេ។",
-
     "deactivateSuccess": "បានបិទដំណើរការប្រភេទបន្ទប់ដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចបិទដំណើរការប្រភេទបន្ទប់បានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបប្រភេទបន្ទប់ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបប្រភេទបន្ទប់ដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបប្រភេទបន្ទប់បានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងបន្ទប់ បរិក្ខារ និងតម្លៃសម្រាប់អចលនទ្រព្យនេះ។",
-
     "rooms": "បន្ទប់",
-
     "amenities": "បរិក្ខារ",
-
     "rates": "តម្លៃ",
-
     "form": {
       "identity": "អត្តសញ្ញាណប្រភេទបន្ទប់",
-
       "identityDescription": "បញ្ចូលព័ត៌មានសម្រាប់លក់ និងកំណត់ប្រភេទបន្ទប់នេះ។",
-
       "name": "ឈ្មោះប្រភេទបន្ទប់",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Deluxe King",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះប្រភេទបន្ទប់។",
-
       "code": "កូដប្រភេទបន្ទប់",
-
       "codePlaceholder": "ឧទាហរណ៍៖ DLX-K",
-
       "codeHelp": "ប្រើកូដខ្លី និងមិនស្ទួនសម្រាប់ប្រភេទបន្ទប់។",
-
       "codeRequired": "ត្រូវបញ្ចូលកូដប្រភេទបន្ទប់។",
-
       "baseRate": "តម្លៃមូលដ្ឋាន",
-
       "baseRateInvalid": "តម្លៃមូលដ្ឋានមិនអាចតិចជាងសូន្យបានទេ។",
-
       "maxAdults": "មនុស្សពេញវ័យអតិបរមា",
-
       "maxAdultsInvalid": "មនុស្សពេញវ័យអតិបរមាត្រូវយ៉ាងហោចណាស់ 1។",
-
       "maxChildren": "កុមារអតិបរមា",
-
       "maxChildrenInvalid": "កុមារអតិបរមាមិនអាចតិចជាងសូន្យបានទេ។",
-
       "description": "សេចក្ដីពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំបន្ថែមអំពីប្រភេទបន្ទប់នេះ។",
-
       "status": "ស្ថានភាពប្រភេទបន្ទប់",
-
       "statusDescription": "ប្រភេទបន្ទប់អសកម្មនៅតែមានក្នុងប្រព័ន្ធ ប៉ុន្តែមិនបង្ហាញសម្រាប់ប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "rooms": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "បន្ទប់",
-
     "room": "បន្ទប់",
-
     "description": "គ្រប់គ្រងបន្ទប់ ប្រភេទបន្ទប់ លេខជាន់ បរិបទសាខា និងស្ថានភាពប្រតិបត្តិការ។",
-
     "create": "បន្ថែមបន្ទប់",
-
     "createTitle": "បង្កើតបន្ទប់",
-
     "createDescription": "បង្កើតបន្ទប់ក្នុងបរិបទសាខាបច្ចុប្បន្ន ឬជ្រើសសាខាជាក់លាក់។",
-
     "edit": "កែសម្រួលបន្ទប់",
-
     "editTitle": "កែសម្រួលបន្ទប់",
-
     "editDescription": "កែប្រែលេខបន្ទប់ ប្រភេទបន្ទប់ និងលេខជាន់។",
-
     "detail": "ព័ត៌មានលម្អិតបន្ទប់",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "roomInformation": "ព័ត៌មានបន្ទប់",
-
     "roomInformationDescription": "អត្តសញ្ញាណបន្ទប់ លេខសម្គាល់ទីតាំង ប្រភេទបន្ទប់ និងស្ថានភាពប្រតិបត្តិការ។",
-
     "roomNumber": "លេខបន្ទប់",
-
     "roomType": "ប្រភេទបន្ទប់",
-
     "roomTypes": "ប្រភេទបន្ទប់",
-
     "roomTypeId": "លេខសម្គាល់ប្រភេទបន្ទប់",
-
     "floor": "ជាន់",
-
     "floorValue": "ជាន់ {{floor}}",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "roomId": "លេខសម្គាល់បន្ទប់",
-
     "status": "ស្ថានភាព",
-
     "changeStatus": "ប្ដូរស្ថានភាព",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "លេខបន្ទប់ ឬប្រភេទបន្ទប់",
-
     "clear": "សម្អាត",
-
     "apply": "ស្វែងរក",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលបន្ទប់",
-
     "editAction": "កែសម្រួលបន្ទប់",
-
     "deleteAction": "លុបបន្ទប់",
-
     "loading": "កំពុងផ្ទុកបន្ទប់...",
-
     "loadingOne": "កំពុងផ្ទុកបន្ទប់...",
-
     "loadFailed": "មិនអាចផ្ទុកបន្ទប់បានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកបន្ទប់នេះបានទេ។",
-
     "loadRoomTypesFailed": "មិនអាចផ្ទុកប្រភេទបន្ទប់បានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់បន្ទប់។",
-
     "noResults": "រកមិនឃើញបន្ទប់",
-
     "noResultsDescription": "សូមប្ដូរពាក្យស្វែងរក ឬបង្កើតបន្ទប់ថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalRooms": "បន្ទប់សរុប",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតបន្ទប់ដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតបន្ទប់បានទេ។",
-
     "updateSuccess": "បានកែសម្រួលបន្ទប់ដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលបន្ទប់បានទេ។",
-
     "statusUpdateSuccess": "បានកែប្រែស្ថានភាពបន្ទប់ដោយជោគជ័យ។",
-
     "statusUpdateFailed": "មិនអាចកែប្រែស្ថានភាពបន្ទប់បានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបបន្ទប់ \"{{number}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបបន្ទប់ដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបបន្ទប់បានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងប្រភេទបន្ទប់ បរិក្ខារ និងតម្លៃសម្រាប់អចលនទ្រព្យនេះ។",
-
     "amenities": "បរិក្ខារ",
-
     "rates": "តម្លៃ",
-
     "statuses": {
       "Available": "ទំនេរ",
-
       "Reserved": "បានកក់",
-
       "Occupied": "កំពុងប្រើ",
-
       "Dirty": "កខ្វក់",
-
       "Cleaning": "កំពុងសម្អាត",
-
       "Inspected": "បានពិនិត្យ",
-
       "Maintenance": "ថែទាំ",
-
       "OutOfOrder": "មិនអាចប្រើបាន",
-
       "Blocked": "បានបិទ"
     },
-
     "form": {
       "identity": "អត្តសញ្ញាណបន្ទប់",
-
       "identityDescription": "បញ្ចូលលេខបន្ទប់ ប្រភេទបន្ទប់ បរិបទសាខា និងលេខជាន់។",
-
       "roomNumber": "លេខបន្ទប់",
-
       "roomNumberPlaceholder": "ឧទាហរណ៍៖ 304",
-
       "roomNumberRequired": "ត្រូវបញ្ចូលលេខបន្ទប់។",
-
       "roomType": "ប្រភេទបន្ទប់",
-
       "selectRoomType": "ជ្រើសប្រភេទបន្ទប់",
-
       "roomTypeRequired": "ត្រូវជ្រើសប្រភេទបន្ទប់។",
-
       "branch": "សាខា",
-
       "defaultBranch": "ប្រើសាខាបច្ចុប្បន្ន",
-
       "branchHelp": "ទុកទទេដើម្បីប្រើសាខាពីសម័យចូលប្រើរបស់អ្នក។",
-
       "floor": "ជាន់",
-
       "floorInvalid": "ជាន់ត្រូវស្ថិតនៅចន្លោះ 0 និង 1000។"
     }
   },
-
   "amenities": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "បរិក្ខារ",
-
     "amenity": "បរិក្ខារ",
-
     "description": "គ្រប់គ្រងបរិក្ខារសណ្ឋាគារ ស្ថានភាពកាតាឡុក និងលេខកូដបរិក្ខារ។",
-
     "create": "បន្ថែមបរិក្ខារ",
-
     "createTitle": "បង្កើតបរិក្ខារ",
-
     "createDescription": "បង្កើតបរិក្ខារថ្មីសម្រាប់បរិបទសណ្ឋាគារ ឬសាខាបច្ចុប្បន្ន។",
-
     "edit": "កែសម្រួលបរិក្ខារ",
-
     "editTitle": "កែសម្រួលបរិក្ខារ",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណបរិក្ខារ ការពិពណ៌នា និងស្ថានភាពសកម្ម។",
-
     "detail": "ព័ត៌មានលម្អិតបរិក្ខារ",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "amenityInformation": "ព័ត៌មានបរិក្ខារ",
-
     "amenityInformationDescription": "អត្តសញ្ញាណបរិក្ខារ និងទំនាក់ទំនងអចលនទ្រព្យ។",
-
     "name": "ឈ្មោះបរិក្ខារ",
-
     "code": "លេខកូដបរិក្ខារ",
-
     "amenityId": "លេខសម្គាល់បរិក្ខារ",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "លំនាំដើមសណ្ឋាគារ",
-
     "descriptionLabel": "ការពិពណ៌នា",
-
     "noDescription": "គ្មានការពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬលេខកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "លេខកូដ",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលបរិក្ខារ",
-
     "editAction": "កែសម្រួលបរិក្ខារ",
-
     "activateAction": "ធ្វើឱ្យសកម្ម",
-
     "deactivateAction": "ធ្វើឱ្យអសកម្ម",
-
     "deleteAction": "លុបបរិក្ខារ",
-
     "loading": "កំពុងផ្ទុកបរិក្ខារ...",
-
     "loadingOne": "កំពុងផ្ទុកបរិក្ខារ...",
-
     "loadFailed": "មិនអាចផ្ទុកបរិក្ខារបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកបរិក្ខារនេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់បរិក្ខារ។",
-
     "noResults": "រកមិនឃើញបរិក្ខារ",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតបរិក្ខារថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalAmenities": "បរិក្ខារសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតបរិក្ខារដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតបរិក្ខារបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលបរិក្ខារដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលបរិក្ខារបានទេ។",
-
     "activateSuccess": "បានធ្វើឱ្យបរិក្ខារសកម្មដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចធ្វើឱ្យបរិក្ខារសកម្មបានទេ។",
-
     "deactivateSuccess": "បានធ្វើឱ្យបរិក្ខារអសកម្មដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចធ្វើឱ្យបរិក្ខារអសកម្មបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបបរិក្ខារ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបបរិក្ខារដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបបរិក្ខារបានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងប្រភេទបន្ទប់ បន្ទប់ និងតម្លៃសម្រាប់អចលនទ្រព្យនេះ។",
-
     "roomTypes": "ប្រភេទបន្ទប់",
-
     "rooms": "បន្ទប់",
-
     "rates": "តម្លៃ",
-
     "form": {
       "identity": "អត្តសញ្ញាណបរិក្ខារ",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់បរិក្ខារនេះ។",
-
       "name": "ឈ្មោះបរិក្ខារ",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Wi-Fi ឥតគិតថ្លៃ",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះបរិក្ខារ។",
-
       "code": "លេខកូដបរិក្ខារ",
-
       "codePlaceholder": "ឧទាហរណ៍៖ WIFI",
-
       "codeHelp": "ប្រើលេខកូដខ្លីនិងតែមួយសម្រាប់បរិក្ខារ។",
-
       "codeRequired": "ត្រូវបញ្ចូលលេខកូដបរិក្ខារ។",
-
       "description": "ការពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីបរិក្ខារនេះ។",
-
       "status": "ស្ថានភាពបរិក្ខារ",
-
       "statusDescription": "បរិក្ខារអសកម្មនៅតែរក្សាទុកក្នុងប្រព័ន្ធ ប៉ុន្តែត្រូវបានលាក់ពីប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "rates": {
     "section": "ការគ្រប់គ្រងអចលនទ្រព្យ",
-
     "title": "តម្លៃ",
-
     "rate": "តម្លៃ",
-
     "description": "គ្រប់គ្រងគម្រោងតម្លៃ ស្ថានភាពកាតាឡុក និងលេខកូដតម្លៃ។",
-
     "create": "បន្ថែមតម្លៃ",
-
     "createTitle": "បង្កើតតម្លៃ",
-
     "createDescription": "បង្កើតគម្រោងតម្លៃថ្មីសម្រាប់បរិបទសណ្ឋាគារ ឬសាខាបច្ចុប្បន្ន។",
-
     "edit": "កែសម្រួលតម្លៃ",
-
     "editTitle": "កែសម្រួលតម្លៃ",
-
     "editDescription": "កែប្រែអត្តសញ្ញាណតម្លៃ ការពិពណ៌នា និងស្ថានភាពសកម្ម។",
-
     "detail": "ព័ត៌មានលម្អិតតម្លៃ",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "rateInformation": "ព័ត៌មានតម្លៃ",
-
     "rateInformationDescription": "អត្តសញ្ញាណគម្រោងតម្លៃ និងទំនាក់ទំនងអចលនទ្រព្យ។",
-
     "name": "ឈ្មោះតម្លៃ",
-
     "code": "លេខកូដតម្លៃ",
-
     "rateId": "លេខសម្គាល់តម្លៃ",
-
     "hotelId": "លេខសម្គាល់សណ្ឋាគារ",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "លំនាំដើមសណ្ឋាគារ",
-
     "descriptionLabel": "ការពិពណ៌នា",
-
     "noDescription": "គ្មានការពិពណ៌នា",
-
     "status": "ស្ថានភាព",
-
     "active": "សកម្ម",
-
     "inactive": "អសកម្ម",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "ឈ្មោះ ឬលេខកូដ",
-
     "all": "ទាំងអស់",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortName": "ឈ្មោះ",
-
     "sortCode": "លេខកូដ",
-
     "sortCreated": "បានបង្កើត",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលតម្លៃ",
-
     "editAction": "កែសម្រួលតម្លៃ",
-
     "activateAction": "ធ្វើឱ្យសកម្ម",
-
     "deactivateAction": "ធ្វើឱ្យអសកម្ម",
-
     "deleteAction": "លុបតម្លៃ",
-
     "loading": "កំពុងផ្ទុកតម្លៃ...",
-
     "loadingOne": "កំពុងផ្ទុកតម្លៃ...",
-
     "loadFailed": "មិនអាចផ្ទុកតម្លៃបានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកតម្លៃនេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់តម្លៃ។",
-
     "noResults": "រកមិនឃើញតម្លៃ",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតតម្លៃថ្មី។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalRates": "តម្លៃសរុប",
-
     "activeOnPage": "សកម្មលើទំព័រនេះ",
-
     "inactiveOnPage": "អសកម្មលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតតម្លៃដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតតម្លៃបានទេ។",
-
     "updateSuccess": "បានកែសម្រួលតម្លៃដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលតម្លៃបានទេ។",
-
     "activateSuccess": "បានធ្វើឱ្យតម្លៃសកម្មដោយជោគជ័យ។",
-
     "activateFailed": "មិនអាចធ្វើឱ្យតម្លៃសកម្មបានទេ។",
-
     "deactivateSuccess": "បានធ្វើឱ្យតម្លៃអសកម្មដោយជោគជ័យ។",
-
     "deactivateFailed": "មិនអាចធ្វើឱ្យតម្លៃអសកម្មបានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបតម្លៃ \"{{name}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបតម្លៃដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបតម្លៃបានទេ។",
-
     "propertyStructure": "រចនាសម្ព័ន្ធអចលនទ្រព្យ",
-
     "propertyStructureDescription": "បន្តគ្រប់គ្រងប្រភេទបន្ទប់ បន្ទប់ និងបរិក្ខារសម្រាប់អចលនទ្រព្យនេះ។",
-
     "roomTypes": "ប្រភេទបន្ទប់",
-
     "rooms": "បន្ទប់",
-
     "amenities": "បរិក្ខារ",
-
     "form": {
       "identity": "អត្តសញ្ញាណតម្លៃ",
-
       "identityDescription": "បញ្ចូលព័ត៌មានមូលដ្ឋានសម្រាប់សម្គាល់គម្រោងតម្លៃនេះ។",
-
       "name": "ឈ្មោះតម្លៃ",
-
       "namePlaceholder": "ឧទាហរណ៍៖ Best Available Rate",
-
       "nameRequired": "ត្រូវបញ្ចូលឈ្មោះតម្លៃ។",
-
       "code": "លេខកូដតម្លៃ",
-
       "codePlaceholder": "ឧទាហរណ៍៖ BAR",
-
       "codeHelp": "ប្រើលេខកូដខ្លីនិងតែមួយសម្រាប់តម្លៃ។",
-
       "codeRequired": "ត្រូវបញ្ចូលលេខកូដតម្លៃ។",
-
       "description": "ការពិពណ៌នា",
-
       "descriptionPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីតម្លៃនេះ។",
-
       "status": "ស្ថានភាពតម្លៃ",
-
       "statusDescription": "តម្លៃអសកម្មនៅតែរក្សាទុកក្នុងប្រព័ន្ធ ប៉ុន្តែត្រូវបានលាក់ពីប្រតិបត្តិការធម្មតា។",
-
       "active": "សកម្ម",
-
       "inactive": "អសកម្ម"
     }
   },
-
   "leaveRequests": {
     "section": "ធនធានមនុស្ស",
-
     "title": "សំណើសុំច្បាប់",
-
     "record": "សំណើសុំច្បាប់",
-
     "description": "គ្រប់គ្រងកំណត់ត្រាសំណើសុំច្បាប់ តាមវាល workflow ដែល backend គាំទ្រ។",
-
     "create": "ស្នើសុំច្បាប់",
-
     "createTitle": "បង្កើតសំណើសុំច្បាប់",
-
     "createDescription": "បង្កើតកំណត់ត្រាសំណើសុំច្បាប់ដែល backend គាំទ្រ ជាមួយចំណងជើង ពេលវេលាព្រឹត្តិការណ៍ ស្ថានភាព និងកំណត់ចំណាំ។",
-
     "edit": "កែសម្រួលសំណើសុំច្បាប់",
-
     "editTitle": "កែសម្រួលសំណើសុំច្បាប់",
-
     "editDescription": "កែប្រែព័ត៌មានសំណើសុំច្បាប់ ដោយរក្សាលេខយោងដែលបានបង្កើត។",
-
     "detail": "ព័ត៌មានលម្អិតសំណើសុំច្បាប់",
-
     "overview": "ទិដ្ឋភាពទូទៅ",
-
     "recordInformation": "ព័ត៌មានសំណើ",
-
     "recordInformationDescription": "លេខយោង ស្ថានភាព ពេលវេលាព្រឹត្តិការណ៍ បរិបទ និងកំណត់ចំណាំសម្រាប់សំណើសុំច្បាប់នេះ។",
-
     "reference": "លេខយោង",
-
     "titleLabel": "ចំណងជើង",
-
     "status": "ស្ថានភាព",
-
     "statusPlaceholder": "ស្ថានភាពពិតប្រាកដ",
-
     "allStatuses": "ស្ថានភាពទាំងអស់",
-
     "amount": "ចំនួន",
-
     "eventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
     "created": "បានបង្កើត",
-
     "branchId": "លេខសម្គាល់សាខា",
-
     "defaultBranch": "សាខាលំនាំដើម",
-
     "relatedEntity": "អង្គភាពពាក់ព័ន្ធ",
-
     "noRelatedEntity": "គ្មានអង្គភាពពាក់ព័ន្ធ",
-
     "notes": "កំណត់ចំណាំ",
-
     "noNotes": "គ្មានកំណត់ចំណាំ",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "លេខយោង ឬចំណងជើង",
-
     "sortBy": "តម្រៀបតាម",
-
     "direction": "ទិសដៅ",
-
     "sortCreated": "បានបង្កើត",
-
     "sortEventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
     "sortReference": "លេខយោង",
-
     "sortTitle": "ចំណងជើង",
-
     "sortStatus": "ស្ថានភាព",
-
     "sortAmount": "ចំនួន",
-
     "ascending": "លំដាប់កើន",
-
     "descending": "លំដាប់ចុះ",
-
     "clear": "សម្អាត",
-
     "apply": "អនុវត្ត",
-
     "actions": "សកម្មភាព",
-
     "viewAction": "មើលសំណើសុំច្បាប់",
-
     "editAction": "កែសម្រួលសំណើសុំច្បាប់",
-
     "deleteAction": "លុបសំណើសុំច្បាប់",
-
     "loading": "កំពុងផ្ទុកសំណើសុំច្បាប់...",
-
     "loadingOne": "កំពុងផ្ទុកសំណើសុំច្បាប់...",
-
     "loadFailed": "មិនអាចផ្ទុកសំណើសុំច្បាប់បានទេ។",
-
     "loadOneFailed": "មិនអាចផ្ទុកសំណើសុំច្បាប់នេះបានទេ។",
-
     "missingId": "មិនមានលេខសម្គាល់សំណើសុំច្បាប់។",
-
     "noResults": "រកមិនឃើញសំណើសុំច្បាប់",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតសំណើសុំច្បាប់។",
-
     "tryAgain": "ព្យាយាមម្ដងទៀត",
-
     "totalRecords": "សំណើសរុប",
-
     "pendingOnPage": "កំពុងរង់ចាំលើទំព័រនេះ",
-
     "approvedOnPage": "បានអនុម័តលើទំព័រនេះ",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "saveChanges": "រក្សាទុកការកែប្រែ",
-
     "createSuccess": "បានបង្កើតសំណើសុំច្បាប់ដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតសំណើសុំច្បាប់បានទេ។",
-
     "updateSuccess": "បានកែសម្រួលសំណើសុំច្បាប់ដោយជោគជ័យ។",
-
     "updateFailed": "មិនអាចកែសម្រួលសំណើសុំច្បាប់បានទេ។",
-
     "statusChangeSuccess": "បានកែប្រែស្ថានភាពសំណើសុំច្បាប់ដោយជោគជ័យ។",
-
     "statusChangeFailed": "មិនអាចកែប្រែស្ថានភាពសំណើសុំច្បាប់បានទេ។",
-
     "deleteConfirm": "តើអ្នកចង់លុបសំណើសុំច្បាប់ \"{{reference}}\" មែនទេ?",
-
     "deleteSuccess": "បានលុបសំណើសុំច្បាប់ដោយជោគជ័យ។",
-
     "deleteFailed": "មិនអាចលុបសំណើសុំច្បាប់បានទេ។",
-
     "statuses": {
       "pending": "កំពុងរង់ចាំ",
-
       "approved": "បានអនុម័ត",
-
       "rejected": "បានបដិសេធ",
-
       "cancelled": "បានបោះបង់"
     },
-
     "form": {
       "record": "សំណើសុំច្បាប់",
-
       "recordDescription": "បញ្ចូលវាលសំណើសុំច្បាប់ប្រតិបត្តិការដែល backend គាំទ្រ។",
-
       "context": "បរិបទសំណើ",
-
       "contextDescription": "លេខសាខា និងលេខអង្គភាពពាក់ព័ន្ធជាជម្រើស ដែលរក្សាទុកជាមួយសំណើ។",
-
       "title": "ចំណងជើង",
-
       "titlePlaceholder": "ឧទាហរណ៍៖ សំណើសុំច្បាប់ប្រចាំឆ្នាំ",
-
       "titleRequired": "ត្រូវបញ្ចូលចំណងជើង។",
-
       "eventAt": "ពេលវេលាព្រឹត្តិការណ៍",
-
       "eventAtRequired": "ត្រូវបញ្ចូលពេលវេលាព្រឹត្តិការណ៍។",
-
       "amount": "ចំនួន",
-
       "status": "ស្ថានភាព",
-
       "statusPlaceholder": "Pending",
-
       "notes": "កំណត់ចំណាំ",
-
       "notesPlaceholder": "កំណត់ចំណាំជាជម្រើសអំពីសំណើសុំច្បាប់នេះ។",
-
       "branchId": "លេខសម្គាល់សាខា",
-
       "branchIdPlaceholder": "លេខ GUID សាខា ជាជម្រើស",
-
       "relatedEntityId": "លេខសម្គាល់អង្គភាពពាក់ព័ន្ធ",
-
       "relatedEntityIdPlaceholder": "លេខ GUID អង្គភាពពាក់ព័ន្ធ ជាជម្រើស",
-
       "relatedEntityType": "ប្រភេទអង្គភាពពាក់ព័ន្ធ",
-
       "relatedEntityTypePlaceholder": "ប្រភេទជាជម្រើស ដូចជា Employee"
     }
   },
-
   "housekeeping": {
     "section": "ប្រតិបត្តិការ",
-
     "title": "ការងារសម្អាតបន្ទប់",
-
     "description": "សម្របសម្រួលការងារសម្អាតបន្ទប់ អាទិភាព ការបញ្ចប់ និងការរៀបចំបន្ទប់ឡើងវិញ។",
-
     "create": "ការងារថ្មី",
-
     "createTitle": "បង្កើតការងារសម្អាតបន្ទប់",
-
     "detail": "ព័ត៌មានលម្អិតការងារសម្អាត",
-
     "totalTasks": "ការងារសរុប",
-
     "inProgressOnPage": "កំពុងដំណើរការលើទំព័រនេះ",
-
     "openOnPage": "បើកនៅលើទំព័រនេះ",
-
     "completedOnPage": "បានបញ្ចប់លើទំព័រនេះ",
-
     "unassignedOnPage": "មិនទាន់ចាត់តាំងលើទំព័រនេះ",
-
     "room": "បន្ទប់",
-
     "roomPrefix": "បន្ទប់",
-
     "selectRoom": "ជ្រើសរើសបន្ទប់",
-
     "taskType": "ប្រភេទការងារ",
-
     "defaultTaskType": "Checkout Cleaning",
-
     "priority": "អាទិភាព",
-
     "status": "ស្ថានភាព",
-
     "assignee": "អ្នកទទួលខុសត្រូវ",
-
     "unassigned": "មិនទាន់ចាត់តាំង",
-
     "created": "បានបង្កើត",
-
     "search": "ស្វែងរក",
-
     "searchPlaceholder": "លេខបន្ទប់ ឬប្រភេទការងារ",
-
     "allStatuses": "ស្ថានភាពទាំងអស់",
-
     "allPriorities": "អាទិភាពទាំងអស់",
-
     "clear": "សម្អាត",
-
     "actions": "សកម្មភាព",
-
     "view": "មើល",
-
     "complete": "បញ្ចប់",
-
     "viewMode": "របៀបមើលការងារសម្អាត",
-
     "boardView": "ក្តារ",
-
     "listView": "បញ្ជី",
-
     "viewAction": "មើលការងារសម្អាត",
-
     "completeAction": "សម្គាល់ថាបានបញ្ចប់",
-
     "loading": "កំពុងផ្ទុកការងារសម្អាត...",
-
     "loadingOne": "កំពុងផ្ទុកការងារសម្អាត...",
-
     "loadingRooms": "កំពុងផ្ទុកបន្ទប់...",
-
     "loadFailed": "មិនអាចផ្ទុកការងារសម្អាតបានទេ។",
-
     "tryAgain": "សូមព្យាយាមម្តងទៀត។",
-
     "retry": "ព្យាយាមម្តងទៀត",
-
     "loadOneFailed": "មិនអាចផ្ទុកការងារសម្អាតនេះបានទេ។",
-
     "roomsLoadFailed": "មិនអាចផ្ទុកបន្ទប់បានទេ។",
-
     "noResults": "រកមិនឃើញការងារសម្អាត",
-
     "noResultsDescription": "សូមប្ដូរតម្រង ឬបង្កើតការងារសម្អាត។",
-
     "noTasksFiltered": "រកមិនឃើញការងារសម្អាត",
-
     "noTasksFilteredDescription": "សូមប្ដូរ ឬសម្អាតតម្រងបច្ចុប្បន្ន។",
-
     "noTasksYet": "មិនទាន់មានការងារសម្អាត",
-
     "noTasksYetDescription": "បង្កើតការងារសម្អាតថ្មី ដើម្បីចាប់ផ្តើម។",
-
     "clearFilters": "សម្អាតតម្រង",
-
     "showing": "បង្ហាញ",
-
     "previous": "មុន",
-
     "next": "បន្ទាប់",
-
     "page": "ទំព័រ",
-
     "of": "នៃ",
-
     "createSuccess": "បានបង្កើតការងារសម្អាតដោយជោគជ័យ។",
-
     "createFailed": "មិនអាចបង្កើតការងារសម្អាតបានទេ។",
-
     "completeSuccess": "បានបញ្ចប់ការងារសម្អាតដោយជោគជ័យ។",
-
     "completeFailed": "មិនអាចបញ្ចប់ការងារសម្អាតបានទេ។",
-
     "statuses": {
       "pending": "កំពុងរង់ចាំ",
-
       "assigned": "បានចាត់តាំង",
-
       "inprogress": "កំពុងដំណើរការ",
-
       "completed": "បានបញ្ចប់",
-
       "cancelled": "បានបោះបង់"
     },
-
     "priorities": {
       "low": "ទាប",
-
       "normal": "ធម្មតា",
-
       "high": "ខ្ពស់",
-
       "urgent": "បន្ទាន់"
     }
   },
-
   "roomInspections": {
     "section": "ប្រតិបត្តិការ",
     "title": "ការត្រួតពិនិត្យបន្ទប់",
@@ -3067,7 +1643,6 @@
       "cancelled": "បានបោះបង់"
     }
   },
-
   "maintenance": {
     "section": "ប្រតិបត្តិការ",
     "title": "ការថែទាំ",
@@ -3268,7 +1843,7 @@
     "requestInformation": "ព័ត៌មានសំណើ",
     "requestInformationDescription": "បញ្ចូលព័ត៌មានប្រតិបត្តិការដែល Guest Requests API បច្ចុប្បន្នទទួលយក។"
   },
-   "complaints": {
+  "complaints": {
     "section": "ប្រតិបត្តិការ",
     "title": "ពាក្យបណ្តឹង",
     "description": "តាមដានបញ្ហារបស់ភ្ញៀវ ការតាមដាន និងការដោះស្រាយ។",
@@ -3331,7 +1906,7 @@
     "requestInformation": "ព័ត៌មានពាក្យបណ្តឹង",
     "requestInformationDescription": "បញ្ចូលព័ត៌មានពាក្យបណ្តឹងប្រតិបត្តិការដែល Complaints API បច្ចុប្បន្នទទួលយក។"
   },
-   "lostAndFound": {
+  "lostAndFound": {
     "section": "ប្រតិបត្តិការ",
     "title": "របស់បាត់ និងរបស់រកឃើញ",
     "description": "កត់ត្រា តាមដាន និងគ្រប់គ្រងរបស់បាត់ ឬរបស់ដែលបានរកឃើញ។",
@@ -3644,7 +2219,7 @@
     "requestInformationDescription": "បញ្ចូលព័ត៌មានហេតុការណ៍ជាក់ស្តែងដែល Security Incidents API បច្ចុប្បន្នទទួលយក។",
     "reportingNote": "អេក្រង់នេះសម្រាប់កត់ត្រាហេតុការណ៍ និងការតាមដានដែលមានសិទ្ធិ។ សូមអនុវត្តតាមនីតិវិធីសន្តិសុខ និងបន្ទាន់របស់សណ្ឋាគារដាច់ដោយឡែក។"
   },
-   "inventoryItems": {
+  "inventoryItems": {
     "section": "ស្តុក និងការទិញ",
     "title": "ស្តុកទំនិញ",
     "description": "តាមដានទំនិញក្នុងស្តុក បរិមាណនៅសល់ និងកម្រិតត្រូវបញ្ជាទិញឡើងវិញ។",
@@ -3805,7 +2380,7 @@
     "branchScope": "សាខា",
     "hotelScope": "សណ្ឋាគារ"
   },
-   "suppliers": {
+  "suppliers": {
     "section": "ស្តុក និងការទិញ",
     "title": "អ្នកផ្គត់ផ្គង់",
     "description": "គ្រប់គ្រងព័ត៌មានអ្នកផ្គត់ផ្គង់សម្រាប់ដំណើរការទិញ និងទទួលទំនិញ។",
@@ -3928,7 +2503,7 @@
     "branchScope": "សាខា",
     "hotelScope": "សណ្ឋាគារ"
   },
-   "purchaseOrders": {
+  "purchaseOrders": {
     "section": "ស្តុក និងការទិញ",
     "title": "បញ្ជាទិញ",
     "description": "បង្កើត ចេញ និងតាមដានបញ្ជាទិញទៅអ្នកផ្គត់ផ្គង់ក្នុងដំណើរការទិញរបស់សណ្ឋាគារ។",
@@ -4069,5 +2644,1845 @@
     "scope": "វិសាលភាព",
     "branchScope": "សាខា",
     "hotelScope": "សណ្ឋាគារ"
+  },
+  "frontOffice": {
+    "title": "ផ្នែកទទួលភ្ញៀវ",
+    "checkIns": "ការចូលស្នាក់នៅ",
+    "availability": "បន្ទប់ទំនេរ",
+    "checkOuts": "ការចាកចេញ",
+    "guests": "ភ្ញៀវ",
+    "roomAssignments": "ការចាត់តាំងបន្ទប់",
+    "stayExtensions": "ការពន្យារពេលស្នាក់នៅ"
+  },
+  "availability": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "បន្ទប់ទំនេរ",
+    "description": "ស្វែងរកបន្ទប់ដែលអាចប្រើបានសម្រាប់រយៈពេលស្នាក់នៅដែលបានជ្រើសរើស។",
+    "loading": "កំពុងពិនិត្យបន្ទប់ទំនេរ...",
+    "loadFailed": "មិនអាចផ្ទុកព័ត៌មានបន្ទប់ទំនេរបានទេ។",
+    "search": "ស្វែងរកបន្ទប់ទំនេរ",
+    "checkInDate": "ថ្ងៃចូលស្នាក់នៅ",
+    "checkOutDate": "ថ្ងៃចាកចេញ",
+    "room": "បន្ទប់",
+    "roomNumber": "លេខបន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "baseRate": "តម្លៃមូលដ្ឋាន",
+    "status": "ស្ថានភាព",
+    "availableRooms": "បន្ទប់ទំនេរ",
+    "loadedRooms": "បន្ទប់ដែលបានផ្ទុក",
+    "availableOnPage": "ទំនេរ",
+    "roomTypesOnPage": "ប្រភេទបន្ទប់",
+    "noResults": "រកមិនឃើញបន្ទប់ទំនេរ",
+    "noResultsDescription": "សូមសាកល្បងប្តូរថ្ងៃចូល ឬថ្ងៃចាកចេញ។",
+    "invalidDates": "ថ្ងៃចាកចេញត្រូវតែក្រោយថ្ងៃចូលស្នាក់នៅ។",
+    "searchPlaceholder": "ស្វែងរកលេខបន្ទប់ ឬប្រភេទបន្ទប់...",
+    "refresh": "ផ្ទុកឡើងវិញ",
+    "allRoomTypes": "ប្រភេទបន្ទប់ទាំងអស់",
+    "allStatuses": "ស្ថានភាពទាំងអស់",
+    "averageBaseRate": "តម្លៃគោលមធ្យម",
+    "checkIn": "ចូលស្នាក់",
+    "checkOut": "ចាកចេញ",
+    "checkOutAfterCheckIn": "ថ្ងៃចាកចេញត្រូវតែក្រោយថ្ងៃចូលស្នាក់។",
+    "datesRequired": "ត្រូវបញ្ចូលថ្ងៃចូលស្នាក់ និងថ្ងៃចាកចេញ។",
+    "filterSearchPlaceholder": "ស្វែងរកលេខបន្ទប់ ឬប្រភេទបន្ទប់...",
+    "lowestBaseRate": "តម្លៃគោលទាបបំផុត",
+    "nights": "{{count}} យប់",
+    "noFilteredResults": "គ្មានបន្ទប់ត្រូវនឹងតម្រងនេះ",
+    "noFilteredResultsDescription": "សូមសាកល្បងស្វែងរក ប្រភេទបន្ទប់ ឬស្ថានភាពផ្សេង។",
+    "resultsDescription": "បន្ទប់ទំនេរដែលបានត្រឡប់ពីការស្វែងរកបច្ចុប្បន្ន។",
+    "resultsTitle": "បន្ទប់ទំនេរ",
+    "roomNumberValue": "បន្ទប់ {{roomNumber}}",
+    "roomTypes": "ប្រភេទបន្ទប់",
+    "roomsFound": "បន្ទប់ដែលបានរកឃើញ",
+    "searchDescription": "ជ្រើសរើសថ្ងៃស្នាក់នៅ ដើម្បីពិនិត្យបន្ទប់ទំនេរ។",
+    "searchFirst": "ស្វែងរកបន្ទប់ទំនេរជាមុន",
+    "searchFirstDescription": "បញ្ចូលថ្ងៃចូលស្នាក់ និងថ្ងៃចាកចេញ ដើម្បីមើលបន្ទប់ដែលត្រូវគ្នា។",
+    "searchPeriod": "រយៈពេលស្វែងរក",
+    "searchTitle": "ស្វែងរកបន្ទប់ទំនេរ",
+    "searching": "កំពុងស្វែងរក...",
+    "showing": "កំពុងបង្ហាញ {{shown}} នៃបន្ទប់ {{total}}",
+    "unknownStatus": "ស្ថានភាពមិនស្គាល់"
+  },
+  "checkIns": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "ការចូលស្នាក់នៅ",
+    "description": "គ្រប់គ្រងការមកដល់របស់ភ្ញៀវ និងបញ្ចប់ការចូលស្នាក់នៅតាមការកក់។",
+    "loading": "កំពុងផ្ទុកការកក់...",
+    "loadFailed": "មិនអាចផ្ទុកការកក់បានទេ។",
+    "noResults": "រកមិនឃើញការកក់",
+    "noResultsDescription": "គ្មានការកក់ណាមួយត្រូវនឹងតម្រងបច្ចុប្បន្ន។",
+    "searchPlaceholder": "ស្វែងរកការកក់ ភ្ញៀវ ឬបន្ទប់...",
+    "reservation": "ការកក់",
+    "guest": "ភ្ញៀវ",
+    "room": "បន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "checkInDate": "ថ្ងៃចូលស្នាក់នៅ",
+    "checkOutDate": "ថ្ងៃចាកចេញ",
+    "status": "ស្ថានភាព",
+    "arrival": "ការមកដល់",
+    "checkIn": "ចូលស្នាក់នៅ",
+    "checkingIn": "កំពុងចូលស្នាក់នៅ...",
+    "checkInTitle": "បញ្ជាក់ការចូលស្នាក់នៅ",
+    "checkInDescription": "តើអ្នកចង់ចូលស្នាក់នៅសម្រាប់ការកក់ {{reservation}} មែនទេ?",
+    "checkInSuccess": "ភ្ញៀវបានចូលស្នាក់នៅដោយជោគជ័យ។",
+    "checkInFailed": "មិនអាចបញ្ចប់ការចូលស្នាក់នៅបានទេ។",
+    "loadedReservations": "ការកក់ដែលបានផ្ទុក",
+    "confirmedOnPage": "បានបញ្ជាក់",
+    "checkedInOnPage": "បានចូលស្នាក់នៅ",
+    "arrivalsToday": "មកដល់ថ្ងៃនេះ",
+    "refresh": "ផ្ទុកឡើងវិញ",
+    "allStatuses": "ស្ថានភាពទាំងអស់",
+    "arrivalsTodayLoaded": "មកដល់ថ្ងៃនេះ",
+    "backendAuthority": "Backend នៅតែជាអាជ្ញាធរសម្រាប់ច្បាប់ចូលស្នាក់។",
+    "cannotLoadReservations": "ត្រូវការសិទ្ធិមើលការកក់",
+    "checkedInLoaded": "បានចូលស្នាក់",
+    "clearFilters": "សម្អាតតម្រង",
+    "confirmCheckIn": "ចូលស្នាក់ការកក់នេះមែនទេ?",
+    "confirmedLoaded": "បានបញ្ជាក់",
+    "emptyDescription": "Reservations API មិនបានបញ្ជូនទិន្នន័យសម្រាប់ផ្ទាំងនេះទេ។",
+    "emptyTitle": "មិនមានការកក់",
+    "loadedCount": "បានទាញយកការកក់ {{count}}",
+    "loadedOfTotal": "បានទាញយក {{loaded}} នៃការកក់ {{total}}",
+    "noMatches": "គ្មានការកក់ត្រូវនឹងតម្រងនេះ",
+    "noMatchesDescription": "សាកល្បងពាក្យស្វែងរក ឬស្ថានភាពផ្សេង។",
+    "occupancy": "ចំនួនអ្នកស្នាក់",
+    "occupancyBreakdown": "មនុស្សពេញវ័យ {{adults}}, កុមារ {{children}}",
+    "readOnly": "មើលប៉ុណ្ណោះ",
+    "reservationViewPermissionRequired": "ផ្ទាំងចូលស្នាក់នេះផ្ទុកទិន្នន័យពី GET /api/v1/reservations ដូច្នេះត្រូវការសិទ្ធិ reservations.view ផងដែរ។",
+    "reservationWorkspace": "ផ្ទាំងការកក់",
+    "showingLoaded": "បង្ហាញ {{shown}} នៃការកក់ដែលបានទាញយក {{loaded}}",
+    "staySummary": "{{nights}} យប់ • {{amount}}",
+    "tryAgain": "ព្យាយាមម្តងទៀត",
+    "unassigned": "មិនទាន់កំណត់បន្ទប់",
+    "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+    "workflowNote": "សកម្មភាពចូលស្នាក់ប្រើ endpoint ដំណើរការការកក់របស់ backend។"
+  },
+  "checkOuts": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "ការចាកចេញ",
+    "description": "គ្រប់គ្រងការចាកចេញរបស់ភ្ញៀវ និងបញ្ចប់ការចាកចេញតាមការកក់។",
+    "loading": "កំពុងផ្ទុកការកក់...",
+    "loadFailed": "មិនអាចផ្ទុកការកក់បានទេ។",
+    "noResults": "រកមិនឃើញការកក់",
+    "noResultsDescription": "គ្មានការកក់ណាមួយត្រូវនឹងតម្រងបច្ចុប្បន្ន។",
+    "searchPlaceholder": "ស្វែងរកការកក់ ភ្ញៀវ ឬបន្ទប់...",
+    "reservation": "ការកក់",
+    "guest": "ភ្ញៀវ",
+    "room": "បន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "checkInDate": "ថ្ងៃចូលស្នាក់នៅ",
+    "checkOutDate": "ថ្ងៃចាកចេញ",
+    "status": "ស្ថានភាព",
+    "departure": "ការចាកចេញ",
+    "checkOut": "ចាកចេញ",
+    "checkingOut": "កំពុងចាកចេញ...",
+    "checkOutTitle": "បញ្ជាក់ការចាកចេញ",
+    "checkOutDescription": "តើអ្នកចង់ចាកចេញសម្រាប់ការកក់ {{reservation}} មែនទេ?",
+    "checkOutSuccess": "ភ្ញៀវបានចាកចេញដោយជោគជ័យ។",
+    "checkOutFailed": "មិនអាចបញ្ចប់ការចាកចេញបានទេ។",
+    "loadedReservations": "ការកក់ដែលបានផ្ទុក",
+    "checkedInOnPage": "បានចូលស្នាក់នៅ",
+    "checkedOutOnPage": "បានចាកចេញ",
+    "departuresToday": "ចាកចេញថ្ងៃនេះ",
+    "refresh": "ផ្ទុកឡើងវិញ",
+    "allStatuses": "ស្ថានភាពទាំងអស់",
+    "backendAuthority": "Backend នៅតែជាអាជ្ញាធរសម្រាប់ច្បាប់ចាកចេញ។",
+    "cannotLoadReservations": "ត្រូវការសិទ្ធិមើលការកក់",
+    "checkedInLoaded": "បានចូលស្នាក់",
+    "checkedOutLoaded": "បានចាកចេញ",
+    "clearFilters": "សម្អាតតម្រង",
+    "confirmCheckOut": "ចាកចេញការកក់នេះមែនទេ?",
+    "departuresTodayLoaded": "ចាកចេញថ្ងៃនេះ",
+    "emptyDescription": "Reservations API មិនបានបញ្ជូនទិន្នន័យសម្រាប់ផ្ទាំងនេះទេ។",
+    "emptyTitle": "មិនមានការកក់",
+    "loadedCount": "បានទាញយកការកក់ {{count}}",
+    "loadedOfTotal": "បានទាញយក {{loaded}} នៃការកក់ {{total}}",
+    "noMatches": "គ្មានការកក់ត្រូវនឹងតម្រងនេះ",
+    "noMatchesDescription": "សាកល្បងពាក្យស្វែងរក ឬស្ថានភាពផ្សេង។",
+    "occupancy": "ចំនួនអ្នកស្នាក់",
+    "occupancyBreakdown": "មនុស្សពេញវ័យ {{adults}}, កុមារ {{children}}",
+    "readOnly": "មើលប៉ុណ្ណោះ",
+    "reservationViewPermissionRequired": "ផ្ទាំងចាកចេញនេះផ្ទុកទិន្នន័យពី GET /api/v1/reservations ដូច្នេះត្រូវការសិទ្ធិ reservations.view ផងដែរ។",
+    "reservationWorkspace": "ផ្ទាំងការកក់",
+    "showingLoaded": "បង្ហាញ {{shown}} នៃការកក់ដែលបានទាញយក {{loaded}}",
+    "staySummary": "{{nights}} យប់ • {{amount}}",
+    "tryAgain": "ព្យាយាមម្តងទៀត",
+    "unassigned": "មិនទាន់កំណត់បន្ទប់",
+    "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+    "workflowNote": "សកម្មភាពចាកចេញប្រើ endpoint ដំណើរការការកក់របស់ backend។"
+  },
+  "guests": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "ភ្ញៀវ",
+    "description": "គ្រប់គ្រងប្រវត្តិរូប និងព័ត៌មានទំនាក់ទំនងរបស់ភ្ញៀវសណ្ឋាគារ។",
+    "create": "បង្កើតភ្ញៀវ",
+    "edit": "កែប្រែភ្ញៀវ",
+    "details": "ព័ត៌មានលម្អិតភ្ញៀវ",
+    "loading": "កំពុងផ្ទុកភ្ញៀវ...",
+    "loadingOne": "កំពុងផ្ទុកព័ត៌មានភ្ញៀវ...",
+    "loadFailed": "មិនអាចផ្ទុកភ្ញៀវបានទេ។",
+    "loadOneFailed": "មិនអាចផ្ទុកព័ត៌មានភ្ញៀវបានទេ។",
+    "createSuccess": "បង្កើតភ្ញៀវបានជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើតភ្ញៀវបានទេ។",
+    "updateSuccess": "កែប្រែភ្ញៀវបានជោគជ័យ។",
+    "updateFailed": "មិនអាចកែប្រែភ្ញៀវបានទេ។",
+    "backToList": "ត្រឡប់ទៅបញ្ជីភ្ញៀវ",
+    "searchPlaceholder": "ស្វែងរកឈ្មោះ លេខទូរស័ព្ទ ឬអ៊ីមែល...",
+    "allGuests": "ភ្ញៀវទាំងអស់",
+    "vipOnly": "ភ្ញៀវ VIP",
+    "regularOnly": "ភ្ញៀវធម្មតា",
+    "firstName": "នាមខ្លួន",
+    "lastName": "នាមត្រកូល",
+    "fullName": "ឈ្មោះពេញ",
+    "phone": "លេខទូរស័ព្ទ",
+    "email": "អ៊ីមែល",
+    "vip": "VIP",
+    "isVip": "ភ្ញៀវ VIP",
+    "portalAccount": "គណនី Portal",
+    "createdAt": "បង្កើតនៅ",
+    "loadedGuests": "ភ្ញៀវដែលបានផ្ទុក",
+    "vipGuests": "ភ្ញៀវ VIP",
+    "regularGuests": "ភ្ញៀវធម្មតា",
+    "portalLinkedGuests": "ភ្ញៀវដែលមានគណនី Portal",
+    "noResults": "រកមិនឃើញភ្ញៀវ",
+    "noResultsDescription": "គ្មានភ្ញៀវណាមួយត្រូវនឹងតម្រងបច្ចុប្បន្ន។",
+    "saveGuest": "រក្សាទុកភ្ញៀវ",
+    "savingGuest": "កំពុងរក្សាទុកភ្ញៀវ...",
+    "accountInformation": "Account Information",
+    "accountInformationHelp": "Account Information Help",
+    "accountLink": "Account Link",
+    "actions": "Actions",
+    "allGuestTypes": "All Guest Types",
+    "backToGuest": "Back To Guest",
+    "backToGuests": "Back To Guests",
+    "clearFilters": "Clear Filters",
+    "contactInformation": "Contact Information",
+    "contactInformationHelp": "Contact Information Help",
+    "createDescription": "Create Description",
+    "createTitle": "Create Title",
+    "detailDescription": "Detail Description",
+    "detailLoadFailed": "Detail Load Failed",
+    "detailTitle": "Detail Title",
+    "editDescription": "Edit Description",
+    "editGuest": "Edit Guest",
+    "editTitle": "Edit Title",
+    "emptyDescription": "Empty Description",
+    "emptyTitle": "Empty Title",
+    "guest": "Guest",
+    "guestDirectory": "Guest Directory",
+    "guestProfile": "Guest Profile",
+    "guestType": "Guest Type",
+    "invalidEmail": "Invalid Email",
+    "invalidGuestId": "Invalid Guest Id",
+    "linkedAccountsLoaded": "Linked Accounts Loaded",
+    "loadedCount": "Loaded Count",
+    "loadedOfTotal": "Loaded Of Total",
+    "loadingGuest": "Loading Guest",
+    "nameRequired": "Name Required",
+    "newGuest": "New Guest",
+    "noMatches": "No Matches",
+    "noMatchesDescription": "No Matches Description",
+    "personalInformation": "Personal Information",
+    "personalInformationHelp": "Personal Information Help",
+    "profileDetails": "Profile Details",
+    "profileDetailsHelp": "Profile Details Help",
+    "profileType": "Profile Type",
+    "refresh": "Refresh",
+    "regular": "Regular",
+    "regularLoaded": "Regular Loaded",
+    "showingLoaded": "Showing Loaded",
+    "tryAgain": "Try Again",
+    "type": "Type",
+    "view": "View",
+    "vipGuest": "Vip Guest",
+    "vipGuestHelp": "Vip Guest Help",
+    "vipLoaded": "Vip Loaded"
+  },
+  "roomAssignments": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "ការចាត់តាំងបន្ទប់",
+    "description": "គ្រប់គ្រងកំណត់ត្រាការចាត់តាំងបន្ទប់សម្រាប់ការកក់ និងស្ថានភាពរបស់វា។",
+    "create": "បង្កើតការចាត់តាំងបន្ទប់",
+    "edit": "កែប្រែការចាត់តាំងបន្ទប់",
+    "details": "ព័ត៌មានលម្អិតការចាត់តាំងបន្ទប់",
+    "loading": "កំពុងផ្ទុកការចាត់តាំងបន្ទប់...",
+    "loadingOne": "កំពុងផ្ទុកការចាត់តាំងបន្ទប់...",
+    "loadFailed": "មិនអាចផ្ទុកការចាត់តាំងបន្ទប់បានទេ។",
+    "loadOneFailed": "មិនអាចផ្ទុកការចាត់តាំងបន្ទប់បានទេ។",
+    "createSuccess": "បង្កើតការចាត់តាំងបន្ទប់បានជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើតការចាត់តាំងបន្ទប់បានទេ។",
+    "updateSuccess": "កែប្រែការចាត់តាំងបន្ទប់បានជោគជ័យ។",
+    "updateFailed": "មិនអាចកែប្រែការចាត់តាំងបន្ទប់បានទេ។",
+    "deleteSuccess": "លុបការចាត់តាំងបន្ទប់បានជោគជ័យ។",
+    "deleteFailed": "មិនអាចលុបការចាត់តាំងបន្ទប់បានទេ។",
+    "deleteTitle": "លុបការចាត់តាំងបន្ទប់",
+    "deleteDescription": "តើអ្នកចង់លុបការចាត់តាំងបន្ទប់ {{name}} មែនទេ?",
+    "backToList": "ត្រឡប់ទៅការចាត់តាំងបន្ទប់",
+    "searchPlaceholder": "ស្វែងរកលេខយោង ចំណងជើង ឬការកក់...",
+    "statusFilterPlaceholder": "ត្រងតាមស្ថានភាព...",
+    "reference": "លេខយោង",
+    "titleLabel": "ចំណងជើង",
+    "status": "ស្ថានភាព",
+    "reservation": "ការកក់",
+    "reservationContext": "ព័ត៌មានការកក់",
+    "reservationNumber": "លេខការកក់",
+    "guest": "ភ្ញៀវ",
+    "room": "បន្ទប់បច្ចុប្បន្ននៃការកក់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "checkInDate": "ថ្ងៃចូលស្នាក់នៅ",
+    "checkOutDate": "ថ្ងៃចាកចេញ",
+    "notes": "កំណត់ចំណាំ",
+    "amount": "ចំនួនទឹកប្រាក់",
+    "eventAt": "ថ្ងៃព្រឹត្តិការណ៍",
+    "createdAt": "បង្កើតនៅ",
+    "relationship": "ទំនាក់ទំនង",
+    "relatedEntityType": "ប្រភេទទិន្នន័យដែលពាក់ព័ន្ធ",
+    "scope": "វិសាលភាព",
+    "hotelScope": "សណ្ឋាគារ",
+    "branchScope": "សាខា",
+    "changeStatus": "ប្តូរស្ថានភាព",
+    "changeStatusHelp": "បញ្ចូលស្ថានភាពដែល Backend គាំទ្រ។",
+    "statusPlaceholder": "បញ្ចូលស្ថានភាព...",
+    "updateStatus": "កែប្រែស្ថានភាព",
+    "statusUpdated": "កែប្រែស្ថានភាពបានជោគជ័យ។",
+    "statusUpdateFailed": "មិនអាចកែប្រែស្ថានភាពបានទេ។",
+    "loadedAssignments": "ការចាត់តាំងដែលបានផ្ទុក",
+    "completedOnPage": "បានបញ្ចប់",
+    "reservationLinkedOnPage": "បានភ្ជាប់ការកក់",
+    "noResults": "រកមិនឃើញការចាត់តាំងបន្ទប់",
+    "noResultsDescription": "គ្មានការចាត់តាំងបន្ទប់ណាមួយត្រូវនឹងតម្រងបច្ចុប្បន្ន។",
+    "showing": "កំពុងបង្ហាញ",
+    "amountHelp": "Amount Help",
+    "amountPlaceholder": "Amount Placeholder",
+    "assignmentDetails": "Assignment Details",
+    "assignmentInformation": "Assignment Information",
+    "assignmentInformationDescription": "Assignment Information Description",
+    "createDescription": "Create Description",
+    "currentReservationRoom": "Current Reservation Room",
+    "deleteMessage": "Delete Message",
+    "linkedReservationsOnPage": "Linked Reservations On Page",
+    "missingId": "Missing Id",
+    "notesPlaceholder": "Notes Placeholder",
+    "of": "Of",
+    "page": "Page",
+    "recordedAmountOnPage": "Recorded Amount On Page",
+    "referenceNumber": "Reference Number",
+    "referencePlaceholder": "Reference Placeholder",
+    "referenceRequired": "Reference Required",
+    "relatedTo": "Related To",
+    "reservationContextHelp": "Reservation Context Help",
+    "reservationHelp": "Reservation Help",
+    "reservationStatus": "Reservation Status",
+    "roomShort": "Room Short",
+    "roomTargetContractNote": "Room Target Contract Note",
+    "stayDates": "Stay Dates",
+    "titlePlaceholder": "Title Placeholder",
+    "titleRequired": "Title Required",
+    "totalAssignments": "Total Assignments",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown Guest"
+  },
+  "stayExtensions": {
+    "section": "ផ្នែកទទួលភ្ញៀវ",
+    "title": "ការពន្យារពេលស្នាក់នៅ",
+    "description": "គ្រប់គ្រងកំណត់ត្រាការពន្យាររយៈពេលស្នាក់នៅរបស់ភ្ញៀវ និងស្ថានភាពរបស់វា។",
+    "create": "បង្កើតការពន្យារពេលស្នាក់នៅ",
+    "edit": "កែប្រែការពន្យារពេលស្នាក់នៅ",
+    "details": "ព័ត៌មានលម្អិតការពន្យារពេលស្នាក់នៅ",
+    "loading": "កំពុងផ្ទុកការពន្យារពេលស្នាក់នៅ...",
+    "loadingOne": "កំពុងផ្ទុកការពន្យារពេលស្នាក់នៅ...",
+    "loadFailed": "មិនអាចផ្ទុកការពន្យារពេលស្នាក់នៅបានទេ។",
+    "loadOneFailed": "មិនអាចផ្ទុកការពន្យារពេលស្នាក់នៅបានទេ។",
+    "createSuccess": "បង្កើតការពន្យារពេលស្នាក់នៅបានជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើតការពន្យារពេលស្នាក់នៅបានទេ។",
+    "updateSuccess": "កែប្រែការពន្យារពេលស្នាក់នៅបានជោគជ័យ។",
+    "updateFailed": "មិនអាចកែប្រែការពន្យារពេលស្នាក់នៅបានទេ។",
+    "deleteSuccess": "លុបការពន្យារពេលស្នាក់នៅបានជោគជ័យ។",
+    "deleteFailed": "មិនអាចលុបការពន្យារពេលស្នាក់នៅបានទេ។",
+    "deleteTitle": "លុបការពន្យារពេលស្នាក់នៅ",
+    "deleteDescription": "តើអ្នកចង់លុបការពន្យារពេលស្នាក់នៅ {{name}} មែនទេ?",
+    "backToList": "ត្រឡប់ទៅការពន្យារពេលស្នាក់នៅ",
+    "searchPlaceholder": "ស្វែងរកលេខយោង ចំណងជើង ឬការកក់...",
+    "statusFilterPlaceholder": "ត្រងតាមស្ថានភាព...",
+    "reference": "លេខយោង",
+    "titleLabel": "ចំណងជើង",
+    "status": "ស្ថានភាព",
+    "reservation": "ការកក់",
+    "reservationContext": "ព័ត៌មានការកក់",
+    "reservationNumber": "លេខការកក់",
+    "guest": "ភ្ញៀវ",
+    "room": "បន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "checkInDate": "ថ្ងៃចូលស្នាក់នៅ",
+    "checkOutDate": "ថ្ងៃចាកចេញបច្ចុប្បន្ន",
+    "notes": "កំណត់ចំណាំ",
+    "amount": "ចំនួនទឹកប្រាក់",
+    "eventAt": "ថ្ងៃព្រឹត្តិការណ៍",
+    "createdAt": "បង្កើតនៅ",
+    "relationship": "ទំនាក់ទំនង",
+    "relatedEntityType": "ប្រភេទទិន្នន័យដែលពាក់ព័ន្ធ",
+    "scope": "វិសាលភាព",
+    "hotelScope": "សណ្ឋាគារ",
+    "branchScope": "សាខា",
+    "changeStatus": "ប្តូរស្ថានភាព",
+    "changeStatusHelp": "បញ្ចូលស្ថានភាពដែល Backend គាំទ្រ។",
+    "statusPlaceholder": "បញ្ចូលស្ថានភាព...",
+    "updateStatus": "កែប្រែស្ថានភាព",
+    "statusUpdated": "កែប្រែស្ថានភាពបានជោគជ័យ។",
+    "statusUpdateFailed": "មិនអាចកែប្រែស្ថានភាពបានទេ។",
+    "loadedExtensions": "ការពន្យារដែលបានផ្ទុក",
+    "completedOnPage": "បានបញ្ចប់",
+    "reservationLinkedOnPage": "បានភ្ជាប់ការកក់",
+    "noResults": "រកមិនឃើញការពន្យារពេលស្នាក់នៅ",
+    "noResultsDescription": "គ្មានការពន្យារពេលស្នាក់នៅណាមួយត្រូវនឹងតម្រងបច្ចុប្បន្ន។",
+    "showing": "កំពុងបង្ហាញ",
+    "amountHelp": "Amount Help",
+    "amountPlaceholder": "Amount Placeholder",
+    "approvedOnPage": "Approved On Page",
+    "createDescription": "Create Description",
+    "currentCheckoutDate": "Current Checkout Date",
+    "currentReservationRoom": "Current Reservation Room",
+    "currentStayDates": "Current Stay Dates",
+    "deleteMessage": "Delete Message",
+    "eventAtHelp": "Event At Help",
+    "extensionDetails": "Extension Details",
+    "extensionInformation": "Extension Information",
+    "extensionInformationDescription": "Extension Information Description",
+    "linkedReservationsOnPage": "Linked Reservations On Page",
+    "missingId": "Missing Id",
+    "newCheckoutContractNote": "New Checkout Contract Note",
+    "notesPlaceholder": "Notes Placeholder",
+    "of": "Of",
+    "page": "Page",
+    "recordedAmountOnPage": "Recorded Amount On Page",
+    "referenceNumber": "Reference Number",
+    "referencePlaceholder": "Reference Placeholder",
+    "referenceRequired": "Reference Required",
+    "relatedTo": "Related To",
+    "reservationContextHelp": "Reservation Context Help",
+    "reservationHelp": "Reservation Help",
+    "reservationStatus": "Reservation Status",
+    "roomShort": "Room Short",
+    "titlePlaceholder": "Title Placeholder",
+    "titleRequired": "Title Required",
+    "totalExtensions": "Total Extensions",
+    "unassigned": "Unassigned",
+    "unknownGuest": "Unknown Guest"
+  },
+  "reservations": {
+    "title": "ការកក់បន្ទប់",
+    "section": "ការិយាល័យមុខ",
+    "subtitle": "គ្រប់គ្រងការកក់បន្ទប់ ភ្ញៀវ ការស្នាក់នៅ និងស្ថានភាពនៃការកក់។",
+    "newReservation": "បង្កើតការកក់ថ្មី",
+    "createDescription": "បង្កើតការកក់បន្ទប់ថ្មី។",
+    "editReservation": "កែប្រែការកក់",
+    "updateDescription": "ធ្វើបច្ចុប្បន្នភាពព័ត៌មានការកក់។",
+    "reservationDetails": "ព័ត៌មានលម្អិតការកក់",
+    "backToReservations": "ត្រឡប់ទៅការកក់បន្ទប់",
+    "createReservation": "បង្កើតការកក់",
+    "updateReservation": "ធ្វើបច្ចុប្បន្នភាពការកក់",
+    "saveReservation": "រក្សាទុកការកក់",
+    "deleteReservation": "លុបការកក់",
+    "deleteConfirm": "តើអ្នកប្រាកដថាចង់លុបការកក់នេះមែនទេ?",
+    "deleteConfirmWithLabel": "លុបការកក់ \"{{label}}\" មែនទេ?",
+    "searchPlaceholder": "ស្វែងរកលេខកក់ ភ្ញៀវ ឬបន្ទប់...",
+    "search": "ស្វែងរក",
+    "clear": "សម្អាត",
+    "retry": "ព្យាយាមម្តងទៀត",
+    "loading": "កំពុងទាញយកការកក់...",
+    "loadingDetails": "កំពុងទាញយកព័ត៌មានការកក់...",
+    "emptyTitle": "រកមិនឃើញការកក់",
+    "emptyDescription": "សូមសាកល្បងផ្លាស់ប្តូរពាក្យស្វែងរក ឬតម្រង។",
+    "errorTitle": "មិនអាចដំណើរការទិន្នន័យការកក់បាន",
+    "missingId": "មិនមានលេខសម្គាល់ការកក់។",
+    "unableToLoad": "មិនអាចទាញយកបញ្ជីការកក់បានទេ។",
+    "unableToLoadDetails": "មិនអាចទាញយកព័ត៌មានការកក់បានទេ។",
+    "unableToCreate": "មិនអាចបង្កើតការកក់បានទេ។",
+    "unableToUpdate": "មិនអាចធ្វើបច្ចុប្បន្នភាពការកក់បានទេ។",
+    "unableToDelete": "មិនអាចលុបការកក់បានទេ។",
+    "description": "គ្រប់គ្រងការកក់បន្ទប់ ភ្ញៀវ ការស្នាក់នៅ និងស្ថានភាពនៃការកក់។",
+    "refresh": "ទាញយកឡើងវិញ",
+    "create": "បង្កើតការកក់",
+    "createTitle": "បង្កើតការកក់ថ្មី",
+    "creating": "កំពុងបង្កើត...",
+    "createSuccess": "បានបង្កើតការកក់ដោយជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើតការកក់បានទេ។",
+    "loadingBookingOptions": "កំពុងទាញយកជម្រើសការកក់...",
+    "lookupLoadFailed": "មិនអាចទាញយកជម្រើសការកក់បានទេ។",
+    "tryAgain": "ព្យាយាមម្តងទៀត",
+    "loadFailed": "មិនអាចទាញយកបញ្ជីការកក់បានទេ។",
+    "loadingDetail": "កំពុងទាញយកព័ត៌មានការកក់...",
+    "detailLoadFailed": "មិនអាចទាញយកព័ត៌មានការកក់បានទេ។",
+    "invalidReservationId": "លេខសម្គាល់ការកក់មិនត្រឹមត្រូវ។",
+    "detailTitle": "ព័ត៌មានលម្អិតការកក់",
+    "detailDescription": "ពិនិត្យព័ត៌មានការស្នាក់នៅ ភ្ញៀវ បន្ទប់ តម្លៃ និងដំណើរការ។",
+    "loadedReservations": "ការកក់ដែលបានទាញយក",
+    "confirmedLoaded": "បានបញ្ជាក់ដែលបានទាញយក",
+    "checkedInLoaded": "បានចូលស្នាក់ដែលបានទាញយក",
+    "loadedValue": "តម្លៃដែលបានទាញយក",
+    "reservationList": "បញ្ជីការកក់",
+    "loadedOfTotal": "បានទាញយក {{loaded}} នៃការកក់ {{total}}",
+    "loadedCount": "បានទាញយកការកក់ {{count}}",
+    "allStatuses": "ស្ថានភាពទាំងអស់",
+    "clearFilters": "សម្អាតតម្រង",
+    "noMatches": "គ្មានការកក់ត្រូវនឹងតម្រងនេះ",
+    "noMatchesDescription": "សាកល្បងពាក្យស្វែងរក ឬតម្រងស្ថានភាពផ្សេង។",
+    "reservationNumber": "លេខការកក់",
+    "guest": "ភ្ញៀវ",
+    "stay": "ការស្នាក់នៅ",
+    "room": "បន្ទប់",
+    "guests": "ចំនួនភ្ញៀវ",
+    "totalAmount": "ចំនួនទឹកប្រាក់សរុប",
+    "actions": "សកម្មភាព",
+    "nightsValue": "{{count}} យប់",
+    "unassigned": "មិនទាន់កំណត់បន្ទប់",
+    "view": "មើល",
+    "showingLoaded": "បង្ហាញ {{shown}} នៃការកក់ដែលបានទាញយក {{loaded}}",
+    "bookingDetails": "ព័ត៌មានការកក់",
+    "bookingDetailsHelp": "ជ្រើសរើសភ្ញៀវ កាលបរិច្ឆេទ ប្រភេទបន្ទប់ និងតម្លៃសម្រាប់ការកក់។",
+    "selectGuest": "ជ្រើសរើសភ្ញៀវ",
+    "roomType": "ប្រភេទបន្ទប់",
+    "selectRoomType": "ជ្រើសរើសប្រភេទបន្ទប់",
+    "roomOptional": "បន្ទប់ មិនចាំបាច់",
+    "assignLater": "កំណត់ពេលក្រោយ",
+    "checkInDate": "កាលបរិច្ឆេទចូលស្នាក់",
+    "checkOutDate": "កាលបរិច្ឆេទចាកចេញ",
+    "adults": "មនុស្សពេញវ័យ",
+    "children": "កុមារ",
+    "nightlyRate": "តម្លៃក្នុងមួយយប់",
+    "nights": "ចំនួនយប់",
+    "estimatedTotal": "តម្លៃសរុបប៉ាន់ស្មាន",
+    "estimateHelp": "Backend នៅតែជាប្រភពត្រឹមត្រូវសម្រាប់តម្លៃចុងក្រោយ។",
+    "requiredFields": "សូមបំពេញព័ត៌មានការកក់ដែលចាំបាច់។",
+    "invalidStayDates": "ថ្ងៃចាកចេញត្រូវតែក្រោយថ្ងៃចូលស្នាក់។",
+    "adultsRequired": "ត្រូវមានមនុស្សពេញវ័យយ៉ាងហោចណាស់ម្នាក់។",
+    "invalidRate": "តម្លៃក្នុងមួយយប់ត្រូវតែសូន្យ ឬធំជាងសូន្យ។",
+    "stayDetails": "ព័ត៌មានការស្នាក់នៅ",
+    "stayDetailsHelp": "ថ្ងៃចូល ថ្ងៃចេញ និងពេលវេលាកក់។",
+    "createdAt": "បានបង្កើត",
+    "guestDetails": "ព័ត៌មានភ្ញៀវ",
+    "guestDetailsHelp": "ព័ត៌មានភ្ញៀវ និងចំនួនអ្នកស្នាក់។",
+    "roomDetails": "ព័ត៌មានបន្ទប់",
+    "roomDetailsHelp": "ប្រភេទបន្ទប់ដែលបានជ្រើស និងបន្ទប់ដែលបានកំណត់។",
+    "roomNumber": "លេខបន្ទប់",
+    "rateDetails": "ព័ត៌មានតម្លៃ",
+    "rateDetailsHelp": "តម្លៃក្នុងមួយយប់ និងតម្លៃសរុបនៃការកក់។",
+    "workflowActions": "សកម្មភាពដំណើរការ",
+    "workflowHelp": "ប្រើសកម្មភាពដំណើរការការកក់ដែល backend គាំទ្រ។",
+    "processing": "កំពុងដំណើរការ...",
+    "checkIn": "ចូលស្នាក់",
+    "checkOut": "ចាកចេញ",
+    "cancel": "បោះបង់",
+    "check-in": "ចូលស្នាក់",
+    "check-out": "ចាកចេញ",
+    "confirmCheckIn": "ចូលស្នាក់ការកក់នេះមែនទេ?",
+    "confirmCheckOut": "ចាកចេញការកក់នេះមែនទេ?",
+    "confirmCancel": "បោះបង់ការកក់នេះមែនទេ?",
+    "checkInSuccess": "បានចូលស្នាក់ការកក់ដោយជោគជ័យ។",
+    "checkInFailed": "មិនអាចចូលស្នាក់ការកក់បានទេ។",
+    "checkOutSuccess": "បានចាកចេញការកក់ដោយជោគជ័យ។",
+    "checkOutFailed": "មិនអាចចាកចេញការកក់បានទេ។",
+    "cancelSuccess": "បានបោះបង់ការកក់ដោយជោគជ័យ។",
+    "cancelFailed": "មិនអាចបោះបង់ការកក់បានទេ។",
+    "summary": {
+      "total": "សរុប",
+      "confirmed": "បានបញ្ជាក់",
+      "confirmedOnPage": "បានបញ្ជាក់ក្នុងទំព័រ",
+      "checkedIn": "បានចូលស្នាក់",
+      "checkedInOnPage": "បានចូលស្នាក់ក្នុងទំព័រ",
+      "pending": "កំពុងរង់ចាំ",
+      "pendingOnPage": "កំពុងរង់ចាំក្នុងទំព័រ"
+    },
+    "filters": {
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "placeholders": {
+      "guestId": "UUID ភ្ញៀវ",
+      "roomTypeId": "UUID ប្រភេទបន្ទប់",
+      "roomId": "UUID បន្ទប់ មិនចាំបាច់បញ្ចូល",
+      "specialRequests": "សំណើពិសេសរបស់ភ្ញៀវ...",
+      "notes": "កំណត់ចំណាំផ្ទៃក្នុង..."
+    },
+    "detail": {
+      "stay": "ការស្នាក់នៅ",
+      "booking": "ការកក់",
+      "audit": "ប្រវត្តិ"
+    },
+    "fields": {
+      "reservation": "ការកក់",
+      "reservationNumber": "លេខការកក់",
+      "guest": "ភ្ញៀវ",
+      "guestId": "លេខសម្គាល់ភ្ញៀវ",
+      "room": "បន្ទប់",
+      "roomId": "លេខសម្គាល់បន្ទប់",
+      "roomType": "ប្រភេទបន្ទប់",
+      "roomTypeId": "លេខសម្គាល់ប្រភេទបន្ទប់",
+      "checkIn": "ចូលស្នាក់",
+      "checkOut": "ចាកចេញ",
+      "checkInDate": "កាលបរិច្ឆេទចូលស្នាក់",
+      "checkOutDate": "កាលបរិច្ឆេទចាកចេញ",
+      "adults": "មនុស្សពេញវ័យ",
+      "children": "កុមារ",
+      "guests": "ចំនួនភ្ញៀវ",
+      "status": "ស្ថានភាព",
+      "source": "ប្រភពការកក់",
+      "total": "សរុប",
+      "specialRequests": "សំណើពិសេស",
+      "notes": "កំណត់ចំណាំ",
+      "created": "បានបង្កើត",
+      "updated": "បានកែប្រែ",
+      "actions": "សកម្មភាព"
+    },
+    "status": {
+      "pending": "កំពុងរង់ចាំ",
+      "confirmed": "បានបញ្ជាក់",
+      "checkedIn": "បានចូលស្នាក់",
+      "checkedOut": "បានចាកចេញ",
+      "cancelled": "បានបោះបង់",
+      "noShow": "មិនបានមក",
+      "unknown": "មិនស្គាល់"
+    },
+    "source": {
+      "walkIn": "មកផ្ទាល់",
+      "phone": "ទូរស័ព្ទ",
+      "website": "គេហទំព័រ",
+      "bookingCom": "Booking.com",
+      "agoda": "Agoda",
+      "expedia": "Expedia",
+      "other": "ផ្សេងៗ"
+    },
+    "validation": {
+      "guestRequired": "ត្រូវជ្រើសរើសភ្ញៀវ។",
+      "roomTypeRequired": "ត្រូវជ្រើសរើសប្រភេទបន្ទប់។",
+      "checkInRequired": "ត្រូវបញ្ចូលកាលបរិច្ឆេទចូលស្នាក់។",
+      "checkOutRequired": "ត្រូវបញ្ចូលកាលបរិច្ឆេទចាកចេញ។",
+      "invalidDateRange": "កាលបរិច្ឆេទចាកចេញត្រូវតែក្រោយកាលបរិច្ឆេទចូលស្នាក់។",
+      "adultsMinimum": "ត្រូវមានមនុស្សពេញវ័យយ៉ាងហោចណាស់ម្នាក់។",
+      "childrenMinimum": "ចំនួនកុមារមិនអាចតិចជាងសូន្យបានទេ។"
+    },
+    "common": {
+      "view": "មើល",
+      "edit": "កែប្រែ",
+      "delete": "លុប",
+      "cancel": "បោះបង់",
+      "saving": "កំពុងរក្សាទុក...",
+      "deleting": "កំពុងលុប...",
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់",
+      "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+      "unassigned": "មិនទាន់កំណត់បន្ទប់",
+      "noNotes": "គ្មានកំណត់ចំណាំ។",
+      "noSpecialRequests": "គ្មានសំណើពិសេស។"
+    }
+  },
+  "roomChanges": {
+    "title": "ការប្តូរបន្ទប់",
+    "section": "ការិយាល័យមុខ",
+    "subtitle": "ពិនិត្យសំណើប្តូរបន្ទប់របស់ភ្ញៀវ និងប្រវត្តិការផ្ទេរបន្ទប់ដែលបានបញ្ចប់។",
+    "analytics": "ស្ថិតិ",
+    "details": "ព័ត៌មានលម្អិតការប្តូរបន្ទប់",
+    "backToRoomChanges": "ត្រឡប់ទៅការប្តូរបន្ទប់",
+    "searchPlaceholder": "ស្វែងរកភ្ញៀវ លេខកក់ ឬបន្ទប់...",
+    "clear": "សម្អាត",
+    "retry": "ព្យាយាមម្តងទៀត",
+    "loading": "កំពុងទាញយកការប្តូរបន្ទប់...",
+    "loadingDetails": "កំពុងទាញយកព័ត៌មានការប្តូរបន្ទប់...",
+    "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+    "emptyTitle": "រកមិនឃើញការប្តូរបន្ទប់",
+    "emptyDescription": "សូមសាកល្បងផ្លាស់ប្តូរពាក្យស្វែងរក ឬតម្រង។",
+    "errorTitle": "មិនអាចទាញយកការប្តូរបន្ទប់បាន",
+    "unableToLoad": "មិនអាចទាញយកបញ្ជីការប្តូរបន្ទប់បានទេ។",
+    "unableToLoadDetails": "មិនអាចទាញយកព័ត៌មានការប្តូរបន្ទប់បានទេ។",
+    "unableToLoadAnalytics": "មិនអាចទាញយកស្ថិតិការប្តូរបន្ទប់បានទេ។",
+    "actions": {
+      "analytics": "ស្ថិតិ",
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "retry": "ព្យាយាមម្តងទៀត",
+      "view": "មើល",
+      "back": "ត្រឡប់ទៅការប្តូរបន្ទប់"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកភ្ញៀវ លេខកក់ ឬបន្ទប់..."
+    },
+    "errors": {
+      "title": "មិនអាចទាញយកការប្តូរបន្ទប់បាន",
+      "loadList": "មិនអាចទាញយកបញ្ជីការប្តូរបន្ទប់បានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានការប្តូរបន្ទប់បានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិការប្តូរបន្ទប់បានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ការប្តូរបន្ទប់។"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកការប្តូរបន្ទប់...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មានការប្តូរបន្ទប់...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញការប្តូរបន្ទប់",
+      "emptyDescription": "សូមសាកល្បងផ្លាស់ប្តូរពាក្យស្វែងរក ឬតម្រង។"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "detail": {
+      "title": "ព័ត៌មានលម្អិតការប្តូរបន្ទប់",
+      "subtitle": "ពិនិត្យព័ត៌មានផ្ទេរបន្ទប់ ភ្ញៀវ ការកក់ និងប្រវត្តិ។",
+      "roomTransfer": "ការផ្ទេរបន្ទប់",
+      "guestReservation": "ភ្ញៀវ និងការកក់",
+      "originalRoom": "បន្ទប់ដើម",
+      "newRoom": "បន្ទប់ថ្មី",
+      "timeline": "ពេលវេលា",
+      "audit": "ប្រវត្តិ"
+    },
+    "summary": {
+      "total": "កំណត់ត្រាសរុប",
+      "completed": "បានបញ្ចប់",
+      "approved": "បានអនុម័ត",
+      "pending": "កំពុងរង់ចាំ"
+    },
+    "filters": {
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "fields": {
+      "requested": "បានស្នើសុំ",
+      "changed": "បានប្តូរ",
+      "reservation": "ការកក់",
+      "guest": "ភ្ញៀវ",
+      "fromRoom": "ពីបន្ទប់",
+      "toRoom": "ទៅបន្ទប់",
+      "roomNumber": "លេខបន្ទប់",
+      "roomType": "ប្រភេទបន្ទប់",
+      "reason": "មូលហេតុ",
+      "notes": "កំណត់ចំណាំ",
+      "status": "ស្ថានភាព",
+      "created": "បានបង្កើត",
+      "updated": "បានកែប្រែ",
+      "roomChangeId": "លេខសម្គាល់ការប្តូរបន្ទប់",
+      "actions": "សកម្មភាព"
+    },
+    "status": {
+      "pending": "កំពុងរង់ចាំ",
+      "approved": "បានអនុម័ត",
+      "completed": "បានបញ្ចប់",
+      "rejected": "បានបដិសេធ",
+      "cancelled": "បានបោះបង់",
+      "unknown": "មិនស្គាល់"
+    },
+    "analyticsPage": {
+      "title": "ស្ថិតិការប្តូរបន្ទប់",
+      "subtitle": "ទិដ្ឋភាពសង្ខេបដែលគណនាពីទិន្នន័យការប្តូរបន្ទប់ពី API។",
+      "totalChanges": "ការប្តូរបន្ទប់សរុប",
+      "completed": "បានបញ្ចប់",
+      "approved": "បានអនុម័ត",
+      "pending": "កំពុងរង់ចាំ",
+      "rejected": "បានបដិសេធ",
+      "cancelled": "បានបោះបង់",
+      "completionRate": "អត្រាបញ្ចប់",
+      "statusBreakdown": "ការបែងចែកតាមស្ថានភាព"
+    },
+    "common": {
+      "view": "មើល",
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់",
+      "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+      "noReason": "មិនមានមូលហេតុត្រូវបានកត់ត្រា។",
+      "noNotes": "មិនមានកំណត់ចំណាំត្រូវបានកត់ត្រា។"
+    }
+  },
+  "folios": {
+    "section": "Front Office",
+    "title": "Folios",
+    "description": "បង្កើត folio សម្រាប់ភ្ញៀវ មើល charges បន្ថែម charge និងបិទ folio តាម workflow API ដែលបានផ្ទៀងផ្ទាត់។",
+    "create": "បង្កើត folio",
+    "createDescription": "ជ្រើស reservation ដែលមានស្រាប់ ដើម្បីបង្កើត folio ថ្មី។",
+    "backToWorkspace": "ត្រឡប់ទៅ Folios",
+    "openExisting": "បើក folio ដែលមានស្រាប់",
+    "openExistingDescription": "Backend មិនមាន folio list endpoint ដែលបានផ្ទៀងផ្ទាត់ទេ។ បញ្ចូល Folio ID ដែលអ្នកស្គាល់ ដើម្បីបើក detail។",
+    "folioIdPlaceholder": "បញ្ចូល Folio ID",
+    "openFolio": "បើក folio",
+    "workflowTitle": "Folio workflow",
+    "workflowDescription": "Backend ដែលបានផ្ទៀងផ្ទាត់ គាំទ្រ create, get-by-id, add-charge និង close។",
+    "workflowCreate": "បង្កើត folio ពី reservation",
+    "workflowCharges": "បញ្ចូល charge ទៅ folio ដែលកំពុងបើក",
+    "workflowClose": "បិទ folio នៅពេល backend អនុញ្ញាត",
+    "noListTitle": "មិនមាន Folio list API ដែលបានផ្ទៀងផ្ទាត់",
+    "noListDescription": "Frontend នេះមិនបង្កើត GET /api/v1/folios ដោយស្មានទេ។ ប្រើ Create Folio ឬបើក folio តាម ID។",
+    "loadingReservations": "កំពុងផ្ទុក reservations...",
+    "reservationsLoadFailed": "មិនអាចផ្ទុក reservations បានទេ។",
+    "reservation": "Reservation",
+    "selectReservation": "ជ្រើស reservation",
+    "reservationContext": "ព័ត៌មាន reservation",
+    "reservationNumber": "លេខ reservation",
+    "reservationId": "Reservation ID",
+    "guest": "ភ្ញៀវ",
+    "guestId": "Guest ID",
+    "room": "បន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "checkInDate": "ថ្ងៃ check-in",
+    "checkOutDate": "ថ្ងៃ check-out",
+    "reservationStatus": "ស្ថានភាព reservation",
+    "createSuccess": "បង្កើត folio បានជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើត folio បានទេ។",
+    "loadingOne": "កំពុងផ្ទុក folio...",
+    "loadOneFailed": "មិនអាចផ្ទុក folio បានទេ។",
+    "missingId": "មិនមាន Folio ID។",
+    "open": "កំពុងបើក",
+    "closed": "បានបិទ",
+    "openDescription": "Folio នេះកំពុងបើក សម្រាប់ charge និង close ដែល backend អនុញ្ញាត។",
+    "closedDescription": "Folio នេះបានបិទហើយ។",
+    "totalCharges": "Charges សរុប",
+    "activeCharges": "Charges សកម្ម",
+    "voidedCharges": "Charges ដែល void",
+    "recordedAmount": "ចំនួន charge សកម្ម",
+    "folioDetails": "ព័ត៌មាន folio",
+    "folioNumber": "លេខ folio",
+    "status": "ស្ថានភាព",
+    "createdAt": "បង្កើតនៅ",
+    "scope": "វិសាលភាព",
+    "branchScope": "សាខា",
+    "hotelScope": "សណ្ឋាគារ",
+    "charges": "Charges",
+    "chargesDescription": "Charges ដែលបានទទួលពី folio detail response។",
+    "noCharges": "មិនមាន charge",
+    "noChargesDescription": "Folio detail response នេះមិនមាន charge rows ទេ។",
+    "chargeCategory": "ប្រភេទ",
+    "chargeDescription": "ពិពណ៌នា",
+    "chargeAmount": "ចំនួន",
+    "chargeCategoryPlaceholder": "ឧទាហរណ៍៖ Room",
+    "chargeDescriptionPlaceholder": "សរសេរពិពណ៌នា charge",
+    "chargeAmountPlaceholder": "0.00",
+    "chargeCategoryRequired": "ត្រូវបញ្ចូល category។",
+    "chargeDescriptionRequired": "ត្រូវបញ្ចូល description។",
+    "chargeAmountRequired": "បញ្ចូល amount ធំជាងសូន្យ។",
+    "addCharge": "បន្ថែម charge",
+    "addChargeDescription": "បញ្ចូល category, description និង amount ទៅ folio នេះ។",
+    "addingCharge": "កំពុងបន្ថែម charge...",
+    "addChargeSuccess": "បន្ថែម charge បានជោគជ័យ។",
+    "addChargeFailed": "មិនអាចបន្ថែម folio charge បានទេ។",
+    "active": "សកម្ម",
+    "voided": "បាន void",
+    "closeFolio": "បិទ folio",
+    "closeTitle": "បិទ folio នេះ?",
+    "closeDescription": "វានឹងផ្ញើ close workflow request ដែលបានផ្ទៀងផ្ទាត់។ Backend ជាអ្នកសម្រេចថាអាចបិទបានឬអត់។",
+    "closeSuccess": "បិទ folio បានជោគជ័យ។",
+    "closeFailed": "មិនអាចបិទ folio បានទេ។"
+  },
+  "invoices": {
+    "section": "Front Office",
+    "title": "Invoices",
+    "description": "Workspace invoice ដែលប្រើ live API data សម្រាប់ billing, balance, due state, payment, PDF និង analytics។",
+    "liveData": "ទិន្នន័យ Live",
+    "refresh": "Refresh",
+    "loading": "កំពុងផ្ទុក invoices...",
+    "loadFailed": "មិនអាចផ្ទុក invoices បានទេ។",
+    "loadingOne": "កំពុងផ្ទុក invoice...",
+    "loadOneFailed": "មិនអាចផ្ទុក invoice បានទេ។",
+    "missingId": "មិនមាន Invoice ID។",
+    "backToList": "ត្រឡប់ទៅ Invoices",
+    "create": "បង្កើត invoice",
+    "createDescription": "បង្កើត invoice សម្រាប់ reservation ដែលមានស្រាប់ និងបន្ថែម invoice items។",
+    "createSuccess": "បង្កើត invoice បានជោគជ័យ។",
+    "createFailed": "មិនអាចបង្កើត invoice បានទេ។",
+    "loadedInvoices": "Invoices ដែលបានផ្ទុក",
+    "backendTotal": "Backend សរុប: {{total}}",
+    "billedLoaded": "Billed (បានផ្ទុក)",
+    "paidLoaded": "Collected (បានផ្ទុក)",
+    "outstandingLoaded": "Outstanding (បានផ្ទុក)",
+    "paidCount": "{{count}} បានទូទាត់រួច",
+    "overdueCount": "{{count}} ហួសកំណត់",
+    "outstandingCount": "{{count}} នៅសល់",
+    "outstandingCenter": "Outstanding Center",
+    "analytics": "Analytics",
+    "searchPlaceholder": "ស្វែងរក invoice, guest, reservation ឬ status...",
+    "allStatuses": "Status ទាំងអស់",
+    "allDueStates": "Due state ទាំងអស់",
+    "from": "ចាប់ពី",
+    "to": "ដល់",
+    "noResults": "រកមិនឃើញ invoice",
+    "noResultsDescription": "គ្មាន invoice ដែលបានផ្ទុកត្រូវនឹង filter បច្ចុប្បន្ន។",
+    "invoiceNumber": "Invoice",
+    "guest": "ភ្ញៀវ",
+    "invoiceDate": "ថ្ងៃ invoice",
+    "dueDate": "ថ្ងៃផុតកំណត់",
+    "totalAmount": "សរុប",
+    "paidAmount": "បានបង់",
+    "balanceAmount": "នៅសល់",
+    "status": "ស្ថានភាព",
+    "dueState": "Due state",
+    "outstanding": "នៅសល់",
+    "overdue": "ហួសកំណត់",
+    "dueSoon": "ជិតដល់ថ្ងៃកំណត់",
+    "settled": "បានទូទាត់រួច",
+    "showingLoaded": "បង្ហាញ {{count}} នៃ {{total}} invoices ដែលបាន filter",
+    "loadingReservations": "កំពុងផ្ទុក reservations...",
+    "reservationsLoadFailed": "មិនអាចផ្ទុក reservations បានទេ។",
+    "invoiceContext": "ព័ត៌មាន invoice",
+    "reservation": "Reservation",
+    "selectReservation": "ជ្រើស reservation",
+    "discountAmount": "Discount",
+    "taxAmount": "Tax",
+    "reservationContext": "ព័ត៌មាន reservation",
+    "reservationNumber": "លេខ reservation",
+    "reservationId": "Reservation ID",
+    "room": "បន្ទប់",
+    "roomType": "ប្រភេទបន្ទប់",
+    "reservationStatus": "ស្ថានភាព reservation",
+    "checkInDate": "ថ្ងៃ check-in",
+    "checkOutDate": "ថ្ងៃ check-out",
+    "invoiceItems": "Invoice items",
+    "invoiceItemsHelp": "បន្ថែម item lines ដែលត្រូវផ្ញើទៅ create invoice API។",
+    "invoiceItemsDetailHelp": "Invoice items ដែលត្រឡប់ពី invoice detail API។",
+    "addItem": "បន្ថែម item",
+    "removeItem": "លុប item",
+    "itemDescription": "ពិពណ៌នា",
+    "itemDescriptionPlaceholder": "ឧទាហរណ៍៖ Standard King - 3 nights",
+    "quantity": "ចំនួន",
+    "unit": "ឯកតា",
+    "unitPlaceholder": "night",
+    "unitPrice": "តម្លៃឯកតា",
+    "lineTotal": "សរុប line",
+    "previewTotals": "មើលសរុប",
+    "subtotal": "Subtotal",
+    "createCompatibilityNote": "Create request ត្រូវបានដាក់ដាច់ដោយឡែក ព្រោះមិនទាន់រកឃើញ source body ពេញលេញនៃ backend InvoiceRequest។ បើ API 400/422 សូមកែ model/service ឲ្យត្រូវ DTO។",
+    "invoiceDetails": "ព័ត៌មាន invoice",
+    "createdAt": "បង្កើតនៅ",
+    "financialSummary": "សង្ខេបហិរញ្ញវត្ថុ",
+    "paymentProgress": "Payment progress",
+    "itemsCount": "Items",
+    "itemSubtotal": "Item subtotal: {{amount}}",
+    "noItems": "API មិនបានត្រឡប់ invoice items",
+    "noItemsDescription": "Invoice detail response មិនមាន item rows នៅពេលនេះ។",
+    "previewPdf": "មើល PDF",
+    "downloadPdf": "ទាញ PDF",
+    "pdfFailed": "មិនអាចផ្ទុក invoice PDF បានទេ។",
+    "recordPayment": "កត់ត្រាការទូទាត់",
+    "paymentModalDescription": "កត់ត្រាការទូទាត់សម្រាប់ {{invoice}}។ Backend ជាអ្នកសម្រេច validation ចុងក្រោយ។",
+    "paymentAmount": "ចំនួនទឹកប្រាក់",
+    "paymentAmountPlaceholder": "0.00",
+    "paymentAmountRequired": "បញ្ចូល amount ធំជាងសូន្យ។",
+    "paymentMethod": "វិធីទូទាត់",
+    "paymentMethodPlaceholder": "ឧទាហរណ៍៖ Cash ឬ Khqr",
+    "paymentMethodHelp": "Cash និង Khqr ជា seed examples ដែលបានផ្ទៀងផ្ទាត់ មិនមែនជាបញ្ជី enum ពេញលេញទេ។",
+    "paymentMethodRequired": "ត្រូវបញ្ចូល payment method។",
+    "paymentReference": "លេខយោង",
+    "paymentReferencePlaceholder": "Payment reference (optional)",
+    "recordingPayment": "កំពុងកត់ត្រាការទូទាត់...",
+    "paymentSuccess": "កត់ត្រាការទូទាត់បានជោគជ័យ។",
+    "paymentFailed": "មិនអាចកត់ត្រាការទូទាត់បានទេ។",
+    "paymentExceedsBalance": "Payment amount មិនអាចលើស balance ដែលបានផ្ទុកបច្ចុប្បន្ន។",
+    "paid": "បានបង់",
+    "remaining": "នៅសល់",
+    "outstandingDescription": "Live view សម្រាប់ invoices ដែលនៅមាន balance រួមទាំង overdue និង due-soon ដែលគណនាខាង frontend។",
+    "outstandingInvoices": "Invoices នៅសល់",
+    "outstandingAmount": "Amount នៅសល់",
+    "overdueInvoices": "Invoices ហួសកំណត់",
+    "overdueAmount": "Amount ហួសកំណត់",
+    "dueSoonCount": "{{count}} ដល់កំណត់ក្នុង 3 ថ្ងៃ",
+    "noOutstanding": "មិនមាន invoice នៅសល់",
+    "noOutstandingDescription": "គ្មាន invoice ដែលបានផ្ទុកមាន balance នៅសល់ទេ។",
+    "daysOverdue": "ហួស {{days}} ថ្ងៃ",
+    "dueInDays": "ដល់កំណត់ក្នុង {{days}} ថ្ងៃ",
+    "analyticsDescription": "គណនា totals, collection rate, status mix និង outstanding indicators ពី live API data ដែលបានផ្ទុក។",
+    "totalBilled": "Billed សរុប",
+    "totalCollected": "Collected សរុប",
+    "totalOutstanding": "Outstanding សរុប",
+    "averageInvoice": "Invoice មធ្យម",
+    "collectionRate": "Collection rate",
+    "collectionRateDescription": "Paid amount ចែក billed amount សម្រាប់ invoices ដែលបានផ្ទុក។",
+    "statusBreakdown": "បែងចែកតាម status",
+    "statusBreakdownDescription": "Dynamic status groups ដែលទទួលពី API។",
+    "analyticsLoadedNote": "Analytics ទាំងនេះគណនាពី invoices ដែល GET /api/v1/invoices បានត្រឡប់។ បើ backend ត្រឡប់តែ server page មួយ metrics នឹងពិពណ៌នាតែ page ដែលបានផ្ទុក។"
+  },
+  "payments": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "ការទូទាត់",
+    "subtitle": "ទិន្នន័យការទូទាត់ផ្ទាល់ពី Hotel Management API។",
+    "actions": {
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "retry": "ព្យាយាមម្តងទៀត",
+      "analytics": "ស្ថិតិ",
+      "view": "មើលការទូទាត់",
+      "back": "ត្រឡប់ទៅការទូទាត់"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "pageAmount": "ចំនួនទឹកប្រាក់ក្នុងទំព័រ",
+      "completed": "បានបញ្ចប់ក្នុងទំព័រនេះ",
+      "pending": "កំពុងរង់ចាំក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកការទូទាត់ លេខយោង វិក្កយបត្រ ឬភ្ញៀវ..."
+    },
+    "filters": {
+      "allStatuses": "ស្ថានភាពទាំងអស់",
+      "allMethods": "វិធីទូទាត់ទាំងអស់"
+    },
+    "status": {
+      "pending": "កំពុងរង់ចាំ",
+      "completed": "បានបញ្ចប់",
+      "failed": "បរាជ័យ",
+      "cancelled": "បានបោះបង់",
+      "refunded": "បានសងប្រាក់វិញ",
+      "unknown": "មិនស្គាល់"
+    },
+    "methods": {
+      "cash": "សាច់ប្រាក់",
+      "card": "កាត",
+      "bankTransfer": "ផ្ទេរតាមធនាគារ",
+      "mobilePayment": "ទូទាត់តាមទូរស័ព្ទ",
+      "cheque": "មូលប្បទានប័ត្រ",
+      "online": "អនឡាញ",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "fields": {
+      "payment": "ការទូទាត់",
+      "guestInvoice": "ភ្ញៀវ / វិក្កយបត្រ",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "method": "វិធីទូទាត់",
+      "reference": "លេខយោង",
+      "status": "ស្ថានភាព",
+      "paidAt": "ពេលទូទាត់",
+      "actions": "សកម្មភាព",
+      "transaction": "ប្រតិបត្តិការ",
+      "invoice": "វិក្កយបត្រ",
+      "reservation": "ការកក់",
+      "guestName": "ឈ្មោះភ្ញៀវ",
+      "guestId": "លេខសម្គាល់ភ្ញៀវ",
+      "created": "បានបង្កើត",
+      "updated": "បានកែប្រែ",
+      "notes": "កំណត់ចំណាំ"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យការទូទាត់...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មានការទូទាត់...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញការទូទាត់",
+      "emptyDescription": "មិនមានទិន្នន័យការទូទាត់ផ្ទាល់ដែលត្រូវនឹងតម្រងបច្ចុប្បន្នទេ។"
+    },
+    "errors": {
+      "title": "មិនអាចទាញយកការទូទាត់បាន",
+      "loadList": "មិនអាចទាញយកបញ្ជីការទូទាត់ពី API បានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតការទូទាត់បានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិការទូទាត់បានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ការទូទាត់។"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+      "noNotes": "គ្មានកំណត់ចំណាំ។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / ការទូទាត់",
+      "payment": "ការទូទាត់",
+      "paymentInfo": "ព័ត៌មានការទូទាត់",
+      "references": "លេខយោង",
+      "guest": "ភ្ញៀវ",
+      "audit": "ប្រវត្តិកំណត់ត្រា"
+    },
+    "analytics": {
+      "title": "ស្ថិតិការទូទាត់",
+      "subtitle": "គណនាពីទិន្នន័យការទូទាត់ផ្ទាល់ដែល API បានផ្តល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក",
+      "totalAmount": "ចំនួនទឹកប្រាក់សរុប",
+      "amountByMethod": "ចំនួនទឹកប្រាក់តាមវិធីទូទាត់"
+    }
+  },
+  "deposits": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "ប្រាក់កក់",
+    "subtitle": "ទិន្នន័យប្រាក់កក់ផ្ទាល់ពី Hotel Management API។",
+    "actions": {
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "retry": "ព្យាយាមម្តងទៀត",
+      "analytics": "ស្ថិតិ",
+      "view": "មើលប្រាក់កក់",
+      "back": "ត្រឡប់ទៅប្រាក់កក់"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "pageAmount": "ចំនួនទឹកប្រាក់ក្នុងទំព័រ",
+      "received": "បានទទួលក្នុងទំព័រនេះ",
+      "pending": "កំពុងរង់ចាំក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកប្រាក់កក់ ភ្ញៀវ ការកក់ ឬលេខយោង..."
+    },
+    "filters": {
+      "allStatuses": "ស្ថានភាពទាំងអស់",
+      "allTypes": "ប្រភេទប្រាក់កក់ទាំងអស់"
+    },
+    "status": {
+      "pending": "កំពុងរង់ចាំ",
+      "received": "បានទទួល",
+      "applied": "បានអនុវត្ត",
+      "partiallyApplied": "បានអនុវត្តមួយផ្នែក",
+      "refunded": "បានសងប្រាក់វិញ",
+      "partiallyRefunded": "បានសងប្រាក់វិញមួយផ្នែក",
+      "cancelled": "បានបោះបង់",
+      "unknown": "មិនស្គាល់"
+    },
+    "types": {
+      "reservation": "ប្រាក់កក់ការកក់បន្ទប់",
+      "security": "ប្រាក់កក់ធានា",
+      "advance": "ប្រាក់កក់ជាមុន",
+      "damage": "ប្រាក់កក់ការខូចខាត",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "methods": {
+      "cash": "សាច់ប្រាក់",
+      "card": "កាត",
+      "bankTransfer": "ផ្ទេរតាមធនាគារ",
+      "mobilePayment": "ទូទាត់តាមទូរស័ព្ទ",
+      "cheque": "មូលប្បទានប័ត្រ",
+      "online": "អនឡាញ",
+      "other": "ផ្សេងៗ"
+    },
+    "fields": {
+      "deposit": "ប្រាក់កក់",
+      "guestReservation": "ភ្ញៀវ / ការកក់",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "type": "ប្រភេទ",
+      "paymentMethod": "វិធីទូទាត់",
+      "reference": "លេខយោង",
+      "status": "ស្ថានភាព",
+      "receivedAt": "ពេលទទួល",
+      "appliedAt": "ពេលអនុវត្ត",
+      "refundedAt": "ពេលសងប្រាក់វិញ",
+      "actions": "សកម្មភាព",
+      "transaction": "ប្រតិបត្តិការ",
+      "reservation": "ការកក់",
+      "guestName": "ឈ្មោះភ្ញៀវ",
+      "guestId": "លេខសម្គាល់ភ្ញៀវ",
+      "created": "បានបង្កើត",
+      "updated": "បានកែប្រែ",
+      "notes": "កំណត់ចំណាំ"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យប្រាក់កក់...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មានប្រាក់កក់...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញប្រាក់កក់",
+      "emptyDescription": "មិនមានទិន្នន័យប្រាក់កក់ផ្ទាល់ដែលត្រូវនឹងតម្រងបច្ចុប្បន្នទេ។"
+    },
+    "errors": {
+      "title": "មិនអាចទាញយកប្រាក់កក់បាន",
+      "loadList": "មិនអាចទាញយកបញ្ជីប្រាក់កក់ពី API បានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតប្រាក់កក់បានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិប្រាក់កក់បានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ប្រាក់កក់។"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+      "noNotes": "គ្មានកំណត់ចំណាំ។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / ប្រាក់កក់",
+      "deposit": "ប្រាក់កក់",
+      "depositInfo": "ព័ត៌មានប្រាក់កក់",
+      "references": "លេខយោង",
+      "guest": "ភ្ញៀវ",
+      "timeline": "ពេលវេលា",
+      "audit": "ប្រវត្តិកំណត់ត្រា"
+    },
+    "analytics": {
+      "title": "ស្ថិតិប្រាក់កក់",
+      "subtitle": "គណនាពីទិន្នន័យប្រាក់កក់ផ្ទាល់ដែល API បានផ្តល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក",
+      "totalAmount": "ចំនួនទឹកប្រាក់សរុប",
+      "amountByType": "ចំនួនទឹកប្រាក់តាមប្រភេទប្រាក់កក់"
+    }
+  },
+  "refunds": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "ការសងប្រាក់វិញ",
+    "subtitle": "ទិន្នន័យការសងប្រាក់វិញផ្ទាល់ពី Hotel Management API។",
+    "actions": {
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "retry": "ព្យាយាមម្តងទៀត",
+      "analytics": "ស្ថិតិ",
+      "view": "មើលការសងប្រាក់វិញ",
+      "back": "ត្រឡប់ទៅការសងប្រាក់វិញ"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "pageAmount": "ចំនួនទឹកប្រាក់ក្នុងទំព័រ",
+      "completed": "បានបញ្ចប់ក្នុងទំព័រនេះ",
+      "pending": "កំពុងរង់ចាំក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកការសងប្រាក់ ភ្ញៀវ ការទូទាត់ ឬលេខយោង..."
+    },
+    "filters": {
+      "allStatuses": "ស្ថានភាពទាំងអស់",
+      "allReasons": "មូលហេតុទាំងអស់"
+    },
+    "status": {
+      "pending": "កំពុងរង់ចាំ",
+      "approved": "បានអនុម័ត",
+      "processing": "កំពុងដំណើរការ",
+      "completed": "បានបញ្ចប់",
+      "rejected": "បានបដិសេធ",
+      "cancelled": "បានបោះបង់",
+      "unknown": "មិនស្គាល់"
+    },
+    "reasons": {
+      "cancellation": "ការបោះបង់",
+      "overpayment": "ទូទាត់លើស",
+      "serviceIssue": "បញ្ហាសេវាកម្ម",
+      "duplicatePayment": "ការទូទាត់ស្ទួន",
+      "depositReturn": "សងប្រាក់កក់វិញ",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "fields": {
+      "refund": "ការសងប្រាក់វិញ",
+      "guestPayment": "ភ្ញៀវ / ការទូទាត់",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "reason": "មូលហេតុ",
+      "method": "វិធីសងប្រាក់",
+      "reference": "លេខយោង",
+      "status": "ស្ថានភាព",
+      "requestedAt": "ពេលស្នើសុំ",
+      "processedAt": "ពេលដំណើរការ",
+      "actions": "សកម្មភាព",
+      "transaction": "ប្រតិបត្តិការ",
+      "payment": "ការទូទាត់",
+      "invoice": "វិក្កយបត្រ",
+      "reservation": "ការកក់",
+      "guestName": "ឈ្មោះភ្ញៀវ",
+      "guestId": "លេខសម្គាល់ភ្ញៀវ",
+      "created": "បានបង្កើត",
+      "updated": "បានកែប្រែ",
+      "notes": "កំណត់ចំណាំ"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យការសងប្រាក់វិញ...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មានការសងប្រាក់វិញ...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញការសងប្រាក់វិញ",
+      "emptyDescription": "មិនមានទិន្នន័យការសងប្រាក់វិញដែលត្រូវនឹងតម្រងបច្ចុប្បន្នទេ។"
+    },
+    "errors": {
+      "title": "មិនអាចទាញយកការសងប្រាក់វិញបាន",
+      "loadList": "មិនអាចទាញយកបញ្ជីការសងប្រាក់វិញពី API បានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតការសងប្រាក់វិញបានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិការសងប្រាក់វិញបានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ការសងប្រាក់វិញ។"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "unknownGuest": "មិនស្គាល់ភ្ញៀវ",
+      "noNotes": "គ្មានកំណត់ចំណាំ។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / ការសងប្រាក់វិញ",
+      "refund": "ការសងប្រាក់វិញ",
+      "refundInfo": "ព័ត៌មានការសងប្រាក់វិញ",
+      "references": "លេខយោង",
+      "guest": "ភ្ញៀវ",
+      "timeline": "ពេលវេលា",
+      "audit": "ប្រវត្តិកំណត់ត្រា"
+    },
+    "analytics": {
+      "title": "ស្ថិតិការសងប្រាក់វិញ",
+      "subtitle": "គណនាពីទិន្នន័យការសងប្រាក់វិញផ្ទាល់ដែល API បានផ្តល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក",
+      "totalAmount": "ចំនួនទឹកប្រាក់សរុប",
+      "amountByReason": "ចំនួនទឹកប្រាក់តាមមូលហេតុ"
+    }
+  },
+  "taxes": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "ពន្ធ",
+    "subtitle": "គ្រប់គ្រងទិន្នន័យពន្ធផ្ទាល់ពី Hotel Management API។",
+    "actions": {
+      "create": "បង្កើតពន្ធ",
+      "save": "រក្សាទុក",
+      "saving": "កំពុងរក្សាទុក...",
+      "update": "កែប្រែពន្ធ",
+      "cancel": "បោះបង់",
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "analytics": "ស្ថិតិ",
+      "view": "មើល",
+      "edit": "កែប្រែ",
+      "delete": "លុប",
+      "activate": "បើកដំណើរការ",
+      "deactivate": "បិទដំណើរការ",
+      "restore": "ស្ដារឡើងវិញ",
+      "back": "ត្រឡប់ទៅពន្ធ"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "averageRate": "អត្រាមធ្យម",
+      "active": "សកម្មក្នុងទំព័រនេះ",
+      "inactive": "អសកម្មក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកឈ្មោះពន្ធ កូដ ឬប្រភេទ..."
+    },
+    "filters": {
+      "allTypes": "ប្រភេទពន្ធទាំងអស់",
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "status": {
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម",
+      "deleted": "បានលុប"
+    },
+    "types": {
+      "vat": "អាករលើតម្លៃបន្ថែម (VAT)",
+      "gst": "ពន្ធលើទំនិញ និងសេវាកម្ម (GST)",
+      "serviceTax": "ពន្ធសេវាកម្ម",
+      "cityTax": "ពន្ធក្រុង",
+      "tourismTax": "ពន្ធទេសចរណ៍",
+      "occupancyTax": "ពន្ធស្នាក់នៅ",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "appliesTo": {
+      "all": "ទាំងអស់",
+      "room": "បន្ទប់",
+      "restaurant": "ភោជនីយដ្ឋាន",
+      "service": "សេវាកម្ម",
+      "laundry": "បោកគក់",
+      "transportation": "ដឹកជញ្ជូន",
+      "invoice": "វិក្កយបត្រ"
+    },
+    "fields": {
+      "tax": "ពន្ធ",
+      "name": "ឈ្មោះ",
+      "code": "កូដ",
+      "type": "ប្រភេទ",
+      "rate": "អត្រា",
+      "percentage": "ជាភាគរយ",
+      "inclusive": "រួមបញ្ចូលក្នុងតម្លៃ",
+      "active": "សកម្ម",
+      "appliesTo": "អនុវត្តលើ",
+      "status": "ស្ថានភាព",
+      "effectiveFrom": "មានប្រសិទ្ធភាពចាប់ពី",
+      "effectiveTo": "មានប្រសិទ្ធភាពដល់",
+      "actions": "សកម្មភាព",
+      "description": "ការពិពណ៌នា"
+    },
+    "form": {
+      "title": "ទម្រង់ពន្ធ",
+      "subtitle": "បញ្ចូលច្បាប់ពន្ធ និងរយៈពេលមានប្រសិទ្ធភាព។"
+    },
+    "create": {
+      "title": "បង្កើតពន្ធ",
+      "subtitle": "បង្កើតការកំណត់ពន្ធថ្មី។"
+    },
+    "edit": {
+      "title": "កែប្រែពន្ធ",
+      "subtitle": "កែប្រែការកំណត់ពន្ធដែលបានជ្រើស។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / ពន្ធ",
+      "taxInfo": "ព័ត៌មានពន្ធ",
+      "effectivePeriod": "រយៈពេលមានប្រសិទ្ធភាព"
+    },
+    "analytics": {
+      "title": "ស្ថិតិពន្ធ",
+      "subtitle": "សង្ខេបពីទិន្នន័យពន្ធផ្ទាល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក",
+      "averageRate": "អត្រាមធ្យម"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យពន្ធ...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មានពន្ធ...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញពន្ធ",
+      "emptyDescription": "មិនមានកំណត់ត្រាពន្ធដែលត្រូវនឹងតម្រងទេ។"
+    },
+    "errors": {
+      "title": "មានបញ្ហាពន្ធ",
+      "loadList": "មិនអាចទាញយកបញ្ជីពន្ធបានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតពន្ធបានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិបានទេ។",
+      "create": "មិនអាចបង្កើតពន្ធបានទេ។",
+      "update": "មិនអាចកែប្រែពន្ធបានទេ។",
+      "delete": "មិនអាចលុបពន្ធបានទេ។",
+      "toggleActive": "មិនអាចប្តូរស្ថានភាពសកម្មបានទេ។",
+      "restore": "មិនអាចស្ដារពន្ធឡើងវិញបានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ពន្ធ។"
+    },
+    "validation": {
+      "reviewFields": "សូមពិនិត្យវាលដែលត្រូវបំពេញ។",
+      "rate": "អត្រាត្រូវតែស្មើ ឬធំជាង 0 ហើយភាគរយមិនអាចលើស 100 បានទេ។",
+      "dateRange": "ថ្ងៃបញ្ចប់ត្រូវនៅក្រោយថ្ងៃចាប់ផ្តើម។"
+    },
+    "delete": {
+      "confirm": "តើអ្នកចង់លុបពន្ធ \"{{name}}\" មែនទេ?"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "yes": "បាទ/ចាស",
+      "no": "ទេ",
+      "noDescription": "គ្មានការពិពណ៌នា។"
+    }
+  },
+  "discounts": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "ការបញ្ចុះតម្លៃ",
+    "subtitle": "គ្រប់គ្រងទិន្នន័យការបញ្ចុះតម្លៃផ្ទាល់ពី Hotel Management API។",
+    "actions": {
+      "create": "បង្កើតការបញ្ចុះតម្លៃ",
+      "save": "រក្សាទុក",
+      "saving": "កំពុងរក្សាទុក...",
+      "update": "កែប្រែការបញ្ចុះតម្លៃ",
+      "cancel": "បោះបង់",
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "analytics": "ស្ថិតិ",
+      "view": "មើល",
+      "edit": "កែប្រែ",
+      "delete": "លុប",
+      "activate": "បើកដំណើរការ",
+      "deactivate": "បិទដំណើរការ",
+      "restore": "ស្ដារឡើងវិញ",
+      "back": "ត្រឡប់ទៅការបញ្ចុះតម្លៃ"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "averageValue": "តម្លៃមធ្យម",
+      "active": "សកម្មក្នុងទំព័រនេះ",
+      "inactive": "អសកម្មក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកឈ្មោះ កូដ ឬប្រភេទការបញ្ចុះតម្លៃ..."
+    },
+    "filters": {
+      "allTypes": "ប្រភេទទាំងអស់",
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "status": {
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម",
+      "deleted": "បានលុប"
+    },
+    "types": {
+      "percentage": "បញ្ចុះតាមភាគរយ",
+      "fixedAmount": "បញ្ចុះជាចំនួនទឹកប្រាក់",
+      "promoCode": "កូដប្រូម៉ូសិន",
+      "seasonal": "តាមរដូវកាល",
+      "loyalty": "អតិថិជនស្មោះត្រង់",
+      "corporate": "ក្រុមហ៊ុន",
+      "manual": "កំណត់ដោយដៃ",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "appliesTo": {
+      "all": "ទាំងអស់",
+      "room": "បន្ទប់",
+      "restaurant": "ភោជនីយដ្ឋាន",
+      "service": "សេវាកម្ម",
+      "laundry": "បោកគក់",
+      "transportation": "ដឹកជញ្ជូន",
+      "invoice": "វិក្កយបត្រ"
+    },
+    "fields": {
+      "discount": "ការបញ្ចុះតម្លៃ",
+      "name": "ឈ្មោះ",
+      "code": "កូដ",
+      "type": "ប្រភេទ",
+      "value": "តម្លៃ",
+      "percentage": "ជាភាគរយ",
+      "active": "សកម្ម",
+      "appliesTo": "អនុវត្តលើ",
+      "usage": "ការប្រើប្រាស់",
+      "usageLimit": "ចំនួនប្រើប្រាស់អតិបរមា",
+      "usedCount": "ចំនួនបានប្រើ",
+      "minimumAmount": "ចំនួនទឹកប្រាក់អប្បបរមា",
+      "maximumDiscountAmount": "ចំនួនបញ្ចុះអតិបរមា",
+      "status": "ស្ថានភាព",
+      "validFrom": "មានសុពលភាពចាប់ពី",
+      "validTo": "មានសុពលភាពដល់",
+      "actions": "សកម្មភាព",
+      "description": "ការពិពណ៌នា"
+    },
+    "form": {
+      "title": "ទម្រង់ការបញ្ចុះតម្លៃ",
+      "subtitle": "បញ្ចូលលក្ខខណ្ឌ និងរយៈពេលសុពលភាព។"
+    },
+    "create": {
+      "title": "បង្កើតការបញ្ចុះតម្លៃ",
+      "subtitle": "បង្កើតការកំណត់ការបញ្ចុះតម្លៃថ្មី។"
+    },
+    "edit": {
+      "title": "កែប្រែការបញ្ចុះតម្លៃ",
+      "subtitle": "កែប្រែការកំណត់ការបញ្ចុះតម្លៃដែលបានជ្រើស។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / ការបញ្ចុះតម្លៃ",
+      "discountInfo": "ព័ត៌មានការបញ្ចុះតម្លៃ",
+      "rules": "លក្ខខណ្ឌការបញ្ចុះតម្លៃ",
+      "validity": "រយៈពេលសុពលភាព",
+      "usage": "ការប្រើប្រាស់"
+    },
+    "analytics": {
+      "title": "ស្ថិតិការបញ្ចុះតម្លៃ",
+      "subtitle": "សង្ខេបពីទិន្នន័យការបញ្ចុះតម្លៃផ្ទាល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យ...",
+      "loadingDetail": "កំពុងទាញយកព័ត៌មាន...",
+      "loadingAnalytics": "កំពុងទាញយកស្ថិតិ...",
+      "emptyTitle": "រកមិនឃើញការបញ្ចុះតម្លៃ",
+      "emptyDescription": "មិនមានកំណត់ត្រាដែលត្រូវនឹងតម្រងទេ។"
+    },
+    "errors": {
+      "title": "មានបញ្ហាការបញ្ចុះតម្លៃ",
+      "loadList": "មិនអាចទាញយកបញ្ជីបានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតបានទេ។",
+      "loadAnalytics": "មិនអាចទាញយកស្ថិតិបានទេ។",
+      "create": "មិនអាចបង្កើតបានទេ។",
+      "update": "មិនអាចកែប្រែបានទេ។",
+      "delete": "មិនអាចលុបបានទេ។",
+      "toggleActive": "មិនអាចប្តូរស្ថានភាពសកម្មបានទេ។",
+      "restore": "មិនអាចស្ដារឡើងវិញបានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់ការបញ្ចុះតម្លៃ។"
+    },
+    "validation": {
+      "reviewFields": "សូមពិនិត្យវាលដែលត្រូវបំពេញ។",
+      "value": "តម្លៃត្រូវធំជាង 0 ហើយភាគរយមិនអាចលើស 100 បានទេ។",
+      "dateRange": "ថ្ងៃបញ្ចប់ត្រូវនៅក្រោយថ្ងៃចាប់ផ្តើម។"
+    },
+    "delete": {
+      "confirm": "តើអ្នកចង់លុបការបញ្ចុះតម្លៃ \"{{name}}\" មែនទេ?"
+    },
+    "pagination": {
+      "rows": "ជួរ",
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "noDescription": "គ្មានការពិពណ៌នា។"
+    }
+  },
+  "utilityBilling": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "dashboard": {
+      "title": "វិក្កយបត្រប្រើប្រាស់សេវា",
+      "subtitle": "គ្រប់គ្រងសេវាប្រើប្រាស់ អត្រា ម៉ែត្រ ការអានម៉ែត្រ និងទិន្នន័យវិក្កយបត្រ។",
+      "utilities": "សេវាប្រើប្រាស់",
+      "rates": "អត្រាសេវា",
+      "meters": "ម៉ែត្រសេវា",
+      "readingsLoaded": "ការអានម៉ែត្រដែលបានទាញយក",
+      "totalUsage": "ការប្រើប្រាស់សរុប",
+      "totalAmount": "ចំនួនទឹកប្រាក់សរុប"
+    },
+    "pages": {
+      "utilities": "សេវាប្រើប្រាស់",
+      "rates": "អត្រាសេវា",
+      "meters": "ម៉ែត្រសេវា",
+      "readings": "ការអានម៉ែត្រ"
+    },
+    "detail": {
+      "utility": "ព័ត៌មានសេវាប្រើប្រាស់",
+      "rate": "ព័ត៌មានអត្រាសេវា",
+      "meter": "ព័ត៌មានម៉ែត្រ",
+      "reading": "ព័ត៌មានការអានម៉ែត្រ"
+    },
+    "analytics": {
+      "title": "ស្ថិតិវិក្កយបត្រសេវា",
+      "subtitle": "គណនាពីទិន្នន័យការអានម៉ែត្រផ្ទាល់។",
+      "readingsLoaded": "ការអានម៉ែត្រដែលបានទាញយក",
+      "totalUsage": "ការប្រើប្រាស់សរុប",
+      "totalAmount": "ចំនួនទឹកប្រាក់សរុប",
+      "averageUsage": "ការប្រើប្រាស់មធ្យម"
+    },
+    "actions": {
+      "create": "បង្កើត",
+      "edit": "កែប្រែ",
+      "update": "ធ្វើបច្ចុប្បន្នភាព",
+      "save": "រក្សាទុក",
+      "cancel": "បោះបង់",
+      "back": "ត្រឡប់ក្រោយ",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "analytics": "ស្ថិតិ"
+    },
+    "fields": {
+      "name": "ឈ្មោះ",
+      "code": "កូដ",
+      "type": "ប្រភេទ",
+      "unit": "ឯកតា",
+      "status": "ស្ថានភាព",
+      "description": "ការពិពណ៌នា",
+      "utility": "សេវាប្រើប្រាស់",
+      "utilityId": "លេខសម្គាល់សេវា",
+      "ratePerUnit": "អត្រាក្នុងមួយឯកតា",
+      "currency": "រូបិយប័ណ្ណ",
+      "effectiveFrom": "មានប្រសិទ្ធភាពចាប់ពី",
+      "effectiveTo": "មានប្រសិទ្ធភាពដល់",
+      "meterId": "លេខសម្គាល់ម៉ែត្រ",
+      "meterNumber": "លេខម៉ែត្រ",
+      "room": "បន្ទប់",
+      "roomId": "លេខសម្គាល់បន្ទប់",
+      "location": "ទីតាំង",
+      "initialReading": "ការអានដំបូង",
+      "currentReading": "ការអានបច្ចុប្បន្ន",
+      "previousReading": "ការអានមុន",
+      "installedAt": "ថ្ងៃដំឡើង",
+      "usage": "ការប្រើប្រាស់",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "readingDate": "ថ្ងៃអានម៉ែត្រ",
+      "notes": "កំណត់ចំណាំ",
+      "actions": "សកម្មភាព"
+    },
+    "status": {
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម",
+      "deleted": "បានលុប"
+    },
+    "utilityTypes": {
+      "electricity": "អគ្គិសនី",
+      "water": "ទឹក",
+      "gas": "ឧស្ម័ន",
+      "internet": "អ៊ីនធឺណិត",
+      "other": "ផ្សេងៗ",
+      "unknown": "មិនស្គាល់"
+    },
+    "search": {
+      "placeholder": "ស្វែងរក..."
+    },
+    "states": {
+      "loading": "កំពុងទាញយកទិន្នន័យផ្ទាល់...",
+      "empty": "មិនមានកំណត់ត្រា។"
+    },
+    "errors": {
+      "load": "មិនអាចទាញយកទិន្នន័យពី API បានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតបានទេ។"
+    },
+    "delete": {
+      "confirm": "តើអ្នកចង់លុបកំណត់ត្រានេះមែនទេ?"
+    },
+    "pagination": {
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    }
+  },
+  "utilityRates": {
+    "section": "ហិរញ្ញវត្ថុ",
+    "title": "អត្រាសេវាប្រើប្រាស់",
+    "subtitle": "គ្រប់គ្រងតម្លៃសេវាប្រើប្រាស់ និងរយៈពេលអត្រាមានប្រសិទ្ធភាព។",
+    "actions": {
+      "create": "បង្កើតអត្រាសេវា",
+      "save": "រក្សាទុក",
+      "saving": "កំពុងរក្សាទុក...",
+      "update": "កែប្រែអត្រាសេវា",
+      "cancel": "បោះបង់",
+      "back": "ត្រឡប់ទៅអត្រាសេវា",
+      "refresh": "ផ្ទុកឡើងវិញ",
+      "search": "ស្វែងរក",
+      "clear": "សម្អាត",
+      "analytics": "ស្ថិតិ",
+      "edit": "កែប្រែ",
+      "delete": "លុប",
+      "activate": "បើកដំណើរការ",
+      "deactivate": "បិទដំណើរការ",
+      "restore": "ស្ដារឡើងវិញ"
+    },
+    "summary": {
+      "totalRecords": "កំណត់ត្រាសរុប",
+      "averageRate": "អត្រាមធ្យម",
+      "active": "សកម្មក្នុងទំព័រនេះ",
+      "inactive": "អសកម្មក្នុងទំព័រនេះ"
+    },
+    "search": {
+      "placeholder": "ស្វែងរកសេវា ឈ្មោះអត្រា ឬកូដ..."
+    },
+    "filters": {
+      "allTypes": "ប្រភេទសេវាទាំងអស់",
+      "allStatuses": "ស្ថានភាពទាំងអស់"
+    },
+    "status": {
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម",
+      "deleted": "បានលុប"
+    },
+    "types": {
+      "electricity": "អគ្គិសនី",
+      "water": "ទឹក",
+      "gas": "ឧស្ម័ន",
+      "internet": "អ៊ីនធឺណិត",
+      "other": "ផ្សេងៗ"
+    },
+    "fields": {
+      "utility": "សេវាប្រើប្រាស់",
+      "utilityId": "លេខសម្គាល់សេវា",
+      "name": "ឈ្មោះអត្រា",
+      "code": "កូដ",
+      "type": "ប្រភេទសេវា",
+      "ratePerUnit": "អត្រាក្នុងមួយឯកតា",
+      "unit": "ឯកតា",
+      "currency": "រូបិយប័ណ្ណ",
+      "minimumCharge": "ថ្លៃអប្បបរមា",
+      "fixedCharge": "ថ្លៃថេរ",
+      "effectiveFrom": "មានប្រសិទ្ធភាពចាប់ពី",
+      "effectiveTo": "មានប្រសិទ្ធភាពដល់",
+      "active": "សកម្ម",
+      "status": "ស្ថានភាព",
+      "notes": "កំណត់ចំណាំ",
+      "actions": "សកម្មភាព"
+    },
+    "form": {
+      "title": "ទម្រង់អត្រាសេវា",
+      "subtitle": "កំណត់អត្រា ឯកតា រូបិយប័ណ្ណ និងរយៈពេលមានប្រសិទ្ធភាព។"
+    },
+    "create": {
+      "title": "បង្កើតអត្រាសេវា",
+      "subtitle": "បង្កើតច្បាប់តម្លៃសេវាប្រើប្រាស់ថ្មី។"
+    },
+    "edit": {
+      "title": "កែប្រែអត្រាសេវា",
+      "subtitle": "កែប្រែច្បាប់តម្លៃសេវាដែលបានជ្រើស។"
+    },
+    "detail": {
+      "section": "ហិរញ្ញវត្ថុ / អត្រាសេវា",
+      "rateInfo": "ព័ត៌មានអត្រា",
+      "effectivePeriod": "រយៈពេលមានប្រសិទ្ធភាព"
+    },
+    "analytics": {
+      "title": "ស្ថិតិអត្រាសេវា",
+      "subtitle": "គណនាពីទិន្នន័យអត្រាសេវាផ្ទាល់។",
+      "recordsLoaded": "កំណត់ត្រាដែលបានទាញយក",
+      "averageRate": "អត្រាមធ្យម",
+      "maxRate": "អត្រាខ្ពស់បំផុត"
+    },
+    "states": {
+      "loading": "កំពុងទាញយកអត្រាសេវា...",
+      "empty": "មិនមានអត្រាសេវា។"
+    },
+    "errors": {
+      "loadList": "មិនអាចទាញយកអត្រាសេវាបានទេ។",
+      "loadDetail": "មិនអាចទាញយកព័ត៌មានលម្អិតបានទេ។",
+      "create": "មិនអាចបង្កើតអត្រាសេវាបានទេ។",
+      "update": "មិនអាចកែប្រែអត្រាសេវាបានទេ។",
+      "delete": "មិនអាចលុបអត្រាសេវាបានទេ។",
+      "toggleActive": "មិនអាចប្តូរស្ថានភាពសកម្មបានទេ។",
+      "restore": "មិនអាចស្ដារអត្រាសេវាបានទេ។",
+      "action": "មិនអាចបំពេញសកម្មភាពនេះបានទេ។",
+      "missingId": "មិនមានលេខសម្គាល់អត្រាសេវា។"
+    },
+    "validation": {
+      "reviewFields": "សូមពិនិត្យវាលដែលត្រូវបំពេញ។",
+      "rate": "អត្រាត្រូវស្មើ ឬធំជាង 0។",
+      "dateRange": "ថ្ងៃបញ្ចប់ត្រូវនៅក្រោយថ្ងៃចាប់ផ្តើម។"
+    },
+    "delete": {
+      "confirm": "តើអ្នកចង់លុបអត្រាសេវា \"{{name}}\" មែនទេ?"
+    },
+    "pagination": {
+      "previous": "មុន",
+      "next": "បន្ទាប់"
+    },
+    "common": {
+      "noNotes": "គ្មានកំណត់ចំណាំ។"
+    }
+  },
+  "utilityMeters": {
+    "title": "ម៉ែត្រសេវាប្រើប្រាស់",
+    "create": "បង្កើតម៉ែត្រ",
+    "edit": "កែប្រែម៉ែត្រ",
+    "analytics": "ស្ថិតិម៉ែត្រសេវា",
+    "active": "សកម្ម",
+    "inactive": "អសកម្ម",
+    "deleted": "បានលុប"
+  },
+  "meterReadings": {
+    "title": "ការអានម៉ែត្រ",
+    "create": "កត់ត្រាការអាន",
+    "edit": "កែប្រែការអាន",
+    "analytics": "ស្ថិតិការអានម៉ែត្រ",
+    "recorded": "បានកត់ត្រា",
+    "deleted": "បានលុប"
+  },
+  "reports": {
+    "title": "របាយការណ៍",
+    "analytics": "វិភាគ",
+    "run": "ដំណើរការរបាយការណ៍",
+    "history": "ប្រវត្តិរបាយការណ៍",
+    "download": "ទាញយក",
+    "completed": "បានបញ្ចប់",
+    "failed": "បរាជ័យ"
+  },
+  "auditLogs": {
+    "title": "កំណត់ហេតុសវនកម្ម",
+    "liveData": "ទិន្នន័យផ្ទាល់",
+    "search": "ស្វែងរកកំណត់ហេតុសវនកម្ម",
+    "success": "ជោគជ័យ",
+    "failed": "បរាជ័យ",
+    "exportCsv": "នាំចេញ CSV ទំព័រនេះ"
+  },
+  "permissions": {
+    "availablePermissions": "សិទ្ធិដែលមាន",
+    "create": "បង្កើតសិទ្ធិ",
+    "createDescription": "បន្ថែមសិទ្ធិថ្មីដែលអាចផ្តល់ទៅតួនាទី។",
+    "createFailed": "មិនអាចបង្កើតសិទ្ធិបានទេ។",
+    "createSuccess": "បានបង្កើតសិទ្ធិដោយជោគជ័យ។",
+    "currentGroups": "ក្រុមបច្ចុប្បន្ន",
+    "currentPage": "ទំព័របច្ចុប្បន្ន",
+    "deleteAssignedError": "សិទ្ធិនេះកំពុងត្រូវបានប្រើ ហើយមិនអាចលុបបានទេ។",
+    "deleteAssignedHint": "សូមដកសិទ្ធិនេះចេញពីតួនាទីជាមុនសិន។",
+    "deleteConfirm": "តើអ្នកចង់លុបសិទ្ធិនេះឬ?",
+    "deleteFailed": "មិនអាចលុបសិទ្ធិបានទេ។",
+    "deleteSuccess": "បានលុបសិទ្ធិដោយជោគជ័យ។",
+    "description": "ការពិពណ៌នា",
+    "edit": "កែប្រែសិទ្ធិ",
+    "editDescription": "កែប្រែឈ្មោះ ក្រុម និងការពិពណ៌នាសិទ្ធិ។",
+    "formDescription": "ព័ត៌មានលម្អិតសិទ្ធិ",
+    "formTitle": "ទម្រង់សិទ្ធិ",
+    "groupsOnPage": "ក្រុមនៅលើទំព័រនេះ",
+    "loadFailed": "មិនអាចផ្ទុកសិទ្ធិបានទេ។",
+    "loadOneFailed": "មិនអាចផ្ទុកព័ត៌មានសិទ្ធិបានទេ។",
+    "loadedRecords": "ទិន្នន័យបានផ្ទុក",
+    "loading": "កំពុងផ្ទុកសិទ្ធិ...",
+    "loadingOne": "កំពុងផ្ទុកសិទ្ធិ...",
+    "missingId": "ខ្វះលេខសម្គាល់សិទ្ធិ។",
+    "name": "ឈ្មោះ",
+    "nameHelp": "ប្រើគន្លឹះច្បាស់លាស់ ដូចជា reservations.view។",
+    "noResults": "រកមិនឃើញសិទ្ធិទេ។",
+    "role": "តួនាទី",
+    "roles": "តួនាទី",
+    "searchPlaceholder": "ស្វែងរកសិទ្ធិ...",
+    "section": "រដ្ឋបាល",
+    "title": "សិទ្ធិ",
+    "totalPermissions": "សិទ្ធិសរុប",
+    "updateFailed": "មិនអាចធ្វើបច្ចុប្បន្នភាពសិទ្ធិបានទេ។",
+    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពសិទ្ធិដោយជោគជ័យ។",
+    "usedBy": "ប្រើដោយ"
   }
 }

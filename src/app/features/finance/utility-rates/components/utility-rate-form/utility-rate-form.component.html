@@ -1,0 +1,271 @@
+<form
+  class="form-card"
+  (ngSubmit)="submit()"
+>
+
+  <div class="form-heading">
+
+    <div class="form-icon">
+      <svg lucideBadgeDollarSign
+        [size]="22"
+        [strokeWidth]="2"
+      ></svg>
+    </div>
+
+    <div>
+      <h2>
+        {{ 'utilityRates.form.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'utilityRates.form.subtitle' | translate }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (
+    touched() &&
+    isInvalid()
+  ) {
+    <div class="validation-alert">
+      {{ 'utilityRates.validation.reviewFields' | translate }}
+    </div>
+  }
+
+
+  <div class="form-grid">
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.utilityId' | translate }} *
+      </span>
+
+      <input
+        type="text"
+        name="utilityId"
+        [ngModel]="utilityId()"
+        (ngModelChange)="utilityId.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.name' | translate }}
+      </span>
+
+      <input
+        type="text"
+        name="name"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.code' | translate }}
+      </span>
+
+      <input
+        type="text"
+        name="code"
+        [ngModel]="code()"
+        (ngModelChange)="code.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.ratePerUnit' | translate }} *
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.0001"
+        name="ratePerUnit"
+        [ngModel]="ratePerUnit()"
+        (ngModelChange)="ratePerUnit.set($event)"
+      />
+
+      @if (
+        touched() &&
+        rateInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'utilityRates.validation.rate' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.unit' | translate }}
+      </span>
+
+      <input
+        type="text"
+        name="unit"
+        [ngModel]="unit()"
+        (ngModelChange)="unit.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.currency' | translate }}
+      </span>
+
+      <input
+        type="text"
+        name="currency"
+        maxlength="10"
+        [ngModel]="currency()"
+        (ngModelChange)="currency.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.minimumCharge' | translate }}
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="minimumCharge"
+        [ngModel]="minimumCharge()"
+        (ngModelChange)="minimumCharge.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.fixedCharge' | translate }}
+      </span>
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        name="fixedCharge"
+        [ngModel]="fixedCharge()"
+        (ngModelChange)="fixedCharge.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.effectiveFrom' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="effectiveFrom"
+        [ngModel]="effectiveFrom()"
+        (ngModelChange)="effectiveFrom.set($event)"
+      />
+    </label>
+
+
+    <label class="field">
+      <span>
+        {{ 'utilityRates.fields.effectiveTo' | translate }}
+      </span>
+
+      <input
+        type="datetime-local"
+        name="effectiveTo"
+        [ngModel]="effectiveTo()"
+        (ngModelChange)="effectiveTo.set($event)"
+      />
+
+      @if (
+        touched() &&
+        dateRangeInvalid()
+      ) {
+        <small class="field-error">
+          {{ 'utilityRates.validation.dateRange' | translate }}
+        </small>
+      }
+    </label>
+
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="isActive"
+        [ngModel]="isActive()"
+        (ngModelChange)="isActive.set($event)"
+      />
+
+      <span>
+        {{ 'utilityRates.fields.active' | translate }}
+      </span>
+    </label>
+
+
+    <label class="field field-full">
+      <span>
+        {{ 'utilityRates.fields.notes' | translate }}
+      </span>
+
+      <textarea
+        rows="5"
+        name="notes"
+        [ngModel]="notes()"
+        (ngModelChange)="notes.set($event)"
+      ></textarea>
+    </label>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="secondary-button"
+      [disabled]="submitting()"
+      (click)="cancel()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'utilityRates.actions.cancel' | translate }}
+    </button>
+
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="submitting()"
+    >
+      <svg lucideSave
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{
+        submitting()
+          ? ('utilityRates.actions.saving' | translate)
+          : (submitLabelKey() | translate)
+      }}
+    </button>
+
+  </div>
+
+</form>

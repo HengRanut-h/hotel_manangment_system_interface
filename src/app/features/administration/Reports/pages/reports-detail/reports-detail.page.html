@@ -1,0 +1,188 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/analytics/reports"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    Back to Reports
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      Loading report...
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="error">
+      Unable to load report.
+    </div>
+
+  } @else if (
+    item();
+    as report
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading">
+
+        <div class="heading-icon">
+          <svg lucideChartNoAxesCombined
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <p class="eyebrow">
+            Analytics / Reports
+          </p>
+
+          <h1>
+            {{ report.name }}
+          </h1>
+
+          <p class="subtitle">
+            {{ report.code || 'Report' }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <app-report-category-badge
+          [category]="report.category"
+        />
+
+
+        <a
+          class="primary"
+          [routerLink]="[
+            '/app/analytics/reports',
+            report.id,
+            'run'
+          ]"
+        >
+          <svg lucidePlay
+            [size]="17"
+            [strokeWidth]="2"
+          ></svg>
+
+          Run Report
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+      <article class="card">
+
+        <h2>
+          Description
+        </h2>
+
+        <p>
+          {{ report.description || 'No description.' }}
+        </p>
+      </article>
+
+
+      <article class="card">
+
+        <h2>
+          Capabilities
+        </h2>
+
+        <dl>
+
+          <div>
+            <dt>
+              <svg lucideCalendarDays
+                [size]="16"
+                [strokeWidth]="2"
+              ></svg>
+              Date Range
+            </dt>
+
+            <dd>
+              {{
+                report.supportsDateRange === false
+                  ? 'No'
+                  : 'Yes'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              <svg lucideBuilding2
+                [size]="16"
+                [strokeWidth]="2"
+              ></svg>
+              Hotel Filter
+            </dt>
+
+            <dd>
+              {{
+                report.supportsHotelFilter
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              Branch Filter
+            </dt>
+
+            <dd>
+              {{
+                report.supportsBranchFilter
+                  ? 'Yes'
+                  : 'No'
+              }}
+            </dd>
+          </div>
+
+
+          <div>
+            <dt>
+              <svg lucideFileDown
+                [size]="16"
+                [strokeWidth]="2"
+              ></svg>
+              Default Format
+            </dt>
+
+            <dd>
+              {{ report.defaultFormat || 'Pdf' }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

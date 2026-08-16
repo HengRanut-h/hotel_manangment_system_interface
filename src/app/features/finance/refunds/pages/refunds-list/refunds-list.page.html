@@ -1,0 +1,653 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <div class="heading-group">
+
+      <div>
+
+        <p class="eyebrow">
+          {{ 'refunds.section' | translate }}
+        </p>
+
+        <h1>
+          {{ 'refunds.title' | translate }}
+        </h1>
+
+        <p class="subtitle">
+          {{ 'refunds.subtitle' | translate }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="loading()"
+        (click)="loadRefunds()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+          [class.spin]="loading()"
+        ></svg>
+
+        {{ 'refunds.actions.refresh' | translate }}
+      </button>
+
+
+      <a
+        class="secondary-button"
+        routerLink="/app/finance/refunds/analytics"
+      >
+        <svg lucideBarChart3
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'refunds.actions.analytics' | translate }}
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-grid">
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--purple">
+        <svg lucideRotateCcw
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+
+        <span>
+          {{ 'refunds.summary.totalRecords' | translate }}
+        </span>
+
+        <strong>
+          {{ totalCount() }}
+        </strong>
+
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--green">
+        <svg lucideCircleDollarSign
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+
+        <span>
+          {{ 'refunds.summary.pageAmount' | translate }}
+        </span>
+
+        <strong>
+          {{
+            pageAmount() |
+            number:'1.2-2'
+          }}
+        </strong>
+
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--blue">
+        <svg lucideCircleCheck
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+
+        <span>
+          {{ 'refunds.summary.completed' | translate }}
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--amber">
+        <svg lucideClock3
+          [size]="20"
+          [strokeWidth]="2"
+        ></svg>
+      </div>
+
+      <div>
+
+        <span>
+          {{ 'refunds.summary.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="filters-card">
+
+    <div class="search-box">
+
+      <svg lucideSearch
+        class="search-icon"
+        [size]="18"
+        [strokeWidth]="2"
+      ></svg>
+
+      <input
+        type="search"
+        [placeholder]="'refunds.search.placeholder' | translate"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+        (keyup.enter)="searchRefunds()"
+      />
+
+      @if (
+        search()
+      ) {
+
+        <button
+          type="button"
+          class="clear-search"
+          (click)="search.set(''); searchRefunds()"
+        >
+          <svg lucideX
+            [size]="16"
+            [strokeWidth]="2"
+          ></svg>
+        </button>
+
+      }
+
+    </div>
+
+
+    <select
+      [ngModel]="status()"
+      (ngModelChange)="status.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'refunds.filters.allStatuses' | translate }}
+      </option>
+
+      <option value="Pending">
+        {{ 'refunds.status.pending' | translate }}
+      </option>
+
+      <option value="Approved">
+        {{ 'refunds.status.approved' | translate }}
+      </option>
+
+      <option value="Processing">
+        {{ 'refunds.status.processing' | translate }}
+      </option>
+
+      <option value="Completed">
+        {{ 'refunds.status.completed' | translate }}
+      </option>
+
+      <option value="Rejected">
+        {{ 'refunds.status.rejected' | translate }}
+      </option>
+
+      <option value="Cancelled">
+        {{ 'refunds.status.cancelled' | translate }}
+      </option>
+    </select>
+
+
+    <select
+      [ngModel]="reason()"
+      (ngModelChange)="reason.set($event); filterChanged()"
+    >
+      <option value="">
+        {{ 'refunds.filters.allReasons' | translate }}
+      </option>
+
+      <option value="Cancellation">
+        {{ 'refunds.reasons.cancellation' | translate }}
+      </option>
+
+      <option value="Overpayment">
+        {{ 'refunds.reasons.overpayment' | translate }}
+      </option>
+
+      <option value="ServiceIssue">
+        {{ 'refunds.reasons.serviceIssue' | translate }}
+      </option>
+
+      <option value="DuplicatePayment">
+        {{ 'refunds.reasons.duplicatePayment' | translate }}
+      </option>
+
+      <option value="DepositReturn">
+        {{ 'refunds.reasons.depositReturn' | translate }}
+      </option>
+
+      <option value="Other">
+        {{ 'refunds.reasons.other' | translate }}
+      </option>
+    </select>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="searchRefunds()"
+    >
+      <svg lucideSearch
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'refunds.actions.search' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="clearFilters()"
+    >
+      <svg lucideX
+        [size]="17"
+        [strokeWidth]="2"
+      ></svg>
+
+      {{ 'refunds.actions.clear' | translate }}
+    </button>
+
+  </div>
+
+
+  @if (
+    errorKey()
+  ) {
+
+    <div class="alert error-alert">
+
+      <div>
+
+        <strong>
+          {{ 'refunds.errors.title' | translate }}
+        </strong>
+
+        <p>
+          {{ errorKey()! | translate }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="loadRefunds()"
+      >
+        <svg lucideRefreshCw
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'refunds.actions.retry' | translate }}
+      </button>
+
+    </div>
+
+  }
+
+
+  <div class="table-card">
+
+    @if (
+      loading()
+    ) {
+
+      <div class="state">
+
+        <div class="spinner"></div>
+
+        <p>
+          {{ 'refunds.states.loading' | translate }}
+        </p>
+
+      </div>
+
+    } @else if (
+      refunds().length ===
+      0
+    ) {
+
+      <div class="state">
+
+        <div class="empty-icon">
+          <svg lucideRotateCcw
+            [size]="28"
+            [strokeWidth]="1.8"
+          ></svg>
+        </div>
+
+        <h3>
+          {{ 'refunds.states.emptyTitle' | translate }}
+        </h3>
+
+        <p>
+          {{ 'refunds.states.emptyDescription' | translate }}
+        </p>
+
+      </div>
+
+    } @else {
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('refundNumber')"
+                >
+                  {{ 'refunds.fields.refund' | translate }}
+                  {{ sortIndicator('refundNumber') }}
+                </button>
+              </th>
+
+
+              <th>
+                {{ 'refunds.fields.guestPayment' | translate }}
+              </th>
+
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('amount')"
+                >
+                  {{ 'refunds.fields.amount' | translate }}
+                  {{ sortIndicator('amount') }}
+                </button>
+              </th>
+
+
+              <th>
+                {{ 'refunds.fields.reason' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'refunds.fields.reference' | translate }}
+              </th>
+
+
+              <th>
+                {{ 'refunds.fields.status' | translate }}
+              </th>
+
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-button"
+                  (click)="sort('requestedAtUtc')"
+                >
+                  {{ 'refunds.fields.requestedAt' | translate }}
+                  {{ sortIndicator('requestedAtUtc') }}
+                </button>
+              </th>
+
+
+              <th>
+                {{ 'refunds.fields.actions' | translate }}
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              refund of refunds();
+              track refund.id
+            ) {
+
+              <tr>
+
+                <td>
+
+                  <a
+                    class="refund-number"
+                    [routerLink]="[
+                      '/app/finance/refunds',
+                      refund.id
+                    ]"
+                  >
+                    {{
+                      refund.refundNumber ||
+                      refund.id
+                    }}
+                  </a>
+
+                </td>
+
+
+                <td>
+
+                  <div class="primary-cell">
+                    {{
+                      refund.guestName ||
+                      ('refunds.common.unknownGuest' | translate)
+                    }}
+                  </div>
+
+                  <div class="secondary-cell">
+                    {{
+                      refund.paymentNumber ||
+                      refund.invoiceNumber ||
+                      refund.reservationNumber ||
+                      '—'
+                    }}
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <strong>
+                    {{
+                      refund.amount |
+                      number:'1.2-2'
+                    }}
+                    {{ refund.currency || '' }}
+                  </strong>
+
+                </td>
+
+
+                <td>
+
+                  <app-refund-reason-badge
+                    [reason]="refund.reason"
+                  />
+
+                </td>
+
+
+                <td>
+                  {{ refund.referenceNumber || '—' }}
+                </td>
+
+
+                <td>
+
+                  <app-refund-status-badge
+                    [status]="refund.status"
+                  />
+
+                </td>
+
+
+                <td>
+                  {{
+                    refund.requestedAtUtc
+                      ? (
+                          refund.requestedAtUtc |
+                          date:'medium'
+                        )
+                      : '—'
+                  }}
+                </td>
+
+
+                <td>
+
+                  <a
+                    class="icon-button"
+                    [routerLink]="[
+                      '/app/finance/refunds',
+                      refund.id
+                    ]"
+                    [attr.aria-label]="'refunds.actions.view' | translate"
+                    [title]="'refunds.actions.view' | translate"
+                  >
+                    <svg lucideEye
+                      [size]="17"
+                      [strokeWidth]="2"
+                    ></svg>
+                  </a>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <div class="pagination">
+
+      <div class="page-size">
+
+        <span>
+          {{ 'refunds.pagination.rows' | translate }}
+        </span>
+
+        <select
+          [ngModel]="pageSize()"
+          (ngModelChange)="changePageSize($event)"
+        >
+          <option [ngValue]="10">
+            10
+          </option>
+
+          <option [ngValue]="20">
+            20
+          </option>
+
+          <option [ngValue]="50">
+            50
+          </option>
+
+          <option [ngValue]="100">
+            100
+          </option>
+        </select>
+
+      </div>
+
+
+      <div class="pagination-controls">
+
+        <button
+          type="button"
+          [disabled]="pageNumber() <= 1"
+          (click)="changePage(pageNumber() - 1)"
+        >
+          {{ 'refunds.pagination.previous' | translate }}
+        </button>
+
+
+        @for (
+          page of pageNumbers();
+          track page
+        ) {
+
+          <button
+            type="button"
+            [class.active]="page === pageNumber()"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+
+        }
+
+
+        <button
+          type="button"
+          [disabled]="pageNumber() >= totalPages()"
+          (click)="changePage(pageNumber() + 1)"
+        >
+          {{ 'refunds.pagination.next' | translate }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

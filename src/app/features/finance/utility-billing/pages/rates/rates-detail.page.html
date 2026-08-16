@@ -1,0 +1,88 @@
+<section class="page">
+
+  <a
+    class="back-link"
+    routerLink="/app/finance/utility-billing/rates"
+  >
+    <svg lucideArrowLeft
+      [size]="17"
+      [strokeWidth]="2"
+    ></svg>
+
+    {{ 'utilityBilling.actions.back' | translate }}
+  </a>
+
+
+  @if (
+    loading()
+  ) {
+    <div class="state">
+      {{ 'utilityBilling.states.loading' | translate }}
+    </div>
+
+  } @else if (
+    error()
+  ) {
+    <div class="alert">
+      {{ 'utilityBilling.errors.loadDetail' | translate }}
+    </div>
+
+  } @else if (
+    item();
+    as data
+  ) {
+
+    <div class="page-header">
+
+      <div class="heading-group">
+
+        <div class="heading-icon">
+          <svg lucideBadgeDollarSign
+            [size]="24"
+            [strokeWidth]="2"
+          ></svg>
+        </div>
+
+        <div>
+          <h1>
+            {{ 'utilityBilling.detail.rate' | translate }}
+          </h1>
+        </div>
+
+      </div>
+
+
+      <a
+        class="secondary-button"
+        [routerLink]="[
+          '/app/finance/utility-billing/rates',
+          data.id,
+          'edit'
+        ]"
+      >
+        <svg lucidePencil
+          [size]="17"
+          [strokeWidth]="2"
+        ></svg>
+
+        {{ 'utilityBilling.actions.edit' | translate }}
+      </a>
+
+    </div>
+
+
+    <article class="form-card">
+
+<dl>
+  <div><dt>{{ 'utilityBilling.fields.utility' | translate }}</dt><dd>{{ data.utilityName || data.utilityId }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.ratePerUnit' | translate }}</dt><dd>{{ data.ratePerUnit | number:'1.2-4' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.currency' | translate }}</dt><dd>{{ data.currency || '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.effectiveFrom' | translate }}</dt><dd>{{ data.effectiveFromUtc ? (data.effectiveFromUtc | date:'medium') : '—' }}</dd></div>
+  <div><dt>{{ 'utilityBilling.fields.effectiveTo' | translate }}</dt><dd>{{ data.effectiveToUtc ? (data.effectiveToUtc | date:'medium') : '—' }}</dd></div>
+</dl>
+
+    </article>
+
+  }
+
+</section>

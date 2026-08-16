@@ -1,0 +1,65 @@
+<section class="summary-grid">
+  <article class="summary-card">
+    <span class="summary-icon summary-icon--purple">
+      <svg lucideBed></svg>
+    </span>
+
+    <div>
+      <span>{{ 'availability.roomsFound' | translate }}</span>
+      <strong>{{ summary().roomsFound }}</strong>
+    </div>
+  </article>
+
+  <article class="summary-card">
+    <span class="summary-icon summary-icon--blue">
+      <svg lucideLayers></svg>
+    </span>
+
+    <div>
+      <span>{{ 'availability.roomTypes' | translate }}</span>
+      <strong>{{ summary().roomTypes }}</strong>
+    </div>
+  </article>
+
+  <article class="summary-card">
+    <span class="summary-icon summary-icon--green">
+      <svg lucideTrendingDown></svg>
+    </span>
+
+    <div>
+      <span>{{ 'availability.lowestBaseRate' | translate }}</span>
+
+      <strong>
+        @if (summary().lowestBaseRate !== null) {
+          {{
+            summary().lowestBaseRate
+              | number:'1.2-2'
+          }}
+        } @else {
+          —
+        }
+      </strong>
+    </div>
+  </article>
+
+  <article class="summary-card">
+    <span class="summary-icon summary-icon--amber">
+      <svg lucideTrendingUp></svg>
+    </span>
+
+    <div>
+      <span>{{ 'availability.averageBaseRate' | translate }}</span>
+
+      <strong>
+        @if (summary().averageBaseRate !== null) {
+          {{
+            summary().averageBaseRate
+              | number:'1.2-2'
+          }}
+        } @else {
+          —
+        }
+      </strong>
+    </div>
+  </article>
+</section>

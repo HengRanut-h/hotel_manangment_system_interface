@@ -1,0 +1,197 @@
+:host {
+  display: block;
+}
+
+.reservation-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-section {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.form-section > header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.section-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eef4ff;
+  color: #3538cd;
+}
+
+.section-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+header h2 {
+  margin: 1px 0 4px;
+  color: #101828;
+  font-size: 16px;
+}
+
+header p {
+  margin: 0;
+  color: #667085;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field--wide {
+  grid-column: 1 / -1;
+}
+
+.field > span {
+  color: #344054;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.field b {
+  color: #d92d20;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 11px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  outline: 0;
+  background: #fff;
+  color: #101828;
+  font: inherit;
+  font-size: 11px;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #84adff;
+  box-shadow:
+    0 0 0 3px rgba(53, 56, 205, .08);
+}
+
+.field select:disabled {
+  background: #f9fafb;
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.estimate-card {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  background: #fcfcfd;
+}
+
+.estimate-card > div {
+  display: grid;
+  gap: 4px;
+}
+
+.estimate-card span {
+  color: #667085;
+  font-size: 10px;
+}
+
+.estimate-card strong {
+  color: #101828;
+  font-size: 20px;
+}
+
+.estimate-card p {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: #667085;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.validation-error {
+  padding: 11px 13px;
+  border: 1px solid #fecdca;
+  border-radius: 10px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 11px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primary-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 15px;
+  border: 1px solid #3538cd;
+  border-radius: 10px;
+  background: #3538cd;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.primary-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 680px) {
+  .fields,
+  .estimate-card {
+    grid-template-columns: 1fr;
+  }
+
+  .field--wide,
+  .estimate-card p {
+    grid-column: auto;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+}

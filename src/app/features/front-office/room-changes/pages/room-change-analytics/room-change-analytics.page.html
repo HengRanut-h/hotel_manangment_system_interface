@@ -1,0 +1,210 @@
+<section class="page">
+
+  <div class="page-header">
+
+    <a
+      routerLink="/app/front-office/room-changes"
+      class="back-link"
+    >
+      <svg lucideArrowLeft></svg>
+
+      <span>
+        {{ 'roomChanges.actions.back' | translate }}
+      </span>
+    </a>
+
+
+    <h1>
+      {{ 'roomChanges.analyticsPage.title' | translate }}
+    </h1>
+
+
+    <p class="subtitle">
+      {{ 'roomChanges.analyticsPage.subtitle' | translate }}
+    </p>
+
+  </div>
+
+
+  @if (
+    loading()
+  ) {
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <p>
+        {{ 'roomChanges.states.loadingAnalytics' | translate }}
+      </p>
+
+    </div>
+
+  } @else if (
+    errorKey()
+  ) {
+
+    <div class="alert error-alert">
+      <svg lucideRefreshCw></svg>
+
+      {{ errorKey()! | translate }}
+    </div>
+
+  } @else {
+
+    <div class="grid">
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucideBarChart3></svg>
+
+        <span>
+          {{ 'roomChanges.analyticsPage.totalChanges' | translate }}
+        </span>
+
+        <strong>
+          {{ totalChanges() }}
+        </strong>
+      </article>
+
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucideCheckCircle2></svg>
+
+        <span>
+          {{ 'roomChanges.status.completed' | translate }}
+        </span>
+
+        <strong>
+          {{ completedCount() }}
+        </strong>
+      </article>
+
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucideCircleCheck></svg>
+
+        <span>
+          {{ 'roomChanges.status.approved' | translate }}
+        </span>
+
+        <strong>
+          {{ approvedCount() }}
+        </strong>
+      </article>
+
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucideClock></svg>
+
+        <span>
+          {{ 'roomChanges.status.pending' | translate }}
+        </span>
+
+        <strong>
+          {{ pendingCount() }}
+        </strong>
+      </article>
+
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucideCircleX></svg>
+
+        <span>
+          {{ 'roomChanges.status.rejected' | translate }}
+        </span>
+
+        <strong>
+          {{ rejectedCount() }}
+        </strong>
+      </article>
+
+
+      <article class="card">
+        <svg
+          class="card-icon"
+          lucidePercent></svg>
+
+        <span>
+          {{ 'roomChanges.analyticsPage.completionRate' | translate }}
+        </span>
+
+        <strong>
+          {{
+            completionRate() |
+            number:'1.0-1'
+          }}%
+        </strong>
+      </article>
+
+    </div>
+
+
+    <div class="methods-card">
+
+      <h2>
+        {{ 'roomChanges.analyticsPage.statusBreakdown' | translate }}
+      </h2>
+
+
+      <div class="method-grid">
+
+        <div>
+          <span>
+            {{ 'roomChanges.status.completed' | translate }}
+          </span>
+
+          <strong>
+            {{ completedCount() }}
+          </strong>
+        </div>
+
+
+        <div>
+          <span>
+            {{ 'roomChanges.status.approved' | translate }}
+          </span>
+
+          <strong>
+            {{ approvedCount() }}
+          </strong>
+        </div>
+
+
+        <div>
+          <span>
+            {{ 'roomChanges.status.pending' | translate }}
+          </span>
+
+          <strong>
+            {{ pendingCount() }}
+          </strong>
+        </div>
+
+
+        <div>
+          <span>
+            {{ 'roomChanges.status.cancelled' | translate }}
+          </span>
+
+          <strong>
+            {{ cancelledCount() }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

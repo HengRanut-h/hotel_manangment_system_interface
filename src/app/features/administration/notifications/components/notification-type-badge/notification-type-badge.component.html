@@ -1,0 +1,80 @@
+<span class="badge">
+
+  @switch (
+    type()
+  ) {
+
+    @case ('Info') {
+      <svg lucideInfo
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Success') {
+      <svg lucideCircleCheck
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Warning') {
+      <svg lucideTriangleAlert
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Error') {
+      <svg lucideCircleX
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Reservation') {
+      <svg lucideCalendarCheck
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Payment') {
+      <svg lucideCreditCard
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Housekeeping') {
+      <svg lucideSparkles
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('Maintenance') {
+      <svg lucideWrench
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case ('System') {
+      <svg lucideBell
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ type() || 'Other' }}
+</span>

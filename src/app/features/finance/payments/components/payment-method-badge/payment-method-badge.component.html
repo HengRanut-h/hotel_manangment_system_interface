@@ -1,0 +1,64 @@
+<span
+  class="badge"
+  [class]="className()"
+>
+  @switch (
+    method()
+  ) {
+
+    @case (
+      'Cash'
+    ) {
+      <svg lucideBanknote
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Card'
+    ) {
+      <svg lucideCreditCard
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'BankTransfer'
+    ) {
+      <svg lucideLandmark
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'MobilePayment'
+    ) {
+      <svg lucideSmartphone
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @case (
+      'Online'
+    ) {
+      <svg lucideGlobe2
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+    @default {
+      <svg lucideCircleHelp
+        [size]="14"
+        [strokeWidth]="2"
+      ></svg>
+    }
+
+  }
+
+  {{ translationKey() | translate }}
+</span>

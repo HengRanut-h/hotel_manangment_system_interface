@@ -1,0 +1,64 @@
+<div class="page">
+  <a
+    class="back-link"
+    [routerLink]="[
+      '/app/front-office/guests',
+      guest()?.id || ''
+    ]">
+    <svg lucideArrowLeft></svg>
+    {{ 'guests.backToGuest' | translate }}
+  </a>
+
+  <header class="page-heading">
+    <span class="title-icon">
+      <svg lucidePencil></svg>
+    </span>
+
+    <div>
+      <span class="eyebrow">
+        {{ 'guests.section' | translate }}
+      </span>
+
+      <h1>
+        {{ 'guests.editTitle' | translate }}
+      </h1>
+
+      <p>
+        {{ 'guests.editDescription' | translate }}
+      </p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <section class="loading-card">
+      <app-spin
+        size="large"
+        [label]="'guests.loadingGuest' | translate" />
+    </section>
+
+  } @else if (errorMessage()) {
+    <section class="state state--error">
+      <strong>
+        {{ 'guests.detailLoadFailed' | translate }}
+      </strong>
+
+      <span>
+        {{ errorMessage() }}
+      </span>
+
+      <button
+        type="button"
+        (click)="load()">
+        <svg lucideRefreshCw></svg>
+        {{ 'guests.tryAgain' | translate }}
+      </button>
+    </section>
+
+  } @else if (guest(); as item) {
+    <app-guest-form
+      [initialValue]="item"
+      [submitting]="submitting()"
+      submitLabelKey="guests.updateGuest"
+      (submitted)="update($event)" />
+  }
+</div>

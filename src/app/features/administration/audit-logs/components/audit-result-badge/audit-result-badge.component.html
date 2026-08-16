@@ -1,0 +1,34 @@
+@if (
+  succeeded() === true
+) {
+  <span class="badge success">
+    <svg lucideCircleCheck
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Success
+  </span>
+
+} @else if (
+  succeeded() === false
+) {
+  <span class="badge failed">
+    <svg lucideCircleX
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Failed
+  </span>
+
+} @else {
+  <span class="badge unknown">
+    <svg lucideCircleHelp
+      [size]="14"
+      [strokeWidth]="2"
+    ></svg>
+
+    Unknown
+  </span>
+}
