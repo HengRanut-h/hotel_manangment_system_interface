@@ -72,13 +72,11 @@ export class LoginPage {
     );
 
   readonly email =
-    signal(
-      'admin@hotel.local'
-    );
+    signal('');
 
   readonly password =
     signal(
-      'ChangeMe123!'
+      ''
     );
 
   readonly show =
