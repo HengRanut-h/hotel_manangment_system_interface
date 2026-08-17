@@ -1,20 +1,40 @@
 <div class="page">
 
+  <!-- ===================================================== -->
+  <!-- HEADER -->
+  <!-- ===================================================== -->
+
   <header class="page-heading">
 
     <div>
+
       <span class="eyebrow">
-        {{ 'reservations.section' | translate }}
+        {{
+          'reservations.section'
+            | translate
+        }}
       </span>
 
       <h1>
-        {{ 'reservations.title' | translate }}
+        {{
+          'reservations.title'
+            | translate
+        }}
       </h1>
 
       <p>
-        {{ 'reservations.description' | translate }}
+        {{
+          'reservations.description'
+            | translate
+        }}
       </p>
+
     </div>
+
+
+    <!-- =================================================== -->
+    <!-- ACTIONS -->
+    <!-- =================================================== -->
 
     <div class="page-actions">
 
@@ -27,10 +47,14 @@
         <svg lucideRefreshCw></svg>
 
         <span>
-          {{ 'reservations.refresh' | translate }}
+          {{
+            'reservations.refresh'
+              | translate
+          }}
         </span>
 
       </button>
+
 
       @if (
         auth.hasPermission(
@@ -45,7 +69,10 @@
           <svg lucidePlus></svg>
 
           <span>
-            {{ 'reservations.newReservation' | translate }}
+            {{
+              'reservations.newReservation'
+                | translate
+            }}
           </span>
 
         </a>
@@ -56,71 +83,139 @@
 
   </header>
 
+
+  <!-- ===================================================== -->
+  <!-- SUMMARY -->
+  <!-- ===================================================== -->
+
   <section class="summary-grid">
+
+
+    <!-- =================================================== -->
+    <!-- LOADED -->
+    <!-- =================================================== -->
 
     <article class="summary-card">
 
-      <span class="summary-icon summary-icon--purple">
+      <span
+        class="
+          summary-icon
+          summary-icon--purple
+        ">
+
         <svg lucideCalendar></svg>
+
       </span>
 
       <div>
+
         <span>
-          {{ 'reservations.loadedReservations' | translate }}
+          {{
+            'reservations.loadedReservations'
+              | translate
+          }}
         </span>
 
         <strong>
           {{ loadedCount() }}
         </strong>
+
       </div>
 
     </article>
 
+
+    <!-- =================================================== -->
+    <!-- CONFIRMED -->
+    <!-- =================================================== -->
+
     <article class="summary-card">
 
-      <span class="summary-icon summary-icon--blue">
+      <span
+        class="
+          summary-icon
+          summary-icon--blue
+        ">
+
         <svg lucideUserCheck></svg>
+
       </span>
 
       <div>
+
         <span>
-          {{ 'reservations.confirmedLoaded' | translate }}
+          {{
+            'reservations.confirmedLoaded'
+              | translate
+          }}
         </span>
 
         <strong>
           {{ confirmedCount() }}
         </strong>
+
       </div>
 
     </article>
 
+
+    <!-- =================================================== -->
+    <!-- CHECKED IN -->
+    <!-- =================================================== -->
+
     <article class="summary-card">
 
-      <span class="summary-icon summary-icon--green">
+      <span
+        class="
+          summary-icon
+          summary-icon--green
+        ">
+
         <svg lucideUserCheck></svg>
+
       </span>
 
       <div>
+
         <span>
-          {{ 'reservations.checkedInLoaded' | translate }}
+          {{
+            'reservations.checkedInLoaded'
+              | translate
+          }}
         </span>
 
         <strong>
           {{ checkedInCount() }}
         </strong>
+
       </div>
 
     </article>
 
+
+    <!-- =================================================== -->
+    <!-- VALUE -->
+    <!-- =================================================== -->
+
     <article class="summary-card">
 
-      <span class="summary-icon summary-icon--amber">
+      <span
+        class="
+          summary-icon
+          summary-icon--amber
+        ">
+
         <svg lucideDollarSign></svg>
+
       </span>
 
       <div>
+
         <span>
-          {{ 'reservations.loadedValue' | translate }}
+          {{
+            'reservations.loadedValue'
+              | translate
+          }}
         </span>
 
         <strong>
@@ -129,35 +224,61 @@
               | number:'1.2-2'
           }}
         </strong>
+
       </div>
 
     </article>
 
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- LIST -->
+  <!-- ===================================================== -->
+
   <section class="list-card">
+
+
+    <!-- =================================================== -->
+    <!-- LIST HEADER -->
+    <!-- =================================================== -->
 
     <header class="list-card__header">
 
       <div>
+
         <h2>
-          {{ 'reservations.reservationList' | translate }}
+          {{
+            'reservations.reservationList'
+              | translate
+          }}
         </h2>
 
         <p>
+
           @if (
-            backendTotalItems() !== null
+            backendTotalItems()
+            !==
+            null
           ) {
+
             {{
               'reservations.loadedOfTotal'
                 | translate:{
                     loaded:
                       loadedCount(),
+
                     total:
-                      (backendTotalItems() ?? 0)
+                      (
+                        backendTotalItems()
+                        ??
+                        0
+                      )
                   }
             }}
+
           } @else {
+
             {{
               'reservations.loadedCount'
                 | translate:{
@@ -165,13 +286,26 @@
                       loadedCount()
                   }
             }}
+
           }
+
         </p>
+
       </div>
 
     </header>
 
+
+    <!-- =================================================== -->
+    <!-- FILTERS -->
+    <!-- =================================================== -->
+
     <div class="filters">
+
+
+      <!-- ================================================= -->
+      <!-- SEARCH -->
+      <!-- ================================================= -->
 
       <div class="search-field">
 
@@ -181,31 +315,58 @@
           type="search"
           autocomplete="off"
           [value]="search()"
-          [placeholder]="'reservations.searchPlaceholder' | translate"
+          [placeholder]="
+            'reservations.searchPlaceholder'
+              | translate
+          "
           (input)="setSearch($event)" />
 
       </div>
+
+
+      <!-- ================================================= -->
+      <!-- STATUS -->
+      <!-- ================================================= -->
 
       <select
         [value]="statusFilter()"
         (change)="setStatus($event)">
 
         <option value="">
-          {{ 'reservations.allStatuses' | translate }}
+          {{
+            'reservations.allStatuses'
+              | translate
+          }}
         </option>
 
+
         @for (
-          status of statuses();
+          status
+          of statuses();
           track status
         ) {
-          <option [value]="status.toLowerCase()">
+
+          <option
+            [value]="
+              status.toLowerCase()
+            ">
+
             {{ status }}
+
           </option>
+
         }
 
       </select>
 
-      @if (hasFilters()) {
+
+      <!-- ================================================= -->
+      <!-- CLEAR -->
+      <!-- ================================================= -->
+
+      @if (
+        hasFilters()
+      ) {
 
         <button
           type="button"
@@ -215,7 +376,10 @@
           <svg lucideX></svg>
 
           <span>
-            {{ 'reservations.clearFilters' | translate }}
+            {{
+              'reservations.clearFilters'
+                | translate
+            }}
           </span>
 
         </button>
@@ -224,22 +388,44 @@
 
     </div>
 
-    @if (loading()) {
+
+    <!-- =================================================== -->
+    <!-- LOADING -->
+    <!-- =================================================== -->
+
+    @if (
+      loading()
+    ) {
 
       <div class="loading-state">
 
         <app-spin
           size="large"
-          [label]="'reservations.loading' | translate" />
+          [label]="
+            'reservations.loading'
+              | translate
+          " />
 
       </div>
 
-    } @else if (errorMessage()) {
+    }
+
+
+    <!-- =================================================== -->
+    <!-- ERROR -->
+    <!-- =================================================== -->
+
+    @else if (
+      errorMessage()
+    ) {
 
       <div class="state state--error">
 
         <strong>
-          {{ 'reservations.loadFailed' | translate }}
+          {{
+            'reservations.loadFailed'
+              | translate
+          }}
         </strong>
 
         <span>
@@ -252,14 +438,28 @@
 
           <svg lucideRefreshCw></svg>
 
-          {{ 'reservations.tryAgain' | translate }}
+          <span>
+            {{
+              'reservations.tryAgain'
+                | translate
+            }}
+          </span>
 
         </button>
 
       </div>
 
-    } @else if (
-      reservations().length === 0
+    }
+
+
+    <!-- =================================================== -->
+    <!-- EMPTY -->
+    <!-- =================================================== -->
+
+    @else if (
+      reservations().length
+      ===
+      0
     ) {
 
       <div class="state">
@@ -267,17 +467,32 @@
         <svg lucideCalendar></svg>
 
         <strong>
-          {{ 'reservations.emptyTitle' | translate }}
+          {{
+            'reservations.emptyTitle'
+              | translate
+          }}
         </strong>
 
         <span>
-          {{ 'reservations.emptyDescription' | translate }}
+          {{
+            'reservations.emptyDescription'
+              | translate
+          }}
         </span>
 
       </div>
 
-    } @else if (
-      filtered().length === 0
+    }
+
+
+    <!-- =================================================== -->
+    <!-- NO MATCH -->
+    <!-- =================================================== -->
+
+    @else if (
+      filtered().length
+      ===
+      0
     ) {
 
       <div class="state">
@@ -285,153 +500,476 @@
         <svg lucideSearch></svg>
 
         <strong>
-          {{ 'reservations.noMatches' | translate }}
+          {{
+            'reservations.noMatches'
+              | translate
+          }}
         </strong>
 
         <span>
-          {{ 'reservations.noMatchesDescription' | translate }}
+          {{
+            'reservations.noMatchesDescription'
+              | translate
+          }}
         </span>
 
       </div>
 
-    } @else {
+    }
+
+
+    <!-- =================================================== -->
+    <!-- TABLE -->
+    <!-- =================================================== -->
+
+    @else {
 
       <div class="table-wrap">
 
-        <table>
+        <table class="reservation-table">
+
+
+          <!-- ================================================= -->
+          <!-- HEAD -->
+          <!-- ================================================= -->
 
           <thead>
+
             <tr>
+
               <th>
-                {{ 'reservations.reservationNumber' | translate }}
+                {{
+                  'reservations.reservationNumber'
+                    | translate
+                }}
               </th>
 
               <th>
-                {{ 'reservations.guest' | translate }}
+                {{
+                  'reservations.guest'
+                    | translate
+                }}
+              </th>
+
+              <th
+                class="
+                  stay-column
+                  stay-column-header
+                ">
+
+                {{
+                  'reservations.stay'
+                    | translate
+                }}
+
               </th>
 
               <th>
-                {{ 'reservations.stay' | translate }}
+                {{
+                  'reservations.room'
+                    | translate
+                }}
               </th>
 
               <th>
-                {{ 'reservations.room' | translate }}
-              </th>
-
-              <th>
-                {{ 'reservations.guests' | translate }}
+                {{
+                  'reservations.guests'
+                    | translate
+                }}
               </th>
 
               <th class="money">
-                {{ 'reservations.totalAmount' | translate }}
+                {{
+                  'reservations.totalAmount'
+                    | translate
+                }}
               </th>
 
               <th>
-                {{ 'reservations.fields.status' | translate }}
+                {{
+                  'reservations.fields.status'
+                    | translate
+                }}
               </th>
 
               <th class="actions-column">
-                {{ 'reservations.actions' | translate }}
+                {{
+                  'reservations.actions'
+                    | translate
+                }}
               </th>
+
             </tr>
+
           </thead>
+
+
+          <!-- ================================================= -->
+          <!-- BODY -->
+          <!-- ================================================= -->
 
           <tbody>
 
             @for (
-              item of filtered();
+              item
+              of filtered();
               track item.id
             ) {
 
               <tr>
 
-                <td>
-                  <strong class="reservation-number">
-                    {{ item.reservationNumber || '—' }}
-                  </strong>
-                </td>
+
+                <!-- ============================================= -->
+                <!-- RESERVATION -->
+                <!-- ============================================= -->
 
                 <td>
-                  <span class="primary-text">
-                    {{ item.guestName || '—' }}
-                  </span>
-                </td>
 
-                <td>
-                  <div class="stay-cell">
-                    <strong>
-                      {{
-                        item.checkInDate
-                          | date:'mediumDate'
-                      }}
-                    </strong>
+                  <div class="reservation-cell">
 
-                    <span>
-                      →
-                      {{
-                        item.checkOutDate
-                          | date:'mediumDate'
-                      }}
+                    <span
+                      class="
+                        cell-icon
+                        cell-icon--reservation
+                      ">
+
+                      <svg lucideHash></svg>
+
                     </span>
+
+                    <div class="cell-info">
+
+                      <small>
+                        {{
+                          'reservations.reservation'
+                            | translate
+                        }}
+                      </small>
+
+                      <strong class="reservation-number">
+                        {{
+                          item.reservationNumber
+                          ||
+                          '—'
+                        }}
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- ============================================= -->
+                <!-- GUEST -->
+                <!-- ============================================= -->
+
+                <td>
+
+                  <div class="guest-cell">
+
+                    <span
+                      class="
+                        cell-icon
+                        cell-icon--guest
+                      ">
+
+                      <svg lucideUser></svg>
+
+                    </span>
+
+                    <div class="cell-info">
+
+                      <small>
+                        {{
+                          'reservations.guest'
+                            | translate
+                        }}
+                      </small>
+
+                      <strong>
+                        {{
+                          item.guestName
+                          ||
+                          '—'
+                        }}
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- ============================================= -->
+                <!-- STAY -->
+                <!-- ============================================= -->
+
+                <td class="stay-column">
+
+                  <div class="stay-cell">
+
+
+                    <!-- ========================================= -->
+                    <!-- CHECK IN -->
+                    <!-- ========================================= -->
+
+                    <div class="stay-item">
+
+                      <span
+                        class="
+                          stay-icon
+                          stay-icon--check-in
+                        ">
+
+                        <svg lucideCalendar></svg>
+
+                      </span>
+
+                      <div class="stay-info">
+
+                        <small>
+                          {{
+                            'reservations.checkIn'
+                              | translate
+                          }}
+                        </small>
+
+                        <strong>
+                          {{
+                            item.checkInDate
+                              | date:'dd MMM yyyy'
+                          }}
+                        </strong>
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- ========================================= -->
+                    <!-- CHECK OUT -->
+                    <!-- ========================================= -->
+
+                    <div class="stay-item">
+
+                      <span
+                        class="
+                          stay-icon
+                          stay-icon--check-out
+                        ">
+
+                        <svg lucideCalendar></svg>
+
+                      </span>
+
+                      <div class="stay-info">
+
+                        <small>
+                          {{
+                            'reservations.checkOut'
+                              | translate
+                          }}
+                        </small>
+
+                        <strong>
+                          {{
+                            item.checkOutDate
+                              | date:'dd MMM yyyy'
+                          }}
+                        </strong>
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- ========================================= -->
+                    <!-- NIGHTS -->
+                    <!-- ========================================= -->
+
+                    <div class="stay-nights">
+
+                      <span class="stay-night-icon">
+                        <svg lucideMoon></svg>
+                      </span>
+
+                      <strong>
+                        {{
+                          'reservations.nightsValue'
+                            | translate:{
+                                count:
+                                  item.nights
+                              }
+                        }}
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- ============================================= -->
+                <!-- ROOM -->
+                <!-- ============================================= -->
+
+                <td>
+
+                  <div class="room-cell">
+
+                    <span
+                      class="
+                        cell-icon
+                        cell-icon--room
+                      ">
+
+                      <svg lucideBed></svg>
+
+                    </span>
+
+                    <div class="cell-info">
+
+                      <small>
+                        {{
+                          'reservations.room'
+                            | translate
+                        }}
+                      </small>
+
+                      <strong>
+                        {{
+                          item.roomTypeName
+                          ||
+                          '—'
+                        }}
+                      </strong>
+
+                      <span>
+                        {{
+                          item.roomNumber
+                          ||
+                          (
+                            'reservations.unassigned'
+                              | translate
+                          )
+                        }}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- ============================================= -->
+                <!-- GUESTS -->
+                <!-- ============================================= -->
+
+                <td>
+
+                  <div class="guest-count">
+
+                    <span
+                      class="
+                        cell-icon
+                        cell-icon--guests
+                      ">
+
+                      <svg lucideUsers></svg>
+
+                    </span>
+
+                    <div>
+
+                      <strong>
+                        {{
+                          item.adults
+                          +
+                          item.children
+                        }}
+                      </strong>
+
+                      <small>
+                        {{
+                          'reservations.guests'
+                            | translate
+                        }}
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- ============================================= -->
+                <!-- AMOUNT -->
+                <!-- ============================================= -->
+
+                <td class="money">
+
+                  <div class="amount-cell">
 
                     <small>
                       {{
-                        'reservations.nightsValue'
-                          | translate:{
-                              count:
-                                item.nights
-                            }
+                        'reservations.totalAmount'
+                          | translate
                       }}
                     </small>
-                  </div>
-                </td>
 
-                <td>
-                  <div class="room-cell">
                     <strong>
-                      {{ item.roomTypeName || '—' }}
+                      {{
+                        item.totalAmount
+                          | number:'1.2-2'
+                      }}
                     </strong>
 
-                    <span>
-                      {{
-                        item.roomNumber
-                        ||
-                        ('reservations.unassigned' | translate)
-                      }}
-                    </span>
                   </div>
+
                 </td>
+
+
+                <!-- ============================================= -->
+                <!-- STATUS -->
+                <!-- ============================================= -->
 
                 <td>
-                  {{
-                    item.adults
-                    +
-                    item.children
-                  }}
-                </td>
 
-                <td class="money">
-                  {{
-                    item.totalAmount
-                      | number:'1.2-2'
-                  }}
-                </td>
-
-                <td>
                   <app-reservation-status-badge
                     [status]="item.status" />
+
                 </td>
+
+
+                <!-- ============================================= -->
+                <!-- ACTION -->
+                <!-- ============================================= -->
 
                 <td class="actions-column">
 
                   <a
-                    class="icon-action icon-action--view"
+                    class="
+                      icon-action
+                      icon-action--view
+                    "
                     [routerLink]="[
                       '/app/front-office/reservations',
                       item.id
                     ]"
-                    [title]="'reservations.view' | translate"
-                    [attr.aria-label]="'reservations.view' | translate">
+                    [title]="
+                      'reservations.view'
+                        | translate
+                    "
+                    [attr.aria-label]="
+                      'reservations.view'
+                        | translate
+                    ">
 
                     <svg lucideEye></svg>
 
@@ -451,16 +989,24 @@
 
     }
 
+
+    <!-- =================================================== -->
+    <!-- FOOTER -->
+    <!-- =================================================== -->
+
     <footer class="list-footer">
+
       {{
         'reservations.showingLoaded'
           | translate:{
               shown:
                 filtered().length,
+
               loaded:
                 loadedCount()
             }
       }}
+
     </footer>
 
   </section>

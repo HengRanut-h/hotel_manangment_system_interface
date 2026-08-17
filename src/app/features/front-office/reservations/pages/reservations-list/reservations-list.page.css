@@ -2,76 +2,166 @@
   display: block;
 }
 
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
 .page {
   display: grid;
+
   gap: 20px;
 }
 
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .page-heading {
   display: flex;
+
   align-items: flex-start;
   justify-content: space-between;
+
   gap: 18px;
 }
 
+
 .page-heading h1 {
   margin: 0;
-  color: #101828;
+
+  color:
+    #101828;
+
   font-size: 28px;
 }
 
+
 .page-heading p {
   max-width: 760px;
-  margin: 7px 0 0;
-  color: #667085;
+
+  margin:
+    7px
+    0
+    0;
+
+  color:
+    #667085;
+
   font-size: 13px;
+
   line-height: 1.6;
 }
 
+
 .eyebrow {
   display: block;
+
   margin-bottom: 6px;
-  color: #667085;
+
+  color:
+    #667085;
+
   font-size: 11px;
+
   font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+
+  letter-spacing:
+    .08em;
+
+  text-transform:
+    uppercase;
 }
+
+
+/* =========================================================
+   PAGE ACTIONS
+   ========================================================= */
 
 .page-actions {
   display: inline-flex;
+
   gap: 8px;
 }
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .primary-button,
 .secondary-button,
 .clear-button {
   min-height: 40px;
+
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 7px;
-  padding: 0 13px;
+
+  padding:
+    0
+    13px;
+
   border-radius: 10px;
+
   font: inherit;
+
   font-size: 11px;
+
   font-weight: 800;
+
   cursor: pointer;
+
   text-decoration: none;
 }
 
+
 .primary-button {
-  border: 1px solid #3538cd;
-  background: #3538cd;
-  color: #fff;
+  border:
+    1px solid
+    #003eb3;
+
+  background:
+    #003eb3;
+
+  color:
+    #ffffff;
 }
+
+
+.primary-button:hover {
+  border-color:
+    #002c8c;
+
+  background:
+    #002c8c;
+}
+
 
 .secondary-button,
 .clear-button {
-  border: 1px solid #d0d5dd;
-  background: #fff;
-  color: #344054;
+  border:
+    1px solid
+    #d0d5dd;
+
+  background:
+    #ffffff;
+
+  color:
+    #344054;
 }
+
+
+.secondary-button:hover:not(:disabled),
+.clear-button:hover {
+  background:
+    #f7f9fc;
+}
+
 
 .primary-button svg,
 .secondary-button svg,
@@ -80,368 +170,1190 @@
   height: 15px;
 }
 
+
 .secondary-button:disabled {
   opacity: .5;
+
   cursor: not-allowed;
 }
 
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
 .summary-grid {
   display: grid;
+
   grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
   gap: 14px;
 }
+
 
 .summary-card {
   min-height: 104px;
+
   display: flex;
+
   align-items: center;
+
   gap: 14px;
+
   padding: 18px;
-  border: 1px solid #e4e7ec;
+
+  border:
+    1px solid
+    #e4e7ec;
+
   border-radius: 15px;
-  background: #fff;
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+
+  background:
+    #ffffff;
 }
 
-.summary-card:hover {
-  transform: translateY(-3px);
-  border-color: #d0d5dd;
-  box-shadow:
-    0 8px 20px rgba(16, 24, 40, .06),
-    0 2px 6px rgba(16, 24, 40, .04);
-}
 
 .summary-icon {
   width: 52px;
   height: 52px;
-  flex: 0 0 52px;
+
+  flex:
+    0 0 52px;
+
   display: grid;
+
   place-items: center;
+
   border-radius: 13px;
 }
+
 
 .summary-icon svg {
   width: 21px;
   height: 21px;
 }
 
+
 .summary-icon--purple {
-  background: #f4ebff;
-  color: #7f56d9;
+  background:
+    #f4ebff;
+
+  color:
+    #7f56d9;
 }
+
 
 .summary-icon--blue {
-  background: #eff8ff;
-  color: #175cd3;
+  background:
+    #eff8ff;
+
+  color:
+    #175cd3;
 }
+
 
 .summary-icon--green {
-  background: #ecfdf3;
-  color: #039855;
+  background:
+    #ecfdf3;
+
+  color:
+    #039855;
 }
 
+
 .summary-icon--amber {
-  background: #fffaeb;
-  color: #b54708;
+  background:
+    #fffaeb;
+
+  color:
+    #b54708;
 }
+
+
+.summary-card > div {
+  min-width: 0;
+}
+
 
 .summary-card div > span {
   display: block;
+
   margin-bottom: 7px;
-  color: #667085;
+
+  color:
+    #667085;
+
   font-size: 10px;
 }
 
+
 .summary-card strong {
-  color: #101828;
+  color:
+    #101828;
+
   font-size: 23px;
 }
 
+
+/* =========================================================
+   LIST CARD
+   ========================================================= */
+
 .list-card {
   overflow: hidden;
-  border: 1px solid #e4e7ec;
+
+  border:
+    1px solid
+    #e4e7ec;
+
   border-radius: 16px;
-  background: #fff;
+
+  background:
+    #ffffff;
 }
 
+
 .list-card__header {
-  padding: 17px 18px;
-  border-bottom: 1px solid #eaecf0;
+  padding:
+    17px
+    18px;
+
+  border-bottom:
+    1px solid
+    #eaecf0;
 }
+
 
 .list-card__header h2 {
   margin: 0;
-  color: #101828;
+
+  color:
+    #101828;
+
   font-size: 16px;
 }
 
+
 .list-card__header p {
-  margin: 4px 0 0;
-  color: #667085;
+  margin:
+    4px
+    0
+    0;
+
+  color:
+    #667085;
+
   font-size: 10px;
 }
 
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
 .filters {
   display: grid;
+
   grid-template-columns:
-    minmax(260px, 1fr)
+    minmax(
+      260px,
+      1fr
+    )
     190px
     auto;
+
   gap: 10px;
-  padding: 14px 18px;
-  border-bottom: 1px solid #eaecf0;
-  background: #fcfcfd;
+
+  padding:
+    14px
+    18px;
+
+  border-bottom:
+    1px solid
+    #eaecf0;
+
+  background:
+    #fcfcfd;
 }
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
 .search-field {
   height: 42px;
+
   display: flex;
+
   align-items: center;
+
   gap: 8px;
-  padding: 0 11px;
-  border: 1px solid #d0d5dd;
+
+  padding:
+    0
+    11px;
+
+  border:
+    1px solid
+    #d0d5dd;
+
   border-radius: 10px;
-  background: #fff;
+
+  background:
+    #ffffff;
 }
+
+
+.search-field:focus-within {
+  border-color:
+    #84adff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      0,
+      62,
+      179,
+      .06
+    );
+}
+
 
 .search-field svg {
   width: 16px;
   height: 16px;
-  color: #98a2b3;
+
+  flex: 0 0 auto;
+
+  color:
+    #98a2b3;
 }
+
 
 .search-field input {
   min-width: 0;
+
   flex: 1;
+
   border: 0;
+
   outline: 0;
-  background: transparent;
+
+  background:
+    transparent;
+
+  color:
+    #344054;
+
   font: inherit;
+
   font-size: 11px;
 }
+
+
+/* =========================================================
+   FILTER SELECT
+   ========================================================= */
 
 .filters select {
   height: 42px;
-  padding: 0 11px;
-  border: 1px solid #d0d5dd;
+
+  padding:
+    0
+    11px;
+
+  border:
+    1px solid
+    #d0d5dd;
+
   border-radius: 10px;
-  background: #fff;
-  color: #344054;
+
+  outline: none;
+
+  background:
+    #ffffff;
+
+  color:
+    #344054;
+
   font: inherit;
+
   font-size: 11px;
 }
 
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
 .loading-state {
   min-height: 280px;
+
   display: grid;
+
   place-items: center;
 }
 
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
 .state {
   min-height: 260px;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   gap: 8px;
+
   padding: 24px;
+
   text-align: center;
 }
+
 
 .state > svg {
   width: 30px;
   height: 30px;
-  color: #667085;
+
+  color:
+    #667085;
 }
 
+
 .state strong {
-  color: #101828;
+  color:
+    #101828;
+
   font-size: 13px;
 }
 
+
 .state span {
   max-width: 460px;
-  color: #667085;
+
+  color:
+    #667085;
+
   font-size: 11px;
+
   line-height: 1.55;
 }
 
+
 .state--error {
-  background: #fffafa;
+  background:
+    #fffafa;
 }
 
+
 .state--error strong {
-  color: #b42318;
+  color:
+    #b42318;
 }
+
 
 .state button {
   min-height: 38px;
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 7px;
+
   margin-top: 4px;
-  padding: 0 12px;
-  border: 1px solid #d0d5dd;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px solid
+    #d0d5dd;
+
   border-radius: 9px;
-  background: #fff;
-  color: #344054;
+
+  background:
+    #ffffff;
+
+  color:
+    #344054;
+
   font: inherit;
+
   font-size: 11px;
+
   font-weight: 700;
+
   cursor: pointer;
 }
+
 
 .state button svg {
   width: 15px;
   height: 15px;
 }
 
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
 .table-wrap {
-  overflow-x: auto;
-}
-
-table {
   width: 100%;
-  border-collapse: collapse;
-  min-width: 1050px;
+
+  min-width: 0;
+
+  overflow-x: auto;
+
+  border-top:
+    1px solid
+    #edf0f4;
+
+  background:
+    #ffffff;
 }
 
-th,
-td {
-  padding: 13px 14px;
-  border-bottom: 1px solid #eaecf0;
-  text-align: left;
-  vertical-align: middle;
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.reservation-table {
+  width: 100%;
+
+  min-width: 1180px;
+
+  border-collapse:
+    collapse;
+
+  table-layout:
+    auto;
 }
 
-th {
-  background: #fcfcfd;
-  color: #667085;
-  font-size: 9px;
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.reservation-table thead {
+  background:
+    #fafbfc;
+}
+
+
+.reservation-table th {
+  height: 46px;
+
+  padding:
+    0
+    14px;
+
+  border-bottom:
+    1px solid
+    #e5e9ef;
+
+  color:
+    #667085;
+
+  font-size: 8px;
+
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
 
-td {
-  color: #475467;
-  font-size: 11px;
-}
+  letter-spacing:
+    .02em;
 
-tbody tr:hover {
-  background: #fcfcfd;
-}
+  text-align: left;
 
-.reservation-number,
-.primary-text,
-.stay-cell strong,
-.room-cell strong {
-  color: #101828;
-}
+  text-transform:
+    uppercase;
 
-.stay-cell,
-.room-cell {
-  display: grid;
-  gap: 3px;
-}
-
-.stay-cell span,
-.room-cell span,
-.stay-cell small {
-  color: #667085;
-  font-size: 10px;
-}
-
-.money {
-  text-align: right;
   white-space: nowrap;
 }
 
-.actions-column {
-  width: 70px;
-  text-align: right;
+
+/* =========================================================
+   TABLE ROW
+   ========================================================= */
+
+.reservation-table td {
+  padding:
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+
+  color:
+    #344054;
+
+  font-size: 9px;
+
+  vertical-align:
+    middle;
 }
 
-.icon-action {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
+
+.reservation-table tbody tr {
+  background:
+    #ffffff;
+
+  transition:
+    background-color
+    .15s ease;
+}
+
+
+.reservation-table tbody tr:hover {
+  background:
+    #fafbfc;
+}
+
+
+.reservation-table
+tbody
+tr:last-child
+td {
+  border-bottom: 0;
+}
+
+
+/* =========================================================
+   COMMON CELLS
+   ========================================================= */
+
+.reservation-cell,
+.guest-cell,
+.room-cell,
+.guest-count {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+/* =========================================================
+   COMMON ICON
+   ========================================================= */
+
+.cell-icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex:
+    0 0 auto;
+
+  border-radius: 8px;
+}
+
+
+.cell-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.cell-icon--reservation {
+  color:
+    #1677ff;
+
+  background:
+    #e6f4ff;
+}
+
+
+.cell-icon--guest {
+  color:
+    #722ed1;
+
+  background:
+    #f9f0ff;
+}
+
+
+.cell-icon--room {
+  color:
+    #08979c;
+
+  background:
+    #e6fffb;
+}
+
+
+.cell-icon--guests {
+  color:
+    #d46b08;
+
+  background:
+    #fff7e6;
+}
+
+
+/* =========================================================
+   CELL INFORMATION
+   ========================================================= */
+
+.cell-info {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.cell-info small {
+  color:
+    #98a2b3;
+
+  font-size: 7.3px;
+
+  font-weight: 600;
+}
+
+
+.cell-info strong {
+  overflow: hidden;
+
+  color:
+    #344054;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.cell-info > span {
+  overflow: hidden;
+
+  color:
+    #667085;
+
+  font-size: 7.8px;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   RESERVATION NUMBER
+   ========================================================= */
+
+.reservation-number {
+  color:
+    #101828 !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    800 !important;
+}
+
+
+/* =========================================================
+   STAY COLUMN
+   ========================================================= */
+
+.stay-column {
+  width: 360px;
+}
+
+
+.stay-column-header {
+  text-align:
+    center !important;
+}
+
+
+/* =========================================================
+   STAY CONTENT
+   ========================================================= */
+
+.stay-cell {
+  min-width: 340px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      100px,
+      1fr
+    )
+    minmax(
+      100px,
+      1fr
+    )
+    minmax(
+      90px,
+      auto
+    );
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   CHECK-IN / CHECK-OUT
+   ========================================================= */
+
+.stay-item {
+  min-width: 0;
+
+  display: flex;
+
   align-items: center;
   justify-content: center;
-  padding: 0;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  background: #fff;
-  color: #667085;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
+
+  gap: 8px;
 }
+
+
+.stay-icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex:
+    0 0 auto;
+
+  border-radius: 8px;
+}
+
+
+.stay-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.stay-icon--check-in {
+  color:
+    #1677ff;
+
+  background:
+    #e6f4ff;
+}
+
+
+.stay-icon--check-out {
+  color:
+    #722ed1;
+
+  background:
+    #f9f0ff;
+}
+
+
+/* =========================================================
+   STAY INFORMATION
+   ========================================================= */
+
+.stay-info {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.stay-info small {
+  color:
+    #98a2b3;
+
+  font-size: 7.5px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+.stay-info strong {
+  color:
+    #344054;
+
+  font-size: 8.6px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NIGHTS
+   ========================================================= */
+
+.stay-nights {
+  min-width: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    9px;
+
+  border:
+    1px solid
+    #ffe7ba;
+
+  border-radius: 9px;
+
+  background:
+    #fff7e6;
+
+  color:
+    #d46b08;
+}
+
+
+.stay-night-icon {
+  width: 23px;
+  height: 23px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex:
+    0 0 auto;
+
+  border-radius: 6px;
+
+  background:
+    #ffffff;
+}
+
+
+.stay-night-icon svg {
+  width: 11px;
+  height: 11px;
+}
+
+
+.stay-nights strong {
+  color:
+    #ad6800;
+
+  font-size: 7.8px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   GUEST COUNT
+   ========================================================= */
+
+.guest-count > div {
+  display: grid;
+
+  gap: 2px;
+}
+
+
+.guest-count strong {
+  color:
+    #101828;
+
+  font-size: 13px;
+
+  line-height: 1;
+}
+
+
+.guest-count small {
+  color:
+    #98a2b3;
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   MONEY
+   ========================================================= */
+
+.money {
+  text-align:
+    right !important;
+
+  white-space: nowrap;
+}
+
+
+.amount-cell {
+  display: grid;
+
+  justify-items: end;
+
+  gap: 3px;
+}
+
+
+.amount-cell small {
+  color:
+    #98a2b3;
+
+  font-size: 7px;
+}
+
+
+.amount-cell strong {
+  color:
+    #101828;
+
+  font-size: 10px;
+
+  font-weight: 750;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions-column {
+  width: 70px;
+
+  text-align:
+    center !important;
+}
+
+
+.icon-action {
+  width: 34px;
+  height: 34px;
+
+  display: inline-grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    1px solid;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color .15s ease,
+    background-color .15s ease,
+    border-color .15s ease,
+    transform .15s ease;
+}
+
 
 .icon-action svg {
-  width: 17px;
-  height: 17px;
-  stroke-width: 1.8;
+  width: 13px;
+  height: 13px;
 }
+
 
 .icon-action:hover {
-  transform: translateY(-1px);
-  background: #f9fafb;
-  border-color: #bfc5cd;
-  color: #344054;
+  transform:
+    translateY(-1px);
 }
 
+
+/* =========================================================
+   VIEW ACTION
+   ========================================================= */
+
+.icon-action--view {
+  color:
+    #475467;
+
+  border-color:
+    #dfe4eb;
+
+  background:
+    #ffffff;
+}
+
+
+.icon-action--view:hover {
+  color:
+    #ffffff;
+
+  border-color:
+    #003eb3;
+
+  background:
+    #003eb3;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
 .list-footer {
-  padding: 12px 18px;
-  background: #fcfcfd;
-  color: #667085;
+  padding:
+    12px
+    18px;
+
+  background:
+    #fcfcfd;
+
+  color:
+    #667085;
+
   font-size: 10px;
 }
 
-@media (max-width: 1000px) {
+
+/* =========================================================
+   RESPONSIVE - 1000
+   ========================================================= */
+
+@media (
+  max-width: 1000px
+) {
+
   .summary-grid {
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
   }
+
 
   .filters {
     grid-template-columns:
-      minmax(0, 1fr)
+      minmax(
+        0,
+        1fr
+      )
       180px;
   }
 
+
   .clear-button {
-    grid-column: 1 / -1;
+    grid-column:
+      1 / -1;
   }
+
 }
 
-@media (max-width: 680px) {
-  .page-heading {
-    flex-direction: column;
+
+/* =========================================================
+   RESPONSIVE - 900
+   ========================================================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .reservation-table th,
+  .reservation-table td {
+    padding:
+      12px;
   }
+
+
+  .stay-column {
+    width: 330px;
+  }
+
+
+  .stay-cell {
+    min-width: 310px;
+
+    gap: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 680
+   ========================================================= */
+
+@media (
+  max-width: 680px
+) {
+
+  .page-heading {
+    flex-direction:
+      column;
+  }
+
 
   .page-actions {
     width: 100%;
   }
 
+
   .page-actions > * {
     flex: 1;
   }
 
+
   .summary-grid,
   .filters {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
+
   .clear-button {
-    grid-column: auto;
+    grid-column:
+      auto;
   }
+
 }

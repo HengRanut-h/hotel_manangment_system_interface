@@ -24,7 +24,12 @@ import {
   LucideRefreshCw,
   LucideSearch,
   LucideUserCheck,
-  LucideX
+  LucideX,
+    LucideMoon,
+   LucideBed,
+  LucideHash,
+  LucideUser,
+  LucideUsers
 } from '@lucide/angular';
 
 import {
@@ -80,7 +85,12 @@ import {
     LucideRefreshCw,
     LucideSearch,
     LucideUserCheck,
-    LucideX
+    LucideX,
+    LucideMoon,
+     LucideBed,
+  LucideHash,
+  LucideUser,
+  LucideUsers
   ],
 
   templateUrl:
