@@ -2,290 +2,1076 @@
   display: block;
 }
 
-.page {
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.availability-page {
+  width: 100%;
+  min-width: 0;
+
   display: grid;
-  gap: 20px;
+
+  gap: 18px;
 }
 
-.page-heading h1 {
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-heading-row {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+
+.page-heading-row h1 {
   margin: 0;
-  color: #101828;
-  font-size: 28px;
+
+  color:
+    #101828;
+
+  font-size: 22px;
+
+  font-weight: 700;
 }
 
-.page-heading p {
-  margin: 7px 0 0;
+
+.page-heading-row p {
   max-width: 760px;
-  color: #667085;
-  font-size: 13px;
+
+  margin:
+    6px
+    0
+    0;
+
+  color:
+    #667085;
+
+  font-size: 9px;
+
   line-height: 1.6;
 }
 
+
 .eyebrow {
   display: block;
-  margin-bottom: 6px;
-  color: #667085;
-  font-size: 11px;
+
+  margin-bottom: 5px;
+
+  color:
+    #98a2b3;
+
+  font-size: 8px;
+
   font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
 }
 
-.loading-card {
-  min-height: 220px;
-  display: grid;
-  place-items: center;
-  padding: 22px;
-  border: 1px solid #e4e7ec;
-  border-radius: 16px;
-  background: #fff;
-}
 
-.state {
-  min-height: 240px;
-  display: flex;
-  flex-direction: column;
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.secondary-button {
+  min-height: 40px;
+
+  display: inline-flex;
+
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 24px;
-  border: 1px solid #e4e7ec;
-  border-radius: 16px;
-  background: #fff;
-  text-align: center;
-}
 
-.state > svg {
-  width: 32px;
-  height: 32px;
-  color: #667085;
-}
-
-.state strong {
-  color: #101828;
-  font-size: 13px;
-}
-
-.state span {
-  max-width: 470px;
-  color: #667085;
-  font-size: 11px;
-  line-height: 1.55;
-}
-
-.state--error {
-  border-color: #fecdca;
-  background: #fffafa;
-}
-
-.state--error > svg {
-  color: #d92d20;
-}
-
-.state button {
-  min-height: 38px;
-  display: inline-flex;
-  align-items: center;
   gap: 7px;
-  margin-top: 4px;
-  padding: 0 12px;
-  border: 1px solid #d0d5dd;
+
+  padding:
+    0
+    14px;
+
+  border:
+    1px solid
+    #dfe4eb;
+
   border-radius: 9px;
-  background: #fff;
-  color: #344054;
+
+  background:
+    #ffffff;
+
+  color:
+    #475467;
+
   font: inherit;
-  font-size: 11px;
+
+  font-size: 8.8px;
+
   font-weight: 700;
+
   cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.state button svg {
-  width: 15px;
-  height: 15px;
+
+.secondary-button:hover:not(:disabled) {
+  border-color:
+    #cfd6df;
+
+  background:
+    #f7f9fc;
 }
+
+
+.secondary-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+.secondary-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+/* =========================================================
+   SEARCH CONTEXT
+   ========================================================= */
 
 .search-context {
   display: grid;
+
   grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+    minmax(0, 1fr)
+    minmax(220px, 0.5fr);
+
   gap: 12px;
 }
 
-.search-context > div {
-  padding: 14px 16px;
-  border: 1px solid #e4e7ec;
-  border-radius: 12px;
-  background: #fff;
+
+/* =========================================================
+   PERIOD / NIGHTS CARDS
+   ========================================================= */
+
+.period-card,
+.nights-card {
+  min-height: 76px;
+
+  box-sizing: border-box;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    1px solid
+    #dfe5ec;
+
+  border-radius: 11px;
+
+  background:
+    #ffffff;
 }
 
-.search-context span {
+
+/* =========================================================
+   CONTEXT TITLE
+   ========================================================= */
+
+.context-title {
   display: block;
-  margin-bottom: 5px;
-  color: #667085;
-  font-size: 10px;
-  font-weight: 700;
+
+  margin-bottom: 9px;
+
+  color:
+    #98a2b3;
+
+  font-size: 8px;
+
+  font-weight: 600;
 }
 
-.search-context strong {
-  color: #101828;
-  font-size: 12px;
-}
 
-.results-panel {
-  overflow: hidden;
-  border: 1px solid #e4e7ec;
-  border-radius: 16px;
-  background: #fff;
-}
+/* =========================================================
+   PERIOD DATES
+   ========================================================= */
 
-.results-heading {
-  padding: 17px 18px;
-  border-bottom: 1px solid #eaecf0;
-}
-
-.results-heading h2 {
-  margin: 0;
-  color: #101828;
-  font-size: 16px;
-}
-
-.results-heading p {
-  margin: 4px 0 0;
-  color: #667085;
-  font-size: 11px;
-}
-
-.filters {
-  display: grid;
-  grid-template-columns:
-    minmax(240px, 1fr)
-    190px
-    170px
-    auto;
-  gap: 10px;
-  padding: 14px 18px;
-  border-bottom: 1px solid #eaecf0;
-  background: #fcfcfd;
-}
-
-.search-field {
-  height: 42px;
+.period-dates {
   display: flex;
+
   align-items: center;
-  gap: 8px;
-  padding: 0 11px;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  background: #fff;
+
+  gap: 28px;
 }
 
-.search-field svg {
-  width: 16px;
-  height: 16px;
-  color: #98a2b3;
-}
 
-.search-field input {
+.period-date {
   min-width: 0;
-  flex: 1;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  font: inherit;
-  font-size: 11px;
-}
 
-select {
-  height: 42px;
-  padding: 0 11px;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  background: #fff;
-  color: #344054;
-  font: inherit;
-  font-size: 11px;
-}
-
-.clear-button {
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 0 12px;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  background: #fff;
-  color: #344054;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.clear-button svg {
-  width: 15px;
-  height: 15px;
-}
-
-.room-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(230px, 1fr)
-    );
-  gap: 14px;
-  padding: 18px;
-}
-
-.empty {
-  min-height: 220px;
   display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.period-icon {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 8px;
+
+  background:
+    #eef3ff;
+
+  color:
+    #2b63e8;
+}
+
+
+.period-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.period-date > div {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.period-date small {
+  color:
+    #98a2b3;
+
+  font-size: 7.8px;
+
+  font-weight: 500;
+}
+
+
+.period-date strong {
+  color:
+    #344054;
+
+  font-size: 9.5px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NIGHTS
+   ========================================================= */
+
+.nights-card {
+  display: flex;
+
   flex-direction: column;
+
+  justify-content: center;
+}
+
+
+.nights-card .context-title {
+  margin-bottom: 7px;
+}
+
+
+.night-value {
+  color:
+    #101828;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+  overflow: hidden;
+
+  border:
+    1px solid
+    #dfe5ec;
+
+  border-radius: 13px;
+
+  background:
+    #ffffff;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar {
+  min-height: 64px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding:
+    12px
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search {
+  width:
+    min(
+      420px,
+      100%
+    );
+
+  min-height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0
+    10px;
+
+  border:
+    1px solid
+    #dfe4eb;
+
+  border-radius: 9px;
+
+  background:
+    #ffffff;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.search:focus-within {
+  border-color:
+    #84adff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      0,
+      62,
+      179,
+      0.06
+    );
+}
+
+
+.search > svg {
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 auto;
+
+  color:
+    #98a2b3;
+}
+
+
+.search input {
+  min-width: 0;
+
+  flex: 1;
+
+  border: 0;
+
+  outline: 0;
+
+  background:
+    transparent;
+
+  color:
+    #344054;
+
+  font: inherit;
+
+  font-size: 9.5px;
+}
+
+
+.search input::placeholder {
+  color:
+    #98a2b3;
+}
+
+
+.search input:disabled {
+  cursor: not-allowed;
+
+  color:
+    #98a2b3;
+}
+
+
+/* =========================================================
+   SEARCH CLEAR
+   ========================================================= */
+
+.search-clear {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background:
+    #f2f4f7;
+
+  color:
+    #667085;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+
+.search-clear:hover {
+  background:
+    #e9edf2;
+
+  color:
+    #344054;
+}
+
+
+.search-clear svg {
+  width: 12px;
+  height: 12px;
+}
+
+
+/* =========================================================
+   TOOLBAR FILTERS
+   ========================================================= */
+
+.toolbar-filters {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.toolbar-filters select {
+  min-width: 150px;
+
+  height: 40px;
+
+  padding:
+    0
+    30px
+    0
+    10px;
+
+  border:
+    1px solid
+    #dfe4eb;
+
+  border-radius: 9px;
+
+  outline: 0;
+
+  background:
+    #ffffff;
+
+  color:
+    #475467;
+
+  font: inherit;
+
+  font-size: 8.8px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.toolbar-filters select:focus {
+  border-color:
+    #84adff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      0,
+      62,
+      179,
+      0.06
+    );
+}
+
+
+.toolbar-filters select:disabled {
+  background:
+    #f9fafb;
+
+  color:
+    #98a2b3;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESULT SUMMARY
+   ========================================================= */
+
+.result-summary {
+  min-height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  padding:
+    0
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+
+  background:
+    #fafbfc;
+}
+
+
+.result-count {
+  color:
+    #98a2b3;
+
+  font-size: 8.5px;
+
+  white-space: nowrap;
+}
+
+
+.result-count strong {
+  color:
+    #475467;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   ROOM LIST
+   ========================================================= */
+
+.room-list {
+  display: grid;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   STATE / EMPTY
+   ========================================================= */
+
+.state,
+.empty {
+  min-height: 260px;
+
+  display: flex;
+
+  flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   gap: 8px;
-  padding: 24px;
+
+  padding: 20px;
+
   text-align: center;
 }
 
-.empty svg {
-  width: 30px;
-  height: 30px;
-  color: #667085;
+
+.state {
+  color:
+    #667085;
 }
 
+
+.state--error {
+  color:
+    #b42318;
+}
+
+
+/* =========================================================
+   STATE ICON
+   ========================================================= */
+
+.state-icon,
+.empty > svg {
+  width: 42px;
+  height: 42px;
+
+  box-sizing: border-box;
+
+  padding: 11px;
+
+  border-radius: 11px;
+
+  background:
+    #f4f6f9;
+
+  color:
+    #667085;
+}
+
+
+.state--error
+.state-icon {
+  background:
+    #fff1f0;
+
+  color:
+    #cf1322;
+}
+
+
+/* =========================================================
+   STATE TEXT
+   ========================================================= */
+
+.state strong,
 .empty strong {
-  color: #101828;
-  font-size: 13px;
+  color:
+    #667085;
+
+  font-size: 9.5px;
+
+  font-weight: 700;
 }
 
+
+.state span,
 .empty span {
-  max-width: 430px;
-  color: #667085;
-  font-size: 11px;
+  max-width: 450px;
+
+  color:
+    #98a2b3;
+
+  font-size: 8.5px;
+
   line-height: 1.55;
 }
 
-.results-footer {
-  padding: 12px 18px;
-  border-top: 1px solid #eaecf0;
-  background: #fcfcfd;
-  color: #667085;
-  font-size: 10px;
-}
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
 
 @media (max-width: 900px) {
-  .filters {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+
+  .toolbar {
+    align-items: stretch;
+
+    flex-direction: column;
   }
+
+
+  .search {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+
+  .toolbar-filters {
+    flex-wrap: wrap;
+  }
+
+
+  .toolbar-filters select {
+    flex: 1;
+
+    min-width: 140px;
+  }
+
 }
 
-@media (max-width: 620px) {
-  .search-context,
-  .filters {
-    grid-template-columns: 1fr;
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .availability-page {
+    gap: 14px;
   }
+
+
+  .page-heading-row {
+    flex-direction: column;
+  }
+
+
+  /* =======================================================
+     SEARCH CONTEXT
+     ======================================================= */
+
+  .search-context {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .period-dates {
+    gap: 14px;
+
+    flex-wrap: wrap;
+  }
+
+
+  .period-date {
+    flex:
+      1 1 180px;
+  }
+
+
+  /* =======================================================
+     FILTERS
+     ======================================================= */
+
+  .toolbar-filters {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+
+  .toolbar-filters select,
+  .toolbar-filters
+  .secondary-button {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
 }
+
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .page-heading-row h1 {
+    font-size: 19px;
+  }
+
+
+  .period-dates {
+    display: grid;
+
+    grid-template-columns:
+      1fr;
+
+    gap: 10px;
+  }
+
+
+  .period-date {
+    width: 100%;
+  }
+
+
+  .period-card,
+  .nights-card {
+    min-height: 70px;
+  }
+
+
+  .toolbar {
+    padding:
+      10px
+      12px;
+  }
+
+
+  .result-summary {
+    padding:
+      0
+      12px;
+  }
+
+}
+
+
+/* =========================================================
+   NIGHTS CARD
+   ========================================================= */
+
+.nights-card {
+  min-height: 92px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding:
+    13px
+    16px;
+
+  border:
+    1px solid
+    #dfe5ec;
+
+  border-radius: 13px;
+
+  background:
+    #ffffff;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.nights-card .context-title {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color:
+    #98a2b3;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.night-content {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.night-icon {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 10px;
+
+  background:
+    #fff7e6;
+
+  color:
+    #d46b08;
+}
+
+
+.night-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.night-info {
+  min-width: 0;
+
+  flex: 1;
+
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.night-info strong {
+  color:
+    #344054;
+
+  font-size: 9.5px;
+
+  font-weight: 700;
+}
+
+
+.night-info small {
+  overflow: hidden;
+
+  color:
+    #98a2b3;
+
+  font-size: 7.8px;
+
+  line-height: 1.4;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.night-result {
+  min-width: 62px;
+
+  display: grid;
+
+  justify-items: end;
+
+  gap: 2px;
+
+  flex: 0 0 auto;
+}
+
+
+.night-result strong {
+  color:
+    #101828;
+
+  font-size: 24px;
+
+  font-weight: 750;
+
+  line-height: 1;
+}
+
+
+.night-result span {
+  color:
+    #98a2b3;
+
+  font-size: 7.5px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .nights-card {
+    min-height: 88px;
+
+    padding:
+      12px
+      14px;
+  }
+
+
+  .night-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .night-result strong {
+    font-size: 21px;
+  }
+
+}
+

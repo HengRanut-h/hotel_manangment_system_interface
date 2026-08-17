@@ -2,102 +2,237 @@
   display: block;
 }
 
-.room-card {
-  min-height: 188px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 17px;
-  border: 1px solid #e4e7ec;
-  border-radius: 15px;
-  background: #fff;
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
-}
 
-.room-card:hover {
-  transform: translateY(-3px);
-  border-color: #d0d5dd;
-  box-shadow:
-    0 8px 20px rgba(16, 24, 40, .06),
-    0 2px 6px rgba(16, 24, 40, .04);
-}
+/* =========================================================
+   ROOM ITEM
+   ========================================================= */
 
-header {
+.room-item {
+  min-height: 72px;
+
   display: flex;
+
   align-items: center;
   justify-content: space-between;
+
+  gap: 14px;
+
+  padding:
+    11px
+    14px;
+
+  border-bottom:
+    1px solid
+    #edf0f4;
+
+  background:
+    #ffffff;
+}
+
+
+.room-item:hover {
+  background:
+    #fafbfc;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.room-main {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
   gap: 10px;
 }
+
 
 .room-icon {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
+
   display: grid;
+
   place-items: center;
-  border-radius: 11px;
-  background: #eef4ff;
-  color: #3538cd;
+
+  flex:
+    0 0 auto;
+
+  border-radius: 9px;
+
+  background:
+    #eef3ff;
+
+  color:
+    #2b63e8;
 }
+
 
 .room-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
 }
+
+
+.room-info {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 4px;
+}
+
+
+.room-info strong {
+  overflow: hidden;
+
+  color:
+    #344054;
+
+  font-size: 9.8px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.room-info small {
+  overflow: hidden;
+
+  color:
+    #98a2b3;
+
+  font-size: 8px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.room-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+.rate {
+  display: grid;
+
+  gap: 3px;
+
+  text-align: right;
+}
+
+
+.rate span {
+  color:
+    #98a2b3;
+
+  font-size: 7.8px;
+}
+
+
+.rate strong {
+  color:
+    #344054;
+
+  font-size: 9.5px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
 
 .status {
+  min-width: 72px;
+
+  min-height: 26px;
+
   display: inline-flex;
+
   align-items: center;
-  min-height: 25px;
-  padding: 4px 8px;
-  border: 1px solid #d0d5dd;
-  border-radius: 999px;
-  background: #f2f4f7;
-  color: #475467;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: capitalize;
+  justify-content: center;
+
+  padding:
+    0
+    9px;
+
+  border:
+    1px solid
+    #d9d9d9;
+
+  border-radius:
+    999px;
+
+  background:
+    #fafafa;
+
+  color:
+    #595959;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  text-transform:
+    capitalize;
 }
+
 
 .status--available {
-  border-color: #abefc6;
-  background: #ecfdf3;
-  color: #027a48;
+  border-color:
+    #b7eb8f;
+
+  background:
+    #f6ffed;
+
+  color:
+    #389e0d;
 }
 
-.room-card__body {
-  flex: 1;
-}
 
-.room-type {
-  color: #667085;
-  font-size: 10px;
-  font-weight: 700;
-}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
-h3 {
-  margin: 6px 0 0;
-  color: #101828;
-  font-size: 18px;
-}
+@media (max-width: 580px) {
 
-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 10px;
-  padding-top: 13px;
-  border-top: 1px solid #eaecf0;
-}
+  .room-item {
+    align-items:
+      flex-start;
 
-footer span {
-  color: #667085;
-  font-size: 10px;
-}
+    flex-direction:
+      column;
+  }
 
-footer strong {
-  color: #101828;
-  font-size: 16px;
+
+  .room-meta {
+    width: 100%;
+
+    justify-content:
+      space-between;
+  }
+
+
+  .rate {
+    text-align:
+      left;
+  }
+
 }

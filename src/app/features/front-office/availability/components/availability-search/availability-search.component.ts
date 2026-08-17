@@ -8,7 +8,8 @@ import {
 
 import {
   LucideCalendar,
-  LucideSearch
+  LucideSearch,
+  LucideX
 } from '@lucide/angular';
 
 import {
@@ -16,140 +17,478 @@ import {
 } from '../../../../../core/i18n/translation.pipe';
 
 import {
-  AvailabilityQuery
+  AvailabilityQuery,
+  AvailabilityRoomTypeOption
 } from '../../models/availability.model';
 
 @Component({
-  selector: 'app-availability-search',
-  standalone: true,
+  selector:
+    'app-availability-search',
+
+  standalone:
+    true,
+
   imports: [
     TranslationPipe,
+
     LucideCalendar,
-    LucideSearch
+    LucideSearch,
+    LucideX
   ],
-  templateUrl: './availability-search.component.html',
-  styleUrl: './availability-search.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+
+  templateUrl:
+    './availability-search.component.html',
+
+  styleUrl:
+    './availability-search.component.css',
+
+  changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent {
-  readonly submitting = input(false);
-  readonly searched = output<AvailabilityQuery>();
 
-  readonly checkInDate = signal(
-    this.formatDate(new Date())
-  );
+  // =========================================================
+  // INPUTS
+  // =========================================================
 
-  readonly checkOutDate = signal(
-    this.formatDate(
-      this.addDays(new Date(), 1)
-    )
-  );
+  readonly submitting =
+    input(false);
 
-  readonly errorKey = signal('');
 
-  setCheckInDate(event: Event): void {
-    const target = event.target;
+  readonly roomTypes =
+    input<
+      AvailabilityRoomTypeOption[]
+    >(
+      []
+    );
 
-    if (!(target instanceof HTMLInputElement)) {
+
+  readonly roomTypesLoading =
+    input(false);
+
+
+  // =========================================================
+  // OUTPUT
+  // =========================================================
+
+  readonly searched =
+    output<AvailabilityQuery>();
+
+
+  // =========================================================
+  // FORM STATE
+  // =========================================================
+
+  readonly checkIn =
+    signal(
+      this.formatDate(
+        new Date()
+      )
+    );
+
+
+  readonly checkOut =
+    signal(
+      this.formatDate(
+        this.addDays(
+          new Date(),
+          1
+        )
+      )
+    );
+
+
+  readonly roomTypeId =
+    signal('');
+
+
+  readonly errorKey =
+    signal('');
+
+
+  // =========================================================
+  // CHECK-IN
+  // =========================================================
+
+  setCheckIn(
+    event: Event
+  ): void {
+
+    const target =
+      event.target;
+
+
+    if (
+      !(
+        target instanceof
+        HTMLInputElement
+      )
+    ) {
+
       return;
     }
 
-    this.checkInDate.set(target.value);
-    this.errorKey.set('');
+
+    this.checkIn.set(
+      target.value
+    );
+
+
+    this.errorKey.set(
+      ''
+    );
   }
 
-  setCheckOutDate(event: Event): void {
-    const target = event.target;
 
-    if (!(target instanceof HTMLInputElement)) {
+  // =========================================================
+  // CHECK-OUT
+  // =========================================================
+
+  setCheckOut(
+    event: Event
+  ): void {
+
+    const target =
+      event.target;
+
+
+    if (
+      !(
+        target instanceof
+        HTMLInputElement
+      )
+    ) {
+
       return;
     }
 
-    this.checkOutDate.set(target.value);
-    this.errorKey.set('');
+
+    this.checkOut.set(
+      target.value
+    );
+
+
+    this.errorKey.set(
+      ''
+    );
   }
+
+
+  // =========================================================
+  // ROOM TYPE
+  // =========================================================
+
+  setRoomType(
+    event: Event
+  ): void {
+
+    const target =
+      event.target;
+
+
+    if (
+      !(
+        target instanceof
+        HTMLSelectElement
+      )
+    ) {
+
+      return;
+    }
+
+
+    this.roomTypeId.set(
+      target.value
+    );
+  }
+
+
+  // =========================================================
+  // SUBMIT
+  // =========================================================
 
   submit(): void {
-    if (this.submitting()) {
+
+    if (
+      this.submitting()
+    ) {
+
       return;
     }
 
-    const checkInDate = this.checkInDate().trim();
-    const checkOutDate = this.checkOutDate().trim();
 
-    if (!checkInDate || !checkOutDate) {
-      this.errorKey.set('availability.datesRequired');
+    const checkIn =
+      this.checkIn()
+        .trim();
+
+
+    const checkOut =
+      this.checkOut()
+        .trim();
+
+
+    // =====================================================
+    // REQUIRED
+    // =====================================================
+
+    if (
+      !checkIn
+      ||
+      !checkOut
+    ) {
+
+      this.errorKey.set(
+        'availability.datesRequired'
+      );
+
       return;
     }
 
-    const checkIn = this.toDate(checkInDate);
-    const checkOut = this.toDate(checkOutDate);
 
-    if (!checkIn || !checkOut) {
-      this.errorKey.set('availability.invalidDates');
+    // =====================================================
+    // VALID DATES
+    // =====================================================
+
+    const checkInDate =
+      this.toDate(
+        checkIn
+      );
+
+
+    const checkOutDate =
+      this.toDate(
+        checkOut
+      );
+
+
+    if (
+      !checkInDate
+      ||
+      !checkOutDate
+    ) {
+
+      this.errorKey.set(
+        'availability.invalidDates'
+      );
+
       return;
     }
 
-    if (checkOut.getTime() <= checkIn.getTime()) {
+
+    // =====================================================
+    // CHECK-OUT AFTER CHECK-IN
+    // =====================================================
+
+    if (
+      checkOutDate.getTime()
+      <=
+      checkInDate.getTime()
+    ) {
+
       this.errorKey.set(
         'availability.checkOutAfterCheckIn'
       );
+
       return;
     }
 
-    this.errorKey.set('');
+
+    this.errorKey.set(
+      ''
+    );
+
+
+    // =====================================================
+    // EMIT
+    // =====================================================
 
     this.searched.emit({
-      checkInDate,
-      checkOutDate
+
+      checkIn,
+
+      checkOut,
+
+      roomTypeId:
+        this.roomTypeId()
+          ||
+        null
     });
   }
 
-  private formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(
-      date.getMonth() + 1
-    ).padStart(2, '0');
-    const day = String(
-      date.getDate()
-    ).padStart(2, '0');
 
-    return `${year}-${month}-${day}`;
+  // =========================================================
+  // RESET
+  // =========================================================
+
+  reset(): void {
+
+    if (
+      this.submitting()
+    ) {
+
+      return;
+    }
+
+
+    const today =
+      new Date();
+
+
+    this.checkIn.set(
+      this.formatDate(
+        today
+      )
+    );
+
+
+    this.checkOut.set(
+      this.formatDate(
+        this.addDays(
+          today,
+          1
+        )
+      )
+    );
+
+
+    this.roomTypeId.set(
+      ''
+    );
+
+
+    this.errorKey.set(
+      ''
+    );
   }
 
-  private addDays(date: Date, days: number): Date {
-    const copy = new Date(date);
-    copy.setDate(copy.getDate() + days);
+
+  // =========================================================
+  // FORMAT DATE
+  // =========================================================
+
+  private formatDate(
+    date: Date
+  ): string {
+
+    const year =
+      date.getFullYear();
+
+
+    const month =
+      String(
+        date.getMonth()
+        +
+        1
+      )
+        .padStart(
+          2,
+          '0'
+        );
+
+
+    const day =
+      String(
+        date.getDate()
+      )
+        .padStart(
+          2,
+          '0'
+        );
+
+
+    return (
+      `${year}-${month}-${day}`
+    );
+  }
+
+
+  // =========================================================
+  // ADD DAYS
+  // =========================================================
+
+  private addDays(
+    date: Date,
+    days: number
+  ): Date {
+
+    const copy =
+      new Date(
+        date
+      );
+
+
+    copy.setDate(
+      copy.getDate()
+      +
+      days
+    );
+
+
     return copy;
   }
 
-  private toDate(value: string): Date | null {
-    const parts = value
-      .split('-')
-      .map(Number);
+
+  // =========================================================
+  // TO DATE
+  // =========================================================
+
+  private toDate(
+    value: string
+  ): Date | null {
+
+    const parts =
+      value
+        .split('-')
+        .map(
+          Number
+        );
+
 
     if (
-      parts.length !== 3 ||
-      parts.some(part => !Number.isFinite(part))
+      parts.length !== 3
+      ||
+      parts.some(
+        part =>
+          !Number.isFinite(
+            part
+          )
+      )
     ) {
+
       return null;
     }
 
-    const [year, month, day] = parts;
 
-    const date = new Date(
+    const [
       year,
-      month - 1,
+      month,
       day
-    );
+    ] =
+      parts;
+
+
+    const date =
+      new Date(
+        year,
+        month - 1,
+        day
+      );
+
 
     if (
-      date.getFullYear() !== year ||
-      date.getMonth() !== month - 1 ||
-      date.getDate() !== day
+      date.getFullYear()
+        !== year
+      ||
+      date.getMonth()
+        !== month - 1
+      ||
+      date.getDate()
+        !== day
     ) {
+
       return null;
     }
+
 
     return date;
   }

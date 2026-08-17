@@ -1,3 +1,7 @@
+// =========================================================
+// AVAILABLE ROOM
+// =========================================================
+
 export interface AvailabilityRoom {
   id: string;
   roomNumber: string;
@@ -7,19 +11,44 @@ export interface AvailabilityRoom {
   status: string;
 }
 
+
+// =========================================================
+// AVAILABILITY SEARCH QUERY
+//
+// Backend:
+//
+// GET /api/v1/availability
+//
+// ?checkIn=2026-08-20
+// &checkOut=2026-08-22
+// &roomTypeId=<optional-guid>
+// =========================================================
+
 export interface AvailabilityQuery {
-  checkInDate: string;
-  checkOutDate: string;
+  checkIn: string;
+  checkOut: string;
+  roomTypeId?: string | null;
 }
 
-export interface ApiResponse<T> {
-  success?: boolean;
-  message?: string;
-  data: T;
-  code?: string | null;
-  errors?: Record<string, string[]> | null;
-  traceId?: string | null;
+
+// =========================================================
+// ROOM TYPE OPTION
+//
+// Used by select elements.
+//
+// name -> displayed to user
+// id   -> sent to backend
+// =========================================================
+
+export interface AvailabilityRoomTypeOption {
+  id: string;
+  name: string;
 }
+
+
+// =========================================================
+// SEARCH SUMMARY
+// =========================================================
 
 export interface AvailabilitySearchSummary {
   roomsFound: number;

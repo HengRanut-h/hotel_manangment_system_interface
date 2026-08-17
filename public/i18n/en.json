@@ -4532,5 +4532,86 @@
     "updateFailed": "Could not update permission.",
     "updateSuccess": "Permission updated successfully.",
     "usedBy": "Used by"
+  },
+  "availability": {
+    "section": "Front Office",
+    "title": "Room Availability",
+    "description": "Search available rooms for a selected stay period and filter the results by room type or status.",
+
+    "searchTitle": "Search availability",
+    "searchDescription": "Choose check-in and check-out dates and optionally select a room type.",
+
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "roomType": "Room type",
+
+    "allRoomTypes": "All room types",
+    "loadingRoomTypes": "Loading room types...",
+
+    "search": "Search",
+    "searching": "Searching...",
+    "reset": "Reset",
+
+    "datesRequired": "Check-in and check-out dates are required.",
+    "invalidDates": "Please enter valid check-in and check-out dates.",
+    "checkOutAfterCheckIn": "Check-out date must be after check-in date.",
+
+    "roomsFound": "Rooms found",
+    "roomTypes": "Room types",
+    "lowestBaseRate": "Lowest base rate",
+    "averageBaseRate": "Average base rate",
+
+    "searchPeriod": "Search period",
+
+    "nights": "Nights",
+    "night": "night",
+    "nightsUnit": "nights",
+    "stayDuration": "Stay duration",
+    "stayDurationDescription": "Number of nights for this stay",
+
+    "filterSearchPlaceholder": "Search room number or room type...",
+    "allStatuses": "All statuses",
+
+    "resultsTitle": "Available rooms",
+    "resultsDescription": "{{count}} rooms found for the selected stay period.",
+
+    "noResults": "No available rooms",
+    "noResultsDescription": "No rooms are available for the selected stay period.",
+
+    "noFilteredResults": "No rooms match these filters",
+    "noFilteredResultsDescription": "Try changing or clearing the current filters.",
+
+    "searchFirst": "Search room availability",
+    "searchFirstDescription": "Select your stay dates above, then search for available rooms.",
+
+    "loadFailed": "Unable to load room availability.",
+
+    "room": "Room",
+    "roomNumber": "Room number",
+    "roomNumberValue": "Room {{number}}",
+    "roomTypeName": "Room type",
+    "baseRate": "Base rate",
+    "status": "Status",
+    "unknownStatus": "Unknown",
+
+    "showing": "Showing {{shown}} of {{total}} rooms",
+
+    "statuses": {
+      "available": "Available",
+      "occupied": "Occupied",
+      "reserved": "Reserved",
+      "dirty": "Dirty",
+      "cleaning": "Cleaning",
+      "maintenance": "Maintenance",
+      "outOfOrder": "Out of order",
+      "blocked": "Blocked",
+      "unknown": "Unknown"
+    }
+  },
+
+  "common": {
+    "clear": "Clear",
+    "tryAgain": "Try again"
   }
+
 }

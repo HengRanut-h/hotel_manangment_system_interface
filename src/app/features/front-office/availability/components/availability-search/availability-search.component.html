@@ -1,56 +1,240 @@
-<section class="search-card">
-  <header class="search-card__heading">
-    <span class="search-card__icon">
+<section class="search-panel">
+
+  <!-- ===================================================== -->
+  <!-- HEADER -->
+  <!-- ===================================================== -->
+
+  <header class="search-heading">
+
+    <span class="search-heading-icon">
       <svg lucideCalendar></svg>
     </span>
 
+
     <div>
-      <h2>{{ 'availability.searchTitle' | translate }}</h2>
-      <p>{{ 'availability.searchDescription' | translate }}</p>
+
+      <h2>
+        {{
+          'availability.searchTitle'
+            | translate
+        }}
+      </h2>
+
+
+      <p>
+        {{
+          'availability.searchDescription'
+            | translate
+        }}
+      </p>
+
     </div>
+
   </header>
+
+
+  <!-- ===================================================== -->
+  <!-- FORM -->
+  <!-- ===================================================== -->
 
   <form
     class="search-form"
-    (submit)="$event.preventDefault(); submit()">
+    (submit)="
+      $event.preventDefault();
+      submit()
+    ">
+
+
+    <!-- =================================================== -->
+    <!-- CHECK IN -->
+    <!-- =================================================== -->
 
     <label class="field">
-      <span>{{ 'availability.checkIn' | translate }}</span>
-      <input
-        type="date"
-        [value]="checkInDate()"
-        (input)="setCheckInDate($event)" />
-    </label>
 
-    <label class="field">
-      <span>{{ 'availability.checkOut' | translate }}</span>
-      <input
-        type="date"
-        [value]="checkOutDate()"
-        (input)="setCheckOutDate($event)" />
-    </label>
-
-    <button
-      type="submit"
-      class="search-button"
-      [disabled]="submitting()">
-      <svg lucideSearch></svg>
       <span>
         {{
-          (
-            submitting()
-              ? 'availability.searching'
-              : 'availability.search'
-          )
+          'availability.checkIn'
             | translate
         }}
       </span>
-    </button>
+
+
+      <div class="field-control">
+
+        <svg lucideCalendar></svg>
+
+
+        <input
+          type="date"
+          [value]="checkIn()"
+          [disabled]="submitting()"
+          (input)="setCheckIn($event)" />
+
+      </div>
+
+    </label>
+
+
+    <!-- =================================================== -->
+    <!-- CHECK OUT -->
+    <!-- =================================================== -->
+
+    <label class="field">
+
+      <span>
+        {{
+          'availability.checkOut'
+            | translate
+        }}
+      </span>
+
+
+      <div class="field-control">
+
+        <svg lucideCalendar></svg>
+
+
+        <input
+          type="date"
+          [value]="checkOut()"
+          [disabled]="submitting()"
+          (input)="setCheckOut($event)" />
+
+      </div>
+
+    </label>
+
+
+    <!-- =================================================== -->
+    <!-- ROOM TYPE -->
+    <!-- =================================================== -->
+
+    <label class="field">
+
+      <span>
+        {{
+          'availability.roomType'
+            | translate
+        }}
+      </span>
+
+
+      <select
+        [value]="roomTypeId()"
+        [disabled]="
+          submitting()
+          ||
+          roomTypesLoading()
+        "
+        (change)="setRoomType($event)">
+
+
+        <option value="">
+
+          @if (
+            roomTypesLoading()
+          ) {
+
+            {{
+              'availability.loadingRoomTypes'
+                | translate
+            }}
+
+          } @else {
+
+            {{
+              'availability.allRoomTypes'
+                | translate
+            }}
+
+          }
+
+        </option>
+
+
+        @for (
+          roomType
+          of roomTypes();
+          track roomType.id
+        ) {
+
+          <option
+            [value]="roomType.id">
+
+            {{ roomType.name }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </label>
+
+
+    <!-- =================================================== -->
+    <!-- ACTIONS -->
+    <!-- =================================================== -->
+
+    <div class="search-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        [disabled]="submitting()"
+        (click)="reset()">
+
+        <svg lucideX></svg>
+
+        <span>
+          {{
+            'availability.reset'
+              | translate
+          }}
+        </span>
+
+      </button>
+
+
+      <button
+        type="submit"
+        class="search-button"
+        [disabled]="submitting()">
+
+        <svg lucideSearch></svg>
+
+        <span>
+
+          {{
+            (
+              submitting()
+                ? 'availability.searching'
+                : 'availability.search'
+            )
+              | translate
+          }}
+
+        </span>
+
+      </button>
+
+    </div>
+
   </form>
 
-  @if (errorKey()) {
-    <p class="validation-error">
+
+  <!-- ===================================================== -->
+  <!-- VALIDATION -->
+  <!-- ===================================================== -->
+
+  @if (
+    errorKey()
+  ) {
+
+    <div class="validation-error">
       {{ errorKey() | translate }}
-    </p>
+    </div>
+
   }
+
 </section>

@@ -3,11 +3,18 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
   signal
 } from '@angular/core';
 
 import {
+  finalize
+} from 'rxjs';
+
+import {
   LucideBed,
+  LucideCalendar,
+  LucideMoon,
   LucideRefreshCw,
   LucideSearch,
   LucideX
@@ -48,391 +55,816 @@ import {
 import {
   AvailabilityQuery,
   AvailabilityRoom,
+  AvailabilityRoomTypeOption,
   AvailabilitySearchSummary
 } from '../../models/availability.model';
 
 @Component({
-  selector: 'app-availability-page',
-  standalone: true,
-  imports: [
-    TranslationPipe,
-    SpinComponent,
-    AvailabilityRoomCardComponent,
-    AvailabilitySearchComponent,
-    AvailabilityStatsComponent,
-    LucideBed,
-    LucideRefreshCw,
-    LucideSearch,
-    LucideX
-  ],
-  templateUrl: './availability-page.page.html',
-  styleUrl: './availability-page.page.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector:
+    'app-availability-page',
+
+  standalone:
+    true,
+
+imports: [
+  TranslationPipe,
+  SpinComponent,
+
+  AvailabilityRoomCardComponent,
+  AvailabilitySearchComponent,
+  AvailabilityStatsComponent,
+
+  LucideBed,
+  LucideCalendar,
+  LucideMoon,
+  LucideRefreshCw,
+  LucideSearch,
+  LucideX
+],
+
+  templateUrl:
+    './availability-page.page.html',
+
+  styleUrl:
+    './availability-page.page.css',
+
+  changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
-export class AvailabilityPage {
+export class AvailabilityPage
+  implements OnInit {
+
+  // =========================================================
+  // DEPENDENCIES
+  // =========================================================
+
   private readonly api =
-    inject(AvailabilityApiService);
+    inject(
+      AvailabilityApiService
+    );
+
 
   private readonly translation =
-    inject(TranslationService);
+    inject(
+      TranslationService
+    );
+
+
+  // =========================================================
+  // ROOMS
+  // =========================================================
 
   readonly rooms =
-    signal<AvailabilityRoom[]>([]);
+    signal<
+      AvailabilityRoom[]
+    >(
+      []
+    );
+
+
+  // =========================================================
+  // ROOM TYPE OPTIONS
+  // =========================================================
+
+  readonly roomTypeOptions =
+    signal<
+      AvailabilityRoomTypeOption[]
+    >(
+      []
+    );
+
+
+  readonly roomTypesLoading =
+    signal(false);
+
+
+  // =========================================================
+  // PAGE STATE
+  // =========================================================
 
   readonly loading =
     signal(false);
 
+
   readonly searched =
     signal(false);
+
 
   readonly errorMessage =
     signal('');
 
+
   readonly lastQuery =
-    signal<AvailabilityQuery | null>(null);
+    signal<
+      AvailabilityQuery | null
+    >(
+      null
+    );
+
+
+  // =========================================================
+  // FILTERS
+  // =========================================================
 
   readonly searchText =
     signal('');
 
+
   readonly roomTypeFilter =
     signal('');
+
 
   readonly statusFilter =
     signal('');
 
-  readonly roomTypes =
-    computed(() => {
-      const map =
-        new Map<string, string>();
 
-      for (const room of this.rooms()) {
+  // =========================================================
+  // RESULT ROOM TYPES
+  //
+  // Display name.
+  // Value stays ID internally.
+  // =========================================================
+
+  readonly resultRoomTypes =
+    computed(() => {
+
+      const values =
+        new Map<
+          string,
+          string
+        >();
+
+
+      for (
+        const room
+        of this.rooms()
+      ) {
+
         if (
-          room.roomTypeId &&
+          room.roomTypeId
+          &&
           room.roomTypeName
         ) {
-          map.set(
+
+          values.set(
             room.roomTypeId,
             room.roomTypeName
           );
         }
       }
 
+
       return Array
-        .from(map.entries())
+        .from(
+          values.entries()
+        )
         .map(
-          ([id, name]) => ({
+          (
+            [
+              id,
+              name
+            ]
+          ) => ({
             id,
             name
           })
         )
         .sort(
-          (left, right) =>
+          (
+            left,
+            right
+          ) =>
             left.name.localeCompare(
               right.name
             )
         );
     });
 
+
+  // =========================================================
+  // STATUSES
+  // =========================================================
+
   readonly statuses =
-    computed(() =>
-      Array
+    computed(() => {
+
+      const values =
+        this.rooms()
+          .map(
+            room =>
+              room.status
+                .trim()
+          )
+          .filter(
+            Boolean
+          );
+
+
+      return Array
         .from(
           new Set(
-            this.rooms()
-              .map(
-                room =>
-                  room.status.trim()
-              )
-              .filter(Boolean)
+            values
           )
         )
         .sort(
-          (left, right) =>
-            left.localeCompare(right)
-        )
-    );
+          (
+            left,
+            right
+          ) =>
+            left.localeCompare(
+              right
+            )
+        );
+    });
+
+
+  // =========================================================
+  // FILTERED ROOMS
+  // =========================================================
 
   readonly filteredRooms =
     computed(() => {
+
       const search =
         this.searchText()
           .trim()
           .toLowerCase();
 
+
       const roomTypeId =
-        this.roomTypeFilter();
+        this.roomTypeFilter()
+          .trim();
+
 
       const status =
         this.statusFilter()
           .trim()
           .toLowerCase();
 
+
       return this.rooms()
-        .filter(room => {
-          if (
-            roomTypeId &&
-            room.roomTypeId !== roomTypeId
-          ) {
-            return false;
-          }
+        .filter(
+          room => {
 
-          if (
-            status &&
-            room.status
-              .trim()
-              .toLowerCase() !== status
-          ) {
-            return false;
-          }
 
-          if (search) {
-            const haystack =
-              [
-                room.roomNumber,
-                room.roomTypeName,
-                room.status
-              ]
-                .join(' ')
-                .toLowerCase();
+            // =================================================
+            // ROOM TYPE
+            // =================================================
 
-            if (!haystack.includes(search)) {
+            if (
+              roomTypeId
+              &&
+              room.roomTypeId
+                !== roomTypeId
+            ) {
+
               return false;
             }
-          }
 
-          return true;
-        });
+
+            // =================================================
+            // STATUS
+            // =================================================
+
+            if (
+              status
+              &&
+              room.status
+                .trim()
+                .toLowerCase()
+                !== status
+            ) {
+
+              return false;
+            }
+
+
+            // =================================================
+            // SEARCH
+            // =================================================
+
+            if (
+              search
+            ) {
+
+              const haystack =
+                [
+                  room.roomNumber,
+                  room.roomTypeName,
+                  room.status
+                ]
+                  .join(' ')
+                  .toLowerCase();
+
+
+              if (
+                !haystack.includes(
+                  search
+                )
+              ) {
+
+                return false;
+              }
+            }
+
+
+            return true;
+          }
+        );
     });
 
+
+  // =========================================================
+  // SUMMARY
+  // =========================================================
+
   readonly summary =
-    computed<AvailabilitySearchSummary>(
+    computed<
+      AvailabilitySearchSummary
+    >(
       () => {
+
         const rooms =
           this.rooms();
+
 
         const rates =
           rooms
             .map(
               room =>
-                Number(room.baseRate)
+                Number(
+                  room.baseRate
+                )
             )
             .filter(
               rate =>
-                Number.isFinite(rate)
+                Number.isFinite(
+                  rate
+                )
             );
 
-        const lowestBaseRate =
-          rates.length
-            ? Math.min(...rates)
-            : null;
 
-        const averageBaseRate =
-          rates.length
-            ? (
-                rates.reduce(
-                  (total, rate) =>
-                    total + rate,
+        return {
+
+          roomsFound:
+            rooms.length,
+
+
+          roomTypes:
+            new Set(
+              rooms.map(
+                room =>
+                  room.roomTypeId
+              )
+            ).size,
+
+
+          lowestBaseRate:
+            rates.length
+              ? Math.min(
+                  ...rates
+                )
+              : null,
+
+
+          averageBaseRate:
+            rates.length
+
+              ? rates.reduce(
+                  (
+                    total,
+                    rate
+                  ) =>
+                    total
+                    +
+                    rate,
                   0
                 )
                 /
                 rates.length
-              )
-            : null;
 
-        return {
-          roomsFound: rooms.length,
-          roomTypes:
-            new Set(
-              rooms.map(
-                room => room.roomTypeId
-              )
-            ).size,
-          lowestBaseRate,
-          averageBaseRate
+              : null
         };
       }
     );
 
+
+  // =========================================================
+  // NIGHTS
+  // =========================================================
+
   readonly nights =
     computed(() => {
+
       const query =
         this.lastQuery();
 
-      if (!query) {
+
+      if (
+        !query
+      ) {
+
         return 0;
       }
+
 
       const checkIn =
-        this.toLocalDate(
-          query.checkInDate
+        this.toUtcMilliseconds(
+          query.checkIn
         );
+
 
       const checkOut =
-        this.toLocalDate(
-          query.checkOutDate
+        this.toUtcMilliseconds(
+          query.checkOut
         );
 
-      if (!checkIn || !checkOut) {
+
+      if (
+        checkIn === null
+        ||
+        checkOut === null
+      ) {
+
         return 0;
       }
 
-      const milliseconds =
-        checkOut.getTime()
-        -
-        checkIn.getTime();
 
       return Math.max(
         0,
+
         Math.round(
-          milliseconds
+          (
+            checkOut
+            -
+            checkIn
+          )
           /
           86_400_000
         )
       );
     });
 
+
+  // =========================================================
+  // FILTER ACTIVE
+  // =========================================================
+
   readonly hasFilters =
-    computed(() =>
-      !!this.searchText().trim()
-      ||
-      !!this.roomTypeFilter()
-      ||
-      !!this.statusFilter()
+    computed(
+      () =>
+        !!this.searchText()
+          .trim()
+        ||
+        !!this.roomTypeFilter()
+          .trim()
+        ||
+        !!this.statusFilter()
+          .trim()
     );
+
+
+  // =========================================================
+  // INIT
+  // =========================================================
+
+  ngOnInit(): void {
+
+    this.loadRoomTypes();
+  }
+
+
+  // =========================================================
+  // LOAD ROOM TYPES
+  // =========================================================
+
+  loadRoomTypes(): void {
+
+    if (
+      this.roomTypesLoading()
+    ) {
+
+      return;
+    }
+
+
+    this.roomTypesLoading.set(
+      true
+    );
+
+
+    this.api
+      .getRoomTypeOptions()
+      .pipe(
+        finalize(
+          () =>
+            this.roomTypesLoading.set(
+              false
+            )
+        )
+      )
+      .subscribe({
+
+        next:
+          roomTypes => {
+
+            this.roomTypeOptions.set(
+              roomTypes
+            );
+          },
+
+
+        error:
+          () => {
+
+            // Availability search can still work
+            // without filtering by room type.
+
+            this.roomTypeOptions.set(
+              []
+            );
+          }
+      });
+  }
+
+
+  // =========================================================
+  // SEARCH AVAILABILITY
+  // =========================================================
 
   search(
     query: AvailabilityQuery
   ): void {
-    if (this.loading()) {
+
+    if (
+      this.loading()
+    ) {
+
       return;
     }
 
-    this.loading.set(true);
-    this.searched.set(true);
-    this.errorMessage.set('');
-    this.lastQuery.set(query);
+
+    this.loading.set(
+      true
+    );
+
+
+    this.searched.set(
+      true
+    );
+
+
+    this.errorMessage.set(
+      ''
+    );
+
+
+    this.lastQuery.set(
+      query
+    );
+
 
     this.api
-      .search(query)
+      .search(
+        query
+      )
+      .pipe(
+        finalize(
+          () =>
+            this.loading.set(
+              false
+            )
+        )
+      )
       .subscribe({
+
         next:
           rooms => {
+
             this.rooms.set(
-              Array.isArray(rooms)
-                ? rooms
-                : []
+              rooms
             );
 
+
             this.clearFilters();
-            this.loading.set(false);
           },
+
 
         error:
           error => {
-            this.rooms.set([]);
+
+            this.rooms.set(
+              []
+            );
+
 
             this.errorMessage.set(
               getSafeApiErrorMessage(
                 error,
+
                 this.translation.translate(
                   'availability.loadFailed'
                 )
               )
             );
-
-            this.loading.set(false);
           }
       });
   }
 
+
+  // =========================================================
+  // RETRY
+  // =========================================================
+
   retry(): void {
+
     const query =
       this.lastQuery();
 
-    if (query) {
-      this.search(query);
+
+    if (
+      query
+    ) {
+
+      this.search(
+        query
+      );
     }
   }
+
+
+  // =========================================================
+  // SEARCH TEXT
+  // =========================================================
 
   setSearchText(
     event: Event
   ): void {
+
     const target =
       event.target;
 
+
     if (
-      !(target instanceof HTMLInputElement)
+      !(
+        target instanceof
+        HTMLInputElement
+      )
     ) {
+
       return;
     }
+
 
     this.searchText.set(
       target.value
     );
   }
 
+
+  // =========================================================
+  // CLEAR SEARCH TEXT
+  // =========================================================
+
+  clearSearchText(): void {
+
+    this.searchText.set(
+      ''
+    );
+  }
+
+
+  // =========================================================
+  // ROOM TYPE FILTER
+  // =========================================================
+
   setRoomTypeFilter(
     event: Event
   ): void {
+
     const target =
       event.target;
 
+
     if (
-      !(target instanceof HTMLSelectElement)
+      !(
+        target instanceof
+        HTMLSelectElement
+      )
     ) {
+
       return;
     }
+
 
     this.roomTypeFilter.set(
       target.value
     );
   }
 
+
+  // =========================================================
+  // STATUS FILTER
+  // =========================================================
+
   setStatusFilter(
     event: Event
   ): void {
+
     const target =
       event.target;
 
+
     if (
-      !(target instanceof HTMLSelectElement)
+      !(
+        target instanceof
+        HTMLSelectElement
+      )
     ) {
+
       return;
     }
+
 
     this.statusFilter.set(
       target.value
     );
   }
 
+
+  // =========================================================
+  // CLEAR FILTERS
+  // =========================================================
+
   clearFilters(): void {
-    this.searchText.set('');
-    this.roomTypeFilter.set('');
-    this.statusFilter.set('');
+
+    this.searchText.set(
+      ''
+    );
+
+
+    this.roomTypeFilter.set(
+      ''
+    );
+
+
+    this.statusFilter.set(
+      ''
+    );
   }
 
-  private toLocalDate(
+
+  // =========================================================
+  // DATE
+  // =========================================================
+
+  private toUtcMilliseconds(
     value: string
-  ): Date | null {
+  ): number | null {
+
     const parts =
       value
         .split('-')
-        .map(Number);
+        .map(
+          Number
+        );
+
 
     if (
-      parts.length !== 3 ||
-      parts.some(
-        part =>
-          !Number.isFinite(part)
-      )
+      parts.length !== 3
     ) {
+
       return null;
     }
 
-    const [year, month, day] =
+
+    const [
+      year,
+      month,
+      day
+    ] =
       parts;
 
-    return new Date(
+
+    if (
+      !Number.isFinite(
+        year
+      )
+      ||
+      !Number.isFinite(
+        month
+      )
+      ||
+      !Number.isFinite(
+        day
+      )
+    ) {
+
+      return null;
+    }
+
+
+    return Date.UTC(
       year,
       month - 1,
       day

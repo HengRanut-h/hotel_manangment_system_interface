@@ -21,28 +21,48 @@ import {
 } from '../../models/availability.model';
 
 @Component({
-  selector: 'app-availability-room-card',
-  standalone: true,
+  selector:
+    'app-availability-room-card',
+
+  standalone:
+    true,
+
   imports: [
     DecimalPipe,
     TranslationPipe,
     LucideBed
   ],
-  templateUrl: './availability-room-card.component.html',
-  styleUrl: './availability-room-card.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+
+  templateUrl:
+    './availability-room-card.component.html',
+
+  styleUrl:
+    './availability-room-card.component.css',
+
+  changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
 export class AvailabilityRoomCardComponent {
+
   readonly room =
-    input.required<AvailabilityRoom>();
+    input.required<
+      AvailabilityRoom
+    >();
+
+
+  // =========================================================
+  // AVAILABLE
+  // =========================================================
 
   isAvailable(): boolean {
+
     return (
       this.room()
         .status
         .trim()
         .toLowerCase()
-      === 'available'
+      ===
+      'available'
     );
   }
 }

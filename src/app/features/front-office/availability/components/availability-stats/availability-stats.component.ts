@@ -24,21 +24,35 @@ import {
 } from '../../models/availability.model';
 
 @Component({
-  selector: 'app-availability-stats',
-  standalone: true,
+  selector:
+    'app-availability-stats',
+
+  standalone:
+    true,
+
   imports: [
     DecimalPipe,
     TranslationPipe,
+
     LucideBed,
     LucideLayers,
     LucideTrendingDown,
     LucideTrendingUp
   ],
-  templateUrl: './availability-stats.component.html',
-  styleUrl: './availability-stats.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+
+  templateUrl:
+    './availability-stats.component.html',
+
+  styleUrl:
+    './availability-stats.component.css',
+
+  changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
 export class AvailabilityStatsComponent {
+
   readonly summary =
-    input.required<AvailabilitySearchSummary>();
+    input.required<
+      AvailabilitySearchSummary
+    >();
 }

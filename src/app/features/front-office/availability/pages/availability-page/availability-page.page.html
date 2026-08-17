@@ -1,220 +1,663 @@
-<div class="page">
-  <header class="page-heading">
+<div class="availability-page">
+
+  <!-- ===================================================== -->
+  <!-- HEADER -->
+  <!-- ===================================================== -->
+
+  <header class="page-heading-row">
+
     <div>
+
       <span class="eyebrow">
-        {{ 'availability.section' | translate }}
+        {{
+          'availability.section'
+            | translate
+        }}
       </span>
 
       <h1>
-        {{ 'availability.title' | translate }}
+        {{
+          'availability.title'
+            | translate
+        }}
       </h1>
 
       <p>
-        {{ 'availability.description' | translate }}
+        {{
+          'availability.description'
+            | translate
+        }}
       </p>
+
     </div>
+
   </header>
+
+
+  <!-- ===================================================== -->
+  <!-- AVAILABILITY SEARCH -->
+  <!-- ===================================================== -->
 
   <app-availability-search
     [submitting]="loading()"
+    [roomTypes]="roomTypeOptions()"
+    [roomTypesLoading]="roomTypesLoading()"
     (searched)="search($event)" />
 
-  @if (loading()) {
-    <section class="loading-card">
-      <app-spin
-        size="large"
-        [label]="'availability.searching' | translate" />
-    </section>
 
-  } @else if (errorMessage()) {
-    <section class="state state--error">
-      <svg lucideBed></svg>
+  <!-- ===================================================== -->
+  <!-- STATS -->
+  <!-- Always visible -->
+  <!-- ===================================================== -->
 
-      <strong>
-        {{ 'availability.loadFailed' | translate }}
-      </strong>
+  <app-availability-stats
+    [summary]="summary()" />
 
-      <span>
-        {{ errorMessage() }}
+
+  <!-- ===================================================== -->
+  <!-- SEARCH CONTEXT -->
+  <!-- Always visible -->
+  <!-- ===================================================== -->
+
+  <section class="search-context">
+
+
+    <!-- =================================================== -->
+    <!-- SEARCH PERIOD -->
+    <!-- =================================================== -->
+
+    <div class="period-card">
+
+      <span class="context-title">
+        {{
+          'availability.searchPeriod'
+            | translate
+        }}
       </span>
 
-      <button
-        type="button"
-        (click)="retry()">
-        <svg lucideRefreshCw></svg>
-        {{ 'common.tryAgain' | translate }}
-      </button>
-    </section>
 
-  } @else if (!searched()) {
-    <section class="state">
-      <svg lucideSearch></svg>
+      <div class="period-dates">
 
-      <strong>
-        {{ 'availability.searchFirst' | translate }}
-      </strong>
 
-      <span>
-        {{ 'availability.searchFirstDescription' | translate }}
-      </span>
-    </section>
+        <!-- =============================================== -->
+        <!-- CHECK IN -->
+        <!-- =============================================== -->
 
-  } @else {
-    <app-availability-stats
-      [summary]="summary()" />
+        <div class="period-date">
 
-    @if (lastQuery(); as query) {
-      <section class="search-context">
-        <div>
-          <span>
-            {{ 'availability.searchPeriod' | translate }}
+          <span class="period-icon">
+            <svg lucideCalendar></svg>
           </span>
 
-          <strong>
-            {{ query.checkInDate }}
-            →
-            {{ query.checkOutDate }}
-          </strong>
-        </div>
 
-        <div>
-          <span>
-            {{ 'availability.nights' | translate }}
-          </span>
+          <div>
 
-          <strong>
-            {{ nights() }}
-          </strong>
-        </div>
-      </section>
-    }
+            <small>
+              {{
+                'availability.checkIn'
+                  | translate
+              }}
+            </small>
 
-    <section class="results-panel">
-      <header class="results-heading">
-        <div>
-          <h2>
-            {{ 'availability.resultsTitle' | translate }}
-          </h2>
 
-          <p>
-            {{
-              'availability.resultsDescription'
-                | translate:{
-                    count: rooms().length
-                  }
-            }}
-          </p>
-        </div>
-      </header>
+            <strong>
 
-      @if (rooms().length > 0) {
-        <div class="filters">
-          <div class="search-field">
-            <svg lucideSearch></svg>
+              @if (
+                lastQuery();
+                as query
+              ) {
 
-            <input
-              type="search"
-              autocomplete="off"
-              [value]="searchText()"
-              [placeholder]="'availability.filterSearchPlaceholder' | translate"
-              (input)="setSearchText($event)" />
+                {{ query.checkIn }}
+
+              } @else {
+
+                —
+
+              }
+
+            </strong>
+
           </div>
 
-          <select
-            [value]="roomTypeFilter()"
-            (change)="setRoomTypeFilter($event)">
-            <option value="">
-              {{ 'availability.allRoomTypes' | translate }}
-            </option>
-
-            @for (
-              type of roomTypes();
-              track type.id
-            ) {
-              <option [value]="type.id">
-                {{ type.name }}
-              </option>
-            }
-          </select>
-
-          <select
-            [value]="statusFilter()"
-            (change)="setStatusFilter($event)">
-            <option value="">
-              {{ 'availability.allStatuses' | translate }}
-            </option>
-
-            @for (
-              status of statuses();
-              track status
-            ) {
-              <option [value]="status.toLowerCase()">
-                {{ status }}
-              </option>
-            }
-          </select>
-
-          @if (hasFilters()) {
-            <button
-              type="button"
-              class="clear-button"
-              (click)="clearFilters()">
-              <svg lucideX></svg>
-              {{ 'common.clear' | translate }}
-            </button>
-          }
         </div>
-      }
 
-      @if (rooms().length === 0) {
-        <div class="empty">
-          <svg lucideBed></svg>
 
-          <strong>
-            {{ 'availability.noResults' | translate }}
-          </strong>
+        <!-- =============================================== -->
+        <!-- CHECK OUT -->
+        <!-- =============================================== -->
 
-          <span>
-            {{ 'availability.noResultsDescription' | translate }}
+        <div class="period-date">
+
+          <span class="period-icon">
+            <svg lucideCalendar></svg>
           </span>
+
+
+          <div>
+
+            <small>
+              {{
+                'availability.checkOut'
+                  | translate
+              }}
+            </small>
+
+
+            <strong>
+
+              @if (
+                lastQuery();
+                as query
+              ) {
+
+                {{ query.checkOut }}
+
+              } @else {
+
+                —
+
+              }
+
+            </strong>
+
+          </div>
+
         </div>
 
-      } @else if (
-        filteredRooms().length === 0
-      ) {
-        <div class="empty">
-          <svg lucideSearch></svg>
+      </div>
 
-          <strong>
-            {{ 'availability.noFilteredResults' | translate }}
-          </strong>
+    </div>
 
-          <span>
-            {{ 'availability.noFilteredResultsDescription' | translate }}
-          </span>
-        </div>
 
-      } @else {
-        <div class="room-grid">
+<!-- ===================================================== -->
+<!-- NIGHTS -->
+<!-- ===================================================== -->
+
+<div class="nights-card">
+
+  <span class="context-title">
+    {{
+      'availability.nights'
+        | translate
+    }}
+  </span>
+
+
+  <div class="night-content">
+
+    <!-- ================================================= -->
+    <!-- ICON -->
+    <!-- ================================================= -->
+
+    <span class="night-icon">
+      <svg lucideMoon></svg>
+    </span>
+
+
+    <!-- ================================================= -->
+    <!-- INFO -->
+    <!-- ================================================= -->
+
+    <div class="night-info">
+
+      <strong>
+        {{
+          'availability.stayDuration'
+            | translate
+        }}
+      </strong>
+
+      <small>
+        {{
+          'availability.stayDurationDescription'
+            | translate
+        }}
+      </small>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- VALUE -->
+    <!-- ================================================= -->
+
+    <div class="night-result">
+
+      <strong>
+        {{ nights() }}
+      </strong>
+
+      <span>
+        {{
+          (
+            nights() === 1
+              ? 'availability.night'
+              : 'availability.nightsUnit'
+          )
+            | translate
+        }}
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- RESULTS PANEL -->
+  <!-- Always visible -->
+  <!-- ===================================================== -->
+
+  <section class="panel">
+
+
+    <!-- =================================================== -->
+    <!-- TOOLBAR -->
+    <!-- =================================================== -->
+
+    <header class="toolbar">
+
+
+      <!-- ================================================= -->
+      <!-- SEARCH -->
+      <!-- ================================================= -->
+
+      <label class="search">
+
+        <svg lucideSearch></svg>
+
+
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="searchText()"
+          [disabled]="
+            !searched()
+            ||
+            loading()
+          "
+          [placeholder]="
+            'availability.filterSearchPlaceholder'
+              | translate
+          "
+          (input)="setSearchText($event)" />
+
+
+        @if (
+          searchText()
+        ) {
+
+          <button
+            type="button"
+            class="search-clear"
+            [title]="
+              'common.clear'
+                | translate
+            "
+            [attr.aria-label]="
+              'common.clear'
+                | translate
+            "
+            (click)="clearSearchText()">
+
+            <svg lucideX></svg>
+
+          </button>
+
+        }
+
+      </label>
+
+
+      <!-- ================================================= -->
+      <!-- FILTERS -->
+      <!-- ================================================= -->
+
+      <div class="toolbar-filters">
+
+
+        <!-- =============================================== -->
+        <!-- ROOM TYPE -->
+        <!-- User sees room type NAME.
+             Angular stores room type ID internally. -->
+        <!-- =============================================== -->
+
+        <select
+          [value]="roomTypeFilter()"
+          [disabled]="
+            !searched()
+            ||
+            loading()
+          "
+          (change)="setRoomTypeFilter($event)">
+
+          <option value="">
+            {{
+              'availability.allRoomTypes'
+                | translate
+            }}
+          </option>
+
+
           @for (
-            room of filteredRooms();
-            track room.id
+            type
+            of resultRoomTypes();
+            track type.id
           ) {
-            <app-availability-room-card
-              [room]="room" />
-          }
-        </div>
-      }
 
-      <footer class="results-footer">
+            <option
+              [value]="type.id">
+
+              {{ type.name }}
+
+            </option>
+
+          }
+
+        </select>
+
+
+        <!-- =============================================== -->
+        <!-- STATUS -->
+        <!-- =============================================== -->
+
+        <select
+          [value]="statusFilter()"
+          [disabled]="
+            !searched()
+            ||
+            loading()
+          "
+          (change)="setStatusFilter($event)">
+
+          <option value="">
+            {{
+              'availability.allStatuses'
+                | translate
+            }}
+          </option>
+
+
+          @for (
+            status
+            of statuses();
+            track status
+          ) {
+
+            <option
+              [value]="
+                status.toLowerCase()
+              ">
+
+              {{ status }}
+
+            </option>
+
+          }
+
+        </select>
+
+
+        <!-- =============================================== -->
+        <!-- CLEAR FILTERS -->
+        <!-- =============================================== -->
+
+        @if (
+          hasFilters()
+        ) {
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="clearFilters()">
+
+            <svg lucideX></svg>
+
+            <span>
+              {{
+                'common.clear'
+                  | translate
+              }}
+            </span>
+
+          </button>
+
+        }
+
+      </div>
+
+    </header>
+
+
+    <!-- =================================================== -->
+    <!-- RESULT COUNT -->
+    <!-- =================================================== -->
+
+    <div class="result-summary">
+
+      <span class="result-count">
+
         {{
           'availability.showing'
             | translate:{
-                shown: filteredRooms().length,
-                total: rooms().length
+                shown:
+                  filteredRooms().length,
+
+                total:
+                  rooms().length
               }
         }}
-      </footer>
-    </section>
-  }
+
+      </span>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- LOADING -->
+    <!-- =================================================== -->
+
+    @if (
+      loading()
+    ) {
+
+      <div class="state">
+
+        <app-spin
+          size="large"
+          [label]="
+            'availability.searching'
+              | translate
+          " />
+
+      </div>
+
+    }
+
+
+    <!-- =================================================== -->
+    <!-- ERROR -->
+    <!-- =================================================== -->
+
+    @else if (
+      errorMessage()
+    ) {
+
+      <div
+        class="
+          state
+          state--error
+        ">
+
+        <svg
+          class="state-icon"
+          lucideBed>
+        </svg>
+
+
+        <strong>
+          {{
+            'availability.loadFailed'
+              | translate
+          }}
+        </strong>
+
+
+        <span>
+          {{ errorMessage() }}
+        </span>
+
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="retry()">
+
+          <svg lucideRefreshCw></svg>
+
+          <span>
+            {{
+              'common.tryAgain'
+                | translate
+            }}
+          </span>
+
+        </button>
+
+      </div>
+
+    }
+
+
+    <!-- =================================================== -->
+    <!-- DEFAULT STATE -->
+    <!-- =================================================== -->
+
+    @else if (
+      !searched()
+    ) {
+
+      <div class="empty">
+
+        <svg lucideSearch></svg>
+
+
+        <strong>
+          {{
+            'availability.searchFirst'
+              | translate
+          }}
+        </strong>
+
+
+        <span>
+          {{
+            'availability.searchFirstDescription'
+              | translate
+          }}
+        </span>
+
+      </div>
+
+    }
+
+
+    <!-- =================================================== -->
+    <!-- NO AVAILABLE ROOMS -->
+    <!-- =================================================== -->
+
+    @else if (
+      rooms().length === 0
+    ) {
+
+      <div class="empty">
+
+        <svg lucideBed></svg>
+
+
+        <strong>
+          {{
+            'availability.noResults'
+              | translate
+          }}
+        </strong>
+
+
+        <span>
+          {{
+            'availability.noResultsDescription'
+              | translate
+          }}
+        </span>
+
+      </div>
+
+    }
+
+
+    <!-- =================================================== -->
+    <!-- NO FILTER RESULTS -->
+    <!-- =================================================== -->
+
+    @else if (
+      filteredRooms().length === 0
+    ) {
+
+      <div class="empty">
+
+        <svg lucideSearch></svg>
+
+
+        <strong>
+          {{
+            'availability.noFilteredResults'
+              | translate
+          }}
+        </strong>
+
+
+        <span>
+          {{
+            'availability.noFilteredResultsDescription'
+              | translate
+          }}
+        </span>
+
+      </div>
+
+    }
+
+
+    <!-- =================================================== -->
+    <!-- ROOM LIST -->
+    <!-- =================================================== -->
+
+    @else {
+
+      <div class="room-list">
+
+        @for (
+          room
+          of filteredRooms();
+          track room.id
+        ) {
+
+          <app-availability-room-card
+            [room]="room" />
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
 </div>
